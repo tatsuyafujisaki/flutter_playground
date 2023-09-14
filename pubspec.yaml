@@ -11,9 +11,12 @@ dependencies:
   cupertino_icons: any
   flutter:
     sdk: flutter
+  flutter_riverpod: any
+  riverpod_annotation: any
 
 dev_dependencies:
   flutter_lints: any
+    sdk: flutter
   flutter_test:
     sdk: flutter
 
