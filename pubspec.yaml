@@ -16,6 +16,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: any
+  build_web_compilers: any # https://github.com/dart-lang/build/blob/master/docs/getting_started.md#using-build_runner-as-a-development-server
   flutter_lints: any
   flutter_test:
     sdk: flutter
