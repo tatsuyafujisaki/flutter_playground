@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'main.g.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
-
-@riverpod
-String myGeneratedParameterless(MyGeneratedParameterlessRef ref) => 'Hello!';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -104,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
