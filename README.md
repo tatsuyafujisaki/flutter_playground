@@ -45,3 +45,10 @@ class MyApp extends ConsumerWidget {
 }
 ```
 </details>
+
+## Recommendations of the official reference
+### "Whenever possible, prefer using ref.watch over ref.read or ref.listen to implement a feature."
+https://docs-v2.riverpod.dev/docs/concepts/reading#using-ref-to-interact-with-providers
+
+### "Prefer using NotifierProvider instead."
+https://docs-v2.riverpod.dev/docs/providers/state_notifier_provider
