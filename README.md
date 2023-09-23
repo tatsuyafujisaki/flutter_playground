@@ -1,7 +1,10 @@
 # Riverpod
+## `WigetRef.watch()` does not react to the update of an item in a collection.
 When the state of the `StateProvider` is a collection, `WigetRef.watch()` reacts to the update of the collection, but does not react to the update of an item in a collection.
 
-## Example
+<details>
+<summary>Example</summary>
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,3 +44,4 @@ class MyApp extends ConsumerWidget {
   }
 }
 ```
+</details>
