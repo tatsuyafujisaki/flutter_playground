@@ -46,12 +46,16 @@ class MyApp extends ConsumerWidget {
 ```
 </details>
 
-## Recommendations of the official reference
+## Official reference's recommendations
 ### "Whenever possible, prefer using ref.watch over ref.read or ref.listen to implement a feature."
 https://docs-v2.riverpod.dev/docs/concepts/reading#using-ref-to-interact-with-providers
 
 ### "Prefer using NotifierProvider instead."
 https://docs-v2.riverpod.dev/docs/providers/state_notifier_provider
 
-### Relationship or difference between `ref.listen()` and `ref.watch()`
+### `ref.listen()` versus `ref.watch()`
 https://youtu.be/BJtQ0dfI-RA?t=4302
+
+## Google's recommendations
+### "Choosing between text and elevated buttons"
+https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
