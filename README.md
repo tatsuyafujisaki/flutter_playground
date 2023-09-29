@@ -53,7 +53,7 @@ https://docs-v2.riverpod.dev/docs/concepts/reading#using-ref-to-interact-with-pr
 ### "Prefer using NotifierProvider instead."
 https://docs-v2.riverpod.dev/docs/providers/state_notifier_provider
 
-### `ref.listen()` versus `ref.watch()`
+### Relationship between `ref.listen()` and `ref.watch()`
 https://youtu.be/BJtQ0dfI-RA?t=4302
 
 ## Google's recommendations
