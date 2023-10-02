@@ -46,6 +46,19 @@ class MyApp extends ConsumerWidget {
 ```
 </details>
 
+# `flutter doctor`
+Q. How to troubleshoot `Unable to find bundled Java version.` about Android Studio.
+```
+[!] Android Studio
+    ✗ Unable to find bundled Java version.
+```
+
+A. Run the following in Terminal
+```shell
+cd /Applications/Android Studio.app/Contents
+ln -s jbr jre
+```
+
 ## Official reference's recommendations
 ### "Whenever possible, prefer using ref.watch over ref.read or ref.listen to implement a feature."
 https://docs-v2.riverpod.dev/docs/concepts/reading#using-ref-to-interact-with-providers
