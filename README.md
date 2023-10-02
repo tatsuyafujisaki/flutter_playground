@@ -46,7 +46,8 @@ class MyApp extends ConsumerWidget {
 ```
 </details>
 
-# `flutter doctor`
+# Troubleshooting
+## flutter doctor
 Q. How to troubleshoot `Unable to find bundled Java version.` about Android Studio.
 ```
 [!] Android Studio
@@ -58,6 +59,9 @@ A. Run the following in Terminal
 cd /Applications/Android Studio.app/Contents
 ln -s jbr jre
 ```
+
+## Trying to run an app in iOS, `Error: DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS, use TOOLCHAIN_DIR instead` appears.
+Upgrade Cocoapods to 1.13.0 or later.
 
 ## Official reference's recommendations
 ### "Whenever possible, prefer using ref.watch over ref.read or ref.listen to implement a feature."
