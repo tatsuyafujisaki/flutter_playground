@@ -26,7 +26,4 @@ ln -s jbr jre
 
 ## Building an iOS app shows `Xcode build failed due to concurrent builds, will retry in 2 seconds.`
 ### Solution
-Run the following command.
-```shell
-rm -r ~/Library/Developer/Xcode/DerivedData
-```
+Stop `XCBbuildService` using Activity Monitor.
