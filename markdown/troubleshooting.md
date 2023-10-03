@@ -24,6 +24,9 @@ ln -s jbr jre
    flutter run
    ```
 
-## Building an iOS app for a simulator shows `Xcode build failed due to concurrent builds, will retry in 2 seconds.`
+## Building an iOS app shows `Xcode build failed due to concurrent builds, will retry in 2 seconds.`
 ### Solution
-Use a different simulator.
+Run the following command.
+```shell
+rm -r ~/Library/Developer/Xcode/DerivedData
+```
