@@ -13,7 +13,7 @@ ln -s jbr jre
 ```
 
 # iOS
-## `Error: DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS, use TOOLCHAIN_DIR instead` appears, trying to run an app in iOS.
+## Building an iOS app shows `Error: DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS, use TOOLCHAIN_DIR instead`.
 ### Solution
 1. Upgrade CocoaPods to 1.13.0 or later.
 2. Run the following.
