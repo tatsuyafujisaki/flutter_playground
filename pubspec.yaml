@@ -7,6 +7,7 @@ dependencies:
   cupertino_icons: any
   flutter:
     sdk: flutter
+  flutter_svg: any
   flutter_riverpod: any
   riverpod_annotation: any
 dev_dependencies:
