@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 
-Widget createColoreSizeddBox({
-  required Color color,
-  required Widget child,
-  double? width,
+Widget createColoreSizedBox({
+  Color color = Colors.pink,
+  double? width = double.infinity,
   double? height,
+  Widget? child,
 }) =>
     ColoredBox(
       color: color,
