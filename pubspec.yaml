@@ -11,6 +11,7 @@ dependencies:
   flutter_svg: any
   freezed_annotation: any
   json_annotation: any
+  path_provider: any
   riverpod_annotation: any
   shared_preferences: any
   url_launcher: any
