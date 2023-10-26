@@ -13,6 +13,7 @@ dependencies:
   json_annotation: any
   riverpod_annotation: any
   shared_preferences: any
+  url_launcher: any
 dev_dependencies:
   build_runner: any
   build_web_compilers: any # https://github.com/dart-lang/build/blob/master/docs/getting_started.md#using-build_runner-as-a-development-server
