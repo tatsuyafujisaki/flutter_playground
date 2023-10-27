@@ -13,7 +13,7 @@ Widget build(BuildContext context, WidgetRef ref) {
     () => showDialog(
       context: context,
       builder: (context) => const AlertDialog(
-        content: Text("Hello!"),
+        content: Text('Hello!'),
       ),
     ),
   );
