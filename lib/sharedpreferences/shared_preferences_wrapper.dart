@@ -16,7 +16,7 @@ class SharedPreferencesWrapper {
 
   static Future<bool> setInt(String key, int value) =>
       _prefs.setInt(key, value);
-  static Future<bool> setBool(String key, bool value) async =>
+  static Future<bool> setBool(String key, bool value) =>
       _prefs.setBool(key, value);
   static Future<bool> setDouble(String key, double value) =>
       _prefs.setDouble(key, value);
