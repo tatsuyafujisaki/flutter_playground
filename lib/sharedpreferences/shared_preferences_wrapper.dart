@@ -1,11 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesWrapper {
+  static late SharedPreferences _prefs;
+
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
-
-  static late SharedPreferences _prefs;
 
   static int? getInt(String key) => _prefs.getInt(key);
   static bool? getBool(String key) => _prefs.getBool(key);
