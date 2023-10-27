@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesWrapper2 {
+class SharedPreferencesFactory {
   static Future<void> init() async {
     instance = await SharedPreferences.getInstance();
   }
