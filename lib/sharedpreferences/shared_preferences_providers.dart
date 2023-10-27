@@ -3,14 +3,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// The implementation is complex, but requires no initialization.
 class SharedPreferencesProvider1 {
   SharedPreferencesProvider1._(SharedPreferences sharedPreferences)
-      : instance = sharedPreferences;
+      : _prefs = sharedPreferences;
   static SharedPreferencesProvider1? _instance;
-  final SharedPreferences instance;
+  final SharedPreferences _prefs;
 
-  static Future<SharedPreferencesProvider1> getInstance() async {
+  static Future<SharedPreferences> get prefs async {
     _instance ??=
         SharedPreferencesProvider1._(await SharedPreferences.getInstance());
-    return _instance!;
+    return _instance!._prefs;
   }
 }
 
