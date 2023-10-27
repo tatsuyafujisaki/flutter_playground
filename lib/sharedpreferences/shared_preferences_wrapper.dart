@@ -7,12 +7,11 @@ class SharedPreferencesWrapper {
 
   static late SharedPreferences _prefs;
 
-  static Future<int?> getInt(String key) async => _prefs.getInt(key);
-  static Future<bool?> getBool(String key) async => _prefs.getBool(key);
-  static Future<double?> getDouble(String key) async => _prefs.getDouble(key);
-  static Future<String> getString(String key) async =>
-      _prefs.getString(key) ?? '';
-  static Future<List<String>> getStringList(String key) async =>
+  static int? getInt(String key) => _prefs.getInt(key);
+  static bool? getBool(String key) => _prefs.getBool(key);
+  static double? getDouble(String key) => _prefs.getDouble(key);
+  static String getString(String key) => _prefs.getString(key) ?? '';
+  static List<String> getStringList(String key) =>
       _prefs.getStringList(key) ?? [];
 
   static Future<bool> setInt(String key, int value) =>
