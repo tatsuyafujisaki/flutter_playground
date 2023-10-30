@@ -3,6 +3,7 @@ import 'package:flutter_playground/sharedpreferences/encypted_shared_preferences
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await EncryptedSharedPreferences.initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
