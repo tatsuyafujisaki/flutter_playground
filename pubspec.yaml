@@ -8,7 +8,7 @@ dependencies:
   encrypt: any
   flutter:
     sdk: flutter
-  flutter_localizations:
+  flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#setting-up
     sdk: flutter
   flutter_riverpod: any
   flutter_svg: any
