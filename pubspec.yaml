@@ -8,10 +8,13 @@ dependencies:
   encrypt: any
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_riverpod: any
   flutter_svg: any
   freezed_annotation: any
   image_picker: any
+  intl: any
   json_annotation: any
   path_provider: any
   riverpod_annotation: any
