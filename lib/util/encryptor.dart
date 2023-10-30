@@ -6,8 +6,21 @@ class Encryptor {
   );
   static final _iv = IV.fromLength(16);
 
-  static String encrypt(String input) =>
-      _encryptor.encrypt(input, iv: _iv).base64;
-  static String decrypt(String encrypted) =>
-      _encryptor.decrypt64(encrypted, iv: _iv);
+  static String encrypt(String input) {
+    if (input.isEmpty) {
+      // Passing an empty string to encrypt() will throw an exception.
+      return '';
+    } else {
+      return _encryptor.encrypt(input, iv: _iv).base64;
+    }
+  }
+
+  static String decrypt(String encoded) {
+    if (encoded.isEmpty) {
+      // Passing an empty string to decrypt64() will throw an exception.
+      return '';
+    } else {
+      return _encryptor.decrypt64(encoded, iv: _iv);
+    }
+  }
 }
