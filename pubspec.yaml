@@ -5,6 +5,7 @@ environment:
   sdk: '^3.1.3'
 dependencies:
   cupertino_icons: any
+  encrypt: any
   flutter:
     sdk: flutter
   flutter_riverpod: any
