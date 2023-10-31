@@ -1,3 +1,6 @@
+# What is the difference between `WidgetRef.invalidate` and `WidgetRef.refresh`?
+https://pub.dev/documentation/flutter_riverpod/latest/flutter_riverpod/WidgetRef/refresh.html
+
 # `WigetRef.watch()` does not react to the update of an item in a collection.
 When the state of the `StateProvider` is a collection, `WigetRef.watch()` reacts to the update of the collection, but does not react to the update of an item in a collection.
 
