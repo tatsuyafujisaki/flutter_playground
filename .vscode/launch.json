@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "name": "Flavor 1",
+      "type": "dart",
+      "request": "launch",
+      "toolArgs": [
+        "--dart-define",
+        "FLAVOR=FLAVOR1",
+        "--dart-define",
+        "MY_KEY=MY_VALUE1",
+      ]
+    },
+    {
+      "name": "Flavor 2",
+      "type": "dart",
+      "request": "launch",
+      "toolArgs": [
+        "--dart-define",
+        "FLAVOR=FLAVOR2",
+        "--dart-define",
+        "MY_KEY=MY_VALUE2",
+s
+      ]
+    }
+  ]
+}
