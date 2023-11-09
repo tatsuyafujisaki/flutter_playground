@@ -14,8 +14,8 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint(const String.fromEnvironment('FLAVOR'));
-    debugPrint(const String.fromEnvironment('MY_KEY'));
+    debugPrint(const String.fromEnvironment('MY_KEY1'));
+    debugPrint(const String.fromEnvironment('MY_KEY2'));
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

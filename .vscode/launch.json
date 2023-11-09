@@ -6,9 +6,9 @@
       "request": "launch",
       "toolArgs": [
         "--dart-define",
-        "FLAVOR=FLAVOR1",
+        "MY_KEY1=MY_VALUE1",
         "--dart-define",
-        "MY_KEY=MY_VALUE1",
+        "MY_KEY2=MY_VALUE2",
       ]
     },
     {
@@ -17,10 +17,9 @@
       "request": "launch",
       "toolArgs": [
         "--dart-define",
-        "FLAVOR=FLAVOR2",
+        "MY_KEY1=MY_VALUE1",
         "--dart-define",
-        "MY_KEY=MY_VALUE2",
-s
+        "MY_KEY2=MY_VALUE2",
       ]
     }
   ]
