@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "Flavor 1",
+      "name": "My Debug",
       "type": "dart",
       "request": "launch",
       "toolArgs": [
@@ -12,9 +12,10 @@
       ]
     },
     {
-      "name": "Flavor 2",
+      "name": "My Release",
       "type": "dart",
       "request": "launch",
+      "flutterMode": "release",
       "toolArgs": [
         "--dart-define",
         "MY_KEY1=MY_VALUE1",
