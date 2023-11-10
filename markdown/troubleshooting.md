@@ -8,7 +8,7 @@
 ### Solution
 Run the following in Terminal.
 ```shell
-cd /Applications/Android Studio.app/Contents
+cd '/Applications/Android Studio.app/Contents'
 ln -s jbr jre
 ```
 
