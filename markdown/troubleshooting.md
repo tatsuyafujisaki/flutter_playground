@@ -12,6 +12,16 @@ cd '/Applications/Android Studio.app/Contents'
 ln -s jbr jre
 ```
 
+#### What is JBR?
+
+> The JetBrains Runtime (JBR)  is an enhanced JDK
+
+https://developer.android.com/build/jdks#jdk-android-studio
+
+> jbr directory (JetBrains Runtime), in the Android Studio distribution. Recommended.
+
+https://developer.android.com/build/jdks#jdk-android-studio
+
 # iOS
 ## Building an iOS app shows `Error: DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS, use TOOLCHAIN_DIR instead`.
 ### Solution
