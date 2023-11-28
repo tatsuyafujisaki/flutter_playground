@@ -10,6 +10,7 @@ analyzer:
 linter:
   rules:
     - always_put_required_named_parameters_first
+    - annotate_redeclares
     - avoid_escaping_inner_quotes
     - avoid_redundant_argument_values
     - avoid_types_on_closure_parameters
