@@ -6,9 +6,6 @@ Skip recompiling the Kotlin or Swift code?|Yes|Yes|No
 
 https://docs.flutter.dev/tools/hot-reload#how-to-perform-a-hot-reload
 
-# Troubleshooting
-[toubleshooting.md](markdown/troubleshooting.md)
-
 # Riverpod
 [riverpod.md](markdown/riverpod.md)
 
@@ -42,3 +39,7 @@ https://youtu.be/BJtQ0dfI-RA?t=4302
 ## Google's recommendations
 ### "Choosing between text and elevated buttons"
 https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
+
+# Troubleshooting
+[toubleshooting.md](markdown/troubleshooting.md)
+
