@@ -2,7 +2,7 @@ name: flutter_playground
 publish_to: 'none'
 version: 1.0.0+1
 environment:
-  sdk: '^3.1.5'
+  sdk: '^3.2.2'
 dependencies:
   cupertino_icons: any
   encrypt: any
