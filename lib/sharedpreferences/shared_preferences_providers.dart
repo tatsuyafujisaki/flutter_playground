@@ -1,6 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// The implementation is complex, but requires no initialization.
+/// The pros and cons compared to SharedPreferencesProvider2.
+/// Pros:
+///   No initialization is required.
+/// Cons:
+///   The implementation is complex.
+///   You have to await prefs.
 class SharedPreferencesProvider1 {
   SharedPreferencesProvider1._(SharedPreferences sharedPreferences)
       : _prefs = sharedPreferences;
@@ -30,7 +35,7 @@ class SharedPreferencesProvider2 {
 }
 
 void main() async {
-  final prefs1 = SharedPreferencesProvider1.prefs;
+  final prefs1 = await SharedPreferencesProvider1.prefs;
 
   await SharedPreferencesProvider2.initialize();
   final prefs2 = SharedPreferencesProvider2.prefs;
