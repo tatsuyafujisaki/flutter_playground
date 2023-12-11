@@ -1,15 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesHoldingClass {
-  SharedPreferencesHoldingClass._privateConstructor();
+class _SharedPreferencesHoldingClass {
+  _SharedPreferencesHoldingClass._privateConstructor();
   late final SharedPreferences prefs;
 
   Future<void> _initializeSharePreferences() async {
     prefs = await SharedPreferences.getInstance();
   }
 
-  static Future<SharedPreferencesHoldingClass> getInstance() async {
-    final myClass = SharedPreferencesHoldingClass._privateConstructor();
+  static Future<_SharedPreferencesHoldingClass> getInstance() async {
+    final myClass = _SharedPreferencesHoldingClass._privateConstructor();
     await myClass._initializeSharePreferences();
     return myClass;
   }
@@ -17,5 +17,5 @@ class SharedPreferencesHoldingClass {
 
 void main() async {
   final sharedPreferencesHoldingClass =
-      await SharedPreferencesHoldingClass.getInstance();
+      await _SharedPreferencesHoldingClass.getInstance();
 }
