@@ -1,15 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// The implementation is complex, but requires no initialization.
-class SharedPreferencesProvider1 {
-  SharedPreferencesProvider1._(SharedPreferences sharedPreferences)
+class _SharedPreferencesProvider1 {
+  _SharedPreferencesProvider1._(SharedPreferences sharedPreferences)
       : _prefs = sharedPreferences;
-  static SharedPreferencesProvider1? _instance;
+  static _SharedPreferencesProvider1? _instance;
   final SharedPreferences _prefs;
 
   static Future<SharedPreferences> get prefs async {
     _instance ??=
-        SharedPreferencesProvider1._(await SharedPreferences.getInstance());
+        _SharedPreferencesProvider1._(await SharedPreferences.getInstance());
     return _instance!._prefs;
   }
 }
@@ -21,10 +21,17 @@ class SharedPreferencesProvider1 {
 ///   await SharedPreferencesProvider2.initialize();
 ///   runApp(child: const MyApp());
 /// }
-class SharedPreferencesProvider2 {
-  static late SharedPreferences instance;
+class _SharedPreferencesProvider2 {
+  static late SharedPreferences prefs;
 
   static Future<void> initialize() async {
-    instance = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
   }
+}
+
+void main() async {
+  final prefs1 = _SharedPreferencesProvider1.prefs;
+
+  await _SharedPreferencesProvider2.initialize();
+  final prefs2 = _SharedPreferencesProvider2.prefs;
 }
