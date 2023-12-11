@@ -8,7 +8,7 @@ class _SharedPreferencesHoldingClass {
     prefs = await SharedPreferences.getInstance();
   }
 
-  static Future<_SharedPreferencesHoldingClass> getInstance() async {
+  static Future<_SharedPreferencesHoldingClass> get instance async {
     final myClass = _SharedPreferencesHoldingClass._privateConstructor();
     await myClass._initializeSharePreferences();
     return myClass;
@@ -17,5 +17,5 @@ class _SharedPreferencesHoldingClass {
 
 void main() async {
   final sharedPreferencesHoldingClass =
-      await _SharedPreferencesHoldingClass.getInstance();
+      await _SharedPreferencesHoldingClass.instance;
 }
