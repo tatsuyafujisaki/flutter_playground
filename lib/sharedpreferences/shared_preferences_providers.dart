@@ -22,7 +22,7 @@ class _SharedPreferencesProvider1 {
 ///   runApp(child: const MyApp());
 /// }
 class _SharedPreferencesProvider2 {
-  static late SharedPreferences prefs;
+  static late final SharedPreferences prefs;
 
   static Future<void> initialize() async {
     prefs = await SharedPreferences.getInstance();
