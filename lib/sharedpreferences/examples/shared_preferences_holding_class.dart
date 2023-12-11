@@ -16,5 +16,6 @@ class SharedPreferencesHoldingClass {
 }
 
 void main() async {
-  final myClass = await SharedPreferencesHoldingClass.getInstance();
+  final sharedPreferencesHoldingClass =
+      await SharedPreferencesHoldingClass.getInstance();
 }
