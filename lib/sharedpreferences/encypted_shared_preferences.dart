@@ -10,18 +10,10 @@ class EncryptedSharedPreferences {
 
   static String getString(String key) {
     final encrypted = _prefs.getString(key) ?? '';
-    if (encrypted.isEmpty) {
-      return '';
-    } else {
-      return Encryptor.decrypt(encrypted);
-    }
+    return encrypted.isEmpty ? '' : Encryptor.decrypt(encrypted);
   }
 
-  static Future<bool> setString(String key, String value) {
-    if (value.isEmpty) {
-      return Future.value(false);
-    } else {
-      return _prefs.setString(key, Encryptor.encrypt(value));
-    }
-  }
+  static Future<bool> setString(String key, String value) => value.isEmpty
+      ? Future.value(false)
+      : _prefs.setString(key, Encryptor.encrypt(value));
 }
