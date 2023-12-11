@@ -2,7 +2,7 @@ import 'package:flutter_playground/util/encryptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EncryptedSharedPreferences {
-  static late SharedPreferences _prefs;
+  static late final SharedPreferences _prefs;
 
   static Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
