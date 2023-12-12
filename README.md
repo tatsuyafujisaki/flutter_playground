@@ -6,6 +6,9 @@ Skip recompiling the Kotlin or Swift code?|Yes|Yes|No
 
 https://docs.flutter.dev/tools/hot-reload#how-to-perform-a-hot-reload
 
+# SharedPreferences
+[shared_preferences.md](markdown/shared_preferences.md)
+
 # Riverpod
 [riverpod.md](markdown/riverpod.md)
 

@@ -1,0 +1,1 @@
+- [getString](https://pub.dev/documentation/shared_preferences/latest/shared_preferences/SharedPreferences/getString.html) and [setString](https://pub.dev/documentation/shared_preferences/latest/shared_preferences/SharedPreferences/setString.html) can read and write an empty String.
