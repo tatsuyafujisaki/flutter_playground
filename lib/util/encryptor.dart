@@ -6,11 +6,11 @@ class Encryptor {
   );
   static final _iv = IV.fromLength(16);
 
-  // Passing an empty string to encrypt() will throw an exception.
   static String encrypt(String input) =>
+      // Passing an empty string to encrypt() will throw an exception.
       input.isEmpty ? '' : _encryptor.encrypt(input, iv: _iv).base64;
 
-  // Passing an empty string to decrypt64() will throw an exception.
   static String decrypt(String encoded) =>
+      // Passing an empty string to decrypt64() will throw an exception.
       encoded.isEmpty ? '' : _encryptor.decrypt64(encoded, iv: _iv);
 }
