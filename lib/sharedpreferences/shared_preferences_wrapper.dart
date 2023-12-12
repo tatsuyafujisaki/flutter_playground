@@ -24,4 +24,7 @@ class SharedPreferencesWrapper {
       _prefs.setString(key, value);
   static Future<bool> setStringList(String key, List<String> value) =>
       _prefs.setStringList(key, value);
+
+  static Future<void> remove(String key) => _prefs.remove(key);
+  static Future<void> clear() => _prefs.clear();
 }
