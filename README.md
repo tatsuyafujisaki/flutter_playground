@@ -1,6 +1,3 @@
-# Style guide
-https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo
-
 # Hot reload verus Hot restart versus Full restart
 &nbsp;|Hot reload|Hot restart|Full restart
 --|--|--|--
