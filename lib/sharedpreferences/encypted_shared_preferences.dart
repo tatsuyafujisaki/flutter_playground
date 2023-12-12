@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_playground/util/encryptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,4 +24,10 @@ class EncryptedSharedPreferences {
 
   static Future<bool> addToStringList(String key, String value) =>
       setStringList(key, getStringList(key)..add(value));
+
+  static void dump() {
+    _prefs.getKeys().forEach(
+          (key) => debugPrint('key=$key, value=${_prefs.get(key)}'),
+        );
+  }
 }
