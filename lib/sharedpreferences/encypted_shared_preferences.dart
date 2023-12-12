@@ -13,6 +13,9 @@ class EncryptedSharedPreferences {
     return encrypted.isEmpty ? '' : Encryptor.decrypt(encrypted);
   }
 
+  static List<String> getStringList(String key) =>
+      _prefs.getStringList(key)?.map(Encryptor.decrypt).toList() ?? [];
+
   static Future<bool> setString(String key, String value) => value.isEmpty
       ? Future.value(false)
       : _prefs.setString(key, Encryptor.encrypt(value));
