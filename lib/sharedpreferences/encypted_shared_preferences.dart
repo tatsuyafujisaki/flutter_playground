@@ -19,7 +19,8 @@ class EncryptedSharedPreferences {
       : _prefs.setString(key, Encryptor.encrypt(value));
 
   static Future<bool> setStringList(String key, Iterable<String> value) =>
-      value.isEmpty
-          ? Future.value(false)
-          : _prefs.setStringList(key, value.map(Encryptor.encrypt).toList());
+      _prefs.setStringList(key, value.map(Encryptor.encrypt).toList());
+
+  static Future<bool> addToStringList(String key, String value) =>
+      setStringList(key, getStringList(key)..add(value));
 }
