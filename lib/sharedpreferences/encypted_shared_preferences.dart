@@ -25,6 +25,9 @@ class EncryptedSharedPreferences {
   static Future<bool> addToStringList(String key, String value) =>
       setStringList(key, getStringList(key)..add(value));
 
+  static Future<void> remove(String key) => _prefs.remove(key);
+  static Future<void> clear() => _prefs.clear();
+
   static void dump() {
     _prefs.getKeys().forEach(
           (key) => debugPrint('key=$key, value=${_prefs.get(key)}'),
