@@ -11,18 +11,22 @@ class EncryptedSharedPreferences {
 
   static String getString(String key) =>
       Encryptor.decrypt(_prefs.getString(key) ?? '');
+
+  static List<String> getStringList(String key) =>
+    (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
+
   static Future<bool> setString(String key, String value) =>
       _prefs.setString(key, Encryptor.encrypt(value));
 
-  static List<String> getStringList(String key) =>
-      (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
   static Future<bool> setStringList(String key, Iterable<String> value) =>
       _prefs.setStringList(key, value.map(Encryptor.encrypt).toList());
+
   static Future<bool> addToStringList(String key, String value) =>
       setStringList(key, getStringList(key)..add(value));
 
   static Future<bool> setStringSet(String key, Iterable<String> value) =>
       _prefs.setStringList(key, value.map(Encryptor.encrypt).toSet().toList());
+  
   static Future<bool> addToStringSet(String key, String value) => _prefs
       .setStringList(key, (getStringList(key)..add(value)).toSet().toList());
 
