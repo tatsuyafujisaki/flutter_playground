@@ -24,12 +24,6 @@ class EncryptedSharedPreferences {
   static Future<bool> addToStringList(String key, String value) =>
       setStringList(key, getStringList(key)..add(value));
 
-  static Future<bool> setStringSet(String key, Iterable<String> value) =>
-      _prefs.setStringList(key, value.map(Encryptor.encrypt).toSet().toList());
-  
-  static Future<bool> addToStringSet(String key, String value) => _prefs
-      .setStringList(key, (getStringList(key)..add(value)).toSet().toList());
-
   static Future<void> remove(String key) => _prefs.remove(key);
   static Future<void> clear() => _prefs.clear();
 
