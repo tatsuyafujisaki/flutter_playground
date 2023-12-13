@@ -24,6 +24,14 @@ class EncryptedSharedPreferences {
   static Future<bool> addToStringList(String key, String value) =>
       _prefs.setStringList(key, getStringList(key)..add(value));
 
+  static Future<bool> addIfAbsent(String key, String value) async {
+    final list = getStringList(key);
+    final encrypted = Encryptor.decrypt(value);
+    return list.contains(encrypted)
+        ? Future.value(false)
+        : _prefs.setStringList(key, [...list, Encryptor.decrypt(encrypted)]);
+  }
+
   static Future<void> remove(String key) => _prefs.remove(key);
   static Future<void> clear() => _prefs.clear();
 
