@@ -22,7 +22,7 @@ class EncryptedSharedPreferences {
       _prefs.setStringList(key, value.map(Encryptor.encrypt).toList());
 
   static Future<bool> addToStringList(String key, String value) =>
-      setStringList(key, getStringList(key)..add(value));
+      _prefs.setStringList(key, getStringList(key)..add(value));
 
   static Future<void> remove(String key) => _prefs.remove(key);
   static Future<void> clear() => _prefs.clear();
