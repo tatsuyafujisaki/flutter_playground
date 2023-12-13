@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// The pros and cons compared to SharedPreferencesProvider2.
@@ -36,7 +37,9 @@ class SharedPreferencesProvider2 {
 
 void main() async {
   final prefs1 = await SharedPreferencesProvider1.prefs;
+  debugPrint(prefs1.toString());
 
   await SharedPreferencesProvider2.initialize();
   final prefs2 = SharedPreferencesProvider2.prefs;
+  debugPrint(prefs2.toString());
 }
