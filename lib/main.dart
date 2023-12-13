@@ -1,12 +1,17 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/sharedpreferences/encypted_shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
-  debugPrint(Platform.version);
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await EncryptedSharedPreferences.initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -17,6 +22,7 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint(Platform.version);
     debugPrint(const String.fromEnvironment('MY_KEY1'));
     debugPrint(const String.fromEnvironment('MY_KEY2'));
     return MaterialApp(
