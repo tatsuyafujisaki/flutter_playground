@@ -13,7 +13,7 @@ class EncryptedSharedPreferences {
       Encryptor.decrypt(_prefs.getString(key) ?? '');
 
   static List<String> getStringList(String key) =>
-    (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
+      (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
 
   static Future<bool> setString(String key, String value) =>
       _prefs.setString(key, Encryptor.encrypt(value));
@@ -24,12 +24,19 @@ class EncryptedSharedPreferences {
   static Future<bool> addToStringList(String key, String value) =>
       _prefs.setStringList(key, getStringList(key)..add(value));
 
-  static Future<bool> addToStringListIfAbsent(String key, String value) async {
-    final list = getStringList(key);
-    final encrypted = Encryptor.encrypt(value);
-    return list.contains(encrypted)
-        ? Future.value(false)
-        : _prefs.setStringList(key, [...list, encrypted]);
+  static Future<bool> addToStringListIfAbsent(
+    String key,
+    String value,
+    Future<void> Function() onAvoidDuplicateValue,
+  ) async {
+    final encryptedList = _prefs.getStringList(key) ?? [];
+    final encryptedValue = Encryptor.encrypt(value);
+    if (encryptedList.contains(encryptedValue)) {
+      await onAvoidDuplicateValue();
+      return Future.value(false);
+    } else {
+      return _prefs.setStringList(key, [...encryptedList, encryptedValue]);
+    }
   }
 
   static Future<void> remove(String key) => _prefs.remove(key);
