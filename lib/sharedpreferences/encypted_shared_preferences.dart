@@ -47,4 +47,8 @@ class EncryptedSharedPreferences {
           (key) => debugPrint('key=$key, value=${_prefs.get(key)}'),
         );
   }
+
+  static void dumpCount() {
+    debugPrint('length=${_prefs.getKeys().length}');
+  }
 }
