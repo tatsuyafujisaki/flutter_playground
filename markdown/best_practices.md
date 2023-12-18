@@ -1,2 +1,3 @@
-- > We don’t recommend using named routes for most applications.
-  - https://docs.flutter.dev/ui/navigation
+- https://docs.flutter.dev/ui/navigation
+  - > We don’t recommend using named routes for most applications.
+  - > Flutter also doesn’t support the browser forward button for applications using named routes. For these reasons, we don’t recommend using named routes in most applications.
