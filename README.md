@@ -43,6 +43,9 @@ https://youtu.be/BJtQ0dfI-RA?t=4302
 ### "Choosing between text and elevated buttons"
 https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
 
+# Best practices
+[best_practices.md](markdown/best_practices.md)
+
 # Troubleshooting
 [toubleshooting.md](markdown/troubleshooting.md)
 

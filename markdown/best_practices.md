@@ -1,0 +1,2 @@
+- > We don’t recommend using named routes for most applications.
+  - https://docs.flutter.dev/ui/navigation
