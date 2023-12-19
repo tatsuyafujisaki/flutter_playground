@@ -12,6 +12,9 @@ class EncryptedSharedPreferences {
   String getString(String key) =>
       Encryptor.decrypt(_prefs.getString(key) ?? '');
 
+  @visibleForTesting
+  static String getEncryptedString(String key) => _prefs.getString(key) ?? '';
+
   List<String> getStringList(String key) =>
       (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
 
@@ -26,13 +29,13 @@ class EncryptedSharedPreferences {
 
   Future<void> addToStringListIfAbsent(
     String key,
-    String value,
-    Future<void> Function() onAvoidDuplicateValue,
-  ) async {
+    String value, [
+    Future<void> Function()? onAvoidDuplicateValue,
+  ]) async {
     final encryptedList = _prefs.getStringList(key) ?? [];
     final encryptedValue = Encryptor.encrypt(value);
     if (encryptedList.contains(encryptedValue)) {
-      await onAvoidDuplicateValue();
+      await onAvoidDuplicateValue?.call();
     } else {
       await _prefs.setStringList(key, [...encryptedList, encryptedValue]);
     }
