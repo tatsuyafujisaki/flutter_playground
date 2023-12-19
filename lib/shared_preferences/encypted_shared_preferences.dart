@@ -15,16 +15,16 @@ class EncryptedSharedPreferences {
   List<String> getStringList(String key) =>
       (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
 
-  Future<bool> setString(String key, String value) =>
+  Future<void> setString(String key, String value) =>
       _prefs.setString(key, Encryptor.encrypt(value));
 
-  Future<bool> setStringList(String key, Iterable<String> value) =>
+  Future<void> setStringList(String key, Iterable<String> value) =>
       _prefs.setStringList(key, value.map(Encryptor.encrypt).toList());
 
-  Future<bool> addToStringList(String key, String value) =>
+  Future<void> addToStringList(String key, String value) =>
       _prefs.setStringList(key, getStringList(key)..add(value));
 
-  Future<bool> addToStringListIfAbsent(
+  Future<void> addToStringListIfAbsent(
     String key,
     String value,
     Future<void> Function() onAvoidDuplicateValue,
@@ -33,9 +33,8 @@ class EncryptedSharedPreferences {
     final encryptedValue = Encryptor.encrypt(value);
     if (encryptedList.contains(encryptedValue)) {
       await onAvoidDuplicateValue();
-      return Future.value(false);
     } else {
-      return _prefs.setStringList(key, [...encryptedList, encryptedValue]);
+      await _prefs.setStringList(key, [...encryptedList, encryptedValue]);
     }
   }
 
