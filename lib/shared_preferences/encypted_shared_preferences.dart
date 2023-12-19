@@ -9,22 +9,22 @@ class EncryptedSharedPreferences {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static String getString(String key) =>
+  String getString(String key) =>
       Encryptor.decrypt(_prefs.getString(key) ?? '');
 
-  static List<String> getStringList(String key) =>
+  List<String> getStringList(String key) =>
       (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
 
-  static Future<bool> setString(String key, String value) =>
+  Future<bool> setString(String key, String value) =>
       _prefs.setString(key, Encryptor.encrypt(value));
 
-  static Future<bool> setStringList(String key, Iterable<String> value) =>
+  Future<bool> setStringList(String key, Iterable<String> value) =>
       _prefs.setStringList(key, value.map(Encryptor.encrypt).toList());
 
-  static Future<bool> addToStringList(String key, String value) =>
+  Future<bool> addToStringList(String key, String value) =>
       _prefs.setStringList(key, getStringList(key)..add(value));
 
-  static Future<bool> addToStringListIfAbsent(
+  Future<bool> addToStringListIfAbsent(
     String key,
     String value,
     Future<void> Function() onAvoidDuplicateValue,
@@ -39,16 +39,16 @@ class EncryptedSharedPreferences {
     }
   }
 
-  static Future<void> remove(String key) => _prefs.remove(key);
-  static Future<void> clear() => _prefs.clear();
+  Future<void> remove(String key) => _prefs.remove(key);
+  Future<void> clear() => _prefs.clear();
 
-  static void dump() {
+  void dump() {
     _prefs.getKeys().forEach(
           (key) => debugPrint('key=$key, value=${_prefs.get(key)}'),
         );
   }
 
-  static void dumpCount() {
+  void dumpCount() {
     debugPrint('length=${_prefs.getKeys().length}');
   }
 }
