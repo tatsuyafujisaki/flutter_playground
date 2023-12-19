@@ -19,6 +19,7 @@ dependencies:
   image_picker: any
   intl: any
   json_annotation: any
+  path: any
   path_provider: any
   riverpod_annotation: any
   shared_preferences: any
