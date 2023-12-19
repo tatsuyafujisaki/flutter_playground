@@ -1,4 +1,5 @@
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/foundation.dart' show debugPrint;
 
 final _encryptor = Encrypter(
   AES(Key.fromBase64('6ZE61Jel3H8bdRNvGz7BGPK2eJWYfczTZgQZRZt9knM=')),
@@ -12,3 +13,10 @@ String encrypt(String input) =>
 String decrypt(String encoded) =>
     // Passing an empty string to decrypt64() will throw an exception.
     encoded.isEmpty ? '' : _encryptor.decrypt64(encoded, iv: _iv);
+
+void main() {
+  const plaintext = 'foo';
+  final encrypted = encrypt(plaintext);
+  debugPrint(encrypted);
+  debugPrint(decrypt(encrypted));
+}
