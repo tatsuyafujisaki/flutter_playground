@@ -9,31 +9,30 @@ class EncryptedSharedPreferences {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  String getString(String key) =>
-      Encryptor.decrypt(_prefs.getString(key) ?? '');
+  static String getString(String key) => decrypt(_prefs.getString(key) ?? '');
 
   @visibleForTesting
   static String getEncryptedString(String key) => _prefs.getString(key) ?? '';
 
-  List<String> getStringList(String key) =>
-      (_prefs.getStringList(key) ?? []).map(Encryptor.decrypt).toList();
+  static List<String> getStringList(String key) =>
+      (_prefs.getStringList(key) ?? []).map(decrypt).toList();
 
-  Future<void> setString(String key, String value) =>
-      _prefs.setString(key, Encryptor.encrypt(value));
+  static Future<void> setString(String key, String value) =>
+      _prefs.setString(key, encrypt(value));
 
-  Future<void> setStringList(String key, Iterable<String> value) =>
-      _prefs.setStringList(key, value.map(Encryptor.encrypt).toList());
+  static Future<void> setStringList(String key, Iterable<String> value) =>
+      _prefs.setStringList(key, value.map(encrypt).toList());
 
-  Future<void> addToStringList(String key, String value) =>
+  static Future<void> addToStringList(String key, String value) =>
       _prefs.setStringList(key, getStringList(key)..add(value));
 
-  Future<void> addToStringListIfAbsent(
+  static Future<void> addToStringListIfAbsent(
     String key,
     String value, [
     Future<void> Function()? onAvoidDuplicateValue,
   ]) async {
     final encryptedList = _prefs.getStringList(key) ?? [];
-    final encryptedValue = Encryptor.encrypt(value);
+    final encryptedValue = encrypt(value);
     if (encryptedList.contains(encryptedValue)) {
       await onAvoidDuplicateValue?.call();
     } else {
@@ -41,16 +40,16 @@ class EncryptedSharedPreferences {
     }
   }
 
-  Future<void> remove(String key) => _prefs.remove(key);
-  Future<void> clear() => _prefs.clear();
+  static Future<void> remove(String key) => _prefs.remove(key);
+  static Future<void> clear() => _prefs.clear();
 
-  void dump() {
+  static void dump() {
     _prefs.getKeys().forEach(
           (key) => debugPrint('key=$key, value=${_prefs.get(key)}'),
         );
   }
 
-  void dumpCount() {
+  static void dumpCount() {
     debugPrint('length=${_prefs.getKeys().length}');
   }
 }

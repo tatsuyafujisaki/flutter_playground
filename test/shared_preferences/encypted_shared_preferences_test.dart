@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  setUp(
+  const key = 'myKey';
+
+  setUpAll(
     () async {
       // SharedPreferences.setMockInitialValues() must be called
       // before SharedPreferences.getInstance()
@@ -15,12 +17,90 @@ void main() {
     },
   );
 
-  test(
-    'Can set a string to and get a string from EncryptedSharedPreferences',
+  tearDown(
     () async {
-      const name = 'John';
-      await EncryptedSharedPreferences.setString('name', name);
-      expect(EncryptedSharedPreferences.getString('name'), name);
+      await EncryptedSharedPreferences.clear();
+    },
+  );
+
+  test('EncryptedSharedPreferences encrypts a string', () async {
+    const myValue = 'myValue';
+    await EncryptedSharedPreferences.setString(key, myValue);
+
+    expect(
+      EncryptedSharedPreferences.getEncryptedString(key),
+      isNot(EncryptedSharedPreferences.getString(key)),
+    );
+  });
+
+  test(
+    'Can set a string to and get a string',
+    () async {
+      const myValue = 'myValue';
+      await EncryptedSharedPreferences.setString(key, myValue);
+      expect(EncryptedSharedPreferences.getString(key), myValue);
+    },
+  );
+
+  test(
+    'Can set a string list to and get a string list',
+    () async {
+      await EncryptedSharedPreferences.addToStringListIfAbsent(
+        key,
+        'myValue1',
+      );
+      await EncryptedSharedPreferences.addToStringListIfAbsent(
+        key,
+        'myValue2',
+      );
+      expect(
+        EncryptedSharedPreferences.getStringList(key),
+        ['myValue1', 'myValue2'],
+      );
+    },
+  );
+
+  test(
+    'Cannot add a duplicate string',
+    () async {
+      await EncryptedSharedPreferences.addToStringListIfAbsent(
+        key,
+        'myValue',
+      );
+
+      await EncryptedSharedPreferences.addToStringListIfAbsent(
+        key,
+        'myValue',
+      );
+
+      expect(
+        EncryptedSharedPreferences.getStringList(key),
+        ['myValue'],
+      );
+    },
+  );
+
+  test(
+    'A given callback is invoked when you try to add a duplicate string',
+    () async {
+      var onAvoidDuplicateValueCalled = false;
+
+      Future<void> onAvoidDuplicateValue() async {
+        onAvoidDuplicateValueCalled = true;
+      }
+
+      await EncryptedSharedPreferences.addToStringListIfAbsent(
+        key,
+        'myValue',
+      );
+
+      await EncryptedSharedPreferences.addToStringListIfAbsent(
+        key,
+        'myValue',
+        onAvoidDuplicateValue,
+      );
+
+      expect(onAvoidDuplicateValueCalled, isTrue);
     },
   );
 }
