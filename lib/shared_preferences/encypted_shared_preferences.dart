@@ -17,6 +17,10 @@ class EncryptedSharedPreferences {
   static List<String> getStringList(String key) =>
       (_prefs.getStringList(key) ?? []).map(decrypt).toList();
 
+  @visibleForTesting
+  static List<String> getEncryptedStringList(String key) =>
+      (_prefs.getStringList(key) ?? []).toList();
+
   static Future<void> setString(String key, String value) =>
       _prefs.setString(key, encrypt(value));
 

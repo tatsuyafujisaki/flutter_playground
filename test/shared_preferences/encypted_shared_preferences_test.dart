@@ -43,7 +43,22 @@ void main() {
   );
 
   test(
-    'Can set a string list to and get a string list',
+    'Can set a string list at once to and get a string list',
+    () async {
+      final xs = ['myValue1', 'myValue2'];
+      await EncryptedSharedPreferences.setStringList(
+        key,
+        xs,
+      );
+      expect(
+        EncryptedSharedPreferences.getStringList(key),
+        xs,
+      );
+    },
+  );
+
+  test(
+    'Can add multiple strings one after the other and get a string list',
     () async {
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
