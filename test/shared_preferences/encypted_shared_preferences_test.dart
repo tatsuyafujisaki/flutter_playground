@@ -24,45 +24,43 @@ void main() {
   );
 
   test(
-    'Can set a string to and get a string',
+    'Can set, encrypt, and get a string',
     () async {
       const value = 'value';
       await EncryptedSharedPreferences.setString(key, value);
+      expect(
+        EncryptedSharedPreferences.getEncryptedString(key),
+        isNot(EncryptedSharedPreferences.getString(key)),
+      );
       expect(EncryptedSharedPreferences.getString(key), value);
     },
   );
 
-  test('Can encrypt a string', () async {
-    const value = 'value';
-    await EncryptedSharedPreferences.setString(key, value);
-
-    expect(
-      EncryptedSharedPreferences.getEncryptedString(key),
-      isNot(EncryptedSharedPreferences.getString(key)),
-    );
-  });
-
   test(
-    'Can set a string list at once to and get a string list',
+    'Can set, encrypt, and get a string list',
     () async {
-      final value = ['myValue1', 'myValue2'];
+      final xs = ['value1', 'value2'];
       await EncryptedSharedPreferences.setStringList(
         key,
-        value,
+        xs,
+      );
+      expect(
+        EncryptedSharedPreferences.getEncryptedStringList(key),
+        isNot(xs),
       );
       expect(
         EncryptedSharedPreferences.getStringList(key),
-        value,
+        xs,
       );
     },
   );
 
   test(
-    'Can add multiple strings one after the other and get a string list',
+    'Can add a string to a string list',
     () async {
-      await EncryptedSharedPreferences.addToStringListIfAbsent(
+      await EncryptedSharedPreferences.setStringList(
         key,
-        'value1',
+        ['value1'],
       );
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
