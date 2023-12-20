@@ -23,9 +23,18 @@ void main() {
     },
   );
 
-  test('EncryptedSharedPreferences encrypts a string', () async {
-    const myValue = 'myValue';
-    await EncryptedSharedPreferences.setString(key, myValue);
+  test(
+    'Can set a string to and get a string',
+    () async {
+      const value = 'value';
+      await EncryptedSharedPreferences.setString(key, value);
+      expect(EncryptedSharedPreferences.getString(key), value);
+    },
+  );
+
+  test('Can encrypt a string', () async {
+    const value = 'value';
+    await EncryptedSharedPreferences.setString(key, value);
 
     expect(
       EncryptedSharedPreferences.getEncryptedString(key),
@@ -34,25 +43,16 @@ void main() {
   });
 
   test(
-    'Can set a string to and get a string',
-    () async {
-      const myValue = 'myValue';
-      await EncryptedSharedPreferences.setString(key, myValue);
-      expect(EncryptedSharedPreferences.getString(key), myValue);
-    },
-  );
-
-  test(
     'Can set a string list at once to and get a string list',
     () async {
-      final xs = ['myValue1', 'myValue2'];
+      final value = ['myValue1', 'myValue2'];
       await EncryptedSharedPreferences.setStringList(
         key,
-        xs,
+        value,
       );
       expect(
         EncryptedSharedPreferences.getStringList(key),
-        xs,
+        value,
       );
     },
   );
@@ -62,15 +62,15 @@ void main() {
     () async {
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
-        'myValue1',
+        'value1',
       );
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
-        'myValue2',
+        'value2',
       );
       expect(
         EncryptedSharedPreferences.getStringList(key),
-        ['myValue1', 'myValue2'],
+        ['value1', 'value2'],
       );
     },
   );
@@ -78,19 +78,20 @@ void main() {
   test(
     'Cannot add a duplicate string',
     () async {
+      const value = 'value';
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
-        'myValue',
+        value,
       );
 
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
-        'myValue',
+        value,
       );
 
       expect(
         EncryptedSharedPreferences.getStringList(key),
-        ['myValue'],
+        [value],
       );
     },
   );
@@ -106,12 +107,12 @@ void main() {
 
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
-        'myValue',
+        'value',
       );
 
       await EncryptedSharedPreferences.addToStringListIfAbsent(
         key,
-        'myValue',
+        'value',
         onAvoidDuplicateValue,
       );
 
