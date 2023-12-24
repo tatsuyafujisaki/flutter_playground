@@ -12,7 +12,7 @@ class SharedPreferencesWrapper {
       _prefs.setInt(key, value);
 
   static bool? getBool(String key) => _prefs.getBool(key);
-  static Future<bool> setBool(String key, bool value) =>
+  static Future<bool> setBool(String key, {required bool value}) =>
       _prefs.setBool(key, value);
 
   static double? getDouble(String key) => _prefs.getDouble(key);
