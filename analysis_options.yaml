@@ -84,7 +84,6 @@ linter:
     - prefer_mixin
     - prefer_null_aware_method_calls
     - prefer_single_quotes # imcompatible with prefer_double_quotes
-    # - public_member_api_docs
     - require_trailing_commas
     - sized_box_shrink_expand
     - sort_constructors_first
