@@ -13,5 +13,6 @@ jobs:
         with:
           flutter-version: '3.16.5'
           channel: 'stable'
+      - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter analyze
       - run: flutter test
