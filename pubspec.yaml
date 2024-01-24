@@ -16,6 +16,7 @@ dependencies:
   flutter_riverpod: any
   flutter_svg: any
   freezed_annotation: any
+  geolocator: any
   image_picker: any
   intl: any
   json_annotation: any
