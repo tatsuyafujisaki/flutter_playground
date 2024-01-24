@@ -53,7 +53,5 @@ class EncryptedSharedPreferences {
         );
   }
 
-  static void dumpCount() {
-    debugPrint('length=${_prefs.getKeys().length}');
-  }
+  static int get dumpCount => _prefs.getKeys().length;
 }
