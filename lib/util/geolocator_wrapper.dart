@@ -38,7 +38,7 @@ class GeolocatorWrapper {
     return const LocationSettings();
   }
 
-  Future<bool> _checkAndRequestPermission() async {
+  Future<bool> get isAllowed async {
     if (!await Geolocator.isLocationServiceEnabled()) {
       return false;
     }
@@ -54,14 +54,14 @@ class GeolocatorWrapper {
   }
 
   Future<Position?> get currentPosition async {
-    if (await _checkAndRequestPermission()) {
+    if (await isAllowed) {
       return Geolocator.getCurrentPosition();
     }
     return null;
   }
 
   Future<Stream<Position>?> get _positionStream async {
-    if (await _checkAndRequestPermission()) {
+    if (await isAllowed) {
       return Geolocator.getPositionStream(
         locationSettings: locationSettings,
       );
