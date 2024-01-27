@@ -53,17 +53,12 @@ class GeolocatorWrapper {
     return true;
   }
 
-  Future<Position> get currentPosition async =>
-      await isAllowed ? Geolocator.getCurrentPosition() : Future.error('');
+  Future<Position?> get currentPosition async =>
+      await isAllowed ? Geolocator.getCurrentPosition() : null;
 
-  Future<Stream<Position>> get _positionStream async {
-    if (await isAllowed) {
-      return Geolocator.getPositionStream(
-        locationSettings: locationSettings,
-      );
-    }
-    return Future.error('');
-  }
+  Future<Stream<Position>?> get _positionStream async => (await isAllowed)
+      ? Geolocator.getPositionStream(locationSettings: locationSettings)
+      : null;
 
   Future<void> listenOnce(void Function(Position) onData) async {
     // avoids accidentally adding multiple listeners to a broadcast stream
@@ -72,9 +67,8 @@ class GeolocatorWrapper {
       return;
     }
     isListening = true;
-    (await _positionStream).listen(
+    (await _positionStream)?.listen(
       onData,
-      onError: (error) => debugPrint(error.toString()),
       onDone: () => isListening = false,
     );
   }
