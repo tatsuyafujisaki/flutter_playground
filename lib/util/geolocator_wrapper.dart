@@ -37,7 +37,7 @@ class GeolocatorWrapper {
     return const LocationSettings();
   }
 
-  Future<bool> get isAllowed async {
+  Future<bool> get _isAllowed async {
     if (!await Geolocator.isLocationServiceEnabled()) {
       return false;
     }
@@ -53,20 +53,15 @@ class GeolocatorWrapper {
   }
 
   Future<Position?> get currentPosition async =>
-      await isAllowed ? Geolocator.getCurrentPosition() : null;
+      await _isAllowed ? Geolocator.getCurrentPosition() : null;
 
-  Future<Stream<Position>?> get _positionStream async => (await isAllowed)
-      ? Geolocator.getPositionStream(locationSettings: _locationSettings)
-      : null;
-
-  Future<void> listenOnce(void Function(Position) onData) async {
-    // avoids accidentally adding multiple listeners to a broadcast stream
-    // Geolocator.getPositionStream() returns.
-    final positionStream = await _positionStream;
-    if (!_controller.hasListener && positionStream != null) {
-      await _controller.addStream(positionStream);
+  Future<Stream<Position>?> get positionStream async {
+    if (!_controller.hasListener && await _isAllowed) {
+      await _controller.addStream(
+        Geolocator.getPositionStream(locationSettings: _locationSettings),
+      );
     }
-    _controller.stream.listen(onData);
+    return _controller.stream;
   }
 
   void demoOneShot() {
@@ -79,7 +74,7 @@ class GeolocatorWrapper {
   void demoListen() {
     Future.delayed(
       Duration.zero,
-      () async => GeolocatorWrapper().listenOnce(
+      () async => (await GeolocatorWrapper().positionStream)?.listen(
         (position) => debugPrint(
           '$position, Time: ${DateFormat.Hms().format(DateTime.now())}',
         ),
