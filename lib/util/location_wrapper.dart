@@ -1,19 +1,20 @@
 import 'package:location/location.dart';
 
 class LocationWrapper {
-  final location = Location();
+  final _location = Location();
 
   Future<bool> get isAllowed async {
-    if (!await location.serviceEnabled() && !await location.requestService()) {
+    if (!await _location.serviceEnabled() &&
+        !await _location.requestService()) {
       return false;
     }
-    if (!await location.isBackgroundModeEnabled() &&
-        !await location.enableBackgroundMode()) {
+    if (!await _location.isBackgroundModeEnabled() &&
+        !await _location.enableBackgroundMode()) {
       return false;
     }
-    var status = await location.hasPermission();
+    var status = await _location.hasPermission();
     if (status == PermissionStatus.denied) {
-      status = await location.requestPermission();
+      status = await _location.requestPermission();
     }
     if (status == PermissionStatus.denied ||
         status == PermissionStatus.deniedForever) {
@@ -24,7 +25,7 @@ class LocationWrapper {
 
   Future<void> listen(void Function(LocationData) onData) async {
     if (await isAllowed) {
-      location.onLocationChanged.listen(onData);
+      _location.onLocationChanged.listen(onData);
     }
   }
 }
