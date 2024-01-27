@@ -76,23 +76,18 @@ class GeolocatorWrapper {
   void demoOneShot() {
     Future.delayed(
       Duration.zero,
-      () async {
-        final position = await GeolocatorWrapper().currentPosition;
-        debugPrint(position.toString());
-      },
+      () async => debugPrint(currentPosition.toString()),
     );
   }
 
   void demoListen() {
     Future.delayed(
       Duration.zero,
-      () async {
-        await GeolocatorWrapper().listenOnce(
-          (position) => debugPrint(
-            '$position, Time: ${DateFormat.Hms().format(DateTime.now())}',
-          ),
-        );
-      },
+      () async => GeolocatorWrapper().listenOnce(
+        (position) => debugPrint(
+          '$position, Time: ${DateFormat.Hms().format(DateTime.now())}',
+        ),
+      ),
     );
   }
 }
