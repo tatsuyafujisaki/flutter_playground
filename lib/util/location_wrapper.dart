@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
 class LocationWrapper {
@@ -23,12 +25,30 @@ class LocationWrapper {
     return true;
   }
 
-  Future<LocationData> get location async =>
-      await _isAllowed ? _location.getLocation() : Future.error('');
+  Future<LocationData?> get location async =>
+      await _isAllowed ? _location.getLocation() : null;
 
   Future<void> listen(void Function(LocationData) onData) async {
     if (await _isAllowed) {
       _location.onLocationChanged.listen(onData);
     }
+  }
+
+  void demoOneShot() {
+    Future.delayed(
+      Duration.zero,
+      () async => debugPrint(location.toString()),
+    );
+  }
+
+  void demoListen() {
+    Future.delayed(
+      Duration.zero,
+      () async => listen(
+        (data) => debugPrint(
+          '$data, Time: ${DateFormat.Hms().format(DateTime.now())}',
+        ),
+      ),
+    );
   }
 }
