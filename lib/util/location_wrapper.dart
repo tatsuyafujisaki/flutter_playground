@@ -23,6 +23,9 @@ class LocationWrapper {
     return true;
   }
 
+  Future<LocationData> get location async =>
+      await _isAllowed ? _location.getLocation() : Future.error('');
+
   Future<void> listen(void Function(LocationData) onData) async {
     if (await _isAllowed) {
       _location.onLocationChanged.listen(onData);
