@@ -3,7 +3,7 @@ import 'package:location/location.dart';
 class LocationWrapper {
   final _location = Location();
 
-  Future<bool> get isAllowed async {
+  Future<bool> get _isAllowed async {
     if (!await _location.serviceEnabled() &&
         !await _location.requestService()) {
       return false;
@@ -24,7 +24,7 @@ class LocationWrapper {
   }
 
   Future<void> listen(void Function(LocationData) onData) async {
-    if (await isAllowed) {
+    if (await _isAllowed) {
       _location.onLocationChanged.listen(onData);
     }
   }
