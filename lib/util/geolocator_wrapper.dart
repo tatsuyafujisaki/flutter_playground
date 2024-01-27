@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -7,12 +8,10 @@ import 'package:intl/intl.dart';
 class GeolocatorWrapper {
   factory GeolocatorWrapper() => _instance;
   GeolocatorWrapper._internal() {
-    locationSettings = _locationSettings;
-    isListening = false;
+    _controller = StreamController();
   }
   static final GeolocatorWrapper _instance = GeolocatorWrapper._internal();
-  late final LocationSettings locationSettings;
-  late bool isListening;
+  late final StreamController<Position> _controller;
 
   LocationSettings get _locationSettings {
     if (Platform.isAndroid) {
@@ -57,20 +56,17 @@ class GeolocatorWrapper {
       await isAllowed ? Geolocator.getCurrentPosition() : null;
 
   Future<Stream<Position>?> get _positionStream async => (await isAllowed)
-      ? Geolocator.getPositionStream(locationSettings: locationSettings)
+      ? Geolocator.getPositionStream(locationSettings: _locationSettings)
       : null;
 
   Future<void> listenOnce(void Function(Position) onData) async {
     // avoids accidentally adding multiple listeners to a broadcast stream
     // Geolocator.getPositionStream() returns.
-    if (isListening) {
-      return;
+    final positionStream = await _positionStream;
+    if (!_controller.hasListener && positionStream != null) {
+      await _controller.addStream(positionStream);
     }
-    isListening = true;
-    (await _positionStream)?.listen(
-      onData,
-      onDone: () => isListening = false,
-    );
+    _controller.stream.listen(onData);
   }
 
   void demoOneShot() {
