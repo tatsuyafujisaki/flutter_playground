@@ -76,7 +76,7 @@ class GeolocatorWrapper {
   void demoOneShot() {
     Future.delayed(
       Duration.zero,
-      () async => debugPrint(currentPosition.toString()),
+      () => debugPrint(currentPosition.toString()),
     );
   }
 
