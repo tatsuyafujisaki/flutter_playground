@@ -37,7 +37,7 @@ class LocationWrapper {
   void demoOneShot() {
     Future.delayed(
       Duration.zero,
-      () async => debugPrint(location.toString()),
+      () => debugPrint(location.toString()),
     );
   }
 
