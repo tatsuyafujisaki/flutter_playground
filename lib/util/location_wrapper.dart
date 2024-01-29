@@ -5,12 +5,16 @@ import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
 class LocationWrapper {
-  final _location = Location();
-  StreamSubscription<LocationData>? subscription;
+  static final _location = Location();
+  static StreamSubscription<LocationData>? subscription;
 
   Future<bool> get _isAllowed async {
     if (!await _location.serviceEnabled() &&
         !await _location.requestService()) {
+      return false;
+    }
+    if (!await _location.isBackgroundModeEnabled() &&
+        !await _location.enableBackgroundMode()) {
       return false;
     }
     var status = await _location.hasPermission();
