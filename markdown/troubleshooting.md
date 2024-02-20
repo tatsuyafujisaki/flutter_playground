@@ -22,6 +22,10 @@ https://developer.android.com/build/jdks#jdk-android-studio
 https://developer.android.com/build/jdks#jdk-android-studio
 
 # iOS
+## What if opening a simulator shows the `Unable to boot the Simulator` dialog.
+macOS's System Settings > General > Storage > Developer > Delete everything (no worries)
+https://stackoverflow.com/a/72238810/10867055
+
 ## What if `pod install` shows the following warning.
 ```
 [!] CocoaPods did not set the base configuration of your project because your project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target `Runner` to `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` or include the `Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig` in your build configuration (`Flutter/Release.xcconfig`).
