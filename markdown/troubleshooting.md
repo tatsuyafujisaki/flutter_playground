@@ -22,9 +22,6 @@ https://developer.android.com/build/jdks#jdk-android-studio
 https://developer.android.com/build/jdks#jdk-android-studio
 
 # iOS
-## What if opening a simulator shows the `Unable to boot the Simulator` dialog.
-macOS's System Settings > General > Storage > Developer > Delete everything (no worries)
-https://stackoverflow.com/a/72238810/10867055
 
 ## What if `pod install` shows the following warning.
 ```
@@ -59,3 +56,6 @@ https://stackoverflow.com/a/72238810/10867055
 ## What if building an iOS app shows `Xcode build failed due to concurrent builds, will retry in 2 seconds.`
 ### Solution
 Stop `XCBbuildService` using Activity Monitor.
+
+## iOS troubleshooting not specific to Flutter
+https://github.com/tatsuyafujisaki/xcode-playground/blob/main/README.md
