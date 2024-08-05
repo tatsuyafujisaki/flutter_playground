@@ -6,7 +6,7 @@ Future<T?> showCupertinoDialogExample<T>(BuildContext context) =>
       builder: (context) => CupertinoAlertDialog(
         title: const Text('Title'),
         content: const Text('Content'),
-        actions: [
+        actions: <Widget>[
           CupertinoDialogAction(
             onPressed: () {
               Navigator.pop(context);
