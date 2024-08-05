@@ -2,7 +2,7 @@ name: flutter_playground
 publish_to: 'none'
 version: 1.0.0+1
 environment:
-  sdk: ^3.2.3 # https://github.com/marketplace/actions/flutter-action uses Dart 3.2.3.
+  sdk: ^3.4.4
 dependencies:
   cupertino_icons: any
   encrypt: any
@@ -11,7 +11,7 @@ dependencies:
   firebase_crashlytics: any
   flutter:
     sdk: flutter
-  flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#setting-up
+  flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
     sdk: flutter
   flutter_riverpod: any
   flutter_svg: any
