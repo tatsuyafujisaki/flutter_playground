@@ -36,4 +36,5 @@ dev_dependencies:
   json_serializable: any
   riverpod_generator: any
 flutter:
+  generate: true # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
   uses-material-design: true

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_playground/firebase_options.dart';
 import 'package:flutter_playground/shared_preferences/encypted_shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,10 +35,12 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp(
       title: 'Flutter Demo',
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
@@ -106,9 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // (the cross axis would be horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
+              Text(AppLocalizations.of(context)?.pushButtonCountLabel ?? ''),
               Text(
                 '$counter',
                 style: Theme.of(context).textTheme.headlineMedium,
