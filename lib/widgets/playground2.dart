@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+void main() => runApp(const _MyStatelessWidget());
+
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget({super.key});
 
@@ -16,32 +18,17 @@ class BottomSheetExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-        child: ElevatedButton(
-          child: const Text('showModalBottomSheet'),
-          onPressed: () async {
-            await showModalBottomSheet<void>(
-              context: context,
-              builder: (context) => Container(
-                height: 200,
-                color: Colors.amber,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const Text('Modal BottomSheet'),
-                      ElevatedButton(
-                        child: const Text('Close BottomSheet'),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
+        child: IconButton(
+          onPressed: () async => showModalBottomSheet<void>(
+            context: context,
+            builder: (context) => IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.close),
+            ),
+            // stretches the bottom sheet to the top.
+            isScrollControlled: true,
+          ),
+          icon: const Icon(Icons.flutter_dash),
         ),
       );
 }
-
-void main() => runApp(const _MyStatelessWidget());
