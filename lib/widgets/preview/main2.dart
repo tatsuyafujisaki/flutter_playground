@@ -11,12 +11,19 @@ class _MyStatelessWidget extends StatelessWidget {
           child: IconButton(
             onPressed: () async => showModalBottomSheet<void>(
               context: context,
-              builder: (context) => IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.close),
+              builder: (context) => Column(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close),
+                  ),
+                ],
               ),
-              // stretches the bottom sheet to the top of the screen.
+              // stretches the bottom sheet to full height.
               isScrollControlled: true,
+              // avoids the bottom sheet of full height
+              // from overlapping the status bar.
+              useSafeArea: true,
             ),
             icon: const Icon(Icons.flutter_dash),
           ),
