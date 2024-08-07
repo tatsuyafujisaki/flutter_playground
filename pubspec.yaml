@@ -14,6 +14,7 @@ dependencies:
   flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
     sdk: flutter
   flutter_riverpod: any
+  flutter_slidable: any
   flutter_svg: any
   freezed_annotation: any
   geolocator: any
