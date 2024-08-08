@@ -11,14 +11,7 @@ class _MyStatelessWidget extends StatelessWidget {
           child: IconButton(
             onPressed: () async => showModalBottomSheet<void>(
               context: context,
-              builder: (context) => Column(
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close),
-                  ),
-                ],
-              ),
+              builder: (_) => const _BottomSheetContent(),
               // stretches the bottom sheet to full height.
               isScrollControlled: true,
               // avoids the bottom sheet of full height
@@ -28,5 +21,19 @@ class _MyStatelessWidget extends StatelessWidget {
             icon: const Icon(Icons.flutter_dash),
           ),
         ),
+      );
+}
+
+class _BottomSheetContent extends StatelessWidget {
+  const _BottomSheetContent();
+
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.close),
+          ),
+        ],
       );
 }
