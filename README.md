@@ -29,6 +29,35 @@ Widget build(BuildContext context, WidgetRef ref) {
   return Scaffold(...);
 ```
 
+# How to set the height of [showModalBottomSheet](https://api.flutter.dev/flutter/material/showModalBottomSheet.html)
+1. If you want the bottom sheet to occupy almost half of the screen height, no special setting is required.
+2. If you want the bottom sheet to occupy the screen height except for the status bar, write as follows.
+    ```dart
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (_) => ...,
+      // stretches the bottom sheet to full height.
+      isScrollControlled: true,
+      // from overlapping the status bar.
+      useSafeArea: true,
+    ),
+    ```
+3. If you want the bottom sheet to occupy a certain percentage of the screen height, write as follows.
+    ```dart
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (_) => FractionallySizedBox(
+        heightFactor: 0.8, // 80% of the screen height
+        child: ...,
+      ),
+      // stretches the bottom sheet to full height.
+      isScrollControlled: true,
+      // avoids the bottom sheet of full height
+      // from overlapping the status bar.
+      useSafeArea: true,
+    )
+    ```
+
 ## Official reference's recommendations
 ### "Whenever possible, prefer using ref.watch over ref.read or ref.listen to implement a feature."
 https://docs-v2.riverpod.dev/docs/concepts/reading#using-ref-to-interact-with-providers
