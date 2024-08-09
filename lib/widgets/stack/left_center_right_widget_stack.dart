@@ -1,26 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget _leftCenterRightWidgetStack({
-  Widget? leftWidget,
-  Widget? centerWidget,
-  Widget? rightWidget,
-}) =>
-    Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        if (leftWidget != null)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: leftWidget,
-          ),
-        if (centerWidget != null) centerWidget,
-        if (rightWidget != null)
-          Align(
-            alignment: Alignment.centerRight,
-            child: rightWidget,
-          ),
-      ],
-    );
+void main() => runApp(const _MyStatelessWidget());
 
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();
@@ -48,4 +28,24 @@ class _MyStatelessWidget extends StatelessWidget {
       );
 }
 
-void main() => runApp(const _MyStatelessWidget());
+Stack _leftCenterRightWidgetStack({
+  Widget? leftWidget,
+  Widget? centerWidget,
+  Widget? rightWidget,
+}) =>
+    Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        if (leftWidget != null)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: leftWidget,
+          ),
+        if (centerWidget != null) centerWidget,
+        if (rightWidget != null)
+          Align(
+            alignment: Alignment.centerRight,
+            child: rightWidget,
+          ),
+      ],
+    );
