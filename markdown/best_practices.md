@@ -10,16 +10,26 @@
   - https://api.flutter.dev/flutter/material/Scaffold-class.html
   - https://youtu.be/lkF0TQJO0bA?t=35
 
-## Official reference's recommendations
-### "Whenever possible, prefer using ref.watch over ref.read or ref.listen to implement a feature."
+# Material Components
+> Choosing between text and elevated buttons
+
+https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
+
+# Package
+## go_router
+> `context.go('/users/123')` is shorthand for calling calling `GoRouter.of(context).go('/users/123)`.
+
+https://pub.dev/documentation/go_router/latest/topics/Navigation-topic.html
+
+## riverpod
+> Whenever possible, prefer using `ref.watch` over `ref.read` or `ref.listen` to implement a feature.
+
 https://docs-v2.riverpod.dev/docs/concepts/reading#using-ref-to-interact-with-providers
 
-### "Prefer using NotifierProvider instead."
+> Prefer using NotifierProvider instead.
+
 https://docs-v2.riverpod.dev/docs/providers/state_notifier_provider
 
-### Relationship between `ref.listen()` and `ref.watch()`
-https://youtu.be/BJtQ0dfI-RA?t=4302
+> Relationship between `ref.listen()` and `ref.watch()`
 
-## Google's recommendations
-### "Choosing between text and elevated buttons"
-https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
+https://youtu.be/BJtQ0dfI-RA?t=4302
