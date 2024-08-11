@@ -17,6 +17,9 @@ https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
 
 # Package
 ## go_router
+Use the syntactic sugar of [GoRouterHelper](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper.html) instead of `GoRouter.of`.
+
+For example ...
 > `context.go('/users/123')` is shorthand for calling calling `GoRouter.of(context).go('/users/123)`.
 
 https://pub.dev/documentation/go_router/latest/topics/Navigation-topic.html
