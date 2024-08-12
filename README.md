@@ -32,6 +32,9 @@ Widget build(BuildContext context, WidgetRef ref) {
   return Scaffold(...);
 ```
 
+# Model-View-ViewModel (MVVM)
+[mvvm.md](markdown/mvvm.md)
+
 # Best practices
 [best_practices.md](markdown/best_practices.md)
 
