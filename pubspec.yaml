@@ -18,6 +18,7 @@ dependencies:
   flutter_svg: any
   freezed_annotation: any
   geolocator: any
+  http: any
   image_picker: any
   intl: any
   json_annotation: any
