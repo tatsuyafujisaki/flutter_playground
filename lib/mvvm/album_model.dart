@@ -46,7 +46,7 @@ class AlbumModel {
     if (response.statusCode == 201) {
       return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
-      throw Exception('Failed to create an album.');
+      throw Exception('Failed to post an album.');
     }
   }
 
