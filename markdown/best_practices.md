@@ -1,3 +1,4 @@
+# widgets library (widgets.dart)
 - https://docs.flutter.dev/ui/navigation
   - > We don’t recommend using named routes for most applications.
   - > Flutter also doesn’t support the browser forward button for applications using named routes. For these reasons, we don’t recommend using named routes in most applications.
@@ -10,10 +11,14 @@
   - https://api.flutter.dev/flutter/material/Scaffold-class.html
   - https://youtu.be/lkF0TQJO0bA?t=35
 
-# Material Components
+# material library (material.dart)
 > Choosing between text and elevated buttons
 
 https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
+
+> To create a divider between ListTile items, consider using ListTile.divideTiles, which is optimized for this case.
+
+https://api.flutter.dev/flutter/material/Divider-class.html
 
 # Package
 ## go_router
