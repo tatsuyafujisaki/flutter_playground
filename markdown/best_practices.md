@@ -47,6 +47,7 @@ https://docs-v2.riverpod.dev/docs/providers/state_notifier_provider
 https://youtu.be/BJtQ0dfI-RA?t=4302
 
 # Use A rather than B for simplicity or better UIUX
-A|B
---|--
+A|B|Note
+--|--|--
+[InputBorder.none](https://api.flutter.dev/flutter/material/InputBorder/none-constant.html)|[BorderSide.none](https://api.flutter.dev/flutter/painting/BorderSide/none-constant.html)|if you don't need to round the TextField.
 [InkWell](https://api.flutter.dev/flutter/material/InkWell-class.html)|[GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
