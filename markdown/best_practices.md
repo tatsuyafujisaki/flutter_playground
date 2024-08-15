@@ -20,6 +20,10 @@ https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
 
 https://api.flutter.dev/flutter/material/Divider-class.html
 
+Don't use the title property of the MaterialApp class because it is meaningless not only on iOS, but also on Android 10 or later
+
+https://stackoverflow.com/questions/78871904/flutter-is-the-title-property-of-the-materialapps-class-not-used-on-android-10
+
 # Package
 ## go_router
 Use the syntactic sugar of [GoRouterHelper](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper.html) instead of `GoRouter.of`.
@@ -41,3 +45,8 @@ https://docs-v2.riverpod.dev/docs/providers/state_notifier_provider
 > Relationship between `ref.listen()` and `ref.watch()`
 
 https://youtu.be/BJtQ0dfI-RA?t=4302
+
+# Use A rather than B for simplicity or better UIUX
+A|B
+--|--
+[InkWell](https://api.flutter.dev/flutter/material/InkWell-class.html)|[GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
