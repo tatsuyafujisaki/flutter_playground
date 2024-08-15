@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_playground/mvvm/album.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 const _baseUrl = 'jsonplaceholder.typicode.com';
 
@@ -17,6 +18,7 @@ class AlbumModel {
           .map((map) => Album.fromJson(map as Map<String, dynamic>))
           .toList();
     }
+    _debugPrint(response);
     throw Exception('Failed to get albums.');
   }
 
@@ -27,6 +29,7 @@ class AlbumModel {
     if (_isSuccessful(response.statusCode)) {
       return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
+    _debugPrint(response);
     throw Exception('Failed to get an album.');
   }
 
@@ -43,6 +46,7 @@ class AlbumModel {
     if (_isSuccessful(response.statusCode)) {
       return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
+    _debugPrint(response);
     throw Exception('Failed to post an album.');
   }
 
@@ -62,6 +66,7 @@ class AlbumModel {
     if (_isSuccessful(response.statusCode)) {
       return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
+    _debugPrint(response);
     throw Exception('Failed to update an album.');
   }
 
@@ -75,11 +80,20 @@ class AlbumModel {
       },
     );
     if (!_isSuccessful(response.statusCode)) {
+      _debugPrint(response);
       throw Exception('Failed to delete an album.');
     }
   }
 
   bool _isSuccessful(int statusCode) => 200 <= statusCode && statusCode <= 299;
+
+  void _debugPrint(Response response) {
+    debugPrint('👀response.request: ${response.request}');
+    debugPrint('👀response.statusCode: ${response.statusCode}');
+    debugPrint('👀response.reasonPhrase: ${response.reasonPhrase}');
+    debugPrint('👀response.headers: ${response.headers}');
+    debugPrint('👀response.body: ${response.body}');
+  }
 }
 
 void main() async {
