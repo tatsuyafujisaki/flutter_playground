@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-Widget createColoreSizedBox({
-  Color color = Colors.pink,
+void main() => runApp(_createApp());
+
+Widget _createApp({
+  Color color = Colors.cyan,
   double? width = double.infinity,
   double? height,
   Widget? child,
