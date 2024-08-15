@@ -30,11 +30,8 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     debugPrint(Platform.version);
-    debugPrint(const String.fromEnvironment('MY_KEY1'));
-    debugPrint(const String.fromEnvironment('MY_KEY2'));
 
     return MaterialApp(
-      title: 'Flutter Demo',
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       theme: ThemeData(
         primarySwatch: Colors.blue,
