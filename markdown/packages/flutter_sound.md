@@ -6,5 +6,5 @@ cd flutter_sound/flutter_sound/example
 rm -fr ios linux macos web windows
 code
 ```
-2. Open main.dart
+2. Open `lib/main.dart`.
 3. Click the “Run” button near the main function.
