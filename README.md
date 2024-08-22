@@ -12,7 +12,7 @@ https://docs.flutter.dev/tools/hot-reload#how-to-perform-a-hot-reload
 # SharedPreferences
 [shared_preferences.md](markdown/shared_preferences.md)
 
-## Packages
+# Packages
 [packages](markdown/packages)
 
 # How to show a dialog when opening a screen
