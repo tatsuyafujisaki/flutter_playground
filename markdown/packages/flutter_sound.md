@@ -7,4 +7,4 @@ rm -fr ios linux macos web windows
 code
 ```
 2. Open `lib/main.dart`.
-3. Click the “Run” button near the main function.
+3. Click “Debug” near the main function.
