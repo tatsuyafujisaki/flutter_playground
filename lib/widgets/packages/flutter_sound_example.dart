@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/widgets/packages/ffmpeg_example.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() => runApp(
       const MaterialApp(
         home: Scaffold(
-          body: _SoundWidget(audioFilePath: 'sample.m4a'),
+          body: _SoundWidget(),
           backgroundColor: Colors.white,
         ),
       ),
     );
 
 class _SoundWidget extends StatefulWidget {
-  const _SoundWidget({
-    required this.audioFilePath,
-  });
-
-  final String audioFilePath;
+  const _SoundWidget();
 
   @override
   State<_SoundWidget> createState() => _SoundWidgetState();
 }
 
 class _SoundWidgetState extends State<_SoundWidget> {
+  final String m4aFilename = 'sample.m4a';
+  late String mp3FilePath;
   final recorder = FlutterSoundRecorder();
   final player = FlutterSoundPlayer();
 
@@ -62,10 +63,16 @@ class _SoundWidgetState extends State<_SoundWidget> {
   Future<void> toggleRecorder() async {
     if (recorder.isRecording) {
       await recorder.stopRecorder();
+      final m4aFilePath = await _joinTemporaryDirectory(m4aFilename);
+      mp3FilePath = p.setExtension(m4aFilePath, '.mp3');
+      await convertAudio(
+        inputAudioPath: m4aFilePath,
+        outputAudioPath: mp3FilePath,
+      );
     } else {
       await recorder.startRecorder(
         codec: Codec.aacMP4,
-        toFile: widget.audioFilePath,
+        toFile: m4aFilename,
       );
     }
     setState(() {});
@@ -76,7 +83,8 @@ class _SoundWidgetState extends State<_SoundWidget> {
       await player.stopPlayer();
     } else {
       await player.startPlayer(
-        fromURI: widget.audioFilePath,
+        fromURI: mp3FilePath,
+        codec: Codec.mp3,
         whenFinished: () => setState(() {}),
       );
     }
@@ -101,3 +109,9 @@ class _SoundWidgetState extends State<_SoundWidget> {
         ),
       );
 }
+
+Future<String> _joinTemporaryDirectory(String relativePath) async =>
+    p.join(
+      (await getTemporaryDirectory()).path,
+      relativePath,
+    );
