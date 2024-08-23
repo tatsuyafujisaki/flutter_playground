@@ -26,6 +26,7 @@ dependencies:
   location: any
   path: any
   path_provider: any
+  permission_handler: any
   riverpod_annotation: any
   shared_preferences: any
   url_launcher: any
