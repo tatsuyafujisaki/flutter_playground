@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_playground/firebase_options.dart';
+import 'package:flutter_playground/l10n/l10n_extensions.dart';
 import 'package:flutter_playground/shared_preferences/encypted_shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -106,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // (the cross axis would be horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(AppLocalizations.of(context)?.pushButtonCountLabel ?? ''),
+              Text(context.l10n.pushButtonCountLabel),
               Text(
                 '$counter',
                 style: Theme.of(context).textTheme.headlineMedium,

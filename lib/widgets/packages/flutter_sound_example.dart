@@ -110,8 +110,7 @@ class _SoundWidgetState extends State<_SoundWidget> {
       );
 }
 
-Future<String> _joinTemporaryDirectory(String relativePath) async =>
-    p.join(
+Future<String> _joinTemporaryDirectory(String relativePath) async => p.join(
       (await getTemporaryDirectory()).path,
       relativePath,
     );
