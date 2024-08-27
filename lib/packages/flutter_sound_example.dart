@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/widgets/packages/ffmpeg_example.dart';
+import 'package:flutter_playground/packages/ffmpeg_example.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -67,6 +67,11 @@ class _SoundWidgetState extends State<_SoundWidget> {
   Future<void> toggleRecorder() async {
     if (recorder.isRecording) {
       await recorder.stopRecorder();
+      await convertAudio(
+        inputAudioPath:
+            'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/dash/ForBiggerFunAudio.mp4',
+        outputAudioPath: await mp3File.filePath,
+      );
     } else {
       await recorder.startRecorder(
         codec: Codec.aacMP4,
@@ -79,10 +84,6 @@ class _SoundWidgetState extends State<_SoundWidget> {
   Future<void> togglePlayer() async {
     if (player.isPlaying) {
       await player.stopPlayer();
-      await convertAudio(
-        inputAudioPath: await m4aFile.filePath,
-        outputAudioPath: await mp3File.filePath,
-      );
     } else {
       await player.startPlayer(
         fromURI: mp3File.filename,
