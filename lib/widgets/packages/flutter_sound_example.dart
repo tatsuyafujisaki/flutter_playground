@@ -25,7 +25,9 @@ class _SoundWidget extends StatefulWidget {
 }
 
 class _SoundWidgetState extends State<_SoundWidget> {
-  final _AudioFile myAudio = _AudioFile('sample');
+  final _AudioFile m4aFile = _AudioFile('sample.m4a');
+  final _AudioFile mp3File = _AudioFile('sample.mp3');
+
   final recorder = FlutterSoundRecorder();
   final player = FlutterSoundPlayer();
 
@@ -68,7 +70,7 @@ class _SoundWidgetState extends State<_SoundWidget> {
     } else {
       await recorder.startRecorder(
         codec: Codec.aacMP4,
-        toFile: myAudio.m4aFilename,
+        toFile: m4aFile.filename,
       );
     }
     setState(() {});
@@ -77,10 +79,13 @@ class _SoundWidgetState extends State<_SoundWidget> {
   Future<void> togglePlayer() async {
     if (player.isPlaying) {
       await player.stopPlayer();
-      await myAudio.convertM4aToMp3();
+      await convertAudio(
+        inputAudioPath: await m4aFile.m4aFilePath,
+        outputAudioPath: await mp3File.m4aFilePath,
+      );
     } else {
       await player.startPlayer(
-        fromURI: myAudio.mp3Filename,
+        fromURI: mp3File.filename,
         codec: Codec.mp3,
         whenFinished: () => setState(() {}),
       );
@@ -108,25 +113,11 @@ class _SoundWidgetState extends State<_SoundWidget> {
 }
 
 class _AudioFile {
-  _AudioFile(this.filenameWithoutExtension);
-  String filenameWithoutExtension;
+  _AudioFile(this.filename);
+  String filename;
 
-  String get m4aFilename => _getFilename('.m4a');
-  String get mp3Filename => _getFilename('.mp3');
-
-  Future<String> get m4aFilePath async => _joinTemporaryDirectory(m4aFilename);
-  Future<String> get mp3FilePath async => _joinTemporaryDirectory(mp3Filename);
-
-  Future<Uint8List> get m4a async => File(await m4aFilePath).readAsBytes();
-  Future<Uint8List> get mp3 async => File(await mp3FilePath).readAsBytes();
-
-  Future<bool> convertM4aToMp3() async => convertAudio(
-        inputAudioPath: await m4aFilePath,
-        outputAudioPath: await mp3FilePath,
-      );
-
-  String _getFilename(String extension) =>
-      p.setExtension(filenameWithoutExtension, extension);
+  Future<String> get m4aFilePath async => _joinTemporaryDirectory(filename);
+  Future<Uint8List> get bytes async => File(await m4aFilePath).readAsBytes();
 
   Future<String> _joinTemporaryDirectory(String relativePath) async => p.join(
         (await getTemporaryDirectory()).path,
