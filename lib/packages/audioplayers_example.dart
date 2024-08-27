@@ -17,8 +17,18 @@ class _MyStatelessWidget extends StatelessWidget {
           ..onDurationChanged.listen(
             (duration) => debugPrint('👀Duration changed: $duration'),
           )
-          ..onPositionChanged.map(formatInMSs).distinct().listen(
-                (mSs) => debugPrint('👀Position changed: $mSs'),
+          ..onPositionChanged
+              .map(
+                (duration) => Duration(
+                  minutes: duration.inMinutes,
+                  seconds: duration.inSeconds,
+                ),
+              )
+              .distinct()
+              .listen(
+                (duration) => debugPrint(
+                  '👀Position changed: ${formatInMSs(duration)}',
+                ),
               )
           ..onPlayerStateChanged.listen(
             (playerState) => debugPrint('👀Player state changed: $playerState'),
