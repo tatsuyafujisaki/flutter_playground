@@ -77,8 +77,8 @@ class _SoundWidgetState extends State<_SoundWidget> {
   Future<void> togglePlayer() async {
     if (player.isPlaying) {
       await player.stopPlayer();
-    } else {
       await myAudio.convertM4aToMp3();
+    } else {
       await player.startPlayer(
         fromURI: myAudio.mp3Filename,
         codec: Codec.mp3,
