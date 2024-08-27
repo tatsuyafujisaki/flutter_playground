@@ -78,7 +78,7 @@ class _SoundWidgetState extends State<_SoundWidget> {
     if (player.isPlaying) {
       await player.stopPlayer();
     } else {
-      await myAudio.convertM4aToMp3IfNotExists();
+      await myAudio.convertM4aToMp3();
       await player.startPlayer(
         fromURI: myAudio.mp3Filename,
         codec: Codec.mp3,
@@ -120,9 +120,7 @@ class _AudioFile {
   Future<Uint8List> get mp3 async => File(await mp3FilePath).readAsBytes();
   Future<Uint8List> get m4a async => File(await m4aFilePath).readAsBytes();
 
-  Future<bool> convertM4aToMp3IfNotExists() async =>
-      File(await mp3FilePath).existsSync() ||
-      await convertAudio(
+  Future<bool> convertM4aToMp3() async => convertAudio(
         inputAudioPath: await m4aFilePath,
         outputAudioPath: await mp3FilePath,
       );
