@@ -111,14 +111,14 @@ class _AudioFile {
   _AudioFile(this.filenameWithoutExtension);
   String filenameWithoutExtension;
 
-  String get mp3Filename => _getFilename('.mp3');
   String get m4aFilename => _getFilename('.m4a');
+  String get mp3Filename => _getFilename('.mp3');
 
   Future<String> get m4aFilePath async => _joinTemporaryDirectory(m4aFilename);
   Future<String> get mp3FilePath async => _joinTemporaryDirectory(mp3Filename);
 
-  Future<Uint8List> get mp3 async => File(await mp3FilePath).readAsBytes();
   Future<Uint8List> get m4a async => File(await m4aFilePath).readAsBytes();
+  Future<Uint8List> get mp3 async => File(await mp3FilePath).readAsBytes();
 
   Future<bool> convertM4aToMp3() async => convertAudio(
         inputAudioPath: await m4aFilePath,
