@@ -117,8 +117,8 @@ class _AudioFile {
   Future<String> get m4aFilePath async => _joinTemporaryDirectory(m4aFilename);
   Future<String> get mp3FilePath async => _joinTemporaryDirectory(mp3Filename);
 
-  Future<Uint8List> get mp3 async => _readAsBytes(await mp3FilePath);
-  Future<Uint8List> get m4a async => _readAsBytes(await m4aFilePath);
+  Future<Uint8List> get mp3 async => File(await mp3FilePath).readAsBytes();
+  Future<Uint8List> get m4a async => File(await m4aFilePath).readAsBytes();
 
   Future<bool> convertM4aToMp3IfNotExists() async =>
       File(await mp3FilePath).existsSync() ||
@@ -134,7 +134,4 @@ class _AudioFile {
         (await getTemporaryDirectory()).path,
         relativePath,
       );
-
-  Future<Uint8List> _readAsBytes(String filepath) async =>
-      File(filepath).readAsBytes();
 }
