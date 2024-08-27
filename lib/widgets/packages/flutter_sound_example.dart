@@ -80,8 +80,8 @@ class _SoundWidgetState extends State<_SoundWidget> {
     if (player.isPlaying) {
       await player.stopPlayer();
       await convertAudio(
-        inputAudioPath: await m4aFile.m4aFilePath,
-        outputAudioPath: await mp3File.m4aFilePath,
+        inputAudioPath: await m4aFile.filePath,
+        outputAudioPath: await mp3File.filePath,
       );
     } else {
       await player.startPlayer(
@@ -116,8 +116,11 @@ class _AudioFile {
   _AudioFile(this.filename);
   String filename;
 
-  Future<String> get m4aFilePath async => _joinTemporaryDirectory(filename);
-  Future<Uint8List> get bytes async => File(await m4aFilePath).readAsBytes();
+  String get filenameWithoutExtension => p.withoutExtension(filename);
+  Future<String> get filePath async => _joinTemporaryDirectory(filename);
+  Future<Uint8List> get bytes async => File(await filePath).readAsBytes();
+
+  Future<void> delete() async => File(filename).delete();
 
   Future<String> _joinTemporaryDirectory(String relativePath) async => p.join(
         (await getTemporaryDirectory()).path,
