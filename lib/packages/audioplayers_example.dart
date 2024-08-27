@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/util/duration_utils.dart';
 
 void main() => runApp(
       const _MyStatelessWidget(),
@@ -16,24 +17,17 @@ class _MyStatelessWidget extends StatelessWidget {
           ..onDurationChanged.listen(
             (duration) => debugPrint('👀Duration changed: $duration'),
           )
-          ..onPositionChanged
-              .map((duration) => (duration.inMinutes, duration.inSeconds))
-              .distinct()
-              .listen(
-            (e) {
-              final minutes = e.$1;
-              final seconds = e.$2.toString().padLeft(2, '0');
-              debugPrint('👀Position changed $minutes:$seconds');
-            },
-          )
+          ..onPositionChanged.map(formatInMSs).distinct().listen(
+                (mSs) => debugPrint('👀Position changed: $mSs'),
+              )
           ..onPlayerStateChanged.listen(
             (playerState) => debugPrint('👀Player state changed: $playerState'),
           )
           ..onSeekComplete.listen(
-            (event) => debugPrint('👀Seek complete'),
+            (_) => debugPrint('👀Seek complete'),
           )
           ..onPlayerComplete.listen(
-            (event) => debugPrint('👀Player complete'),
+            (_) => debugPrint('👀Player complete'),
           );
         await player.play(
           UrlSource(
