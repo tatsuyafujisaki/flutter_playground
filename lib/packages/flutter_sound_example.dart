@@ -53,6 +53,28 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   }
 
   @override
+  Widget build(BuildContext context) => SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                recorder.isRecording ? Icons.mic_off : Icons.mic,
+              ),
+              onPressed: player.isPlaying ? null : toggleRecorder,
+            ),
+            IconButton(
+              icon: Icon(
+                player.isPlaying ? Icons.pause : Icons.play_arrow,
+              ),
+              onPressed: recorder.isRecording ? null : togglePlayer,
+            ),
+          ],
+        ),
+      );
+
+  @override
   void dispose() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
@@ -91,28 +113,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     }
     setState(() {});
   }
-
-  @override
-  Widget build(BuildContext context) => SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: Icon(
-                recorder.isRecording ? Icons.mic_off : Icons.mic,
-              ),
-              onPressed: player.isPlaying ? null : toggleRecorder,
-            ),
-            IconButton(
-              icon: Icon(
-                player.isPlaying ? Icons.pause : Icons.play_arrow,
-              ),
-              onPressed: recorder.isRecording ? null : togglePlayer,
-            ),
-          ],
-        ),
-      );
 }
 
 class _AudioFile {

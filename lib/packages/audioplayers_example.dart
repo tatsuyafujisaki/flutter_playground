@@ -27,7 +27,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        await _configureAudioPlayer(
+        await configureAudioPlayer(
           player,
           'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/dash/ForBiggerFunAudio.mp4',
         );
@@ -35,15 +35,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
         setState(() {});
       },
     );
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => player.dispose(),
-    );
-
-    super.dispose();
   }
 
   @override
@@ -65,7 +56,16 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
         ),
       );
 
-  Future<void> _configureAudioPlayer(AudioPlayer player, String url) async {
+  @override
+  void dispose() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async => player.dispose(),
+    );
+
+    super.dispose();
+  }
+
+  Future<void> configureAudioPlayer(AudioPlayer player, String url) async {
     player
       ..onDurationChanged.listen(
         (duration) => debugPrint('👀Duration changed: $duration'),
