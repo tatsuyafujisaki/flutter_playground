@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/util/duration_utils.dart';
 
 void main() => runApp(
       const MaterialApp(
@@ -96,5 +95,11 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
     // > beforehand and then resume separately.
     // https://pub.dev/documentation/audioplayers/latest/audioplayers/AudioPlayer/play.html
     await player.setSourceUrl(url);
+  }
+
+  String formatInMSs(Duration duration) {
+    final minutes = duration.inMinutes;
+    final seconds = duration.inSeconds.toString().padLeft(2, '0');
+    return '$minutes:$seconds';
   }
 }
