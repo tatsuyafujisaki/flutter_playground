@@ -19,7 +19,7 @@ class _MyStatefulsWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
-  final _player = AudioPlayer();
+  final player = AudioPlayer();
 
   @override
   void initState() {
@@ -28,10 +28,10 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         await _configureAudioPlayer(
-          _player,
+          player,
           'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/dash/ForBiggerFunAudio.mp4',
         );
-        await _player.resume();
+        await player.resume();
         setState(() {});
       },
     );
@@ -40,7 +40,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
   @override
   void dispose() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _player.dispose(),
+      (_) async => player.dispose(),
     );
 
     super.dispose();
@@ -50,15 +50,15 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
   Widget build(BuildContext context) => Center(
         child: IconButton(
           icon: Icon(
-            _player.state == PlayerState.playing
+            player.state == PlayerState.playing
                 ? Icons.pause
                 : Icons.play_arrow,
           ),
           onPressed: () async {
-            if (_player.state == PlayerState.playing) {
-              await _player.pause();
+            if (player.state == PlayerState.playing) {
+              await player.pause();
             } else {
-              await _player.resume();
+              await player.resume();
             }
             setState(() {});
           },
