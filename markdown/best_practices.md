@@ -1,13 +1,3 @@
-# try-catch template
-```dart
-try {
-  // ...
-} on Exception catch (e, s) {
-  debugPrint(e.toString());
-  debugPrintStack(stackTrace: s);
-}
-```
-
 # widgets library (widgets.dart)
 - https://docs.flutter.dev/ui/navigation
   - > We don’t recommend using named routes for most applications.
