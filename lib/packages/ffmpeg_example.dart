@@ -14,16 +14,18 @@ Future<bool> convertAudio({
   );
 
   final output = await session.getOutput();
-  debugPrint('👀FFmpeg > output: $output');
+  if (output != null && output.isNotEmpty) {
+    debugPrint('👀FFmpeg output: $output');
+  }
 
   final logs = await session.getLogs();
   for (final log in logs) {
-    debugPrint('👀FFmpeg > logMessage: ${log.getMessage()}');
+    debugPrint('👀FFmpeg logMessage: ${log.getMessage()}');
   }
 
   final failStackTrace = await session.getFailStackTrace();
   if (failStackTrace != null && failStackTrace.isNotEmpty) {
-    debugPrint('👀FFmpeg > failStackTrace: $failStackTrace');
+    debugPrint('👀FFmpeg failStackTrace: $failStackTrace');
   }
 
   final returnCode = await session.getReturnCode();
