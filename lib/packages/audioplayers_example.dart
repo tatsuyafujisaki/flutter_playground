@@ -69,17 +69,9 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
       ..onDurationChanged.listen(
         (duration) => debugPrint('👀Duration changed: $duration'),
       )
-      ..onPositionChanged
-          .map(
-            (duration) => Duration(
-              minutes: duration.inMinutes,
-              seconds: duration.inSeconds,
-            ),
-          )
-          .distinct()
-          .listen(
-            (duration) => debugPrint(
-              '👀Position changed: ${formatInMSs(duration)}',
+      ..onPositionChanged.map(formatInMSs).distinct().listen(
+            (mSs) => debugPrint(
+              '👀Position changed: $mSs',
             ),
           )
       ..onPlayerStateChanged.listen(
@@ -97,9 +89,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
     await player.setSourceUrl(url);
   }
 
-  String formatInMSs(Duration duration) {
-    final minutes = duration.inMinutes;
-    final seconds = duration.inSeconds.toString().padLeft(2, '0');
-    return '$minutes:$seconds';
-  }
+  // Returns 34:56 if Duration is 12:34:56.123456
+  String formatInMSs(Duration duration) =>
+      duration.toString().split('.').first.substring(3);
 }

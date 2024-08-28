@@ -25,15 +25,19 @@ class _MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-  final _AudioFile m4aFile = _AudioFile('sample.m4a');
-  final _AudioFile mp3File = _AudioFile('sample.mp3');
-
+  late _AudioFile m4aFile;
+  late _AudioFile mp3File;
   final recorder = FlutterSoundRecorder();
   final player = FlutterSoundPlayer();
 
   @override
   void initState() {
     super.initState();
+
+    const basenameWithoutExtension = 'sample';
+    m4aFile = _AudioFile(p.setExtension(basenameWithoutExtension, '.m4a'));
+    mp3File = _AudioFile(p.setExtension(basenameWithoutExtension, '.mp3'));
+
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         // You have to add the following to AndroidManifest.xml
@@ -48,6 +52,14 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
         }
         await recorder.openRecorder();
         await player.openPlayer();
+        await player.setSubscriptionDuration(const Duration(seconds: 1));
+        player.onProgress?.listen(
+          (disposition) => setState(
+            () => debugPrint(
+              '👀${disposition.position} / ${disposition.duration}',
+            ),
+          ),
+        );
       },
     );
   }
@@ -107,7 +119,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     } else {
       await player.startPlayer(
         fromURI: mp3File.filename,
-        codec: Codec.mp3,
         whenFinished: () => setState(() {}),
       );
     }
