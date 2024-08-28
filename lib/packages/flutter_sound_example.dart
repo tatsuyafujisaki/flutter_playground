@@ -11,20 +11,20 @@ import 'package:permission_handler/permission_handler.dart';
 void main() => runApp(
       const MaterialApp(
         home: Scaffold(
-          body: _SoundWidget(),
+          body: _MyStatefulWidget(),
           backgroundColor: Colors.white,
         ),
       ),
     );
 
-class _SoundWidget extends StatefulWidget {
-  const _SoundWidget();
+class _MyStatefulWidget extends StatefulWidget {
+  const _MyStatefulWidget();
 
   @override
-  State<_SoundWidget> createState() => _SoundWidgetState();
+  State<_MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
-class _SoundWidgetState extends State<_SoundWidget> {
+class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   final _AudioFile m4aFile = _AudioFile('sample.m4a');
   final _AudioFile mp3File = _AudioFile('sample.mp3');
 
@@ -54,9 +54,8 @@ class _SoundWidgetState extends State<_SoundWidget> {
 
   @override
   void dispose() {
-    Future.delayed(
-      Duration.zero,
-      () async {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
         await recorder.closeRecorder();
         await player.closePlayer();
       },
@@ -68,8 +67,7 @@ class _SoundWidgetState extends State<_SoundWidget> {
     if (recorder.isRecording) {
       await recorder.stopRecorder();
       await convertAudio(
-        inputAudioPath:
-            'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/dash/ForBiggerFunAudio.mp4',
+        inputAudioPath: await m4aFile.filePath,
         outputAudioPath: await mp3File.filePath,
       );
     } else {
@@ -100,13 +98,17 @@ class _SoundWidgetState extends State<_SoundWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            IconButton(
+              icon: Icon(
+                recorder.isRecording ? Icons.mic_off : Icons.mic,
+              ),
               onPressed: player.isPlaying ? null : toggleRecorder,
-              child: Text(recorder.isRecording ? 'Stop' : 'Record'),
             ),
-            ElevatedButton(
+            IconButton(
+              icon: Icon(
+                player.isPlaying ? Icons.pause : Icons.play_arrow,
+              ),
               onPressed: recorder.isRecording ? null : togglePlayer,
-              child: Text(player.isPlaying ? 'Stop' : 'Play'),
             ),
           ],
         ),
