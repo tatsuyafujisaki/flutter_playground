@@ -46,7 +46,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
         // https://developer.android.com/reference/android/Manifest.permission#RECORD_AUDIO
         // Otherwise, the following "request().isGranted" will return false
         // without displaying a runtime permission prompt.
-        if (!await isAllowed(Permission.microphone)) {
+        if (!await isGranted(Permission.microphone)) {
           return;
         }
         await recorder.openRecorder();
