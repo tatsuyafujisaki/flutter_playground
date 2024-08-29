@@ -7,6 +7,7 @@ import 'package:flutter_playground/packages/permission_handler_example.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() => runApp(
       const MaterialApp(
@@ -45,7 +46,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
         // https://developer.android.com/reference/android/Manifest.permission#RECORD_AUDIO
         // Otherwise, the following "request().isGranted" will return false
         // without displaying a runtime permission prompt.
-        if (!await isMicrophoneAllowed) {
+        if (!await isAllowed(Permission.microphone)) {
           return;
         }
         await recorder.openRecorder();

@@ -8,6 +8,7 @@ dependencies:
   # > The version constraint is optional but recommended. If no version constraint is given, any is assumed.
   # https://dart.dev/tools/pub/dependencies#hosted-packages
   cupertino_icons: any
+  device_info_plus: any
   encrypt: any
   ffmpeg_kit_flutter_audio: any
   firebase_analytics: any
