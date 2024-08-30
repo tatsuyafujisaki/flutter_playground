@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-DateTime getToday() => DateUtils.dateOnly(DateTime.now());
+DateTime get today => DateUtils.dateOnly(DateTime.now());
