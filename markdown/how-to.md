@@ -20,13 +20,3 @@ class MyStatefulWidgetState extends State<MyStatefulsWidget> {
   // ...
 }
 ```
-
-# try-catch template
-```dart
-try {
-  // ...
-} on Exception catch (e, s) {
-  debugPrint(e.toString());
-  debugPrintStack(stackTrace: s);
-}
-```
