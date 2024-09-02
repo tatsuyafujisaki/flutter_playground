@@ -10,5 +10,10 @@ class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();
 
   @override
-  Widget build(BuildContext context) => const FlutterLogo();
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async => debugPrint('🍎'),
+    );
+    return const FlutterLogo();
+  }
 }
