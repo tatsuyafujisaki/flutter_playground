@@ -11,6 +11,12 @@ bool exist(String path) => File(path).existsSync();
 String replaceExtension(String path, String extension) =>
     p.setExtension(path, extension.startsWith('.') ? extension : '.$extension');
 
+Future<String> joinApplicationDocumentsDirectory(String relativePath) async =>
+    p.join(
+      (await getApplicationDocumentsDirectory()).path,
+      relativePath,
+    );
+
 Future<String> joinTemporaryDirectory(String relativePath) async => p.join(
       (await getTemporaryDirectory()).path,
       relativePath,
