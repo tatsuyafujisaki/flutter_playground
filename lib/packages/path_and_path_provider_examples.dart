@@ -3,6 +3,7 @@ import 'dart:io';
 // > The path library was designed to be imported with a prefix,
 // > though you don't have to if you don't want to:
 // https://pub.dev/documentation/path/
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -21,3 +22,17 @@ Future<String> joinTemporaryDirectory(String relativePath) async => p.join(
       (await getTemporaryDirectory()).path,
       relativePath,
     );
+
+Future<void> save(String contents) async {
+  final path = p.join(
+    (await getApplicationDocumentsDirectory()).path,
+    'deleteme.txt',
+  );
+
+  debugPrint('👀path: $path');
+  debugPrint(
+    '👀path in the Device File Explorer in Android Studio: ${path.replaceFirst('/data/user/0', '/data/data')}',
+  );
+
+  File(path).writeAsStringSync(contents);
+}
