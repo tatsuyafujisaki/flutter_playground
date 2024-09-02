@@ -23,16 +23,16 @@ Future<String> joinTemporaryDirectory(String relativePath) async => p.join(
       relativePath,
     );
 
-Future<void> save(String contents) async {
-  final path = p.join(
-    (await getApplicationDocumentsDirectory()).path,
-    'deleteme.txt',
-  );
+Future<void> saveAsFile(String contents) async {
+  final path = await joinTemporaryDirectory('deleteme.txt');
 
   debugPrint('👀path: $path');
   debugPrint(
-    '👀path in the Device File Explorer in Android Studio: ${path.replaceFirst('/data/user/0', '/data/data')}',
+    '👀path in the Device File Explorer: ${converToPathInDeviceFileExplorer(path)}}',
   );
 
   File(path).writeAsStringSync(contents);
 }
+
+String converToPathInDeviceFileExplorer(String path) =>
+    path.replaceFirst('/data/user/0', '/data/data');
