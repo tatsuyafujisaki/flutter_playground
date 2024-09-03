@@ -7,16 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-bool exist(String path) => File(path).existsSync();
+String converToPathInDeviceFileExplorer(String path) => path
+    .replaceFirst('/data/user/0', '/data/data')
+    .replaceFirst('/storage/emulated/0', '/sdcard');
 
-String replaceExtension(String path, String extension) =>
-    p.setExtension(path, extension.startsWith('.') ? extension : '.$extension');
+Future<String> joinApplicationDocumentsDirectory(String relativePath) async {
+  final directory = await getApplicationDocumentsDirectory();
+  return p.join(directory.path, relativePath);
+}
 
-Future<String> joinApplicationDocumentsDirectory(String relativePath) async =>
-    p.join(
-      (await getApplicationDocumentsDirectory()).path,
-      relativePath,
-    );
+Future<String?> joinExternalStorageDirectory(String relativePath) async {
+  final directory = await getExternalStorageDirectory();
+  return directory == null ? null : p.join(directory.path, relativePath);
+}
 
 Future<String> joinTemporaryDirectory(String relativePath) async => p.join(
       (await getTemporaryDirectory()).path,
@@ -24,15 +27,35 @@ Future<String> joinTemporaryDirectory(String relativePath) async => p.join(
     );
 
 Future<void> saveAsFile(String contents) async {
-  final path = await joinTemporaryDirectory('deleteme.txt');
-
-  debugPrint('👀path: $path');
-  debugPrint(
-    '👀path in the Device File Explorer: ${converToPathInDeviceFileExplorer(path)}}',
-  );
+  final path = await joinExternalStorageDirectory('deleteme.txt');
+  if (path == null) {
+    return;
+  }
 
   File(path).writeAsStringSync(contents);
+  debugPrint(
+    '👀adb pull ${converToPathInDeviceFileExplorer(path)} ~/Desktop',
+  );
 }
 
-String converToPathInDeviceFileExplorer(String path) =>
-    path.replaceFirst('/data/user/0', '/data/data');
+void main() => runApp(
+      const MaterialApp(
+        home: _MyStatelessWidget(),
+      ),
+    );
+
+class _MyStatelessWidget extends StatelessWidget {
+  const _MyStatelessWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        const contents = '🍎';
+        await saveAsFile(contents);
+      },
+    );
+
+    return const FlutterLogo();
+  }
+}
