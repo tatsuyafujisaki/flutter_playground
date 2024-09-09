@@ -7,7 +7,7 @@ void main() => runApp(
 
 class _MyStatelessWidget extends StatelessWidget {
   final imageBytes = _downloadImage(
-    'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC/dancing-dog.gif',
+    'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC',
   );
 
   @override

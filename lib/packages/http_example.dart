@@ -7,8 +7,8 @@ void main() => runApp(
     );
 
 class _MyStatelessWidget extends StatelessWidget {
-  final imageBytes = downloadImage(
-    'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC/dancing-dog.gif',
+  final imageBytes = _downloadImage(
+    'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC',
   );
 
   @override
@@ -21,7 +21,7 @@ class _MyStatelessWidget extends StatelessWidget {
       );
 }
 
-Future<Uint8List> downloadImage(String url) async {
+Future<Uint8List> _downloadImage(String url) async {
   final response = await http.get(Uri.parse(url));
   return response.bodyBytes;
 }
