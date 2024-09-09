@@ -7,7 +7,7 @@ void main() => runApp(
     );
 
 class _MyStatelessWidget extends StatelessWidget {
-  final imageBytes = downloadBinaryFile(
+  final imageBytes = downloadBytes(
     'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC',
   );
 

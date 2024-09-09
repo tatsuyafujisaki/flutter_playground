@@ -24,7 +24,7 @@ class _MyStatelessWidget extends StatelessWidget {
 Future<void> _downloadAndSaveTextFile(String url) async {
   try {
     final uri = Uri.parse(url);
-    final bytes = await downloadTextFile(uri);
+    final bytes = await downloadString(uri);
     final path = await _saveTextFile(bytes, p.basename(uri.path));
     debugPrint('👀adb pull $path ~/Desktop');
   } on Exception catch (e, s) {

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 
-Future<Uint8List> downloadBinaryFile(String url) async {
+Future<Uint8List> downloadBytes(String url) async {
   bool isSuccessful(int statusCode) => 200 <= statusCode && statusCode <= 299;
 
   final response = await http.get(Uri.parse(url));
@@ -13,7 +13,7 @@ Future<Uint8List> downloadBinaryFile(String url) async {
   );
 }
 
-Future<String> downloadTextFile(Uri uri) async {
+Future<String> downloadString(Uri uri) async {
   bool isSuccessful(int statusCode) => 200 <= statusCode && statusCode <= 299;
 
   final response = await http.get(uri);
