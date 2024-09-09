@@ -1,5 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(
       _MyStatelessWidget(),
@@ -31,6 +32,6 @@ class _MyStatelessWidget extends StatelessWidget {
 }
 
 Future<Uint8List> _downloadImage(String url) async {
-  final byteData = await NetworkAssetBundle(Uri.parse(url)).load('');
-  return byteData.buffer.asUint8List();
+  final response = await http.get(Uri.parse(url));
+  return response.bodyBytes;
 }
