@@ -15,7 +15,7 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _downloadAndSaveTextFile('https://www.w3.org/robots.txt'),
+      (_) async => _downloadAndSaveTextFile('https://www.w3.org/robots2s.txt'),
     );
     return const FlutterLogo();
   }
@@ -41,7 +41,7 @@ Future<String> _downloadTextFile(Uri uri) async {
     return response.body;
   }
   throw Exception(
-    'Status code: ${response.statusCode}, Reason phrase: ${response.reasonPhrase}, URL: ${uri.path}',
+    'Status code: ${response.statusCode}\nReason phrase: ${response.reasonPhrase}\nURL: $uri',
   );
 }
 
