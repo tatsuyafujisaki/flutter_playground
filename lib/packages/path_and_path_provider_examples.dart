@@ -26,18 +26,6 @@ Future<String> joinTemporaryDirectory(String relativePath) async => p.join(
       relativePath,
     );
 
-Future<String> saveBytes(
-  List<int> bytes, [
-  String filename = 'deleteme.bin',
-]) async {
-  final path = await joinExternalStorageDirectory(filename);
-  if (path == null) {
-    return '';
-  }
-  File(path).writeAsBytesSync(bytes, mode: FileMode.writeOnly);
-  return _converToPathInDeviceFileExplorer(path);
-}
-
 Future<String> saveString(
   String contents, [
   String filename = 'deleteme.txt',

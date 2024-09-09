@@ -19,8 +19,13 @@ Future<void> downloadAndSaveBinaryFile(String url) async {
 }
 
 Future<Uint8List> _downloadBinaryFile(Uri uri) async {
+  bool isSuccessful(int statusCode) => 200 <= statusCode && statusCode <= 299;
+
   final response = await http.get(uri);
-  return response.bodyBytes;
+  if (isSuccessful(response.statusCode)) {
+    return response.bodyBytes;
+  }
+  throw Exception('Status code: ${response.statusCode}. URL: ${uri.path}');
 }
 
 Future<String> _saveBinaryFile(List<int> bytes, String filename) async {
