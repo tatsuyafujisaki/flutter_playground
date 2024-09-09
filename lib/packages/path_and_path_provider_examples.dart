@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-String converToPathInDeviceFileExplorer(String path) => path
+String _converToPathInDeviceFileExplorer(String path) => path
     .replaceFirst('/data/user/0', '/data/data')
     .replaceFirst('/storage/emulated/0', '/sdcard');
 
@@ -26,16 +26,28 @@ Future<String> joinTemporaryDirectory(String relativePath) async => p.join(
       relativePath,
     );
 
-Future<void> saveAsFile(String contents) async {
-  final path = await joinExternalStorageDirectory('deleteme.txt');
+Future<String> saveBytes(
+  List<int> contents, [
+  String filename = 'deleteme.bin',
+]) async {
+  final path = await joinExternalStorageDirectory(filename);
   if (path == null) {
-    return;
+    return '';
   }
+  File(path).writeAsBytesSync(contents, mode: FileMode.writeOnly);
+  return _converToPathInDeviceFileExplorer(path);
+}
 
-  File(path).writeAsStringSync(contents);
-  debugPrint(
-    '👀adb pull ${converToPathInDeviceFileExplorer(path)} ~/Desktop',
-  );
+Future<String> saveString(
+  String contents, [
+  String filename = 'deleteme.txt',
+]) async {
+  final path = await joinExternalStorageDirectory(filename);
+  if (path == null) {
+    return '';
+  }
+  File(path).writeAsStringSync(contents, mode: FileMode.writeOnly);
+  return _converToPathInDeviceFileExplorer(path);
 }
 
 void main() => runApp(
@@ -52,7 +64,8 @@ class _MyStatelessWidget extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         const contents = '🍎';
-        await saveAsFile(contents);
+        final path = await saveString(contents);
+        debugPrint('👀adb pull $path ~/Desktop');
       },
     );
 
