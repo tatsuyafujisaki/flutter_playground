@@ -13,10 +13,18 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FutureBuilder<Uint8List>(
         future: imageBytes,
-        builder: (_, snapshot) =>
-            snapshot.connectionState == ConnectionState.done
-                ? Image.memory(snapshot.data!)
-                : const CircularProgressIndicator(),
+        builder: (_, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const CircularProgressIndicator();
+          }
+          if (snapshot.hasError) {
+            return const Icon(Icons.broken_image);
+          }
+          if (snapshot.hasData) {
+            return Image.memory(snapshot.data!);
+          }
+          return const SizedBox.shrink();
+        },
       );
 }
 
