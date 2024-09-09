@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_playground/packages/http_example.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -24,25 +24,13 @@ class _MyStatelessWidget extends StatelessWidget {
 Future<void> _downloadAndSaveTextFile(String url) async {
   try {
     final uri = Uri.parse(url);
-    final bytes = await _downloadTextFile(uri);
+    final bytes = await downloadTextFile(uri);
     final path = await _saveTextFile(bytes, p.basename(uri.path));
     debugPrint('👀adb pull $path ~/Desktop');
   } on Exception catch (e, s) {
     debugPrint(e.toString());
     debugPrintStack(stackTrace: s);
   }
-}
-
-Future<String> _downloadTextFile(Uri uri) async {
-  bool isSuccessful(int statusCode) => 200 <= statusCode && statusCode <= 299;
-
-  final response = await http.get(uri);
-  if (isSuccessful(response.statusCode)) {
-    return response.body;
-  }
-  throw Exception(
-    'Status code: ${response.statusCode}\nReason phrase: ${response.reasonPhrase}\nURL: $uri',
-  );
 }
 
 Future<String> _saveTextFile(String contents, String filename) async {

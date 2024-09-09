@@ -23,6 +23,7 @@ dependencies:
   flutter_sound: any
   flutter_svg: any
   freezed_annotation: any
+  gal: ^2.3.0
   geolocator: any
   http: any
   image_picker: any

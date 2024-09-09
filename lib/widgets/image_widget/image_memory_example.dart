@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_playground/packages/http_example.dart';
 
 void main() => runApp(
       _MyStatelessWidget(),
     );
 
 class _MyStatelessWidget extends StatelessWidget {
-  final imageBytes = _downloadImage(
+  final imageBytes = downloadBinaryFile(
     'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC',
   );
 
@@ -29,9 +29,4 @@ class _MyStatelessWidget extends StatelessWidget {
           return const SizedBox.shrink();
         },
       );
-}
-
-Future<Uint8List> _downloadImage(String url) async {
-  final response = await http.get(Uri.parse(url));
-  return response.bodyBytes;
 }
