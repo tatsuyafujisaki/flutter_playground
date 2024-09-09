@@ -6,7 +6,7 @@ void main() => runApp(
     );
 
 class _MyStatelessWidget extends StatelessWidget {
-  final imageBytes = downloadImage(
+  final imageBytes = _downloadImage(
     'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC/dancing-dog.gif',
   );
 
@@ -20,7 +20,7 @@ class _MyStatelessWidget extends StatelessWidget {
       );
 }
 
-Future<Uint8List> downloadImage(String url) async {
+Future<Uint8List> _downloadImage(String url) async {
   final byteData = await NetworkAssetBundle(Uri.parse(url)).load('');
   return byteData.buffer.asUint8List();
 }
