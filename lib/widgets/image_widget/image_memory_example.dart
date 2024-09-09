@@ -18,6 +18,8 @@ class _MyStatelessWidget extends StatelessWidget {
             return const CircularProgressIndicator();
           }
           if (snapshot.hasError) {
+            debugPrint(snapshot.error.toString());
+            debugPrintStack(stackTrace: snapshot.stackTrace);
             return const Icon(Icons.broken_image);
           }
           if (snapshot.hasData) {
