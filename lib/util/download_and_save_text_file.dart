@@ -15,7 +15,7 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _downloadAndSaveTextFile('https://www.w3.org/robots2s.txt'),
+      (_) async => _downloadAndSaveTextFile('https://www.w3.org/robots.txt'),
     );
     return const FlutterLogo();
   }
