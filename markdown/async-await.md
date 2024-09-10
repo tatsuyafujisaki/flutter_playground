@@ -3,7 +3,7 @@
 Use [WidgetsBinding.instance.addPostFrameCallback](https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addPostFrameCallback.html).
 ```dart
 WidgetsBinding.instance.addPostFrameCallback(
-  (_) async =>  myAsyncFunction(),
+  (_) async => myAsyncFunction(),
 );
 ```
 
@@ -12,9 +12,10 @@ Use [Future.delayed](https://api.dart.dev/stable/dart-async/Future/Future.delaye
 ```dart
 Future.delayed(
   Duration.zero,
-  () async => await myAsyncFunction(),
+  () async => myAsyncFunction(),
 );
 ```
 
-# How to use [Future](https://api.dart.dev/stable/dart-async/Future-class.html) in a non-`async` function
-Use [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html).
+# How to create [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html) from [Future](https://api.dart.dev/stable/dart-async/Future-class.html) or [Stream](https://api.flutter.dev/flutter/dart-async/Stream-class.html)
+- Use [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html).
+- Use [StreamBuilder](https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html)
