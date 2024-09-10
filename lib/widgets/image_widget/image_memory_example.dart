@@ -15,18 +15,15 @@ class _MyStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) => FutureBuilder<Uint8List>(
         future: imageBytes,
         builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const CircularProgressIndicator();
+          if (snapshot.hasData) {
+            return Image.memory(snapshot.data!);
           }
           if (snapshot.hasError) {
             debugPrint(snapshot.error.toString());
             debugPrintStack(stackTrace: snapshot.stackTrace);
             return const Icon(Icons.broken_image);
           }
-          if (snapshot.hasData) {
-            return Image.memory(snapshot.data!);
-          }
-          return const SizedBox.shrink();
+          return const CircularProgressIndicator();
         },
       );
 }

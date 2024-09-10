@@ -17,7 +17,6 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
         child: StreamBuilder<String>(
-          initialData: 'Initial data!',
           stream: countStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
