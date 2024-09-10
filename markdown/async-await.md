@@ -18,22 +18,3 @@ Future.delayed(
 
 # How to use [Future](https://api.dart.dev/stable/dart-async/Future-class.html) in a non-`async` function
 Use [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html).
-```dart
-FutureBuilder<T>(
-  future: myFuture,
-  builder: (context, snapshot) {
-    if (snapshot.connectionState != ConnectionState.done) {
-      return const CircularProgressIndicator();
-    }
-    if (snapshot.hasError) {
-      debugPrint(snapshot.error.toString());
-      debugPrintStack(stackTrace: snapshot.stackTrace);
-      return const FlutterLogo();
-    }
-    if (snapshot.hasData) {
-      return Image.memory(snapshot.data!);
-    }
-    return const SizedBox.shrink();
-  },
-)
-```

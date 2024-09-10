@@ -14,7 +14,7 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FutureBuilder<Uint8List>(
         future: imageBytes,
-        builder: (_, snapshot) {
+        builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const CircularProgressIndicator();
           }
