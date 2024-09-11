@@ -1,5 +1,5 @@
 # Future
-## How to invoke an `async` function in a non-`async` function
+## When to use which: [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html), [WidgetsBinding.instance.addPostFrameCallback](https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addPostFrameCallback.html), or [Future.delayed](https://api.dart.dev/stable/dart-async/Future/Future.delayed.html), as a way to invoke an `async` function in a non-`async` function
 1. If you want to create a Widget from a Future, use [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html).
 2. If you want to call an `async` function in a Widget, use [WidgetsBinding.instance.addPostFrameCallback](https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addPostFrameCallback.html).
   ```dart
