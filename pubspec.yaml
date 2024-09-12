@@ -14,6 +14,7 @@ dependencies:
   firebase_analytics: any
   firebase_core: any
   firebase_crashlytics: any
+  firebase_messaging: any
   flutter:
     sdk: flutter
   flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
