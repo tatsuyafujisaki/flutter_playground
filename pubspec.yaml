@@ -7,7 +7,6 @@ dependencies:
   audioplayers: any
   # > The version constraint is optional but recommended. If no version constraint is given, any is assumed.
   # https://dart.dev/tools/pub/dependencies#hosted-packages
-  cupertino_icons: any
   device_info_plus: any
   encrypt: any
   ffmpeg_kit_flutter_audio: any
@@ -24,7 +23,7 @@ dependencies:
   flutter_sound: any
   flutter_svg: any
   freezed_annotation: any
-  gal: ^2.3.0
+  gal: any
   geolocator: any
   http: any
   image_picker: any
