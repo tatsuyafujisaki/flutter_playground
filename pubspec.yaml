@@ -20,7 +20,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: any
   flutter_slidable: any
-  flutter_sound: any
+  # flutter_sound: any
   flutter_svg: any
   freezed_annotation: any
   gal: any
