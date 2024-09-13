@@ -25,7 +25,12 @@ Don't use the title property of the MaterialApp class because it is meaningless 
 https://stackoverflow.com/questions/78871904/flutter-is-the-title-property-of-the-materialapps-class-not-used-on-android-10
 
 # Package
-## go_router
+## [firebase_messaging](https://pub.dev/packages/firebase_messaging)
+> You shouldn't request a token during app startup,
+
+https://firebase.google.com/codelabs/firebase-fcm-flutter#3
+
+## [go_router](https://pub.dev/packages/go_router)
 Use the syntactic sugar of [GoRouterHelper](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper.html) instead of `GoRouter.of`.
 
 For example ...
@@ -33,7 +38,7 @@ For example ...
 
 https://pub.dev/documentation/go_router/latest/topics/Navigation-topic.html
 
-## riverpod
+## [riverpod](https://pub.dev/packages/riverpod)
 > Whenever possible, prefer using `ref.watch` over `ref.read` or `ref.listen` to implement a feature.
 
 https://docs-v2.riverpod.dev/docs/concepts/reading#using-ref-to-interact-with-providers
