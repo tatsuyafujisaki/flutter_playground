@@ -14,6 +14,10 @@ class _MyStatelessWidget extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async => debugPrint('🍎'),
     );
+    Future.delayed(
+      Duration.zero,
+      () => debugPrint('🍊'),
+    );
     return const FlutterLogo();
   }
 }
