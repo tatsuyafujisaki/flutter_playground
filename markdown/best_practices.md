@@ -1,17 +1,4 @@
-# widgets library (widgets.dart)
-- https://docs.flutter.dev/ui/navigation
-  - > We don’t recommend using named routes for most applications.
-  - > Flutter also doesn’t support the browser forward button for applications using named routes. For these reasons, we don’t recommend using named routes in most applications.
-
-- > When you have a list of children and do not require cross-axis shrink-wrapping behavior, for example a scrolling list that is always the width of the screen, consider ListView, which is vastly more efficient than a SingleChildScrollView containing a ListBody or Column with many children.
-  - https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html
-- > You could consider ListView as an optimisation to the combination of SingleChildScrollView + Column.
-  - https://stackoverflow.com/a/62147092
-- > The SafeArea widget can be used within the scaffold's body to avoid areas like display notches.
-  - https://api.flutter.dev/flutter/material/Scaffold-class.html
-  - https://youtu.be/lkF0TQJO0bA?t=35
-
-# material library (material.dart)
+# [material library (material.dart)](https://api.flutter.dev/flutter/material/material-library.html)
 > Choosing between text and elevated buttons
 
 https://codelabs.developers.google.com/codelabs/mdc-101-flutter#4
@@ -23,6 +10,19 @@ https://api.flutter.dev/flutter/material/Divider-class.html
 Don't use the title property of the MaterialApp class because it is meaningless not only on iOS, but also on Android 10 or later
 
 https://stackoverflow.com/questions/78871904/flutter-is-the-title-property-of-the-materialapps-class-not-used-on-android-10
+
+# [widgets library (widgets.dart)](https://api.flutter.dev/flutter/widgets/widgets-library.html)
+- https://docs.flutter.dev/ui/navigation
+  - > We don’t recommend using named routes for most applications.
+  - > Flutter also doesn’t support the browser forward button for applications using named routes. For these reasons, we don’t recommend using named routes in most applications.
+
+- > When you have a list of children and do not require cross-axis shrink-wrapping behavior, for example a scrolling list that is always the width of the screen, consider ListView, which is vastly more efficient than a SingleChildScrollView containing a ListBody or Column with many children.
+  - https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html
+- > You could consider ListView as an optimisation to the combination of SingleChildScrollView + Column.
+  - https://stackoverflow.com/a/62147092
+- > The SafeArea widget can be used within the scaffold's body to avoid areas like display notches.
+  - https://api.flutter.dev/flutter/material/Scaffold-class.html
+  - https://youtu.be/lkF0TQJO0bA?t=35
 
 # Package
 ## [firebase_messaging](https://pub.dev/packages/firebase_messaging)
