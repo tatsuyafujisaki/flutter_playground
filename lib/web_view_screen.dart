@@ -31,7 +31,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   void initState() {
     super.initState();
     if (widget.cookie != null) {
-      Future.delayed(
+      Future<void>.delayed(
         Duration.zero,
         () async => cookieManager.setCookie(widget.cookie!),
       );
@@ -39,7 +39,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
     controller = WebViewController();
 
-    Future.delayed(
+    Future<void>.delayed(
       Duration.zero,
       () async {
         await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -64,8 +64,9 @@ class _WebViewScreenState extends State<WebViewScreen> {
         );
         try {
           await controller.loadRequest(Uri.parse(widget.url));
-        } on FormatException catch (e) {
+        } on FormatException catch (e, s) {
           stderr.writeln(e);
+          debugPrintStack(stackTrace: s);
         }
       },
     );
@@ -73,7 +74,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(
+    Future<void>.delayed(
       Duration.zero,
       () async {
         canGoBack = await controller.canGoBack();

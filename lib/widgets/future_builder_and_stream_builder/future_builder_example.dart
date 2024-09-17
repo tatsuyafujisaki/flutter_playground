@@ -9,7 +9,7 @@ void main() => runApp(
     );
 
 class _MyStatelessWidget extends StatelessWidget {
-  final myFuture = Future.delayed(
+  final myFuture = Future<String>.delayed(
     const Duration(seconds: 5),
     () => '🍎',
   );

@@ -65,14 +65,14 @@ class GeolocatorWrapper {
   }
 
   void demoOneShot() {
-    Future.delayed(
+    Future<void>.delayed(
       Duration.zero,
       () => debugPrint(currentPosition.toString()),
     );
   }
 
   void demoListen() {
-    Future.delayed(
+    Future<void>.delayed(
       Duration.zero,
       () async => (await GeolocatorWrapper().positionStream)?.listen(
         (position) => debugPrint(

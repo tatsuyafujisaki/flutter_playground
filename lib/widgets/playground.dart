@@ -14,7 +14,7 @@ class _MyStatelessWidget extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async => debugPrint('🍎'),
     );
-    Future.delayed(
+    Future<void>.delayed(
       Duration.zero,
       () => debugPrint('🍊'),
     );

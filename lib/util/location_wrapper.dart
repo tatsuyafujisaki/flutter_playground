@@ -40,14 +40,14 @@ class LocationWrapper {
   }
 
   void demoOneShot() {
-    Future.delayed(
+    Future<void>.delayed(
       Duration.zero,
       () => debugPrint(location.toString()),
     );
   }
 
   void demoListen() {
-    Future.delayed(
+    Future<void>.delayed(
       Duration.zero,
       () async => listen(
         (data) => debugPrint(
