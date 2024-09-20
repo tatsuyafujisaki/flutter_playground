@@ -1,6 +1,6 @@
 # Future
 ## When to use which: [ignore](https://api.flutter.dev/flutter/dart-async/FutureExtensions/ignore.html), [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html), [WidgetsBinding.instance.addPostFrameCallback](https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addPostFrameCallback.html), or [Future.delayed](https://api.dart.dev/stable/dart-async/Future/Future.delayed.html), as a way to invoke an `async` function in a non-`async` function
-1. If you want to ignore both the result and the error from a Future, use [ignore](https://api.flutter.dev/flutter/dart-async/FutureExtensions/ignore.html).
+1. If you want to ignore the result and not have the global error handler catch the error, use [ignore](https://api.flutter.dev/flutter/dart-async/FutureExtensions/ignore.html).
 1. If you want to create a Widget from a Future, use [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html).
 1. If you want to call an `async` function in a Widget, use [WidgetsBinding.instance.addPostFrameCallback](https://api.flutter.dev/flutter/scheduler/SchedulerBinding/addPostFrameCallback.html).
   ```dart
