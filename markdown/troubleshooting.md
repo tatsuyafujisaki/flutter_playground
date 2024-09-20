@@ -32,10 +32,10 @@ https://developer.android.com/build/jdks#jdk-android-studio
     ```shell
     ios/Runner.xcworkspace
     ```
-2. Select `Runner` in the leftmost column (`Navigators` > `Project`)
-3. Select `Runner` in `PROJECT` in the second leftmost column.
-3. Select the `Info` tab.
-4. Select the following in `Conigurations`.
+1. Select `Runner` in the leftmost column (`Navigators` > `Project`)
+1. Select `Runner` in `PROJECT` in the second leftmost column.
+1. Select the `Info` tab.
+1. Select the following in `Conigurations`.
     - `Debug` > `Runner` > `Pods-Runner.debug`
     - `Release` > `Runner` > `Pods-Runner.release`
     - `Profile` > `Runner` > `Pods-Runner.profile`
@@ -45,7 +45,7 @@ https://developer.android.com/build/jdks#jdk-android-studio
 ## What if building an iOS app shows `Error: DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS, use TOOLCHAIN_DIR instead`.
 ### Solution
 1. Upgrade CocoaPods to 1.13.0 or later.
-2. Run the following.
+1. Run the following.
    ```shell
    cd <your-flutter-projector-folder>/ios
    pod install
