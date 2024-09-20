@@ -4,6 +4,11 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /// To access photos and videos, use [isPhotoGranted] instead.
+///
+/// > Call request() on a Permission to request it. If it has already been
+/// > granted before, nothing happens. request() returns the new status of
+/// > the Permission.
+/// https://pub.dev/packages/permission_handler
 Future<bool> isGranted<T extends Permission>(T permission) async => permission
     .onPermanentlyDeniedCallback(() async => openAppSettings())
     .request()
