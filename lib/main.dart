@@ -59,11 +59,6 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -121,9 +116,4 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Icon(Icons.add),
         ), // This trailing comma makes auto-formatting nicer for build methods.
       );
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('counter', counter));
-  }
 }
