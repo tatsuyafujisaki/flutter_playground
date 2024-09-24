@@ -8,8 +8,8 @@ void printLocales(BuildContext? context) {
 
   if (context != null) {
     final locale = Localizations.localeOf(context);
-    debugPrint('👀Intl.locale: $locale');
-    debugPrint('👀Intl.countryCode: ${locale.countryCode}');
-    debugPrint('👀Intl.languageCode: ${locale.languageCode}');
+    debugPrint('👀Locale: $locale');
+    debugPrint('👀Locale.countryCode: ${locale.countryCode}');
+    debugPrint('👀Locale.languageCode: ${locale.languageCode}');
   }
 }
