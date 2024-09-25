@@ -1,3 +1,14 @@
 {
+  "fullName": "{firstName} {lastName}",
+  "@fullName": {
+    "placeholders": {
+      "firstName": {
+        "type": "String"
+      },
+      "lastName": {
+        "type": "String"
+      }
+    }
+  },
   "pushButtonCountLabel": "You have pushed the button this many times:"
 }
