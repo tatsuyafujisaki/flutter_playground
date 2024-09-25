@@ -52,7 +52,7 @@ class _MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-  final myTextEditingController = TextEditingController();
+  final myTextEditingController = TextEditingController(text: 'Initial text!');
   int counter = 0;
 
   @override
