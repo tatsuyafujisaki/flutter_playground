@@ -5,8 +5,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_playground/extension/extensions.dart';
 import 'package:flutter_playground/firebase_options.dart';
-import 'package:flutter_playground/l10n/l10n_extensions.dart';
 import 'package:flutter_playground/shared_preferences/encypted_shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
