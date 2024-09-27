@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_playground/extension/extensions.dart';
 import 'package:flutter_playground/firebase_options.dart';
+import 'package:flutter_playground/packages/firebase_message_handler.dart';
 import 'package:flutter_playground/shared_preferences/encypted_shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -54,6 +55,7 @@ class _MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   final myTextEditingController = TextEditingController(text: 'Initial text!');
   int counter = 0;
+  final firebaseMessageHandler = FirebaseMessageHandler();
 
   @override
   void initState() {
@@ -111,6 +113,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
 
   @override
   void dispose() {
+    firebaseMessageHandler.dispose();
     myTextEditingController.dispose();
     super.dispose();
   }
