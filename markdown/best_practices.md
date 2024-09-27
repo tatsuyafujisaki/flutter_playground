@@ -24,6 +24,15 @@ https://stackoverflow.com/questions/78871904/flutter-is-the-title-property-of-th
   - https://api.flutter.dev/flutter/material/Scaffold-class.html
   - https://youtu.be/lkF0TQJO0bA?t=35
 
+## Navigation
+> Named routes are no longer recommended for most applications
+
+https://docs.flutter.dev/cookbook/navigation/named-routes
+
+> Named routes are no longer recommended for most applications.
+
+https://docs.flutter.dev/cookbook/navigation/navigate-with-arguments
+
 # Package
 ## [firebase_messaging](https://pub.dev/packages/firebase_messaging)
 > You shouldn't request a token during app startup,
