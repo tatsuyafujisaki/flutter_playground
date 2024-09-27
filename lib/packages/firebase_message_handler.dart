@@ -112,6 +112,12 @@ class FirebaseMessageHandler {
 
   void _handleMessage(RemoteMessage message) {
     debugPrint('🔥Firebase Cloud Messaging (FCM) message: $message');
+
+    for (final entry in message.data.entries) {
+      debugPrint(
+        '🔥Firebase Cloud Messaging (FCM) message > data > key value pair: ${entry.key}, Value: ${entry.value}',
+      );
+    }
   }
 
   void _sendTokenToServer(String token) {
