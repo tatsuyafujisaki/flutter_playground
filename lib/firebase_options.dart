@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'flutter-playground2.appspot.com',
     iosBundleId: 'com.tatsuyafujisaki.flutterplayground',
   );
-
 }
