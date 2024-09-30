@@ -16,6 +16,7 @@ dependencies:
   firebase_messaging: any
   flutter:
     sdk: flutter
+  flutter_local_notifications: any
   flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
     sdk: flutter
   flutter_riverpod: any

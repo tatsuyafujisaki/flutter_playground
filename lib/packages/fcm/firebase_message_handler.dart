@@ -185,7 +185,11 @@ class FirebaseMessageHandler {
 
 void _printMessage(RemoteMessage message) {
   inspect(message);
-  debugPrint('🔥message.notification: ${message.notification}');
+  final notification = message.notification;
+  if (notification != null) {
+    debugPrint('🔥message.notification.title: ${notification.title}');
+    debugPrint('🔥message.notification.body: ${notification.body}');
+  }
   for (final entry in message.data.entries) {
     debugPrint(
       '🔥message.data.entries (each): ${entry.key}: ${entry.value}',
