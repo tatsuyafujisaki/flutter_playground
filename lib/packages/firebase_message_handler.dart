@@ -51,8 +51,8 @@ class FirebaseMessageHandler {
         _onMessageOpenedAppSubscription = await _onMessageOpenedApp;
 
         // Without this, if you receive a message while the application is closed, no notification will be displayed.
-        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
         // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
         FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
       },
     );
@@ -99,6 +99,7 @@ class FirebaseMessageHandler {
     try {
       // > If the application has been opened from a terminated state via a RemoteMessage (containing a Notification), it will be returned, otherwise it will be null.
       // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getInitialMessage.html
+      // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
       message = await FirebaseMessaging.instance.getInitialMessage();
     } on Exception catch (e, s) {
       debugPrint(e.toString());
@@ -122,6 +123,7 @@ class FirebaseMessageHandler {
 
   /// Recieves a message when the app is in the background.
   Future<StreamSubscription<RemoteMessage>?> get _onMessageOpenedApp => _listen(
+        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
         // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
         FirebaseMessaging.onMessageOpenedApp,
         (message) {
