@@ -49,6 +49,10 @@ class FirebaseMessageHandler {
 
         _onMessageSubscription = await _onMessage;
         _onMessageOpenedAppSubscription = await _onMessageOpenedApp;
+
+        // Without this, if you receive a message while the application is closed, no notification will be displayed.
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
+        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
         FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
       },
     );
