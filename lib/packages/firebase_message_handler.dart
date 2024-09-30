@@ -18,6 +18,9 @@ class FirebaseMessageHandler {
 
         final initialMessage = await _initialMessage;
         if (initialMessage != null) {
+          debugPrint(
+            '👀the application has been opened from a terminated state via a RemoteMessage.',
+          );
           _handleMessage(initialMessage);
         }
 
@@ -122,7 +125,7 @@ class FirebaseMessageHandler {
 
   void _sendTokenToServer(String token) {
     debugPrint(
-      '🔥Send a Firebase Cloud Messaging (FCM) registration token to server: $token',
+      '🔥Pretend to send a Firebase Cloud Messaging (FCM) registration token to server: $token',
     );
   }
 
