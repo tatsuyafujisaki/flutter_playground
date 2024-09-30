@@ -160,6 +160,7 @@ class FirebaseMessageHandler {
     );
   }
 
+  // ignore: unreachable_from_main
   Future<void> deleteToken() async {
     try {
       await FirebaseMessaging.instance.deleteToken();
@@ -169,6 +170,7 @@ class FirebaseMessageHandler {
     }
   }
 
+  // ignore: unreachable_from_main
   void dispose() {
     Future.delayed(
       Duration.zero,
