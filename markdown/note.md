@@ -17,3 +17,18 @@ https://docs.flutter.dev/tools/hot-reload#how-to-perform-a-hot-reload
 > Containers with no children try to be as big as possible unless the incoming constraints are unbounded, in which case they try to be as small as possible. Containers with children size themselves to their children. The width, height, and constraints arguments to the constructor override this.
 
 https://api.flutter.dev/flutter/widgets/Container-class.html
+
+# Firebase Cloud Messaging (FCM)
+## Foreground messages
+> Notification messages which arrive while the application is in the foreground will not display a visible notification by default
+
+https://firebase.google.com/docs/cloud-messaging/flutter/receive#foreground_and_notification_messages
+
+## Background messages
+> There are a few things to keep in mind about your background message handler:
+
+1. > It must not be an anonymous function.
+2. > It must be a top-level function (e.g. not a class method which requires initialization).
+3. > When using Flutter version 3.3.0 or higher, the message handler must be annotated with @pragma('vm:entry-point') right above the function declaration (otherwise it may be removed during tree shaking for release mode).
+
+https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
