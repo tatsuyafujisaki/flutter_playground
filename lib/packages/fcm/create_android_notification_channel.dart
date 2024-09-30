@@ -2,8 +2,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-FlutterLocalNotificationsPlugin? notificationsPlugin;
-const channel = AndroidNotificationChannel(
+FlutterLocalNotificationsPlugin? _notificationsPlugin;
+const _channel = AndroidNotificationChannel(
   'dummy',
   'dummy',
   importance: Importance.high,
@@ -13,15 +13,15 @@ const channel = AndroidNotificationChannel(
 /// On Android, you must create a "High Priority" notification channel.
 /// https://firebase.google.com/docs/cloud-messaging/flutter/receive#foreground_and_notification_messages
 Future<void> createAndroidNotificationChannel() async {
-  if (notificationsPlugin != null) {
+  if (_notificationsPlugin != null) {
     return;
   }
   try {
-    notificationsPlugin = FlutterLocalNotificationsPlugin();
-    await notificationsPlugin!
+    _notificationsPlugin = FlutterLocalNotificationsPlugin();
+    await _notificationsPlugin!
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
+        ?.createNotificationChannel(_channel);
   } on Exception catch (e, s) {
     debugPrint(e.toString());
     debugPrintStack(stackTrace: s);
@@ -34,14 +34,14 @@ Future<void> showNotification(RemoteMessage message) async {
     return;
   }
   try {
-    await notificationsPlugin?.show(
+    await _notificationsPlugin?.show(
       notification.hashCode,
       notification!.title,
       notification.body,
       NotificationDetails(
         android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
+          _channel.id,
+          _channel.name,
           icon: '@mipmap/ic_launcher',
         ),
       ),
