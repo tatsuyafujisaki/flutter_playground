@@ -1,8 +1,25 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_playground/firebase_options.dart';
+
+/// > There are a few things to keep in mind about your background message handler:
+/// > 1. It must not be an anonymous function.
+/// > 2. It must be a top-level function (e.g. not a class method which requires initialization).
+/// > 3, When using Flutter version 3.3.0 or higher, the message handler must be annotated with @pragma('vm:entry-point') right above the function declaration (otherwise it may be removed during tree shaking for release mode).
+/// https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
+@pragma('vm:entry-point')
+Future<void> _backgroundMessageHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  debugPrint(
+    '🔥FirebaseMessaging.onBackgroundMessage received the following message.',
+  );
+  _printMessage(message);
+}
 
 class FirebaseMessageHandler {
   FirebaseMessageHandler() {
@@ -19,9 +36,9 @@ class FirebaseMessageHandler {
         final initialMessage = await _initialMessage;
         if (initialMessage != null) {
           debugPrint(
-            '👀the application has been opened from a terminated state via a RemoteMessage.',
+            '🔥FirebaseMessaging.instance.getInitialMessage() received the following message.',
           );
-          _handleMessage(initialMessage);
+          _printMessage(initialMessage);
         }
 
         _onTokenRefreshSubscription = await _listen(
@@ -30,17 +47,9 @@ class FirebaseMessageHandler {
           _sendTokenToServer,
         );
 
-        _onMessageSubscription = await _listen(
-          // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessage.html
-          FirebaseMessaging.onMessage,
-          _handleMessage,
-        );
-
-        _onMessageOpenedAppSubscription = await _listen(
-          // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
-          FirebaseMessaging.onMessageOpenedApp,
-          _handleMessage,
-        );
+        _onMessageSubscription = await _onMessage;
+        _onMessageOpenedAppSubscription = await _onMessageOpenedApp;
+        FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
       },
     );
   }
@@ -52,6 +61,7 @@ class FirebaseMessageHandler {
   Future<NotificationSettings?> get _requestPermission async {
     NotificationSettings? settings;
     try {
+      // https://firebase.google.com/docs/cloud-messaging/flutter/receive#permissions
       // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
       settings = await FirebaseMessaging.instance.requestPermission();
     } on Exception catch (e, s) {
@@ -93,6 +103,31 @@ class FirebaseMessageHandler {
     return message;
   }
 
+  /// Recieves messages while the app is in the foreground.
+  Future<StreamSubscription<RemoteMessage>?> get _onMessage => _listen(
+        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#foreground_messages
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
+        FirebaseMessaging.onMessage,
+        (message) {
+          debugPrint(
+            '🔥FirebaseMessaging.onMessage received the following message.',
+          );
+          _printMessage(message);
+        },
+      );
+
+  /// Recieves a message when the app is in the background.
+  Future<StreamSubscription<RemoteMessage>?> get _onMessageOpenedApp => _listen(
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
+        FirebaseMessaging.onMessageOpenedApp,
+        (message) {
+          debugPrint(
+            '🔥FirebaseMessaging.onMessageOpenedApp received the following message.',
+          );
+          _printMessage(message);
+        },
+      );
+
   Future<StreamSubscription<T>?> _listen<T>(
     Stream<T> stream,
     void Function(T) onData, {
@@ -111,16 +146,6 @@ class FirebaseMessageHandler {
       debugPrintStack(stackTrace: s);
     }
     return subscrption;
-  }
-
-  void _handleMessage(RemoteMessage message) {
-    debugPrint('🔥Firebase Cloud Messaging (FCM) message: $message');
-
-    for (final entry in message.data.entries) {
-      debugPrint(
-        '🔥Firebase Cloud Messaging (FCM) message > data > key value pair: ${entry.key}, Value: ${entry.value}',
-      );
-    }
   }
 
   void _sendTokenToServer(String token) {
@@ -146,6 +171,16 @@ class FirebaseMessageHandler {
         await _onMessageSubscription?.cancel();
         await _onMessageOpenedAppSubscription?.cancel();
       },
+    );
+  }
+}
+
+void _printMessage(RemoteMessage message) {
+  inspect(message);
+  debugPrint('🔥message.notification: ${message.notification}');
+  for (final entry in message.data.entries) {
+    debugPrint(
+      '🔥message.data.entries (each): ${entry.key}: ${entry.value}',
     );
   }
 }

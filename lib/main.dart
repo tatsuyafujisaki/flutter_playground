@@ -119,8 +119,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   }
 
   void incrementCounter() {
-    setState(() {
-      counter++;
-    });
+    setState(() => counter++);
   }
 }
