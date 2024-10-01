@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_playground/packages/fcm/create_android_notification_channel.dart';
 import 'package:flutter_playground/packages/fcm/firebase_on_background_message.dart';
+import 'package:flutter_playground/packages/fcm/notification.dart';
 
 class FirebaseMessageHandler {
   FirebaseMessageHandler() {

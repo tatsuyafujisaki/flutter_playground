@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_playground/extension/extensions.dart';
 import 'package:flutter_playground/firebase_options.dart';
-import 'package:flutter_playground/packages/fcm/create_android_notification_channel.dart';
 import 'package:flutter_playground/packages/fcm/firebase_message_handler.dart';
+import 'package:flutter_playground/packages/fcm/notification.dart';
 import 'package:flutter_playground/shared_preferences/encypted_shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
