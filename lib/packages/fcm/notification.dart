@@ -43,7 +43,7 @@ Future<void> showNotification(RemoteMessage message) async {
         android: AndroidNotificationDetails(
           _channel.id,
           _channel.name,
-          icon: '',
+          icon: 'android_robot',
           largeIcon: await createLargeIcon(
             'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_Jb2dSHvFPcUjxl753C-AkJDQdD71J9cwskYmrwpw2lcR7CoLEZU77s6ZWcgLsTJ_Rjsn2onNx1TkwlYv2_ziUm49HGN4fsMDccNN2HJBq3Wp-agn5U9Fc45FzDVKDJR81H4HYYF-zhE/s800/animal_inu.png',
           ),
