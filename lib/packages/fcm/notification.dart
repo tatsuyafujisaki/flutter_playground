@@ -1,15 +1,32 @@
+import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 
-final _notificationsPlugin = FlutterLocalNotificationsPlugin();
+FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
+var _isPluginInitialized = false;
 
 Future<void> showNotification(RemoteMessage message) async {
   final notification = message.notification;
   if (notification == null) {
     return;
   }
-  await _notificationsPlugin.show(
+
+  if (!_isPluginInitialized) {
+    await _plugin.initialize(
+      const InitializationSettings(
+        android: AndroidInitializationSettings('android_robot'),
+      ),
+      onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
+      onDidReceiveBackgroundNotificationResponse:
+          _onDidReceiveBackgroundNotificationResponse,
+    );
+    _isPluginInitialized = true;
+  }
+
+  await _plugin.show(
     notification.hashCode,
     notification.title,
     notification.body,
@@ -19,6 +36,22 @@ Future<void> showNotification(RemoteMessage message) async {
   );
 }
 
+void _onDidReceiveNotificationResponse(NotificationResponse response) {
+  debugPrint(
+    '👀onDidReceiveNotificationResponse received the following response.',
+  );
+  inspect(response);
+}
+
+void _onDidReceiveBackgroundNotificationResponse(
+  NotificationResponse response,
+) {
+  debugPrint(
+    '👀onDidReceiveBackgroundNotificationResponse received the following response.',
+  );
+  inspect(response);
+}
+
 Future<NotificationDetails> _createAndroidNotificationDetails(
   String imageUrl,
 ) async =>
@@ -26,7 +59,6 @@ Future<NotificationDetails> _createAndroidNotificationDetails(
       android: AndroidNotificationDetails(
         'My channel id',
         'My channel name',
-        icon: 'android_robot',
         largeIcon: await _createLargeIcon(imageUrl),
       ),
     );
