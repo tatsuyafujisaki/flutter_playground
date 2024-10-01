@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -15,15 +13,25 @@ Future<void> showNotification(RemoteMessage message) async {
   }
 
   if (!_isPluginInitialized) {
+    _isPluginInitialized = true;
+    // > The onDidReceiveBackgroundNotificationResponse is currently only for notification actions.
+    // > There's no support for dealing with tapping on the notification itself so perhaps this is where your confusion lies
+    // https://github.com/MaikuB/flutter_local_notifications/issues/2134#issuecomment-1804800834
     await _plugin.initialize(
       const InitializationSettings(
         android: AndroidInitializationSettings('android_robot'),
       ),
       onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
-      onDidReceiveBackgroundNotificationResponse:
-          _onDidReceiveBackgroundNotificationResponse,
     );
-    _isPluginInitialized = true;
+
+    // Even without creating a notification channel, you can receive notifications while the app is in the foreground, in the background, or terminated.
+    // However, if you do not create a notification channel, the channel name in Android's notification settings will be "Miscellaneous".
+    await _plugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(
+          const AndroidNotificationChannel('', 'My channel name'),
+        );
   }
 
   await _plugin.show(
@@ -33,23 +41,12 @@ Future<void> showNotification(RemoteMessage message) async {
     await _createAndroidNotificationDetails(
       'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_Jb2dSHvFPcUjxl753C-AkJDQdD71J9cwskYmrwpw2lcR7CoLEZU77s6ZWcgLsTJ_Rjsn2onNx1TkwlYv2_ziUm49HGN4fsMDccNN2HJBq3Wp-agn5U9Fc45FzDVKDJR81H4HYYF-zhE/s800/animal_inu.png',
     ),
+    payload: '🍎',
   );
 }
 
 void _onDidReceiveNotificationResponse(NotificationResponse response) {
-  debugPrint(
-    '👀onDidReceiveNotificationResponse received the following response.',
-  );
-  inspect(response);
-}
-
-void _onDidReceiveBackgroundNotificationResponse(
-  NotificationResponse response,
-) {
-  debugPrint(
-    '👀onDidReceiveBackgroundNotificationResponse received the following response.',
-  );
-  inspect(response);
+  debugPrint('NotificationResponse.payload: ${response.payload}');
 }
 
 Future<NotificationDetails> _createAndroidNotificationDetails(
