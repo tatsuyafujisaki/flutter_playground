@@ -23,15 +23,6 @@ Future<void> showNotification(RemoteMessage message) async {
       ),
       onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
     );
-
-    // Even without creating a notification channel, you can receive notifications while the app is in the foreground, in the background, or terminated.
-    // However, if you do not create a notification channel, the channel name in Android's notification settings will be "Miscellaneous".
-    await _plugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(
-          const AndroidNotificationChannel('', 'My channel name'),
-        );
   }
 
   await _plugin.show(
@@ -54,8 +45,8 @@ Future<NotificationDetails> _createAndroidNotificationDetails(
 ) async =>
     NotificationDetails(
       android: AndroidNotificationDetails(
-        'My channel id',
-        'My channel name',
+        '',
+        'My channel name', // is displayed in Android's notification settings.
         largeIcon: await _createLargeIcon(imageUrl),
       ),
     );
