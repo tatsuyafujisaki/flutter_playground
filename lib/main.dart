@@ -34,8 +34,6 @@ void main() async {
     return true;
   };
 
-  await initializeNotificationPlugin();
-
   await EncryptedSharedPreferences.initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -73,6 +71,12 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     // In the English locale, this will print "Jane Doe".
     // In the Japanese locale, this will print "Doe Jane".
     debugPrint('👀Full name: ${context.l10n.fullName('Jane', 'Doe')}');
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        await initializeNotificationPlugin(context);
+      },
+    );
 
     return Scaffold(
       appBar: AppBar(

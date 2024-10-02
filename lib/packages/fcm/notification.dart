@@ -1,17 +1,31 @@
 import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_playground/extension/extensions.dart';
 import 'package:http/http.dart' as http;
 
 final _notificationPlugin = FlutterLocalNotificationsPlugin();
-const _channel = AndroidNotificationChannel(
-  'my_notification_channel_id',
-  'My Notification Channel Name', // is displayed in Android's notification settings.
-);
+late AndroidNotificationChannel _channel;
 
-Future<void> initializeNotificationPlugin() async {
+Future<void> initializeNotificationPlugin(BuildContext context) async {
+  // > The app must create a channel with this channel ID before any notification with this channel ID is received.
+  // https://firebase.google.com/docs/cloud-messaging/http-server-ref
+  Future<AndroidNotificationChannel> createNotificationChannel(
+    BuildContext context,
+  ) async {
+    final channel = AndroidNotificationChannel(
+      'my_notification_channel_id',
+      context.l10n.notificationChannelName,
+    );
+    await _notificationPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+    return channel;
+  }
+
   // > The onDidReceiveBackgroundNotificationResponse is currently only for notification actions.
   // > There's no support for dealing with tapping on the notification itself so perhaps this is where your confusion lies
   // https://github.com/MaikuB/flutter_local_notifications/issues/2134#issuecomment-1804800834
@@ -26,16 +40,10 @@ Future<void> initializeNotificationPlugin() async {
       );
     },
   );
-  await _createNotificationChannel();
-}
 
-// > The app must create a channel with this channel ID before any notification with this channel ID is received.
-// https://firebase.google.com/docs/cloud-messaging/http-server-ref
-Future<void> _createNotificationChannel() async {
-  await _notificationPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(_channel);
+  if (context.mounted) {
+    _channel = await createNotificationChannel(context);
+  }
 }
 
 Future<void> showNotification(RemoteMessage message) async {

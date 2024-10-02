@@ -9,5 +9,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notificationChannelName": "My Notification Channel"
 }
