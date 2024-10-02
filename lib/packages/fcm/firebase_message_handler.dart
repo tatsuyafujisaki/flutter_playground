@@ -98,7 +98,7 @@ class FirebaseMessageHandler {
         FirebaseMessaging.onMessage,
         (message) {
           debugPrint(
-            '🔥FirebaseMessaging.onMessage received the following message.',
+            '🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.',
           );
           printMessage(message);
           showNotification(message);
@@ -171,12 +171,12 @@ void printMessage(RemoteMessage message) {
   inspect(message);
   final notification = message.notification;
   if (notification != null) {
-    debugPrint('🔥message.notification.title: ${notification.title}');
-    debugPrint('🔥message.notification.body: ${notification.body}');
+    debugPrint('🔥RemoteMessage.notification.title: ${notification.title}');
+    debugPrint('🔥RemoteMessage.notification.body: ${notification.body}');
   }
   for (final entry in message.data.entries) {
     debugPrint(
-      '🔥message.data.entries (each): ${entry.key}: ${entry.value}',
+      '🔥RemoteMessage.data.entries[${entry.key}]: ${entry.value}',
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -31,12 +33,15 @@ Future<void> showNotification(RemoteMessage message) async {
     await _createAndroidNotificationDetails(
       'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_Jb2dSHvFPcUjxl753C-AkJDQdD71J9cwskYmrwpw2lcR7CoLEZU77s6ZWcgLsTJ_Rjsn2onNx1TkwlYv2_ziUm49HGN4fsMDccNN2HJBq3Wp-agn5U9Fc45FzDVKDJR81H4HYYF-zhE/s800/animal_inu.png',
     ),
-    payload: '🍎',
+    payload: jsonEncode(message.data),
   );
 }
 
 void _onDidReceiveNotificationResponse(NotificationResponse response) {
-  debugPrint('NotificationResponse.payload: ${response.payload}');
+  debugPrint(
+    '🔥onDidReceiveNotificationResponse is called. In other words, the user tapped a notification while the app was in the foreground.',
+  );
+  debugPrint('🔥NotificationResponse.payload: ${response.payload}');
 }
 
 Future<NotificationDetails> _createAndroidNotificationDetails(
