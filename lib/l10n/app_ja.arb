@@ -9,6 +9,5 @@
         "type": "String"
       }
     }
-  },
-  "pushButtonCountLabel": "あなたがボタンを押した回数："
+  }
 }
