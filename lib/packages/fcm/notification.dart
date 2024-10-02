@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 
-final _plugin = FlutterLocalNotificationsPlugin();
-var _isPluginInitialized = false;
+final _notificationPlugin = FlutterLocalNotificationsPlugin();
+var _isNotificationPluginInitialized = false;
 
 Future<void> showNotification(RemoteMessage message) async {
   final notification = message.notification;
@@ -12,12 +12,12 @@ Future<void> showNotification(RemoteMessage message) async {
     return;
   }
 
-  if (!_isPluginInitialized) {
-    _isPluginInitialized = true;
+  if (!_isNotificationPluginInitialized) {
+    _isNotificationPluginInitialized = true;
     // > The onDidReceiveBackgroundNotificationResponse is currently only for notification actions.
     // > There's no support for dealing with tapping on the notification itself so perhaps this is where your confusion lies
     // https://github.com/MaikuB/flutter_local_notifications/issues/2134#issuecomment-1804800834
-    await _plugin.initialize(
+    await _notificationPlugin.initialize(
       const InitializationSettings(
         android: AndroidInitializationSettings('android_robot'),
       ),
@@ -25,7 +25,7 @@ Future<void> showNotification(RemoteMessage message) async {
     );
   }
 
-  await _plugin.show(
+  await _notificationPlugin.show(
     notification.hashCode,
     notification.title,
     notification.body,
