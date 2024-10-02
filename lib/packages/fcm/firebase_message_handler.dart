@@ -1,22 +1,36 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_playground/packages/fcm/firebase_on_background_message.dart';
+import 'package:flutter_playground/firebase_options.dart';
 import 'package:flutter_playground/packages/fcm/notification.dart';
 
 class FirebaseMessageHandler {
   FirebaseMessageHandler() {
-    onBackgroundMessage();
+    // Without this, if you receive a message while the application is terminated, no notification will be displayed.
+    // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
+    // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
+    FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 
     Future.delayed(
       Duration.zero,
       () async {
-        await _requestPermission;
+        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#permissions
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
+        await FirebaseMessaging.instance.requestPermission();
 
-        final token = await _token;
+        // Despite the description below, getToken() does not ask the user for notification permissions.
+        // > If notification permission has not been granted, this method will ask the user for notification permissions.
+        // https://firebase.google.com/docs/cloud-messaging/flutter/first-message#access_the_registration_token
+        //
+        // This issue is reported below.
+        // https://github.com/firebase/flutterfire/issues/12676
+        //
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getToken.html
+        final token = await FirebaseMessaging.instance.getToken();
         if (token != null) {
           _sendTokenToServer(token);
         }
@@ -27,12 +41,16 @@ class FirebaseMessageHandler {
           _sendTokenToServer,
         );
 
-        final initialMessage = await _initialMessage;
+        // > If the application has been opened from a terminated state via a RemoteMessage (containing a Notification), it will be returned, otherwise it will be null.
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getInitialMessage.html
+        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
+        final initialMessage =
+            await FirebaseMessaging.instance.getInitialMessage();
         if (initialMessage != null) {
           debugPrint(
             '🔥FirebaseMessaging.instance.getInitialMessage() received the following message.',
           );
-          printMessage(initialMessage);
+          _printMessage(initialMessage);
         }
 
         _onMessageSubscription = await _onMessage;
@@ -45,52 +63,6 @@ class FirebaseMessageHandler {
   StreamSubscription<RemoteMessage>? _onMessageSubscription;
   StreamSubscription<RemoteMessage>? _onMessageOpenedAppSubscription;
 
-  Future<NotificationSettings?> get _requestPermission async {
-    NotificationSettings? settings;
-    try {
-      // https://firebase.google.com/docs/cloud-messaging/flutter/receive#permissions
-      // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
-      settings = await FirebaseMessaging.instance.requestPermission();
-    } on Exception catch (e, s) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: s);
-    }
-    return settings;
-  }
-
-  Future<String?> get _token async {
-    String? token;
-    try {
-      // Despite the description below, getToken() does not ask the user for notification permissions.
-      // > If notification permission has not been granted, this method will ask the user for notification permissions.
-      // https://firebase.google.com/docs/cloud-messaging/flutter/first-message#access_the_registration_token
-      //
-      // This issue is reported below.
-      // https://github.com/firebase/flutterfire/issues/12676
-      //
-      // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getToken.html
-      token = await FirebaseMessaging.instance.getToken();
-    } on Exception catch (e, s) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: s);
-    }
-    return token;
-  }
-
-  Future<RemoteMessage?> get _initialMessage async {
-    RemoteMessage? message;
-    try {
-      // > If the application has been opened from a terminated state via a RemoteMessage (containing a Notification), it will be returned, otherwise it will be null.
-      // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getInitialMessage.html
-      // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
-      message = await FirebaseMessaging.instance.getInitialMessage();
-    } on Exception catch (e, s) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: s);
-    }
-    return message;
-  }
-
   /// Recieves messages while the app is in the foreground.
   Future<StreamSubscription<RemoteMessage>?> get _onMessage => _listen(
         // https://firebase.google.com/docs/cloud-messaging/flutter/receive#foreground_messages
@@ -100,7 +72,7 @@ class FirebaseMessageHandler {
           debugPrint(
             '🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.',
           );
-          printMessage(message);
+          _printMessage(message);
           showNotification(message);
         },
       );
@@ -114,7 +86,7 @@ class FirebaseMessageHandler {
           debugPrint(
             '🔥FirebaseMessaging.onMessageOpenedApp received the following message. In other words, the user tapped a notification while the app was in the background.',
           );
-          printMessage(message);
+          _printMessage(message);
         },
       );
 
@@ -167,7 +139,23 @@ class FirebaseMessageHandler {
   }
 }
 
-void printMessage(RemoteMessage message) {
+/// > There are a few things to keep in mind about your background message handler:
+/// > 1. It must not be an anonymous function.
+/// > 2. It must be a top-level function (e.g. not a class method which requires initialization).
+/// > 3, When using Flutter version 3.3.0 or higher, the message handler must be annotated with @pragma('vm:entry-point') right above the function declaration (otherwise it may be removed during tree shaking for release mode).
+/// https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
+@pragma('vm:entry-point')
+Future<void> _backgroundMessageHandler(
+  RemoteMessage message,
+) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  debugPrint(
+    '🔥FirebaseMessaging.onBackgroundMessage received the following message. In other words, the app received a notification while it was in the background.',
+  );
+  _printMessage(message);
+}
+
+void _printMessage(RemoteMessage message) {
   inspect(message);
   final notification = message.notification;
   if (notification != null) {
