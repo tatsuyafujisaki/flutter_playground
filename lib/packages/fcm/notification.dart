@@ -6,29 +6,41 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 
 final _notificationPlugin = FlutterLocalNotificationsPlugin();
-var _isNotificationPluginInitialized = false;
+const _channel = AndroidNotificationChannel(
+  'my_notification_channel',
+  'My Notification', // is displayed in Android's notification settings.
+);
+
+Future<void> initializeNotificationPlugin() async {
+  // > The onDidReceiveBackgroundNotificationResponse is currently only for notification actions.
+  // > There's no support for dealing with tapping on the notification itself so perhaps this is where your confusion lies
+  // https://github.com/MaikuB/flutter_local_notifications/issues/2134#issuecomment-1804800834
+  await _notificationPlugin.initialize(
+    const InitializationSettings(
+      // Specifies the name of a drawable file without the extension in the "android/app/src/main/res/drawable" directory.
+      android: AndroidInitializationSettings('android_robot'),
+    ),
+    onDidReceiveNotificationResponse: (details) {
+      debugPrint(
+        '🔥onDidReceiveNotificationResponse received the payload: ${details.payload}. In other words, the user tapped a notification while the app was in the foreground.',
+      );
+    },
+  );
+  await _createNotificationChannel();
+}
+
+// > The app must create a channel with this channel ID before any notification with this channel ID is received.
+// https://firebase.google.com/docs/cloud-messaging/http-server-ref
+Future<void> _createNotificationChannel() async {
+  await _notificationPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(_channel);
+}
 
 Future<void> showNotification(RemoteMessage message) async {
   if (message.notification == null) {
     return;
-  }
-
-  if (!_isNotificationPluginInitialized) {
-    _isNotificationPluginInitialized = true;
-    // > The onDidReceiveBackgroundNotificationResponse is currently only for notification actions.
-    // > There's no support for dealing with tapping on the notification itself so perhaps this is where your confusion lies
-    // https://github.com/MaikuB/flutter_local_notifications/issues/2134#issuecomment-1804800834
-    await _notificationPlugin.initialize(
-      const InitializationSettings(
-        // Specifies the name of a drawable file without the extension in the "android/app/src/main/res/drawable" directory.
-        android: AndroidInitializationSettings('android_robot'),
-      ),
-      onDidReceiveNotificationResponse: (details) {
-        debugPrint(
-          '🔥onDidReceiveNotificationResponse received the payload: ${details.payload}. In other words, the user tapped a notification while the app was in the foreground.',
-        );
-      },
-    );
   }
 
   await _notificationPlugin.show(
@@ -47,8 +59,8 @@ Future<NotificationDetails> _createAndroidNotificationDetails(
 ) async =>
     NotificationDetails(
       android: AndroidNotificationDetails(
-        '',
-        'My channel name', // is displayed in Android's notification settings.
+        _channel.id,
+        _channel.name,
         largeIcon: await _createLargeIcon(imageUrl),
       ),
     );
