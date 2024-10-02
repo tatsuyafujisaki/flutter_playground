@@ -40,11 +40,8 @@ void main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
-        home: const _MyStatefulWidget(title: 'My title'),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+  Widget build(BuildContext context, WidgetRef ref) => const MaterialApp(
+        home: _MyStatefulWidget(title: 'My title'),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
       );
@@ -78,9 +75,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: FlutterLogo(),
-      ),
+      body: const Center(child: FlutterLogo()),
     );
   }
 
