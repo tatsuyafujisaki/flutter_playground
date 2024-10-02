@@ -4,6 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_playground/firebase_options.dart';
 import 'package:flutter_playground/packages/fcm/firebase_message_handler.dart';
 
+void onBackgroundMessage() {
+  // Without this, if you receive a message while the application is closed, no notification will be displayed.
+  // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
+  // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
+  FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
+}
+
 /// > There are a few things to keep in mind about your background message handler:
 /// > 1. It must not be an anonymous function.
 /// > 2. It must be a top-level function (e.g. not a class method which requires initialization).
@@ -18,11 +25,4 @@ Future<void> _backgroundMessageHandler(
     '🔥FirebaseMessaging.onBackgroundMessage received the following message. In other words, the app received a notification while it was in the background.',
   );
   printMessage(message);
-}
-
-void onBackgroundMessage() {
-  // Without this, if you receive a message while the application is closed, no notification will be displayed.
-  // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
-  // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
-  FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 }
