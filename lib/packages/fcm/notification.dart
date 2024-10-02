@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 final _notificationPlugin = FlutterLocalNotificationsPlugin();
 const _channel = AndroidNotificationChannel(
   'my_notification_channel_id',
-  'My Notification Name', // is displayed in Android's notification settings.
+  'My Notification Channel Name', // is displayed in Android's notification settings.
 );
 
 Future<void> initializeNotificationPlugin() async {
