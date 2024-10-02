@@ -47,6 +47,23 @@ Future<void> initializeNotificationPlugin(BuildContext context) async {
 }
 
 Future<void> showNotification(RemoteMessage message) async {
+  Future<NotificationDetails> createAndroidNotificationDetails(
+    String imageUrl,
+  ) async {
+    Future<ByteArrayAndroidBitmap> createLargeIcon(String url) async {
+      final response = await http.get(Uri.parse(url));
+      return ByteArrayAndroidBitmap(response.bodyBytes);
+    }
+
+    return NotificationDetails(
+      android: AndroidNotificationDetails(
+        _channel.id,
+        _channel.name,
+        largeIcon: await createLargeIcon(imageUrl),
+      ),
+    );
+  }
+
   if (message.notification == null) {
     return;
   }
@@ -55,25 +72,9 @@ Future<void> showNotification(RemoteMessage message) async {
     message.notification.hashCode,
     message.notification!.title,
     message.notification!.body,
-    await _createAndroidNotificationDetails(
+    await createAndroidNotificationDetails(
       'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_Jb2dSHvFPcUjxl753C-AkJDQdD71J9cwskYmrwpw2lcR7CoLEZU77s6ZWcgLsTJ_Rjsn2onNx1TkwlYv2_ziUm49HGN4fsMDccNN2HJBq3Wp-agn5U9Fc45FzDVKDJR81H4HYYF-zhE/s800/animal_inu.png',
     ),
     payload: jsonEncode(message.data),
   );
-}
-
-Future<NotificationDetails> _createAndroidNotificationDetails(
-  String imageUrl,
-) async =>
-    NotificationDetails(
-      android: AndroidNotificationDetails(
-        _channel.id,
-        _channel.name,
-        largeIcon: await _createLargeIcon(imageUrl),
-      ),
-    );
-
-Future<ByteArrayAndroidBitmap> _createLargeIcon(String url) async {
-  final response = await http.get(Uri.parse(url));
-  return ByteArrayAndroidBitmap(response.bodyBytes);
 }
