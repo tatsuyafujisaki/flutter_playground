@@ -112,7 +112,7 @@ class FirebaseMessageHandler {
         FirebaseMessaging.onMessageOpenedApp,
         (message) {
           debugPrint(
-            '🔥FirebaseMessaging.onMessageOpenedApp received the following message.',
+            '🔥FirebaseMessaging.onMessageOpenedApp received the following message. In other words, the user tapped a notification while the app was in the background.',
           );
           printMessage(message);
         },

@@ -15,7 +15,7 @@ Future<void> _backgroundMessageHandler(
 ) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   debugPrint(
-    '🔥FirebaseMessaging.onBackgroundMessage received the following message.',
+    '🔥FirebaseMessaging.onBackgroundMessage received the following message. In other words, the app received a notification while it was in the background.',
   );
   printMessage(message);
 }
