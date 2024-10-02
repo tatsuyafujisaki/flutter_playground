@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 
-FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
+final _plugin = FlutterLocalNotificationsPlugin();
 var _isPluginInitialized = false;
 
 Future<void> showNotification(RemoteMessage message) async {
