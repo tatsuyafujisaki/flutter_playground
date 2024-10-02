@@ -74,7 +74,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        await initializeNotificationPlugin(context);
+        await enableNotification(context);
       },
     );
 

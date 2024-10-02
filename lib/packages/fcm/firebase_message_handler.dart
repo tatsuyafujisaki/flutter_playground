@@ -18,10 +18,6 @@ class FirebaseMessageHandler {
     Future.delayed(
       Duration.zero,
       () async {
-        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#permissions
-        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
-        await FirebaseMessaging.instance.requestPermission();
-
         // Despite the description below, getToken() does not ask the user for notification permissions.
         // > If notification permission has not been granted, this method will ask the user for notification permissions.
         // https://firebase.google.com/docs/cloud-messaging/flutter/first-message#access_the_registration_token

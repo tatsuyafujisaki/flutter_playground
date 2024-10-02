@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 final _notificationPlugin = FlutterLocalNotificationsPlugin();
 late AndroidNotificationChannel _channel;
 
-Future<void> initializeNotificationPlugin(BuildContext context) async {
+Future<void> enableNotification(BuildContext context) async {
   // > The app must create a channel with this channel ID before any notification with this channel ID is received.
   // https://firebase.google.com/docs/cloud-messaging/http-server-ref
   Future<AndroidNotificationChannel> createNotificationChannel(
@@ -25,6 +25,10 @@ Future<void> initializeNotificationPlugin(BuildContext context) async {
         ?.createNotificationChannel(channel);
     return channel;
   }
+
+  // https://firebase.google.com/docs/cloud-messaging/flutter/receive#permissions
+  // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
+  await FirebaseMessaging.instance.requestPermission();
 
   // > The onDidReceiveBackgroundNotificationResponse is currently only for notification actions.
   // > There's no support for dealing with tapping on the notification itself so perhaps this is where your confusion lies
