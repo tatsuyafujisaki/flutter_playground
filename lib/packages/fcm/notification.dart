@@ -20,9 +20,14 @@ Future<void> showNotification(RemoteMessage message) async {
     // https://github.com/MaikuB/flutter_local_notifications/issues/2134#issuecomment-1804800834
     await _notificationPlugin.initialize(
       const InitializationSettings(
+        // Specifies the name of a drawable file without the extension in the "android/app/src/main/res/drawable" directory.
         android: AndroidInitializationSettings('android_robot'),
       ),
-      onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
+      onDidReceiveNotificationResponse: (details) {
+        debugPrint(
+          '🔥onDidReceiveNotificationResponse received the payload: ${details.payload}. In other words, the user tapped a notification while the app was in the foreground.',
+        );
+      },
     );
   }
 
@@ -34,12 +39,6 @@ Future<void> showNotification(RemoteMessage message) async {
       'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_Jb2dSHvFPcUjxl753C-AkJDQdD71J9cwskYmrwpw2lcR7CoLEZU77s6ZWcgLsTJ_Rjsn2onNx1TkwlYv2_ziUm49HGN4fsMDccNN2HJBq3Wp-agn5U9Fc45FzDVKDJR81H4HYYF-zhE/s800/animal_inu.png',
     ),
     payload: jsonEncode(message.data),
-  );
-}
-
-void _onDidReceiveNotificationResponse(NotificationResponse response) {
-  debugPrint(
-    '🔥onDidReceiveNotificationResponse received the payload: ${response.payload}. In other words, the user tapped a notification while the app was in the foreground.',
   );
 }
 
