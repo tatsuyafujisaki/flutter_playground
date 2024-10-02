@@ -17,6 +17,11 @@ void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
   WidgetsFlutterBinding.ensureInitialized();
 
+  // https://pub.dev/documentation/firebase_core/latest/firebase_core/Firebase/initializeApp.html
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   // Records uncaught errors caused by my Dart code as fatal in Firebase Crashlytics.
   // https://api.flutter.dev/flutter/foundation/FlutterError/onError.html
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
@@ -27,11 +32,6 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
     return true;
   };
-
-  // https://pub.dev/documentation/firebase_core/latest/firebase_core/Firebase/initializeApp.html
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
   await EncryptedSharedPreferences.initialize();
   runApp(const ProviderScope(child: MyApp()));

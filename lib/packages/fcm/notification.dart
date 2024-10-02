@@ -7,8 +7,7 @@ final _notificationPlugin = FlutterLocalNotificationsPlugin();
 var _isNotificationPluginInitialized = false;
 
 Future<void> showNotification(RemoteMessage message) async {
-  final notification = message.notification;
-  if (notification == null) {
+  if (message.notification == null) {
     return;
   }
 
@@ -26,9 +25,9 @@ Future<void> showNotification(RemoteMessage message) async {
   }
 
   await _notificationPlugin.show(
-    notification.hashCode,
-    notification.title,
-    notification.body,
+    message.notification.hashCode,
+    message.notification!.title,
+    message.notification!.body,
     await _createAndroidNotificationDetails(
       'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_Jb2dSHvFPcUjxl753C-AkJDQdD71J9cwskYmrwpw2lcR7CoLEZU77s6ZWcgLsTJ_Rjsn2onNx1TkwlYv2_ziUm49HGN4fsMDccNN2HJBq3Wp-agn5U9Fc45FzDVKDJR81H4HYYF-zhE/s800/animal_inu.png',
     ),
