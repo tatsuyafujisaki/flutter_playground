@@ -39,9 +39,8 @@ Future<void> showNotification(RemoteMessage message) async {
 
 void _onDidReceiveNotificationResponse(NotificationResponse response) {
   debugPrint(
-    '🔥onDidReceiveNotificationResponse is called. In other words, the user tapped a notification while the app was in the foreground.',
+    '🔥onDidReceiveNotificationResponse received the payload: ${response.payload}. In other words, the user tapped a notification while the app was in the foreground.',
   );
-  debugPrint('🔥NotificationResponse.payload: ${response.payload}');
 }
 
 Future<NotificationDetails> _createAndroidNotificationDetails(
