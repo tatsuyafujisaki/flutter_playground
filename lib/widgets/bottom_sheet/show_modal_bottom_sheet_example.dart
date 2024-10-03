@@ -18,7 +18,7 @@ class _MyStatelessWidget extends StatelessWidget {
               // from overlapping the status bar.
               useSafeArea: true,
             ),
-            icon: const Icon(Icons.flutter_dash),
+            icon: const Icon(Icons.open_in_new),
           ),
         ),
       );
@@ -30,9 +30,13 @@ class _BottomSheetContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.close),
+          Row(
+            children: [
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.close),
+              ),
+            ],
           ),
         ],
       );
