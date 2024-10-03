@@ -16,7 +16,7 @@ Future<void> enableNotification(BuildContext context) async {
     BuildContext context,
   ) async {
     final channel = AndroidNotificationChannel(
-      'my_notification_channel_id',
+      'my_default_notification_channel_id',
       context.l10n.notificationChannelName,
     );
     await _notificationPlugin
