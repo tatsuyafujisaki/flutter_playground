@@ -66,3 +66,4 @@ A|B|Note
 [InputBorder.none](https://api.flutter.dev/flutter/material/InputBorder/none-constant.html)|[BorderSide.none](https://api.flutter.dev/flutter/painting/BorderSide/none-constant.html)|Only if your TextField is not rounded.
 [BorderSide.none](https://api.flutter.dev/flutter/painting/BorderSide/none-constant.html)|[BorderSide(width: 0, style: BorderStyle.none)](https://api.flutter.dev/flutter/painting/BorderStyle.html)|> none constant<br>> Implementation<br>> static const BorderSide none = BorderSide(width: 0.0, style: BorderStyle.none);
 [InkWell](https://api.flutter.dev/flutter/material/InkWell-class.html)|[GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
+[context.go(...)](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper/go.html)|[GoRouter.of(context).go(...)](https://pub.dev/documentation/go_router/latest/go_router/GoRouter/go.html)
