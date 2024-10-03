@@ -14,7 +14,7 @@ class _MyStatelessWidget extends StatelessWidget {
               context: context,
               builder: (_) => _BottomSheetContent(),
             ),
-            icon: const Icon(Icons.flutter_dash),
+            icon: const Icon(Icons.open_in_new),
           ),
         ),
       );
