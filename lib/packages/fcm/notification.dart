@@ -26,6 +26,12 @@ Future<void> enableNotification(BuildContext context) async {
     return channel;
   }
 
+  Future<void>
+      deleteMiscellaneousNotificationChannel() async => _notificationPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.deleteNotificationChannel('fcm_fallback_notification_channel');
+
   // https://firebase.google.com/docs/cloud-messaging/flutter/receive#permissions
   // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
   await FirebaseMessaging.instance.requestPermission();
@@ -44,6 +50,8 @@ Future<void> enableNotification(BuildContext context) async {
       );
     },
   );
+
+  await deleteMiscellaneousNotificationChannel();
 
   if (context.mounted) {
     _channel = await createNotificationChannel(context);
