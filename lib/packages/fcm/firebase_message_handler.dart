@@ -10,7 +10,8 @@ import 'package:flutter_playground/packages/fcm/notification.dart';
 
 class FirebaseMessageHandler {
   FirebaseMessageHandler() {
-    // Without this, if you receive a message while the application is terminated, no notification will be displayed.
+    // Without this, no notification will be displayed when the app is terminated.
+    // Even without this, the notification will appear whether the app is in the foreground or background.
     // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
     FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
