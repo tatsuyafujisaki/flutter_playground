@@ -45,7 +45,7 @@ class FirebaseMessageHandler {
             await FirebaseMessaging.instance.getInitialMessage();
         if (initialMessage != null) {
           debugPrint(
-            '🔥FirebaseMessaging.instance.getInitialMessage() received the following message.',
+            '''🔥FirebaseMessaging.instance.getInitialMessage() received the following message.''',
           );
           _printMessage(initialMessage);
         }
@@ -67,7 +67,7 @@ class FirebaseMessageHandler {
         FirebaseMessaging.onMessage,
         (message) {
           debugPrint(
-            '🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.',
+            '''🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.''',
           );
           _printMessage(message);
           showNotification(message);
@@ -81,7 +81,7 @@ class FirebaseMessageHandler {
         FirebaseMessaging.onMessageOpenedApp,
         (message) {
           debugPrint(
-            '🔥FirebaseMessaging.onMessageOpenedApp received the following message. In other words, the user tapped a notification while the app was in the background.',
+            '''🔥FirebaseMessaging.onMessageOpenedApp received the following message. In other words, the user tapped a notification while the app was in the background.''',
           );
           _printMessage(message);
         },
@@ -109,7 +109,7 @@ class FirebaseMessageHandler {
 
   void _sendTokenToServer(String token) {
     debugPrint(
-      '🔥Pretend to send a Firebase Cloud Messaging (FCM) registration token to server: $token',
+      '''🔥Pretend to send a Firebase Cloud Messaging (FCM) registration token to server: $token''',
     );
   }
 
@@ -147,7 +147,7 @@ Future<void> _backgroundMessageHandler(
 ) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   debugPrint(
-    '🔥FirebaseMessaging.onBackgroundMessage received the following message. In other words, the app received a notification while it was in the background.',
+    '''🔥FirebaseMessaging.onBackgroundMessage received the following message. In other words, the app received a notification while it was in the background.''',
   );
   _printMessage(message);
 }
