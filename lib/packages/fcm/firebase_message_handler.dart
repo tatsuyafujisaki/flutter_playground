@@ -17,36 +17,14 @@ class FirebaseMessageHandler {
     Future.delayed(
       Duration.zero,
       () async {
-        // Despite the description below, getToken() does not ask the user for notification permissions.
-        // > If notification permission has not been granted, this method will ask the user for notification permissions.
-        // https://firebase.google.com/docs/cloud-messaging/flutter/first-message#access_the_registration_token
-        //
-        // This issue is reported below.
-        // https://github.com/firebase/flutterfire/issues/12676
-        //
-        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getToken.html
-        final token = await FirebaseMessaging.instance.getToken();
-        if (token != null) {
-          _sendTokenToServer(token);
-        }
+        await _handleTokenIfExists();
+        await _handleInitialMessageIfExists();
 
         _onTokenRefreshSubscription = await _listen(
           // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onTokenRefresh.html
           FirebaseMessaging.instance.onTokenRefresh,
           _sendTokenToServer,
         );
-
-        // > If the application has been opened from a terminated state via a RemoteMessage (containing a Notification), it will be returned, otherwise it will be null.
-        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getInitialMessage.html
-        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
-        final initialMessage =
-            await FirebaseMessaging.instance.getInitialMessage();
-        if (initialMessage != null) {
-          debugPrint(
-            '''🔥FirebaseMessaging.instance.getInitialMessage() received the following message.''',
-          );
-          _printMessage(initialMessage);
-        }
 
         _onMessageSubscription = await _onMessage;
         _onMessageOpenedAppSubscription = await _onMessageOpenedApp;
@@ -103,6 +81,34 @@ class FirebaseMessageHandler {
       debugPrintStack(stackTrace: s);
     }
     return subscrption;
+  }
+
+  Future<void> _handleTokenIfExists() async {
+    // Despite the description below, getToken() does not ask the user for notification permissions.
+    // > If notification permission has not been granted, this method will ask the user for notification permissions.
+    // https://firebase.google.com/docs/cloud-messaging/flutter/first-message#access_the_registration_token
+    //
+    // This issue is reported below.
+    // https://github.com/firebase/flutterfire/issues/12676
+    //
+    // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getToken.html
+    final token = await FirebaseMessaging.instance.getToken();
+    if (token != null) {
+      _sendTokenToServer(token);
+    }
+  }
+
+  Future<void> _handleInitialMessageIfExists() async {
+    // > If the application has been opened from a terminated state via a RemoteMessage (containing a Notification), it will be returned, otherwise it will be null.
+    // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getInitialMessage.html
+    // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
+    final message = await FirebaseMessaging.instance.getInitialMessage();
+    if (message != null) {
+      debugPrint(
+        '''🔥FirebaseMessaging.instance.getInitialMessage() received the following message.''',
+      );
+      _printMessage(message);
+    }
   }
 
   void _sendTokenToServer(String token) {
