@@ -63,8 +63,9 @@ https://youtu.be/BJtQ0dfI-RA?t=4302
 # Use A rather than B for simplicity or better UIUX
 A|B|Note
 --|--|--
+[TimeOfDay.now](https://api.flutter.dev/flutter/material/TimeOfDay/TimeOfDay.now.html)|[DateTime.now](https://api.dart.dev/stable/3.5.1/dart-core/DateTime/DateTime.now.html)|if what you want is only hours and minutes.
 [InputBorder.none](https://api.flutter.dev/flutter/material/InputBorder/none-constant.html)|[BorderSide.none](https://api.flutter.dev/flutter/painting/BorderSide/none-constant.html)|Only if your TextField is not rounded.
 [BorderSide.none](https://api.flutter.dev/flutter/painting/BorderSide/none-constant.html)|[BorderSide(width: 0, style: BorderStyle.none)](https://api.flutter.dev/flutter/painting/BorderStyle.html)|> none constant<br>> Implementation<br>> static const BorderSide none = BorderSide(width: 0.0, style: BorderStyle.none);
 [InkWell](https://api.flutter.dev/flutter/material/InkWell-class.html)|[GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
-[context.go(...)](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper/go.html)|[GoRouter.of(context).go(...)](https://pub.dev/documentation/go_router/latest/go_router/GoRouter/go.html)
+[context.go](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper/go.html)|[GoRouter.of(context).go](https://pub.dev/documentation/go_router/latest/go_router/GoRouter/go.html)
 [context.watch\<T>(...)](https://pub.dev/documentation/provider/latest/provider/WatchContext/watch.html)|[Consumer](https://pub.dev/documentation/provider/latest/provider/Consumer-class.html)|https://stackoverflow.com/a/77087227
