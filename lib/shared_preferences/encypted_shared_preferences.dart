@@ -3,34 +3,37 @@ import 'package:flutter_playground/util/encryptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EncryptedSharedPreferences {
-  static late final SharedPreferences _prefs;
+  factory EncryptedSharedPreferences() => _singleton;
+  EncryptedSharedPreferences._();
+  static final _singleton = EncryptedSharedPreferences._();
+  late final SharedPreferences _prefs;
 
-  static Future<void> initialize() async {
+  Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static String getString(String key) => decrypt(_prefs.getString(key) ?? '');
+  String getString(String key) => decrypt(_prefs.getString(key) ?? '');
 
   @visibleForTesting
-  static String getEncryptedString(String key) => _prefs.getString(key) ?? '';
+  String getEncryptedString(String key) => _prefs.getString(key) ?? '';
 
-  static List<String> getStringList(String key) =>
+  List<String> getStringList(String key) =>
       (_prefs.getStringList(key) ?? []).map(decrypt).toList();
 
   @visibleForTesting
-  static List<String> getEncryptedStringList(String key) =>
+  List<String> getEncryptedStringList(String key) =>
       (_prefs.getStringList(key) ?? []).toList();
 
-  static Future<void> setString(String key, String value) =>
+  Future<void> setString(String key, String value) =>
       _prefs.setString(key, encrypt(value));
 
-  static Future<void> setStringList(String key, Iterable<String> value) =>
+  Future<void> setStringList(String key, Iterable<String> value) =>
       _prefs.setStringList(key, value.map(encrypt).toList());
 
-  static Future<void> addToStringList(String key, String value) =>
+  Future<void> addToStringList(String key, String value) =>
       _prefs.setStringList(key, getStringList(key)..add(value));
 
-  static Future<void> addToStringListIfAbsent(
+  Future<void> addToStringListIfAbsent(
     String key,
     String value, [
     Future<void> Function()? onAvoidDuplicateValue,
@@ -44,14 +47,14 @@ class EncryptedSharedPreferences {
     }
   }
 
-  static Future<void> remove(String key) => _prefs.remove(key);
-  static Future<void> clear() => _prefs.clear();
+  Future<void> remove(String key) => _prefs.remove(key);
+  Future<void> clear() => _prefs.clear();
 
-  static void dump() {
+  void dump() {
     _prefs.getKeys().forEach(
           (key) => debugPrint('key=$key, value=${_prefs.get(key)}'),
         );
   }
 
-  static int get dumpCount => _prefs.getKeys().length;
+  int get dumpCount => _prefs.getKeys().length;
 }

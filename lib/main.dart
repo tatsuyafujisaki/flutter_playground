@@ -34,7 +34,7 @@ void main() async {
     return true;
   };
 
-  await EncryptedSharedPreferences.initialize();
+  await EncryptedSharedPreferences().initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
 
