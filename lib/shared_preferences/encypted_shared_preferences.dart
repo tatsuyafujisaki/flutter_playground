@@ -49,12 +49,4 @@ class EncryptedSharedPreferences {
 
   Future<void> remove(String key) => _prefs.remove(key);
   Future<void> clear() => _prefs.clear();
-
-  void dump() {
-    _prefs.getKeys().forEach(
-          (key) => debugPrint('key=$key, value=${_prefs.get(key)}'),
-        );
-  }
-
-  int get dumpCount => _prefs.getKeys().length;
 }
