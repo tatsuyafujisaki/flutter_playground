@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
@@ -57,10 +59,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulsWidget> {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => player.dispose(),
-    );
-
+    unawaited(player.dispose());
     super.dispose();
   }
 

@@ -128,15 +128,10 @@ class FirebaseMessageHandler {
   }
 
   // ignore: unreachable_from_main
-  void dispose() {
-    Future.delayed(
-      Duration.zero,
-      () async {
-        await _onTokenRefreshSubscription?.cancel();
-        await _onMessageSubscription?.cancel();
-        await _onMessageOpenedAppSubscription?.cancel();
-      },
-    );
+  Future<void> dispose() async {
+    await _onTokenRefreshSubscription?.cancel();
+    await _onMessageSubscription?.cancel();
+    await _onMessageOpenedAppSubscription?.cancel();
   }
 }
 
