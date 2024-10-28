@@ -52,7 +52,10 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
                   aspectRatio: _videoPlayerController.value.aspectRatio,
                   child: VideoPlayer(_videoPlayerController),
                 )
-              : const CircularProgressIndicator(),
+              : VideoProgressIndicator(
+                  _videoPlayerController,
+                  allowScrubbing: true,
+                ),
         ),
       );
 
