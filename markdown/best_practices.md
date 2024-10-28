@@ -69,4 +69,4 @@ A|B|Note
 [InkWell](https://api.flutter.dev/flutter/material/InkWell-class.html)|[GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
 [context.go](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper/go.html)|[GoRouter.of(context).go](https://pub.dev/documentation/go_router/latest/go_router/GoRouter/go.html)
 [context.watch\<T>(...)](https://pub.dev/documentation/provider/latest/provider/WatchContext/watch.html)|[Consumer](https://pub.dev/documentation/provider/latest/provider/Consumer-class.html)|https://stackoverflow.com/a/77087227
-[Navigator.pop(context)](https://api.flutter.dev/flutter/widgets/Navigator/pop.html)|[Navigator.of(context).pop()](https://api.flutter.dev/flutter/widgets/NavigatorState/pop.html)
+[Navigator.push(context, route)](https://api.flutter.dev/flutter/widgets/Navigator/push.html)<br>[Navigator.pop(context)](https://api.flutter.dev/flutter/widgets/Navigator/pop.html)|[Navigator.of(context).push(route)](https://api.flutter.dev/flutter/widgets/NavigatorState/push.html)<br>[Navigator.of(context).pop()](https://api.flutter.dev/flutter/widgets/NavigatorState/pop.html)
