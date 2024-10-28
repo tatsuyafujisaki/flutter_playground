@@ -13,13 +13,13 @@ void main() {
       // with a test instance.
       // https://github.com/flutter/flutter/issues/106514#issuecomment-1164771569
       SharedPreferences.setMockInitialValues({});
-      await EncryptedSharedPreferences.initialize();
+      await EncryptedSharedPreferences().initialize();
     },
   );
 
   tearDown(
     () async {
-      await EncryptedSharedPreferences.clear();
+      await EncryptedSharedPreferences().clear();
     },
   );
 
@@ -27,12 +27,12 @@ void main() {
     'Can set, encrypt, and get a string',
     () async {
       const value = 'value';
-      await EncryptedSharedPreferences.setString(key, value);
+      await EncryptedSharedPreferences().setString(key, value);
       expect(
-        EncryptedSharedPreferences.getEncryptedString(key),
-        isNot(EncryptedSharedPreferences.getString(key)),
+        EncryptedSharedPreferences().getEncryptedString(key),
+        isNot(EncryptedSharedPreferences().getString(key)),
       );
-      expect(EncryptedSharedPreferences.getString(key), value);
+      expect(EncryptedSharedPreferences().getString(key), value);
     },
   );
 
@@ -40,16 +40,16 @@ void main() {
     'Can set, encrypt, and get a string list',
     () async {
       final xs = ['value1', 'value2'];
-      await EncryptedSharedPreferences.setStringList(
+      await EncryptedSharedPreferences().setStringList(
         key,
         xs,
       );
       expect(
-        EncryptedSharedPreferences.getEncryptedStringList(key),
+        EncryptedSharedPreferences().getEncryptedStringList(key),
         isNot(xs),
       );
       expect(
-        EncryptedSharedPreferences.getStringList(key),
+        EncryptedSharedPreferences().getStringList(key),
         xs,
       );
     },
@@ -58,16 +58,16 @@ void main() {
   test(
     'Can add a string to a string list',
     () async {
-      await EncryptedSharedPreferences.setStringList(
+      await EncryptedSharedPreferences().setStringList(
         key,
         ['value1'],
       );
-      await EncryptedSharedPreferences.addToStringListIfAbsent(
+      await EncryptedSharedPreferences().addToStringListIfAbsent(
         key,
         'value2',
       );
       expect(
-        EncryptedSharedPreferences.getStringList(key),
+        EncryptedSharedPreferences().getStringList(key),
         ['value1', 'value2'],
       );
     },
@@ -77,18 +77,18 @@ void main() {
     'Cannot add a duplicate string',
     () async {
       const value = 'value';
-      await EncryptedSharedPreferences.addToStringListIfAbsent(
+      await EncryptedSharedPreferences().addToStringListIfAbsent(
         key,
         value,
       );
 
-      await EncryptedSharedPreferences.addToStringListIfAbsent(
+      await EncryptedSharedPreferences().addToStringListIfAbsent(
         key,
         value,
       );
 
       expect(
-        EncryptedSharedPreferences.getStringList(key),
+        EncryptedSharedPreferences().getStringList(key),
         [value],
       );
     },
@@ -103,12 +103,12 @@ void main() {
         onAvoidDuplicateValueCalled = true;
       }
 
-      await EncryptedSharedPreferences.addToStringListIfAbsent(
+      await EncryptedSharedPreferences().addToStringListIfAbsent(
         key,
         'value',
       );
 
-      await EncryptedSharedPreferences.addToStringListIfAbsent(
+      await EncryptedSharedPreferences().addToStringListIfAbsent(
         key,
         'value',
         onAvoidDuplicateValue,
