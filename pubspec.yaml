@@ -2,7 +2,7 @@ name: flutter_playground
 publish_to: none
 version: 1.0.0+1
 environment:
-  sdk: ^3.4.4
+  sdk: ^3.2.3
 dependencies:
   audioplayers: any
   # > The version constraint is optional but recommended. If no version constraint is given, any is assumed.
