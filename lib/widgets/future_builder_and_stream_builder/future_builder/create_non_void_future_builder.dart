@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-FutureBuilder<T> createFutureBuilder<T>({
+FutureBuilder<T> createNonVoidFutureBuilder<T>({
   required Widget Function(T) onData,
   Future<T>? future,
   Widget Function()? onError,
@@ -15,8 +15,9 @@ FutureBuilder<T> createFutureBuilder<T>({
         if (snapshot.hasError) {
           debugPrint(snapshot.error.toString());
           debugPrintStack(stackTrace: snapshot.stackTrace);
-          return onError?.call() ?? const Icon(Icons.error);
+          return onError?.call() ?? const Center(child: Icon(Icons.error));
         }
-        return onElse?.call() ?? const CircularProgressIndicator();
+        return onElse?.call() ??
+            const Center(child: CircularProgressIndicator());
       },
     );
