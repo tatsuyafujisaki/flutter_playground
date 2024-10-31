@@ -4,7 +4,10 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 
 void main() => runApp(
       MaterialApp(
-        home: SafeArea(child: _MyStatelessWidget()),
+        home: Scaffold(
+          body: SafeArea(child: _MyStatelessWidget()),
+          backgroundColor: Colors.white,
+        ),
       ),
     );
 
@@ -17,8 +20,15 @@ class _MyStatelessWidget extends StatelessWidget {
     );
     return createNonVoidFutureBuilder(
       future: future,
-      onData: (bytes) =>
-          bytes != null ? Image.memory(bytes) : const SizedBox.shrink(),
+      onData: (bytes) => bytes != null
+          ? Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.memory(bytes),
+                const Icon(Icons.ondemand_video),
+              ],
+            )
+          : const SizedBox.shrink(),
     );
   }
 }
