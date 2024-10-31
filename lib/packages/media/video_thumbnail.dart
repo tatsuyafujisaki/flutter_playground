@@ -21,14 +21,24 @@ class _MyStatelessWidget extends StatelessWidget {
     return createNonVoidFutureBuilder(
       future: future,
       onData: (bytes) => bytes != null
-          ? Stack(
-              alignment: Alignment.center,
-              children: [
-                Image.memory(bytes),
-                const Icon(Icons.ondemand_video),
-              ],
+          ? GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                debugPrint('👀The thumnail is tapped.');
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.memory(bytes),
+                  const Icon(
+                    Icons.play_circle,
+                    size: 100,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
             )
-          : const SizedBox.shrink(),
+          : const Icon(Icons.broken_image),
     );
   }
 }
