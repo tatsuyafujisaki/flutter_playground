@@ -8,7 +8,7 @@
     (_) async => myAsyncFunction(),
   );
   ```
-1. Otherwise, use [Future.delayed](https://api.dart.dev/stable/dart-async/Future/Future.delayed.html).
+1. Otherwise, use [Future.delayed](https://api.dart.dev/stable/dart-async/Future/Future.delayed.html) or [unawaited](https://api.dart.dev/stable/dart-async/unawaited.html).
 
 # Stream
 ## When to use which: [StreamBuilder](https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html), [await for](https://dart.dev/libraries/async/using-streams#receiving-stream-events), or [Stream.listen](https://api.flutter.dev/flutter/dart-async/Stream/listen.html)
