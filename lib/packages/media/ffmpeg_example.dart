@@ -19,16 +19,17 @@ class _MyStatelessWidget extends StatelessWidget {
       (_) async {
         // Don't omit a filename extension,
         // because ffmpeg uses it to detect the file format.
-        final m4aPath = await downloadAndSaveBinaryFile(
+        final inputPath = await downloadAndSaveBinaryFile(
           'https://filesamples.com/samples/audio/m4a/Symphony%20No.6%20(1st%20movement).m4a',
         );
-        final mp3Path = p.setExtension(m4aPath, '.mp3');
+        final outputPath = p.setExtension(inputPath, '.mp3');
         final success = await ffmpeg(
-          inputPath: m4aPath,
-          outputPath: mp3Path,
+          inputPath: inputPath,
+          outputPath: outputPath,
         );
-        debugPrint('👀adb pull $mp3Path ~/Desktop');
-        debugPrint('Success: $success');
+        if (success) {
+          debugPrint('👀adb pull $outputPath ~/Desktop');
+        }
       },
     );
     return const FlutterLogo();
