@@ -16,24 +16,28 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _downloadAndSaveBinaryFile(
-        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-      ),
+      (_) async {
+        final path = await downloadAndSaveBinaryFile(
+          'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+        );
+        debugPrint('👀How to pull the saved file: adb pull $path ~/Desktop');
+      },
     );
     return const FlutterLogo();
   }
 }
 
-Future<void> _downloadAndSaveBinaryFile(String url) async {
+Future<String> downloadAndSaveBinaryFile(String url) async {
+  var path = '';
   try {
     final uri = Uri.parse(url);
     final bytes = await _downloadBinaryFile(uri);
-    final path = await _saveBinaryFile(bytes, p.basename(uri.path));
-    debugPrint('👀adb pull $path ~/Desktop');
+    path = await _saveBinaryFile(bytes, p.basename(uri.path));
   } on Exception catch (e, s) {
     debugPrint(e.toString());
     debugPrintStack(stackTrace: s);
   }
+  return path;
 }
 
 Future<Uint8List> _downloadBinaryFile(Uri uri) async {

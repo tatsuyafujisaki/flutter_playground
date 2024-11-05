@@ -15,22 +15,28 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _downloadAndSaveTextFile('https://www.w3.org/robots.txt'),
+      (_) async {
+        final path = await _downloadAndSaveTextFile(
+          'https://www.w3.org/robots.txt',
+        );
+        debugPrint('👀How to pull the saved file: adb pull $path ~/Desktop');
+      },
     );
     return const FlutterLogo();
   }
 }
 
-Future<void> _downloadAndSaveTextFile(String url) async {
+Future<String> _downloadAndSaveTextFile(String url) async {
+  var path = '';
   try {
     final uri = Uri.parse(url);
     final bytes = await downloadString(uri);
-    final path = await _saveTextFile(bytes, p.basename(uri.path));
-    debugPrint('👀adb pull $path ~/Desktop');
+    path = await _saveTextFile(bytes, p.basename(uri.path));
   } on Exception catch (e, s) {
     debugPrint(e.toString());
     debugPrintStack(stackTrace: s);
   }
+  return path;
 }
 
 Future<String> _saveTextFile(String contents, String filename) async {
