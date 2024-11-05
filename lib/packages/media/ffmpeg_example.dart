@@ -1,7 +1,8 @@
 import 'package:ffmpeg_kit_flutter_audio/ffmpeg_kit.dart';
 import 'package:ffmpeg_kit_flutter_audio/return_code.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/util/download_and_save_binary_file.dart';
+import 'package:flutter_playground/packages/io/download_and_save_binary_file.dart';
+import 'package:flutter_playground/packages/io/save_file_example.dart';
 import 'package:path/path.dart' as p;
 
 void main() => runApp(
@@ -22,13 +23,16 @@ class _MyStatelessWidget extends StatelessWidget {
         final inputPath = await downloadAndSaveBinaryFile(
           'https://filesamples.com/samples/audio/m4a/Symphony%20No.6%20(1st%20movement).m4a',
         );
+        if (inputPath == null) {
+          return;
+        }
         final outputPath = p.setExtension(inputPath, '.mp3');
         final success = await ffmpeg(
           inputPath: inputPath,
           outputPath: outputPath,
         );
         if (success) {
-          debugPrint('👀adb pull $outputPath ~/Desktop');
+          showHowtoPullSavedFile(outputPath);
         }
       },
     );

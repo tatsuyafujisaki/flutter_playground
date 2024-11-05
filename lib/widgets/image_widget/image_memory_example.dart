@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/packages/http_example.dart';
+import 'package:flutter_playground/packages/io/download_file_example.dart';
 
 void main() => runApp(
       _MyStatelessWidget(),
     );
 
 class _MyStatelessWidget extends StatelessWidget {
-  final imageBytes = downloadBytes(
+  final imageBytes = downloadBinaryFile(
     'https://media1.tenor.com/m/NVP2kRD7CHsAAAAC',
   );
 
