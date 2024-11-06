@@ -27,16 +27,9 @@ class _MyStatelessWidget extends StatelessWidget {
 }
 
 Future<String?> downloadAndSaveBinaryFile(String url) async {
-  String? path;
-  try {
-    final bytes = await downloadBinaryFile(url);
-    path = await saveBinaryFileToExternalStorageDirectory(
-      bytes,
-      p.basename(url),
-    );
-  } on Exception catch (e, s) {
-    debugPrint(e.toString());
-    debugPrintStack(stackTrace: s);
-  }
-  return path;
+  final bytes = await downloadBinaryFile(url);
+  return saveBinaryFileToExternalStorageDirectory(
+    bytes,
+    p.basename(url),
+  );
 }

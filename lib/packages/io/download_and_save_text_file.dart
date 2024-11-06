@@ -27,17 +27,10 @@ class _MyStatelessWidget extends StatelessWidget {
 }
 
 Future<String?> _downloadAndSaveTextFile(String url) async {
-  String? path;
-  try {
-    final uri = Uri.parse(url);
-    final bytes = await downloadTextFile(uri);
-    path = await saveTextFileToExternalStorageDirectory(
-      bytes,
-      p.basename(uri.path),
-    );
-  } on Exception catch (e, s) {
-    debugPrint(e.toString());
-    debugPrintStack(stackTrace: s);
-  }
-  return path;
+  final uri = Uri.parse(url);
+  final bytes = await downloadTextFile(uri);
+  return saveTextFileToExternalStorageDirectory(
+    bytes,
+    p.basename(uri.path),
+  );
 }
