@@ -5,11 +5,7 @@ import 'package:flutter_playground/packages/io/download_and_save_binary_file.dar
 import 'package:flutter_playground/packages/io/save_file_example.dart';
 import 'package:path/path.dart' as p;
 
-void main() => runApp(
-      const MaterialApp(
-        home: _MyStatelessWidget(),
-      ),
-    );
+void main() => runApp(const _MyStatelessWidget());
 
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();
