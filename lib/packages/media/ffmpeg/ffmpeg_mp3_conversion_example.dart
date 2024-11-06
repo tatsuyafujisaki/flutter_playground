@@ -23,7 +23,7 @@ class _MyStatelessWidget extends StatelessWidget {
           return;
         }
         final outputPath = p.setExtension(inputPath, '.mp3');
-        final success = await ffmpeg(
+        final success = await _ffmpeg(
           inputPath: inputPath,
           outputPath: outputPath,
         );
@@ -32,17 +32,17 @@ class _MyStatelessWidget extends StatelessWidget {
         }
       },
     );
-    return const FlutterLogo();
+    return const SizedBox.shrink();
   }
 }
 
 /// Unlike the command line version of FFmpeg,
-/// FFmpeg in the ffmpeg_kit_flutter_audio package does not support URLs as input or output.
-Future<bool> ffmpeg({
+/// FFmpeg in the ffmpeg_kit_flutter_audio package does not support URLs
+/// as input or output.
+Future<bool> _ffmpeg({
   required String inputPath,
   required String outputPath,
 }) async {
-  // -y is to overwrite an output file if it already exists.
   final session = await FFmpegKit.execute(
     '-y -i $inputPath $outputPath',
   );
@@ -57,8 +57,8 @@ Future<bool> ffmpeg({
     debugPrint('FFmpeg logMessage: ${log.getMessage()}');
   }
 
-  final failStackTrace = await session.getFailStackTrace();
-  if (failStackTrace != null && failStackTrace.isNotEmpty) {
+  final failStackTrace = await session.getFailStackTrace() ?? '';
+  if (failStackTrace.isNotEmpty) {
     debugPrint('FFmpeg failStackTrace: $failStackTrace');
   }
 
