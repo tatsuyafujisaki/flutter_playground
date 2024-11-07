@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ffmpeg_kit_flutter_full/ffmpeg_kit.dart';
 import 'package:ffmpeg_kit_flutter_full/return_code.dart';
 import 'package:flutter/material.dart';
@@ -17,23 +19,25 @@ class _MyStatelessWidget extends StatelessWidget {
       (_) async {
         // Don't omit a filename extension,
         // because ffmpeg uses it to detect the file format.
-        final inputPath = await downloadAndSaveBinaryFile(
+        final mp4Path = await downloadAndSaveBinaryFile(
           'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4',
         );
-        if (inputPath == null) {
+        if (mp4Path == null) {
           return;
         }
-        final tempPath = await createTemporaryFile(
-          extension: p.extension(inputPath),
+        final trimmedMp4Path = await createTemporaryFile(
+          directory: (await externalStorageDirectory)!,
+          extension: p.extension(mp4Path),
         );
         final success = await _trimVideo(
-          inputPath: inputPath,
-          outputPath: tempPath,
+          inputPath: mp4Path,
+          outputPath: trimmedMp4Path,
           secondsToTrimAt: 3,
         );
         if (success) {
-          showHowtoPullSavedFile(tempPath);
+          showHowtoPullSavedFile(trimmedMp4Path);
         }
+        File(mp4Path).deleteSync();
       },
     );
     return const FlutterLogo();
@@ -49,7 +53,7 @@ Future<bool> _trimVideo({
   required int secondsToTrimAt,
 }) async {
   final session = await FFmpegKit.execute(
-    '-y -t $secondsToTrimAt $inputPath $outputPath',
+    '-y -t $secondsToTrimAt -i $inputPath $outputPath',
   );
 
   final output = await session.getOutput() ?? '';
