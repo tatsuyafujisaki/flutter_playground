@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_playground/packages/io/join_example.dart';
+import 'package:flutter_playground/packages/io/directories.dart';
 
 Future<String?> saveBinaryFileToExternalStorageDirectory(
   List<int> bytes, [

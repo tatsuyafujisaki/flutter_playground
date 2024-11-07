@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:ffmpeg_kit_flutter_full/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_flutter_full/return_code.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/packages/io/directories.dart';
 import 'package:flutter_playground/packages/io/download_and_save_binary_file.dart';
-import 'package:flutter_playground/packages/io/join_example.dart';
 import 'package:flutter_playground/packages/io/save_file_example.dart';
+import 'package:flutter_playground/packages/io/temporary_file.dart';
+import 'package:flutter_playground/packages/media/ffmpeg/ffmpeg.dart';
 import 'package:path/path.dart' as p;
 
 void main() => runApp(const _MyStatelessWidget());
@@ -29,48 +29,15 @@ class _MyStatelessWidget extends StatelessWidget {
           directory: (await externalStorageDirectory)!,
           extension: p.extension(mp4Path),
         );
-        final success = await _trimVideo(
-          inputPath: mp4Path,
-          outputPath: trimmedMp4Path,
-          secondsToTrimAt: 3,
-        );
+        debugPrint('⏱️[FFmpeg starts] ${DateTime.now()}');
+        final success = await ffmpeg('-y -i -t 3 $mp4Path $trimmedMp4Path');
+        debugPrint('⏱️[FFmpeg ends] ${DateTime.now()}');
         if (success) {
-          showHowtoPullSavedFile(trimmedMp4Path);
+          File(trimmedMp4Path).renameSync(mp4Path);
+          showHowtoPullSavedFile(mp4Path);
         }
-        File(mp4Path).deleteSync();
       },
     );
     return const FlutterLogo();
   }
-}
-
-/// Unlike the command line version of FFmpeg,
-/// FFmpeg in the ffmpeg_kit_flutter_audio package does not support URLs
-/// as input or output.
-Future<bool> _trimVideo({
-  required String inputPath,
-  required String outputPath,
-  required int secondsToTrimAt,
-}) async {
-  final session = await FFmpegKit.execute(
-    '-y -t $secondsToTrimAt -i $inputPath $outputPath',
-  );
-
-  final output = await session.getOutput() ?? '';
-  if (output.isNotEmpty) {
-    debugPrint('FFmpeg output: $output');
-  }
-
-  final logs = await session.getLogs();
-  for (final log in logs) {
-    debugPrint('FFmpeg logMessage: ${log.getMessage()}');
-  }
-
-  final failStackTrace = await session.getFailStackTrace() ?? '';
-  if (failStackTrace.isNotEmpty) {
-    debugPrint('FFmpeg failStackTrace: $failStackTrace');
-  }
-
-  final returnCode = await session.getReturnCode();
-  return ReturnCode.isSuccess(returnCode);
 }

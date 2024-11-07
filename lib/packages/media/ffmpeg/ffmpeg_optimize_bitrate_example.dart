@@ -1,8 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/packages/io/directories.dart';
 import 'package:flutter_playground/packages/io/download_and_save_binary_file.dart';
 import 'package:flutter_playground/packages/io/save_file_example.dart';
+import 'package:flutter_playground/packages/io/temporary_file.dart';
 import 'package:flutter_playground/packages/media/ffmpeg/ffmpeg.dart';
 import 'package:path/path.dart' as p;
 
@@ -18,17 +18,22 @@ class _MyStatelessWidget extends StatelessWidget {
         // Don't omit a filename extension,
         // because ffmpeg uses it to detect the file format.
         final inputPath = await downloadAndSaveBinaryFile(
-          'https://filesamples.com/samples/audio/m4a/Symphony%20No.6%20(1st%20movement).m4a',
+          'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4',
         );
         if (inputPath == null) {
           return;
         }
-        final outputPath = p.setExtension(inputPath, '.mp3');
+        final outputPath = await createTemporaryFile(
+          directory: (await externalStorageDirectory)!,
+          extension: p.extension(inputPath),
+        );
+        debugPrint('⏱️[FFmpeg starts]${DateTime.now()}');
         final success = await ffmpeg('-y -i $inputPath $outputPath');
+        debugPrint('⏱️[FFmpeg ends]${DateTime.now()}');
         if (success) {
+          showHowtoPullSavedFile(inputPath);
           showHowtoPullSavedFile(outputPath);
         }
-        File(inputPath).deleteSync();
       },
     );
     return const FlutterLogo();

@@ -16,18 +16,6 @@ Future<String?> get externalStorageDirectory async {
   return directory?.path;
 }
 
-Future<String> createTemporaryFile({
-  String directory = '',
-  String extension = '',
-}) async =>
-    p.join(
-      directory.isNotEmpty ? directory : (await getTemporaryDirectory()).path,
-      p.setExtension(
-        'delete-me-${DateTime.now().microsecondsSinceEpoch}',
-        extension,
-      ),
-    );
-
 Future<String> joinApplicationDocumentsDirectory(String relativePath) async =>
     p.join(await applicationDocumentsDirectory, relativePath);
 
