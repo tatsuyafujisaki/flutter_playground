@@ -1,5 +1,5 @@
-import 'package:ffmpeg_kit_flutter_audio/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_flutter_audio/return_code.dart';
+import 'package:ffmpeg_kit_flutter_full/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_full/return_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/packages/io/download_and_save_binary_file.dart';
 import 'package:flutter_playground/packages/io/join_example.dart';
@@ -18,39 +18,42 @@ class _MyStatelessWidget extends StatelessWidget {
         // Don't omit a filename extension,
         // because ffmpeg uses it to detect the file format.
         final inputPath = await downloadAndSaveBinaryFile(
-          'https://cdn.pixabay.com/video/2024/07/27/223461_large.mp4',
+          'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4',
         );
         if (inputPath == null) {
           return;
         }
-        final tempPath =
-            await createTemporaryFile(extension: p.extension(inputPath));
-        final success = await _trimVideoTo30seconds(
+        final tempPath = await createTemporaryFile(
+          extension: p.extension(inputPath),
+        );
+        final success = await _trimVideo(
           inputPath: inputPath,
           outputPath: tempPath,
+          secondsToTrimAt: 3,
         );
         if (success) {
           showHowtoPullSavedFile(tempPath);
         }
       },
     );
-    return const SizedBox.shrink();
+    return const FlutterLogo();
   }
 }
 
 /// Unlike the command line version of FFmpeg,
 /// FFmpeg in the ffmpeg_kit_flutter_audio package does not support URLs
 /// as input or output.
-Future<bool> _trimVideoTo30seconds({
+Future<bool> _trimVideo({
   required String inputPath,
   required String outputPath,
+  required int secondsToTrimAt,
 }) async {
   final session = await FFmpegKit.execute(
-    '-y -i -t 30 $inputPath $outputPath',
+    '-y -t $secondsToTrimAt $inputPath $outputPath',
   );
 
-  final output = await session.getOutput();
-  if (output != null && output.isNotEmpty) {
+  final output = await session.getOutput() ?? '';
+  if (output.isNotEmpty) {
     debugPrint('FFmpeg output: $output');
   }
 

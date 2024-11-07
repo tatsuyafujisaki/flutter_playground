@@ -1,5 +1,5 @@
-import 'package:ffmpeg_kit_flutter_audio/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_flutter_audio/return_code.dart';
+import 'package:ffmpeg_kit_flutter_full/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_full/return_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/packages/io/download_and_save_binary_file.dart';
 import 'package:flutter_playground/packages/io/save_file_example.dart';
@@ -32,7 +32,7 @@ class _MyStatelessWidget extends StatelessWidget {
         }
       },
     );
-    return const SizedBox.shrink();
+    return const FlutterLogo();
   }
 }
 
