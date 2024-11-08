@@ -42,7 +42,6 @@ dependencies:
   shared_preferences: any
   url_launcher: any
   video_player: any
-  video_thumbnail: any
   webview_flutter: any
 dev_dependencies:
   build_runner: any
