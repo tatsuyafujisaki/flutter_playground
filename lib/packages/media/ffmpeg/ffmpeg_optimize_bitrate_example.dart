@@ -18,7 +18,7 @@ class _MyStatelessWidget extends StatelessWidget {
         // Don't omit a filename extension,
         // because ffmpeg uses it to detect the file format.
         final inputPath = await downloadAndSaveBinaryFile(
-          'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4',
+          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
         );
         if (inputPath == null) {
           return;
@@ -28,7 +28,9 @@ class _MyStatelessWidget extends StatelessWidget {
           extension: p.extension(inputPath),
         );
         debugPrint('⏱️[FFmpeg starts]${DateTime.now()}');
-        final success = await ffmpeg('-y -i $inputPath $outputPath');
+        final success = await ffmpeg(
+          '-y -i $inputPath -vf fps=10,scale=-1:144 -t 300 $outputPath',
+        );
         debugPrint('⏱️[FFmpeg ends]${DateTime.now()}');
         if (success) {
           showHowtoPullSavedFile(inputPath);
