@@ -41,6 +41,7 @@ dependencies:
   riverpod_annotation: any
   shared_preferences: any
   url_launcher: any
+  video_compress: any
   video_player: any
   webview_flutter: any
 dev_dependencies:
