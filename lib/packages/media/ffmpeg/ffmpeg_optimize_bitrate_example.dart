@@ -23,7 +23,7 @@ class _MyStatelessWidget extends StatelessWidget {
         if (inputPath == null) {
           return;
         }
-        final outputPath = await createTemporaryFile(
+        final outputPath = await createTemporaryFilePath(
           directory: (await externalStorageDirectory)!,
           extension: p.extension(inputPath),
         );

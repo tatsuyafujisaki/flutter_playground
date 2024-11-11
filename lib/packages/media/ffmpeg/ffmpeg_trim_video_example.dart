@@ -25,7 +25,7 @@ class _MyStatelessWidget extends StatelessWidget {
         if (mp4Path == null) {
           return;
         }
-        final trimmedMp4Path = await createTemporaryFile(
+        final trimmedMp4Path = await createTemporaryFilePath(
           directory: (await externalStorageDirectory)!,
           extension: p.extension(mp4Path),
         );
