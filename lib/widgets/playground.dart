@@ -12,11 +12,15 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => debugPrint('🍎'),
+      (_) async {
+        debugPrint('🍎');
+      },
     );
     Future<void>.delayed(
       Duration.zero,
-      () => debugPrint('🍊'),
+      () {
+        debugPrint('🍊');
+      },
     );
     return const FlutterLogo();
   }
