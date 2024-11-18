@@ -18,7 +18,7 @@ class _MyStatelessWidget extends StatelessWidget {
               // from overlapping the status bar.
               useSafeArea: true,
             ),
-            icon: const Icon(Icons.open_in_new),
+            icon: const Icon(Icons.flutter_dash),
           ),
         ),
       );
