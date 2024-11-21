@@ -63,6 +63,7 @@ https://youtu.be/BJtQ0dfI-RA?t=4302
 # Use A rather than B for simplicity or better UIUX
 A|B|Note
 --|--|--
+[PlatformDispatcher.instance.locale](https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/locale.html)|[Localizations.localeOf](https://api.flutter.dev/flutter/widgets/Localizations/localeOf.html)
 [TimeOfDay.now](https://api.flutter.dev/flutter/material/TimeOfDay/TimeOfDay.now.html)|[DateTime.now](https://api.dart.dev/stable/3.5.1/dart-core/DateTime/DateTime.now.html)|if what you want is only hours and minutes.
 [InputBorder.none](https://api.flutter.dev/flutter/material/InputBorder/none-constant.html)|[BorderSide.none](https://api.flutter.dev/flutter/painting/BorderSide/none-constant.html)|Only if your TextField is not rounded.
 [BorderSide.none](https://api.flutter.dev/flutter/painting/BorderSide/none-constant.html)|[BorderSide(width: 0, style: BorderStyle.none)](https://api.flutter.dev/flutter/painting/BorderStyle.html)|> none constant<br>> Implementation<br>> static const BorderSide none = BorderSide(width: 0.0, style: BorderStyle.none);
