@@ -20,7 +20,7 @@ class _MyStatelessWidget extends StatelessWidget {
               context: context,
               builder: (context) => CupertinoActionSheet(
                 title: const Text('Title'),
-                message: Text('Message'),
+                message: const Text('Message'),
                 actions: <Widget>[
                   CupertinoActionSheetAction(
                     onPressed: () => Navigator.pop(context, '🍎'),

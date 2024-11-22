@@ -10,6 +10,10 @@ import 'package:flutter_playground/packages/fcm/notification.dart';
 
 class FirebaseMessageHandler {
   FirebaseMessageHandler() {
+    // Use "FirebaseMessaging.onBackgroundMessage" only if you want to do something with RemoteMessage when the Android device receives a message while the app is in the background or terminated.
+    //
+    // Whether or not FirebaseMessaging.onBackgroundMessage is used, the Android device will display a notification when it receives a message while the app is in the background or terminated.
+    //
     // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
     FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
