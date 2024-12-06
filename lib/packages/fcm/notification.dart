@@ -32,6 +32,7 @@ Future<void> enableNotification(BuildContext context) async {
               AndroidFlutterLocalNotificationsPlugin>()
           ?.deleteNotificationChannel('fcm_fallback_notification_channel');
 
+  // > On Android versions 13 and above, there is no way to determine if the user has chosen whether to grant/deny permission.
   // https://firebase.google.com/docs/cloud-messaging/flutter/receive#permissions
   // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
   await FirebaseMessaging.instance.requestPermission();
