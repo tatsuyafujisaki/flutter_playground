@@ -32,6 +32,11 @@ android {
     ndkVersion flutter.ndkVersion
 
     compileOptions {
+        // Avoids the following build error.
+        // > An issue was found when checking AAR metadata:
+        // > 1. Dependency ':flutter_local_notifications' requires core library desugaring to be enabled for :app.
+        // >    See https://developer.android.com/studio/write/java8-support.html for more details.
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -68,4 +73,6 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.3'
+}
