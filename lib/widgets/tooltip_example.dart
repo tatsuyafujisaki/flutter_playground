@@ -4,6 +4,7 @@ void main() => runApp(
       MaterialApp(
         home: Scaffold(
           body: _MyStatelessWidget(),
+          backgroundColor: Colors.lime,
         ),
       ),
     );
@@ -18,16 +19,32 @@ class _MyStatelessWidget extends StatelessWidget {
     );
 
     return Center(
-      child: Tooltip(
-        key: key,
-        message: 'Tooltip!',
-        decoration: BoxDecoration(
-          color: Colors.red,
-        ),
-        textStyle: TextStyle(
-          color: Colors.yellow,
-        ),
-        child: FlutterLogo(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Tooltip(
+            key: key,
+            message: 'Tooltip!',
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+            textStyle: TextStyle(
+              color: Colors.black,
+            ),
+            child: FlutterLogo(),
+          ),
+          Tooltip(
+            key: key,
+            message: 'Tooltip!',
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+            textStyle: TextStyle(
+              color: Colors.black,
+            ),
+            child: FlutterLogo(),
+          ),
+        ],
       ),
     );
   }

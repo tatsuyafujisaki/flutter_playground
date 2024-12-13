@@ -6,20 +6,20 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     MaterialApp(
-      home: SafeArea(child: App()),
+      home: _MyStatefulWidget(),
     ),
   );
 }
 
-class App extends StatefulWidget {
-  const App({super.key});
+class _MyStatefulWidget extends StatefulWidget {
+  const _MyStatefulWidget();
 
   @override
-  State<App> createState() => _AppState();
+  State<_MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
-class _AppState extends State<App> {
-  final tourController = FeaturesTourController('App');
+class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
+  final tourController = FeaturesTourController('');
 
   @override
   void initState() {
@@ -35,69 +35,57 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              for (var i = 0; i < 3; i++)
+                createFeaturesTour(
+                  index: i.toDouble(),
+                  introduce: createIntroduce('Explanation!'),
+                  child: Icon(Icons.flutter_dash),
+                ),
+            ],
+          ),
+        ),
+      );
+
+  FeaturesTour createFeaturesTour({
+    required double index,
+    required Widget introduce,
+    required Widget child,
+  }) =>
+      FeaturesTour(
+        controller: tourController,
+        index: index,
+        introduce: introduce,
+        // Replaces the default Next button with an empty widget.
+        nextConfig: NextConfig(
+          child: (_) => SizedBox.shrink(),
+        ),
+        // Replaces the default Skip button with an empty widget.
+        skipConfig: SkipConfig(
+          child: (_) => SizedBox.shrink(),
+        ),
+        // Replaces the default Done button with an empty widget.
+        doneConfig: DoneConfig(
+          child: (_) => SizedBox.shrink(),
+        ),
+        child: child,
+      );
+
+  Widget createIntroduce(String data) => Container(
+        padding: EdgeInsets.all(16),
+        color: Colors.white,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            FeaturesTour(
-              controller: tourController,
-              index: 0,
-              introduce: const Text(
-                'This is TextButton 1\nWith enableAnimation = false',
-              ),
-              nextConfig: NextConfig(
-                child: (onPressed) => ElevatedButton(
-                  onPressed: onPressed,
-                  child: const Text('Modified Next'),
-                ),
-              ),
-              childConfig: ChildConfig(
-                enableAnimation: false,
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: const Text('TextButton 1'),
-              ),
+            Text(
+              data,
+              style: TextStyle(color: Colors.black),
             ),
-            Align(
-              child: FeaturesTour(
-                controller: tourController,
-                index: 1,
-                introduce: const Text('This is TextButton 2'),
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text('TextButton 2'),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FeaturesTour(
-                controller: tourController,
-                index: 2,
-                introduce: const Text('This is TextButton 3'),
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text('TextButton 3'),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Center(
-                child: FeaturesTour(
-                  controller: tourController,
-                  index: 3,
-                  introduce: const Text(
-                    'Go to the Second Page (A more complicated tour)',
-                  ),
-                  onPressed: () {},
-                  doneConfig: DoneConfig(text: 'Second Page'),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text('Second Page'),
-                  ),
-                ),
-              ),
-            ),
+            SizedBox(width: 8),
+            Icon(Icons.arrow_circle_right, color: Colors.black),
           ],
         ),
       );
