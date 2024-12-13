@@ -8,11 +8,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_playground/firebase_options.dart';
 import 'package:flutter_playground/packages/fcm/notification.dart';
 
+// ignore: unreachable_from_main
 class FirebaseMessageHandler {
+  // ignore: unreachable_from_main
   FirebaseMessageHandler() {
-    // Use "FirebaseMessaging.onBackgroundMessage" only if you want to do something with RemoteMessage when the Android device receives a message while the app is in the background or terminated.
+    // Use "FirebaseMessaging.onBackgroundMessage" only if you want to do
+    // something with RemoteMessage when the Android device receives a message
+    // while the app is in the background or terminated.
     //
-    // Whether or not FirebaseMessaging.onBackgroundMessage is used, the Android device will display a notification when it receives a message while the app is in the background or terminated.
+    // Whether or not FirebaseMessaging.onBackgroundMessage is used, the Android
+    // device will display a notification when it receives a message while
+    // the app is in the background or terminated.
     //
     // https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
@@ -88,8 +94,11 @@ class FirebaseMessageHandler {
   }
 
   Future<void> _handleTokenIfExists() async {
-    // Despite the description below, getToken() does not ask the user for notification permissions.
-    // > If notification permission has not been granted, this method will ask the user for notification permissions.
+    // Despite the description below, getToken() does not ask the user for
+    // notification permissions.
+    //
+    // > If notification permission has not been granted, this method will ask
+    //   the user for notification permissions.
     // https://firebase.google.com/docs/cloud-messaging/flutter/first-message#access_the_registration_token
     //
     // This issue is reported below.
@@ -103,7 +112,9 @@ class FirebaseMessageHandler {
   }
 
   Future<void> _handleInitialMessageIfExists() async {
-    // > If the application has been opened from a terminated state via a RemoteMessage (containing a Notification), it will be returned, otherwise it will be null.
+    // > If the application has been opened from a terminated state via
+    //   a RemoteMessage (containing a Notification), it will be returned,
+    //   otherwise it will be null.
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/getInitialMessage.html
     // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
     final message = await FirebaseMessaging.instance.getInitialMessage();
@@ -139,10 +150,15 @@ class FirebaseMessageHandler {
   }
 }
 
-/// > There are a few things to keep in mind about your background message handler:
+/// > There are a few things to keep in mind about your background message
+///   handler:
 /// > 1. It must not be an anonymous function.
-/// > 2. It must be a top-level function (e.g. not a class method which requires initialization).
-/// > 3, When using Flutter version 3.3.0 or higher, the message handler must be annotated with @pragma('vm:entry-point') right above the function declaration (otherwise it may be removed during tree shaking for release mode).
+/// > 2. It must be a top-level function (e.g. not a class method which requires
+///   initialization).
+/// > 3, When using Flutter version 3.3.0 or higher, the message handler must be
+///   annotated with @pragma('vm:entry-point') right above the function
+///   declaration (otherwise it may be removed during tree shaking for release
+///   mode).
 /// https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
 @pragma('vm:entry-point')
 Future<void> _backgroundMessageHandler(

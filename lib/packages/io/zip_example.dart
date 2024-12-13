@@ -39,10 +39,7 @@ Future<String?> createZip(String sourceFilePath) async {
   final archive = Archive()
     ..addFile(ArchiveFile(p.basename(sourceFilePath), bytes.length, bytes));
 
-  final zipData = ZipEncoder().encode(archive, level: Deflate.BEST_COMPRESSION);
-  if (zipData == null) {
-    return null;
-  }
+  final zipData = ZipEncoder().encode(archive);
   final zipPath = p.setExtension(sourceFilePath, '.zip');
   File(zipPath).writeAsBytesSync(zipData);
   return zipPath;

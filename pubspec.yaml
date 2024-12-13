@@ -2,7 +2,7 @@ name: flutter_playground
 publish_to: none
 version: 1.0.0+1
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.6.0
 dependencies:
   archive: any
   audioplayers: any
@@ -10,6 +10,7 @@ dependencies:
   # https://dart.dev/tools/pub/dependencies#hosted-packages
   device_info_plus: any
   encrypt: any
+  features_tour: any
   ffmpeg_kit_flutter_full: any
   # ffmpeg_kit_flutter_audio: any
   firebase_analytics: any
@@ -23,7 +24,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: any
   flutter_slidable: any
-  # flutter_sound: any
+  flutter_sound: any
   flutter_svg: any
   freezed_annotation: any
   gal: any

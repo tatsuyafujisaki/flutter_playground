@@ -24,7 +24,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Records uncaught errors caused by my Dart code as fatal in Firebase Crashlytics.
+  // Records uncaught errors caused by my Dart code as fatal in Firebase
+  // Crashlytics.
   // https://api.flutter.dev/flutter/foundation/FlutterError/onError.html
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 

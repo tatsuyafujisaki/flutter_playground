@@ -10,7 +10,8 @@ final _notificationPlugin = FlutterLocalNotificationsPlugin();
 late AndroidNotificationChannel _channel;
 
 Future<void> enableNotification(BuildContext context) async {
-  // > The app must create a channel with this channel ID before any notification with this channel ID is received.
+  // > The app must create a channel with this channel ID before any
+  //   notification with this channel ID is received.
   // https://firebase.google.com/docs/cloud-messaging/http-server-ref
   Future<AndroidNotificationChannel> createNotificationChannel(
     BuildContext context,
@@ -37,8 +38,10 @@ Future<void> enableNotification(BuildContext context) async {
   // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/requestPermission.html
   await FirebaseMessaging.instance.requestPermission();
 
-  // > The onDidReceiveBackgroundNotificationResponse is currently only for notification actions.
-  // > There's no support for dealing with tapping on the notification itself so perhaps this is where your confusion lies
+  // > The onDidReceiveBackgroundNotificationResponse is currently only for
+  //   notification actions.
+  // > There's no support for dealing with tapping on the notification itself
+  //   so perhaps this is where your confusion lies
   // https://github.com/MaikuB/flutter_local_notifications/issues/2134#issuecomment-1804800834
   await _notificationPlugin.initialize(
     const InitializationSettings(
@@ -47,7 +50,7 @@ Future<void> enableNotification(BuildContext context) async {
     ),
     onDidReceiveNotificationResponse: (details) {
       debugPrint(
-        '🔥onDidReceiveNotificationResponse received the payload: ${details.payload}. In other words, the user tapped a notification while the app was in the foreground.',
+        '''🔥onDidReceiveNotificationResponse received the payload: ${details.payload}. In other words, the user tapped a notification while the app was in the foreground.''',
       );
     },
   );

@@ -15,8 +15,10 @@ Future<bool> isGranted<T extends Permission>(T permission) async => permission
     .isGranted;
 
 Future<bool> get isPhotoGranted async {
-  /// > Devices running Android 12 (API level 32) or lower: use Permissions.storage.
-  /// > Devices running Android 13 (API level 33) and above: Should use Permissions.photos.
+  /// > Devices running Android 12 (API level 32) or lower:
+  ///   use Permissions.storage.
+  /// > Devices running Android 13 (API level 33) and above:
+  ///   Should use Permissions.photos.
   /// https://pub.dev/documentation/permission_handler/latest/permission_handler/Permission/photos-constant.html
   Future<bool> shouldUseStorage() async =>
       Platform.isAndroid &&

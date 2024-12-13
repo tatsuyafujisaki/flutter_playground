@@ -18,6 +18,7 @@ void main() => runApp(
 class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => createNonVoidFutureBuilder(
+        // ignore: discarded_futures
         future: _createThumbnail(
           'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4',
         ),

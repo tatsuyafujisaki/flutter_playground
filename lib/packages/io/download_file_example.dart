@@ -9,7 +9,7 @@ Future<Uint8List> downloadBinaryFile(String url) async {
     return response.bodyBytes;
   }
   throw Exception(
-    'Status code: ${response.statusCode}\nReason phrase: ${response.reasonPhrase}\nURL: $url',
+    '''Status code: ${response.statusCode}\nReason phrase: ${response.reasonPhrase}\nURL: $url''',
   );
 }
 
@@ -21,6 +21,6 @@ Future<String> downloadTextFile(Uri uri) async {
     return response.body;
   }
   throw Exception(
-    'Status code: ${response.statusCode}\nReason phrase: ${response.reasonPhrase}\nURL: $uri',
+    '''Status code: ${response.statusCode}\nReason phrase: ${response.reasonPhrase}\nURL: $uri''',
   );
 }

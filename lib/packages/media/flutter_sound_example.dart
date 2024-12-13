@@ -1,142 +1,141 @@
-// import 'dart:io';
-// import 'dart:typed_data';
+import 'dart:io';
+import 'dart:typed_data';
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_playground/packages/ffmpeg_example.dart';
-// import 'package:flutter_playground/packages/permission_handler_example.dart';
-// import 'package:flutter_sound/flutter_sound.dart';
-// import 'package:path/path.dart' as p;
-// import 'package:path_provider/path_provider.dart';
-// import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_playground/packages/media/ffmpeg/ffmpeg.dart';
+import 'package:flutter_playground/packages/permission_handler_example.dart';
+import 'package:flutter_sound/flutter_sound.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-// void main() => runApp(
-//       const MaterialApp(
-//         home: Scaffold(
-//           body: _MyStatefulWidget(),
-//           backgroundColor: Colors.white,
-//         ),
-//       ),
-//     );
+void main() => runApp(
+      const MaterialApp(
+        home: Scaffold(
+          body: _MyStatefulWidget(),
+          backgroundColor: Colors.white,
+        ),
+      ),
+    );
 
-// class _MyStatefulWidget extends StatefulWidget {
-//   const _MyStatefulWidget();
+class _MyStatefulWidget extends StatefulWidget {
+  const _MyStatefulWidget();
 
-//   @override
-//   State<_MyStatefulWidget> createState() => _MyStatefulWidgetState();
-// }
+  @override
+  State<_MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
 
-// class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-//   late _AudioFile m4aFile;
-//   late _AudioFile mp3File;
-//   final recorder = FlutterSoundRecorder();
-//   final player = FlutterSoundPlayer();
+class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
+  late _AudioFile m4aFile;
+  late _AudioFile mp3File;
+  final recorder = FlutterSoundRecorder();
+  final player = FlutterSoundPlayer();
 
-//   @override
-//   void initState() {
-//     super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-//     const basenameWithoutExtension = 'sample';
-//     m4aFile = _AudioFile(p.setExtension(basenameWithoutExtension, '.m4a'));
-//     mp3File = _AudioFile(p.setExtension(basenameWithoutExtension, '.mp3'));
+    const basenameWithoutExtension = 'sample';
+    m4aFile = _AudioFile(p.setExtension(basenameWithoutExtension, '.m4a'));
+    mp3File = _AudioFile(p.setExtension(basenameWithoutExtension, '.mp3'));
 
-//     WidgetsBinding.instance.addPostFrameCallback(
-//       (_) async {
-//         // You have to add the following to AndroidManifest.xml
-//         // <uses-permission android:name="android.permission.RECORD_AUDIO" />
-//         // https://developer.android.com/reference/android/Manifest.permission#RECORD_AUDIO
-//         // Otherwise, the following "request().isGranted" will return false
-//         // without displaying a runtime permission prompt.
-//         if (!await isGranted(Permission.microphone)) {
-//           return;
-//         }
-//         await recorder.openRecorder();
-//         await player.openPlayer();
-//         await player.setSubscriptionDuration(const Duration(seconds: 1));
-//         player.onProgress?.listen(
-//           (disposition) => setState(
-//             () => debugPrint(
-//               '👀${disposition.position} / ${disposition.duration}',
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        // You have to add the following to AndroidManifest.xml
+        // <uses-permission android:name="android.permission.RECORD_AUDIO" />
+        // https://developer.android.com/reference/android/Manifest.permission#RECORD_AUDIO
+        // Otherwise, the following "request().isGranted" will return false
+        // without displaying a runtime permission prompt.
+        if (!await isGranted(Permission.microphone)) {
+          return;
+        }
+        await recorder.openRecorder();
+        await player.openPlayer();
+        await player.setSubscriptionDuration(const Duration(seconds: 1));
+        player.onProgress?.listen(
+          (disposition) => setState(
+            () => debugPrint(
+              '👀${disposition.position} / ${disposition.duration}',
+            ),
+          ),
+        );
+      },
+    );
+  }
 
-//   @override
-//   Widget build(BuildContext context) => SizedBox(
-//         width: double.infinity,
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             IconButton(
-//               icon: Icon(
-//                 recorder.isRecording ? Icons.mic_off : Icons.mic,
-//               ),
-//               onPressed: player.isPlaying ? null : toggleRecorder,
-//             ),
-//             IconButton(
-//               icon: Icon(
-//                 player.isPlaying ? Icons.pause : Icons.play_arrow,
-//               ),
-//               onPressed: recorder.isRecording ? null : togglePlayer,
-//             ),
-//           ],
-//         ),
-//       );
+  @override
+  Widget build(BuildContext context) => SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                recorder.isRecording ? Icons.mic_off : Icons.mic,
+              ),
+              onPressed: player.isPlaying ? null : toggleRecorder,
+            ),
+            IconButton(
+              icon: Icon(
+                player.isPlaying ? Icons.pause : Icons.play_arrow,
+              ),
+              onPressed: recorder.isRecording ? null : togglePlayer,
+            ),
+          ],
+        ),
+      );
 
-//   @override
-//   void dispose() {
-//     WidgetsBinding.instance.addPostFrameCallback(
-//       (_) async {
-//         await recorder.closeRecorder();
-//         await player.closePlayer();
-//       },
-//     );
-//     super.dispose();
-//   }
+  @override
+  void dispose() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        await recorder.closeRecorder();
+        await player.closePlayer();
+      },
+    );
+    super.dispose();
+  }
 
-//   Future<void> toggleRecorder() async {
-//     if (recorder.isRecording) {
-//       await recorder.stopRecorder();
-//       await convertAudio(
-//         inputAudioPath: await m4aFile.filePath,
-//         outputAudioPath: await mp3File.filePath,
-//       );
-//     } else {
-//       await recorder.startRecorder(
-//         codec: Codec.aacMP4,
-//         toFile: m4aFile.filename,
-//       );
-//     }
-//     setState(() {});
-//   }
+  Future<void> toggleRecorder() async {
+    if (recorder.isRecording) {
+      await recorder.stopRecorder();
+      final inputPath = await m4aFile.filePath;
+      final outputPath = await mp3File.filePath;
+      await ffmpeg('-y -i $inputPath $outputPath');
+    } else {
+      await recorder.startRecorder(
+        codec: Codec.aacMP4,
+        toFile: m4aFile.filename,
+      );
+    }
+    setState(() {});
+  }
 
-//   Future<void> togglePlayer() async {
-//     if (player.isPlaying) {
-//       await player.stopPlayer();
-//     } else {
-//       await player.startPlayer(
-//         fromURI: mp3File.filename,
-//         whenFinished: () => setState(() {}),
-//       );
-//     }
-//     setState(() {});
-//   }
-// }
+  Future<void> togglePlayer() async {
+    if (player.isPlaying) {
+      await player.stopPlayer();
+    } else {
+      await player.startPlayer(
+        fromURI: mp3File.filename,
+        whenFinished: () => setState(() {}),
+      );
+    }
+    setState(() {});
+  }
+}
 
-// class _AudioFile {
-//   _AudioFile(this.filename);
-//   String filename;
+class _AudioFile {
+  _AudioFile(this.filename);
+  String filename;
 
-//   String get filenameWithoutExtension => p.withoutExtension(filename);
-//   Future<String> get filePath async => _joinTemporaryDirectory(filename);
-//   Future<Uint8List> get bytes async => File(await filePath).readAsBytes();
+  String get filenameWithoutExtension => p.withoutExtension(filename);
+  Future<String> get filePath async => _joinTemporaryDirectory(filename);
+  Future<Uint8List> get bytes async => File(await filePath).readAsBytes();
 
-//   Future<void> delete() async => File(filename).delete();
+  Future<void> delete() async => File(filename).delete();
 
-//   Future<String> _joinTemporaryDirectory(String relativePath) async => p.join(
-//         (await getTemporaryDirectory()).path,
-//         relativePath,
-//       );
-// }
+  Future<String> _joinTemporaryDirectory(String relativePath) async => p.join(
+        (await getTemporaryDirectory()).path,
+        relativePath,
+      );
+}

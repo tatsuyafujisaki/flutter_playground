@@ -43,6 +43,7 @@ class _MyStatelessWidgetState extends State<_MyStatelessWidget> {
       },
     );
     return FutureBuilder<Uint8List?>(
+      // ignore: discarded_futures
       future: path != null ? VideoCompress.getByteThumbnail(path!) : null,
       builder: (context, snapshot) => snapshot.hasData && snapshot.data != null
           ? Image.memory(snapshot.data!)
