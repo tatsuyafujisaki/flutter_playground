@@ -14,7 +14,7 @@ import 'package:flutter_playground/shared_preferences/encypted_shared_preference
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
-  debugPrint('👀Platform version: ${Platform.version}');
+  debugPrint('Platform version: ${Platform.version}');
 
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
   WidgetsFlutterBinding.ensureInitialized();
