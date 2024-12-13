@@ -63,12 +63,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   final firebaseMessageHandler = FirebaseMessageHandler();
 
   @override
-  void initState() {
-    super.initState();
-    debugPrint('👀initState() is called!');
-  }
-
-  @override
   Widget build(BuildContext context) {
     // In the English locale, this will print "Jane Doe".
     // In the Japanese locale, this will print "Doe Jane".
