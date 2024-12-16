@@ -10,7 +10,6 @@ dependencies:
   # https://dart.dev/tools/pub/dependencies#hosted-packages
   device_info_plus: any
   encrypt: any
-  features_tour: any
   ffmpeg_kit_flutter_full: any
   # ffmpeg_kit_flutter_audio: any
   firebase_analytics: any
