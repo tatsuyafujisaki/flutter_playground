@@ -64,9 +64,14 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // In the English locale, this will print "Jane Doe".
-    // In the Japanese locale, this will print "Doe Jane".
-    debugPrint('👀Full name: ${context.l10n.fullName('Jane', 'Doe')}');
+    // This is an example of changing the order of first name and last name
+    // depending on the locale.
+    //
+    // In the English locale, this will print "John Doe".
+    // In the Japanese locale, this will print "Doe John".
+    debugPrint(
+      '''Full name: ${context.l10n.fullName('John', 'Doe')}''',
+    );
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
@@ -78,7 +83,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(child: FlutterLogo()),
+      body: SizedBox.expand(child: FlutterLogo()),
     );
   }
 
