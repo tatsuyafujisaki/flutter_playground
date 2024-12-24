@@ -56,7 +56,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
                   child: GestureDetector(
                     onTap: () => tutorialCoachMark.next(),
                     behavior: HitTestBehavior.translucent,
-                    child: Row(
+                    child: const Row(
                       children: <Widget>[
                         Expanded(
                           child: Column(

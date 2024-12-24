@@ -25,24 +25,24 @@ class _MyStatelessWidget extends StatelessWidget {
           Tooltip(
             key: key,
             message: 'Tooltip!',
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               color: Colors.black,
             ),
-            child: FlutterLogo(),
+            child: const FlutterLogo(),
           ),
           Tooltip(
             key: key,
             message: 'Tooltip!',
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               color: Colors.black,
             ),
-            child: FlutterLogo(),
+            child: const FlutterLogo(),
           ),
         ],
       ),

@@ -83,7 +83,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SizedBox.expand(child: FlutterLogo()),
+      body: const SizedBox.expand(child: FlutterLogo()),
     );
   }
 
