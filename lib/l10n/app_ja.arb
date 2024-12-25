@@ -10,5 +10,9 @@
       }
     }
   },
-  "notificationChannelName": "私のチャンネル名"
+  "notificationChannelName": "私のチャンネル名",
+  "coachMark1Title": "コーチマーク1のタイトル",
+  "coachMark1Body": "コーチマーク1の本文",
+  "coachMark2Title": "コーチマーク2のタイトル",
+  "coachMark2Body": "コーチマーク2の本文"
 }

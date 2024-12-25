@@ -10,5 +10,9 @@
       }
     }
   },
-  "notificationChannelName": "My Notification Channel"
+  "notificationChannelName": "My Notification Channel",
+  "coachMark1Title": "Coach mark 1's  title",
+  "coachMark1Body": "Coach mark 1's body",
+  "coachMark2Title": "Coach mark 2's title",
+  "coachMark2Body": "Coach mark 2's body"
 }
