@@ -28,6 +28,7 @@ dependencies:
   freezed_annotation: any
   gal: any
   geolocator: any
+  glob: any
   http: any
   image_picker: any
   image_picker_android: any
