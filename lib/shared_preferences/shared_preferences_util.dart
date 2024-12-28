@@ -6,7 +6,7 @@ Future<SharedPreferences> get prefs async => SharedPreferences.getInstance();
 extension SharedPreferencesExtension on SharedPreferences {
   int get keyCount => getKeys().length;
 
-  Future<void> dump() async {
+  void dump() {
     getKeys().forEach(
       (key) => debugPrint('key=$key, value=${get(key)}'),
     );
