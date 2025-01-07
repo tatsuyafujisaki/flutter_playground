@@ -10,6 +10,22 @@
       }
     }
   },
+  "piDouble": "Pi is {value}.",
+  "@piDouble": {
+    "placeholders": {
+      "value": {
+        "type": "double"
+      }
+    }
+  },
+  "piNum": "Pi is {value}.",
+  "@piNum": {
+    "placeholders": {
+      "value": {
+        "type": "num"
+      }
+    }
+  },
   "notificationChannelName": "My Notification Channel",
   "coachMark1Title": "Coach mark 1's  title",
   "coachMark1Body": "Coach mark 1's body",

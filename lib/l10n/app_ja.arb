@@ -10,6 +10,22 @@
       }
     }
   },
+  "piDouble": "円周率は {value} です。",
+  "@piDouble": {
+    "placeholders": {
+      "value": {
+        "type": "double"
+      }
+    }
+  },
+  "piNum": "円周率は {value} です。",
+  "@piNum": {
+    "placeholders": {
+      "value": {
+        "type": "num"
+      }
+    }
+  },
   "notificationChannelName": "私のチャンネル名",
   "coachMark1Title": "コーチマーク1のタイトル",
   "coachMark1Body": "コーチマーク1の本文",
