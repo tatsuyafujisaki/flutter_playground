@@ -8,7 +8,8 @@
       "lastName": {
         "type": "String"
       }
-    }
+    },
+    "description": "..."
   },
   "piDouble": "Pi is {value}.",
   "@piDouble": {
@@ -16,7 +17,8 @@
       "value": {
         "type": "double"
       }
-    }
+    },
+    "description": "..."
   },
   "piNum": "Pi is {value}.",
   "@piNum": {
@@ -24,11 +26,27 @@
       "value": {
         "type": "num"
       }
-    }
+    },
+    "description": "..."
   },
   "notificationChannelName": "My Notification Channel",
-  "coachMark1Title": "Coach mark 1's  title",
-  "coachMark1Body": "Coach mark 1's body",
-  "coachMark2Title": "Coach mark 2's title",
-  "coachMark2Body": "Coach mark 2's body"
+  "@notificationChannelName": {
+    "description": "..."
+  },
+  "coachMarkTitle1": "Coach mark title 1",
+  "@coachMarkTitle1": {
+    "description": "..."
+  },
+  "coachMarkBody1": "Coach mark body 1",
+  "@coachMarkBody1": {
+    "description": "..."
+  },
+  "coachMarkTitle2": "Coach mark title 2",
+  "@coachMarkTitle2": {
+    "description": "..."
+  },
+  "coachMarkBody2": "Coach mark body 2",
+  "@coachMarkBody2": {
+    "description": "..."
+  }
 }

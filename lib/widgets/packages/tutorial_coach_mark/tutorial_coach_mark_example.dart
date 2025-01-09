@@ -28,13 +28,13 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
       get keyAndTitleAndBodyList => <(GlobalKey, String, String)>[
             (
               coachMarkKey1,
-              context.l10n.coachMark1Title,
-              context.l10n.coachMark1Body,
+              context.l10n.coachMarkTitle1,
+              context.l10n.coachMarkBody1,
             ),
             (
               coachMarkKey2,
-              context.l10n.coachMark2Title,
-              context.l10n.coachMark2Body,
+              context.l10n.coachMarkTitle2,
+              context.l10n.coachMarkBody2,
             ),
           ];
 

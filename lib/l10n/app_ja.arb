@@ -8,7 +8,8 @@
       "lastName": {
         "type": "String"
       }
-    }
+    },
+    "description": "..."
   },
   "piDouble": "円周率は {value} です。",
   "@piDouble": {
@@ -16,7 +17,8 @@
       "value": {
         "type": "double"
       }
-    }
+    },
+    "description": "..."
   },
   "piNum": "円周率は {value} です。",
   "@piNum": {
@@ -24,11 +26,27 @@
       "value": {
         "type": "num"
       }
-    }
+    },
+    "description": "..."
   },
-  "notificationChannelName": "私のチャンネル名",
-  "coachMark1Title": "コーチマーク1のタイトル",
-  "coachMark1Body": "コーチマーク1の本文",
-  "coachMark2Title": "コーチマーク2のタイトル",
-  "coachMark2Body": "コーチマーク2の本文"
+  "notificationChannelName": "私のチャンネル",
+  "@notificationChannelName": {
+    "description": "..."
+  },
+  "coachMarkTitle1": "コーチマークのタイトル1",
+  "@coachMarkTitle1": {
+    "description": "..."
+  },
+  "coachMarkBody1": "コーチマーク1の本文",
+  "@coachMarkBody1": {
+    "description": "..."
+  },
+  "coachMarkTitle2": "コーチマーク2のタイトル",
+  "@coachMarkTitle2": {
+    "description": "..."
+  },
+  "coachMarkBody2": "コーチマーク2の本文",
+  "@coachMarkBody2": {
+    "description": "..."
+  }
 }
