@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(
       const MaterialApp(
-        home: _MyStatelessWidget(),
+        home: SafeArea(
+          child: Scaffold(
+            body: _MyStatelessWidget(),
+          ),
+        ),
       ),
     );
 
