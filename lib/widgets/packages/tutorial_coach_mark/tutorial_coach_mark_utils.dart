@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/coach_mark_target_data.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-TutorialCoachMark createTutorialCoachMark(
-  List<(GlobalKey<State<StatefulWidget>>, String, String)>
-      keyAndTitleAndBodyList,
+Future<void> showTutorialOnFirstVisit(
+  BuildContext context,
+  List<CoachMarkTargetData> coachMarkTargetDataList,
+) async {
+  // const key = 'tutorial_shown';
+  // final prefs = await SharedPreferences.getInstance();
+  // final shown = prefs.getBool(key) ?? false;
+  const shown = false;
+
+  if (!shown && context.mounted) {
+    late final TutorialCoachMark tutorialCoachMark;
+    tutorialCoachMark = _createTutorialCoachMark(
+      coachMarkTargetDataList,
+      () => tutorialCoachMark.next(),
+    )..show(context: context);
+    // await prefs.setBool(key, true);
+  }
+}
+
+TutorialCoachMark _createTutorialCoachMark(
+  List<CoachMarkTargetData> coachMarkTargetDataList,
   GestureTapCallback onTap,
 ) =>
     TutorialCoachMark(
-      targets: _createTargetFocusList(keyAndTitleAndBodyList, onTap),
+      targets: _createTargetFocusList(coachMarkTargetDataList, onTap),
       paddingFocus: 0,
       hideSkip: true,
       focusAnimationDuration: Duration.zero,
@@ -16,16 +35,17 @@ TutorialCoachMark createTutorialCoachMark(
     );
 
 List<TargetFocus> _createTargetFocusList(
-  List<(GlobalKey<State<StatefulWidget>>, String, String)> tutorialDataList,
+  List<CoachMarkTargetData> coachMarkTargetDataList,
   GestureTapCallback onTap,
 ) =>
-    tutorialDataList
+    coachMarkTargetDataList
         .map(
           (data) => _createTargetFocus(
-            keyTarget: data.$1,
-            title: data.$2,
-            body: data.$3,
+            keyTarget: data.key,
+            title: data.title,
+            body: data.body,
             onTap: onTap,
+            align: data.align,
           ),
         )
         .toList();
@@ -35,11 +55,13 @@ TargetFocus _createTargetFocus({
   required String title,
   required String body,
   required GestureTapCallback onTap,
+  ContentAlign? align,
 }) =>
     TargetFocus(
       keyTarget: keyTarget,
       contents: [
         TargetContent(
+          align: align ?? ContentAlign.bottom,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: ColoredBox(

@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_playground/extension/extensions.dart';
+import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/coach_mark_target_data.dart';
 import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/tutorial_coach_mark_utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -21,27 +18,28 @@ class _MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-  final coachMarkKey1 = GlobalKey();
-  final coachMarkKey2 = GlobalKey();
+  final key1 = GlobalKey();
+  final key2 = GlobalKey();
 
-  List<(GlobalKey<State<StatefulWidget>>, String, String)>
-      get keyAndTitleAndBodyList => <(GlobalKey, String, String)>[
-            (
-              coachMarkKey1,
-              context.l10n.coachMarkTitle1,
-              context.l10n.coachMarkBody1,
-            ),
-            (
-              coachMarkKey2,
-              context.l10n.coachMarkTitle2,
-              context.l10n.coachMarkBody2,
-            ),
-          ];
+  List<CoachMarkTargetData> get keyAndTitleAndBodyList => <CoachMarkTargetData>[
+        CoachMarkTargetData(
+          key: key1,
+          title: context.l10n.coachMarkTitle1,
+          body: context.l10n.coachMarkBody1,
+        ),
+        CoachMarkTargetData(
+          key: key2,
+          title: context.l10n.coachMarkTitle2,
+          body: context.l10n.coachMarkBody2,
+        ),
+      ];
 
   @override
   void initState() {
     super.initState();
-    unawaited(_showTutorialOnFirstVisit());
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async => showTutorialOnFirstVisit(context, keyAndTitleAndBodyList),
+    );
   }
 
   @override
@@ -51,30 +49,15 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Icon(
-                key: coachMarkKey1,
+                key: key1,
                 Icons.flutter_dash,
               ),
               Icon(
-                key: coachMarkKey2,
+                key: key2,
                 Icons.flutter_dash,
               ),
             ],
           ),
         ),
       );
-
-  Future<void> _showTutorialOnFirstVisit() async {
-    const key = 'tutorial_shown';
-    final prefs = await SharedPreferences.getInstance();
-    final shown = prefs.getBool(key) ?? false;
-
-    if (!shown && mounted) {
-      late final TutorialCoachMark tutorialCoachMark;
-      tutorialCoachMark = createTutorialCoachMark(
-        keyAndTitleAndBodyList,
-        () => tutorialCoachMark.next(),
-      )..show(context: context);
-      await prefs.setBool(key, true);
-    }
-  }
 }
