@@ -15,23 +15,26 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
         child: IconButton(
-          onPressed: () async => showCupertinoDialog(
-            context: context,
-            builder: (context) => CupertinoAlertDialog(
-              title: const Text('Title'),
-              content: const Text('Content'),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('🍎'),
-                ),
-                CupertinoDialogAction(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('🍊'),
-                ),
-              ],
-            ),
-          ),
+          onPressed: () async {
+            final fruit = await showCupertinoDialog<String>(
+              context: context,
+              builder: (context) => CupertinoAlertDialog(
+                title: const Text('Title'),
+                content: const Text('Content'),
+                actions: <Widget>[
+                  CupertinoDialogAction(
+                    onPressed: () => Navigator.pop<String>(context, '🍎'),
+                    child: const Text('🍎'),
+                  ),
+                  CupertinoDialogAction(
+                    onPressed: () => Navigator.pop<String>(context, '🍊'),
+                    child: const Text('🍊'),
+                  ),
+                ],
+              ),
+            );
+            debugPrint(fruit);
+          },
           icon: const Icon(Icons.flutter_dash),
         ),
       );
