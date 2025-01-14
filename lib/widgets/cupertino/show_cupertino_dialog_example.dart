@@ -16,24 +16,32 @@ class _MyStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) => Center(
         child: IconButton(
           onPressed: () async {
-            final fruit = await showCupertinoDialog<String>(
+            final result = await showCupertinoDialog<String>(
               context: context,
               builder: (context) => CupertinoAlertDialog(
-                title: const Text('Title'),
-                content: const Text('Content'),
+                title: const Text('Title!'),
+                content: const Text('Content!'),
                 actions: <Widget>[
                   CupertinoDialogAction(
-                    onPressed: () => Navigator.pop<String>(context, '🍎'),
-                    child: const Text('🍎'),
+                    onPressed: () => Navigator.pop<String>(
+                      context,
+                      'Default action is chosen!',
+                    ),
+                    isDefaultAction: true,
+                    child: const Text('I am default!'),
                   ),
                   CupertinoDialogAction(
-                    onPressed: () => Navigator.pop<String>(context, '🍊'),
-                    child: const Text('🍊'),
+                    onPressed: () => Navigator.pop<String>(
+                      context,
+                      'Destructive action is chosen!',
+                    ),
+                    isDestructiveAction: true,
+                    child: const Text('I am destructive, so my color is red!'),
                   ),
                 ],
               ),
             );
-            debugPrint(fruit);
+            debugPrint(result);
           },
           icon: const Icon(Icons.flutter_dash),
         ),
