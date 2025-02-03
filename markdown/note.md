@@ -16,7 +16,7 @@ https://docs.flutter.dev/tools/hot-reload#how-to-perform-a-hot-reload
 ## `flutter clean`
 > Delete the build/ and .dart_tool/ directories.
 
-https://docs.flutter.dev/reference/flutter-cli#:~:text=Delete%20the%20build/%20and%20.dart_tool/%20directories.
+https://docs.flutter.dev/reference/flutter-cli#:~:text=Delete%20the%20build/%20and%20.dart_tool/%20directories%2E
 
 ## `flutter pub cache clean`
 > You can empty the entire system cache to reclaim extra disk space or remove problematic packages:
