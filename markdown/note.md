@@ -12,7 +12,7 @@ Skip recompiling the Kotlin or Swift code?|Yes|Yes|No
 
 https://docs.flutter.dev/tools/hot-reload#how-to-perform-a-hot-reload
 
-# Difference between `flutter clean` and `flutter pub cache clean`
+# Differences between `flutter clean` and `flutter pub cache clean`
 ## `flutter clean`
 > Delete the build/ and .dart_tool/ directories.
 
