@@ -4,13 +4,24 @@
 
 https://docs.flutter.dev/cookbook/navigation/navigation-basics
 
-# Hot reload / Hot restart / Full restart
+# Differences among hot reload, hot restart, and full restart
 &nbsp;|Hot reload|Hot restart|Full restart
 --|--|--|--
 Skip `main()` or `initState()`, and preserve the app state?|Yes|No|No
 Skip recompiling the Kotlin or Swift code?|Yes|Yes|No
 
 https://docs.flutter.dev/tools/hot-reload#how-to-perform-a-hot-reload
+
+# Difference between `flutter clean` and `flutter pub cache clean`
+## `flutter clean`
+> Delete the build/ and .dart_tool/ directories.
+
+https://docs.flutter.dev/reference/flutter-cli#:~:text=Delete%20the%20build/%20and%20.dart_tool/%20directories.
+
+## `flutter pub cache clean`
+> You can empty the entire system cache to reclaim extra disk space or remove problematic packages:
+
+https://dart.dev/tools/pub/cmd/pub-cache#:~:text=You%20can%20empty%20the%20entire%20system%20cache%20to%20reclaim%20extra%20disk%20space%20or%20remove%20problematic%20packages:
 
 # widgets library (widget.dart)
 ## [Container](https://api.flutter.dev/flutter/widgets/Container-class.html) class
