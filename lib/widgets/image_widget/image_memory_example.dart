@@ -2,9 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/packages/io/download_file_example.dart';
 
-void main() => runApp(
-      _MyStatelessWidget(),
-    );
+void main() => runApp(_MyStatelessWidget());
 
 class _MyStatelessWidget extends StatelessWidget {
   final imageBytes = downloadBinaryFile(
@@ -13,17 +11,17 @@ class _MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FutureBuilder<Uint8List>(
-        future: imageBytes,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Image.memory(snapshot.data!);
-          }
-          if (snapshot.hasError) {
-            debugPrint(snapshot.error.toString());
-            debugPrintStack(stackTrace: snapshot.stackTrace);
-            return const Icon(Icons.broken_image);
-          }
-          return const CircularProgressIndicator();
-        },
-      );
+    future: imageBytes,
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return Image.memory(snapshot.data!);
+      }
+      if (snapshot.hasError) {
+        debugPrint(snapshot.error.toString());
+        debugPrintStack(stackTrace: snapshot.stackTrace);
+        return const Icon(Icons.broken_image);
+      }
+      return const CircularProgressIndicator();
+    },
+  );
 }

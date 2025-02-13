@@ -102,17 +102,11 @@ void main() async {
   final albums = await albumModel.getAlbums();
   final album = await albumModel.getAlbum(id: 1);
   final postedAlbum = await albumModel.postAlbum(
-    body: <String, dynamic>{
-      'userId': 42,
-      'title': 'My posted album',
-    },
+    body: <String, dynamic>{'userId': 42, 'title': 'My posted album'},
   );
   final updatedAlbum = await albumModel.updateAlbum(
     id: 1,
-    body: <String, dynamic>{
-      'userId': 99,
-      'title': 'My updated album',
-    },
+    body: <String, dynamic>{'userId': 99, 'title': 'My updated album'},
   );
 
   debugPrint(albums.toString());

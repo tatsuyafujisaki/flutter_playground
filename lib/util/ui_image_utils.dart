@@ -33,8 +33,10 @@ Future<Uint8List?> _centerCrop(Uint8List imageBytes) async {
     Rect.fromLTWH(0, 0, cropSize.toDouble(), cropSize.toDouble()),
     Paint(),
   );
-  final croppedImage =
-      await pictureRecorder.endRecording().toImage(cropSize, cropSize);
+  final croppedImage = await pictureRecorder.endRecording().toImage(
+    cropSize,
+    cropSize,
+  );
   final byteData = await croppedImage.toByteData(format: ImageByteFormat.png);
   return byteData?.buffer.asUint8List();
 }

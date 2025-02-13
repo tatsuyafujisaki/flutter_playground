@@ -32,7 +32,6 @@ void showHowtoPullSavedFile(String path) =>
 
 String _getDeviceFileExplorerFriendlyExternalStorageDirectory(
   String externalStorageDirectoryPath,
-) =>
-    externalStorageDirectoryPath
-        .replaceFirst('/data/user/0', '/data/data')
-        .replaceFirst('/storage/emulated/0', '/sdcard');
+) => externalStorageDirectoryPath
+    .replaceFirst('/data/user/0', '/data/data')
+    .replaceFirst('/storage/emulated/0', '/sdcard');

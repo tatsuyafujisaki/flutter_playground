@@ -9,10 +9,11 @@ import 'package:permission_handler/permission_handler.dart';
 /// > granted before, nothing happens. request() returns the new status of
 /// > the Permission.
 /// https://pub.dev/packages/permission_handler
-Future<bool> isGranted<T extends Permission>(T permission) async => permission
-    .onPermanentlyDeniedCallback(() async => openAppSettings())
-    .request()
-    .isGranted;
+Future<bool> isGranted<T extends Permission>(T permission) async =>
+    permission
+        .onPermanentlyDeniedCallback(() async => openAppSettings())
+        .request()
+        .isGranted;
 
 Future<bool> get isPhotoGranted async {
   /// > Devices running Android 12 (API level 32) or lower:

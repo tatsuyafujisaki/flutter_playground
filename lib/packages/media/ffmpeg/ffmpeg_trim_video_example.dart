@@ -15,29 +15,27 @@ class _MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async {
-        // Don't omit a filename extension,
-        // because ffmpeg uses it to detect the file format.
-        final mp4Path = await downloadAndSaveBinaryFile(
-          'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4',
-        );
-        if (mp4Path == null) {
-          return;
-        }
-        final trimmedMp4Path = await createTemporaryFilePath(
-          directory: (await externalStorageDirectory)!,
-          extension: p.extension(mp4Path),
-        );
-        debugPrint('⏱️[FFmpeg starts] ${DateTime.now()}');
-        final success = await ffmpeg('-y -i -t 3 $mp4Path $trimmedMp4Path');
-        debugPrint('⏱️[FFmpeg ends] ${DateTime.now()}');
-        if (success) {
-          File(trimmedMp4Path).renameSync(mp4Path);
-          showHowtoPullSavedFile(mp4Path);
-        }
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Don't omit a filename extension,
+      // because ffmpeg uses it to detect the file format.
+      final mp4Path = await downloadAndSaveBinaryFile(
+        'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4',
+      );
+      if (mp4Path == null) {
+        return;
+      }
+      final trimmedMp4Path = await createTemporaryFilePath(
+        directory: (await externalStorageDirectory)!,
+        extension: p.extension(mp4Path),
+      );
+      debugPrint('⏱️[FFmpeg starts] ${DateTime.now()}');
+      final success = await ffmpeg('-y -i -t 3 $mp4Path $trimmedMp4Path');
+      debugPrint('⏱️[FFmpeg ends] ${DateTime.now()}');
+      if (success) {
+        File(trimmedMp4Path).renameSync(mp4Path);
+        showHowtoPullSavedFile(mp4Path);
+      }
+    });
     return const FlutterLogo();
   }
 }

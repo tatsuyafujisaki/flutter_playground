@@ -22,15 +22,17 @@ Future<void> enableNotification(BuildContext context) async {
     );
     await _notificationPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(channel);
     return channel;
   }
 
-  Future<void>
-      deleteMiscellaneousNotificationChannel() async => _notificationPlugin
+  Future<void> deleteMiscellaneousNotificationChannel() async =>
+      _notificationPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin
+          >()
           ?.deleteNotificationChannel('fcm_fallback_notification_channel');
 
   // > On Android versions 13 and above, there is no way to determine if the user has chosen whether to grant/deny permission.

@@ -5,12 +5,12 @@ import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/coach_ma
 import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/tutorial_coach_mark_utils.dart';
 
 void main() => runApp(
-      MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: _MyStatefulWidget(),
-      ),
-    );
+  MaterialApp(
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    home: _MyStatefulWidget(),
+  ),
+);
 
 class _MyStatefulWidget extends StatefulWidget {
   @override
@@ -22,17 +22,17 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   final key2 = GlobalKey();
 
   List<CoachMarkTargetData> get keyAndTitleAndBodyList => <CoachMarkTargetData>[
-        CoachMarkTargetData(
-          key: key1,
-          title: context.l10n.coachMarkTitle1,
-          body: context.l10n.coachMarkBody1,
-        ),
-        CoachMarkTargetData(
-          key: key2,
-          title: context.l10n.coachMarkTitle2,
-          body: context.l10n.coachMarkBody2,
-        ),
-      ];
+    CoachMarkTargetData(
+      key: key1,
+      title: context.l10n.coachMarkTitle1,
+      body: context.l10n.coachMarkBody1,
+    ),
+    CoachMarkTargetData(
+      key: key2,
+      title: context.l10n.coachMarkTitle2,
+      body: context.l10n.coachMarkBody2,
+    ),
+  ];
 
   @override
   void initState() {
@@ -44,20 +44,14 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(
-                key: key1,
-                Icons.flutter_dash,
-              ),
-              Icon(
-                key: key2,
-                Icons.flutter_dash,
-              ),
-            ],
-          ),
-        ),
-      );
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Icon(key: key1, Icons.flutter_dash),
+          Icon(key: key2, Icons.flutter_dash),
+        ],
+      ),
+    ),
+  );
 }

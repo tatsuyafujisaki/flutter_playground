@@ -8,16 +8,17 @@ class _MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: IconButton(
-            onPressed: () async => showModalBottomSheet<void>(
+    body: Center(
+      child: IconButton(
+        onPressed:
+            () async => showModalBottomSheet<void>(
               context: context,
               builder: (_) => _BottomSheetContent(),
             ),
-            icon: const Icon(Icons.open_in_new),
-          ),
-        ),
-      );
+        icon: const Icon(Icons.open_in_new),
+      ),
+    ),
+  );
 }
 
 class _BottomSheetContent extends StatelessWidget {
@@ -27,12 +28,12 @@ class _BottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListView(
-        children: [
-          for (final i in indices)
-            ListTile(
-              title: Text('Item $i'),
-              tileColor: getMaterialColor(Colors.amber, i),
-            ),
-        ],
-      );
+    children: [
+      for (final i in indices)
+        ListTile(
+          title: Text('Item $i'),
+          tileColor: getMaterialColor(Colors.amber, i),
+        ),
+    ],
+  );
 }

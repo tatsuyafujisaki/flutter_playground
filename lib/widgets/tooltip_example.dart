@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(
-      MaterialApp(
-        home: Scaffold(
-          body: _MyStatelessWidget(),
-          backgroundColor: Colors.lime,
-        ),
-      ),
-    );
+  MaterialApp(
+    home: Scaffold(body: _MyStatelessWidget(), backgroundColor: Colors.lime),
+  ),
+);
 
 class _MyStatelessWidget extends StatelessWidget {
   @override
@@ -25,23 +22,15 @@ class _MyStatelessWidget extends StatelessWidget {
           Tooltip(
             key: key,
             message: 'Tooltip!',
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            textStyle: const TextStyle(
-              color: Colors.black,
-            ),
+            decoration: const BoxDecoration(color: Colors.white),
+            textStyle: const TextStyle(color: Colors.black),
             child: const FlutterLogo(),
           ),
           Tooltip(
             key: key,
             message: 'Tooltip!',
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            textStyle: const TextStyle(
-              color: Colors.black,
-            ),
+            decoration: const BoxDecoration(color: Colors.white),
+            textStyle: const TextStyle(color: Colors.black),
             child: const FlutterLogo(),
           ),
         ],

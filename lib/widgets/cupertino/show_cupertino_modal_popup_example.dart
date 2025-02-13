@@ -1,24 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      const MaterialApp(
-        home: Scaffold(
-          body: _MyStatelessWidget(),
-        ),
-      ),
-    );
+void main() =>
+    runApp(const MaterialApp(home: Scaffold(body: _MyStatelessWidget())));
 
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();
 
   @override
   Widget build(BuildContext context) => Center(
-        child: IconButton(
-          onPressed: () async {
-            final result = await showCupertinoModalPopup<String>(
-              context: context,
-              builder: (context) => CupertinoActionSheet(
+    child: IconButton(
+      onPressed: () async {
+        final result = await showCupertinoModalPopup<String>(
+          context: context,
+          builder:
+              (context) => CupertinoActionSheet(
                 title: const Text('Title'),
                 message: const Text('Message'),
                 actions: <Widget>[
@@ -44,10 +40,10 @@ class _MyStatelessWidget extends StatelessWidget {
                   child: const Text('cancel'),
                 ),
               ),
-            );
-            debugPrint('👀showCupertinoModalPopup returns $result');
-          },
-          icon: const Icon(Icons.flutter_dash),
-        ),
-      );
+        );
+        debugPrint('👀showCupertinoModalPopup returns $result');
+      },
+      icon: const Icon(Icons.flutter_dash),
+    ),
+  );
 }

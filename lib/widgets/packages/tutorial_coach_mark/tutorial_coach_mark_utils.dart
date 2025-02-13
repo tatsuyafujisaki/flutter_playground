@@ -24,15 +24,14 @@ Future<void> showTutorialOnFirstVisit(
 TutorialCoachMark _createTutorialCoachMark(
   List<CoachMarkTargetData> coachMarkTargetDataList,
   GestureTapCallback onTap,
-) =>
-    TutorialCoachMark(
-      targets: _createTargetFocusList(coachMarkTargetDataList, onTap),
-      paddingFocus: 0,
-      hideSkip: true,
-      focusAnimationDuration: Duration.zero,
-      unFocusAnimationDuration: Duration.zero,
-      pulseEnable: false,
-    );
+) => TutorialCoachMark(
+  targets: _createTargetFocusList(coachMarkTargetDataList, onTap),
+  paddingFocus: 0,
+  hideSkip: true,
+  focusAnimationDuration: Duration.zero,
+  unFocusAnimationDuration: Duration.zero,
+  pulseEnable: false,
+);
 
 List<TargetFocus> _createTargetFocusList(
   List<CoachMarkTargetData> coachMarkTargetDataList,
@@ -56,52 +55,51 @@ TargetFocus _createTargetFocus({
   required String body,
   required GestureTapCallback onTap,
   ContentAlign? align,
-}) =>
-    TargetFocus(
-      keyTarget: keyTarget,
-      contents: [
-        TargetContent(
-          align: align ?? ContentAlign.bottom,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: ColoredBox(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: GestureDetector(
-                  onTap: onTap,
-                  behavior: HitTestBehavior.translucent,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              title,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              body,
-                              maxLines: 10,
-                              style: const TextStyle(fontSize: 16),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+}) => TargetFocus(
+  keyTarget: keyTarget,
+  contents: [
+    TargetContent(
+      align: align ?? ContentAlign.bottom,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: ColoredBox(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: GestureDetector(
+              onTap: onTap,
+              behavior: HitTestBehavior.translucent,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.arrow_circle_right, size: 40),
-                    ],
+                        const SizedBox(height: 8),
+                        Text(
+                          body,
+                          maxLines: 10,
+                          style: const TextStyle(fontSize: 16),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.arrow_circle_right, size: 40),
+                ],
               ),
             ),
           ),
         ),
-      ],
-    );
+      ),
+    ),
+  ],
+);

@@ -24,22 +24,19 @@ class FirebaseMessageHandler {
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
     FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 
-    Future.delayed(
-      Duration.zero,
-      () async {
-        await _handleTokenIfExists();
-        await _handleInitialMessageIfExists();
+    Future.delayed(Duration.zero, () async {
+      await _handleTokenIfExists();
+      await _handleInitialMessageIfExists();
 
-        _onTokenRefreshSubscription = await _listen(
-          // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onTokenRefresh.html
-          FirebaseMessaging.instance.onTokenRefresh,
-          _sendTokenToServer,
-        );
+      _onTokenRefreshSubscription = await _listen(
+        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onTokenRefresh.html
+        FirebaseMessaging.instance.onTokenRefresh,
+        _sendTokenToServer,
+      );
 
-        _onMessageSubscription = await _onMessage;
-        _onMessageOpenedAppSubscription = await _onMessageOpenedApp;
-      },
-    );
+      _onMessageSubscription = await _onMessage;
+      _onMessageOpenedAppSubscription = await _onMessageOpenedApp;
+    });
   }
 
   StreamSubscription<String>? _onTokenRefreshSubscription;
@@ -48,30 +45,30 @@ class FirebaseMessageHandler {
 
   /// Recieves messages while the app is in the foreground.
   Future<StreamSubscription<RemoteMessage>?> get _onMessage => _listen(
-        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#foreground_messages
-        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
-        FirebaseMessaging.onMessage,
-        (message) {
-          debugPrint(
-            '''🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.''',
-          );
-          _printMessage(message);
-          showNotification(message);
-        },
+    // https://firebase.google.com/docs/cloud-messaging/flutter/receive#foreground_messages
+    // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
+    FirebaseMessaging.onMessage,
+    (message) {
+      debugPrint(
+        '''🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.''',
       );
+      _printMessage(message);
+      showNotification(message);
+    },
+  );
 
   /// Recieves a message when the app is in the background.
   Future<StreamSubscription<RemoteMessage>?> get _onMessageOpenedApp => _listen(
-        // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
-        // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
-        FirebaseMessaging.onMessageOpenedApp,
-        (message) {
-          debugPrint(
-            '''🔥FirebaseMessaging.onMessageOpenedApp received the following message. In other words, the user tapped a notification while the app was in the background.''',
-          );
-          _printMessage(message);
-        },
+    // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
+    // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
+    FirebaseMessaging.onMessageOpenedApp,
+    (message) {
+      debugPrint(
+        '''🔥FirebaseMessaging.onMessageOpenedApp received the following message. In other words, the user tapped a notification while the app was in the background.''',
       );
+      _printMessage(message);
+    },
+  );
 
   Future<StreamSubscription<T>?> _listen<T>(
     Stream<T> stream,
@@ -81,11 +78,7 @@ class FirebaseMessageHandler {
   }) async {
     StreamSubscription<T>? subscrption;
     try {
-      subscrption = stream.listen(
-        onData,
-        onError: onError,
-        onDone: onDone,
-      );
+      subscrption = stream.listen(onData, onError: onError, onDone: onDone);
     } on Exception catch (e, s) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: s);
@@ -161,9 +154,7 @@ class FirebaseMessageHandler {
 ///   mode).
 /// https://firebase.google.com/docs/cloud-messaging/flutter/receive#apple_platforms_and_android
 @pragma('vm:entry-point')
-Future<void> _backgroundMessageHandler(
-  RemoteMessage message,
-) async {
+Future<void> _backgroundMessageHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   debugPrint(
     '''🔥FirebaseMessaging.onBackgroundMessage received the following message. In other words, the app received a notification while it was in the background.''',
@@ -179,8 +170,6 @@ void _printMessage(RemoteMessage message) {
     debugPrint('🔥RemoteMessage.notification.body: ${notification.body}');
   }
   for (final entry in message.data.entries) {
-    debugPrint(
-      '🔥RemoteMessage.data.entries[${entry.key}]: ${entry.value}',
-    );
+    debugPrint('🔥RemoteMessage.data.entries[${entry.key}]: ${entry.value}');
   }
 }

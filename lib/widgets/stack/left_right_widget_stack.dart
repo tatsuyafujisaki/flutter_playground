@@ -7,12 +7,9 @@ class _MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const MaterialApp(
-        home: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FlutterLogo(),
-            FlutterLogo(),
-          ],
-        ),
-      );
+    home: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[FlutterLogo(), FlutterLogo()],
+    ),
+  );
 }

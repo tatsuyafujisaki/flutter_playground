@@ -7,12 +7,7 @@ Widget _createApp({
   double? width = double.infinity,
   double? height,
   Widget? child,
-}) =>
-    ColoredBox(
-      color: color,
-      child: SizedBox(
-        width: width,
-        height: height,
-        child: child,
-      ),
-    );
+}) => ColoredBox(
+  color: color,
+  child: SizedBox(width: width, height: height, child: child),
+);

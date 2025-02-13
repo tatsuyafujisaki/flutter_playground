@@ -20,9 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // https://pub.dev/documentation/firebase_core/latest/firebase_core/Firebase/initializeApp.html
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Records uncaught errors caused by my Dart code as fatal in Firebase
   // Crashlytics.
@@ -44,10 +42,10 @@ class MyApp extends ConsumerWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) => const MaterialApp(
-        home: _MyStatefulWidget(title: 'My title'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-      );
+    home: _MyStatefulWidget(title: 'My title'),
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+  );
 }
 
 class _MyStatefulWidget extends StatefulWidget {
@@ -71,9 +69,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     showInternationalizationExamples(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: const SizedBox.expand(child: FlutterLogo()),
     );
   }
@@ -91,9 +87,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     //
     // In the English locale, this will print "John Doe".
     // In the Japanese locale, this will print "Doe John".
-    debugPrint(
-      '''Full name: ${context.l10n.fullName('John', 'Doe')}''',
-    );
+    debugPrint('''Full name: ${context.l10n.fullName('John', 'Doe')}''');
 
     debugPrint(context.l10n.piDouble(3.14));
     debugPrint(context.l10n.piNum(3.14));

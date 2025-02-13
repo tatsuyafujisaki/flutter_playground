@@ -7,9 +7,10 @@ class _MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: IconButton(
-            onPressed: () async => showModalBottomSheet<void>(
+    body: Center(
+      child: IconButton(
+        onPressed:
+            () async => showModalBottomSheet<void>(
               context: context,
               builder: (_) => const _BottomSheetContent(),
               // stretches the bottom sheet to full height.
@@ -18,10 +19,10 @@ class _MyStatelessWidget extends StatelessWidget {
               // from overlapping the status bar.
               useSafeArea: true,
             ),
-            icon: const Icon(Icons.flutter_dash),
-          ),
-        ),
-      );
+        icon: const Icon(Icons.flutter_dash),
+      ),
+    ),
+  );
 }
 
 class _BottomSheetContent extends StatelessWidget {
@@ -29,15 +30,13 @@ class _BottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.close),
-          ),
-          title: const Text('My title'),
-        ),
-        body: const Center(
-          child: FlutterLogo(),
-        ),
-      );
+    appBar: AppBar(
+      leading: IconButton(
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(Icons.close),
+      ),
+      title: const Text('My title'),
+    ),
+    body: const Center(child: FlutterLogo()),
+  );
 }

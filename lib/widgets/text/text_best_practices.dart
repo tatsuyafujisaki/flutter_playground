@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(
-      MaterialApp(
-        home: SafeArea(
-          child: Scaffold(
-            body: _MyStatelessWidget(),
-          ),
-        ),
-      ),
-    );
+  MaterialApp(home: SafeArea(child: Scaffold(body: _MyStatelessWidget()))),
+);
 
 /// Note of the Text widget:
 /// - The [Text.softWrap] is true.
@@ -20,27 +14,18 @@ class _MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          const Text(
-            '''↓Use the following if you want to display all the text.''',
-          ),
-          Text(data),
-          const Text(
-            '''↓Use the following if you want to ellipsize text on a single line.''',
-          ),
-          Text(
-            data,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const Text(
-            '''↓Use the following if you want to ellipsize text on `maxLines` lines.''',
-          ),
-          Text(
-            data,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
-        ],
-      );
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: <Widget>[
+      const Text('''↓Use the following if you want to display all the text.'''),
+      Text(data),
+      const Text(
+        '''↓Use the following if you want to ellipsize text on a single line.''',
+      ),
+      Text(data, overflow: TextOverflow.ellipsis),
+      const Text(
+        '''↓Use the following if you want to ellipsize text on `maxLines` lines.''',
+      ),
+      Text(data, overflow: TextOverflow.ellipsis, maxLines: 2),
+    ],
+  );
 }

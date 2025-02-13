@@ -7,8 +7,6 @@ extension SharedPreferencesExtension on SharedPreferences {
   int get keyCount => getKeys().length;
 
   void dump() {
-    getKeys().forEach(
-      (key) => debugPrint('key=$key, value=${get(key)}'),
-    );
+    getKeys().forEach((key) => debugPrint('key=$key, value=${get(key)}'));
   }
 }

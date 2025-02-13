@@ -21,8 +21,10 @@ class LocationWrapper {
     if (status == PermissionStatus.denied) {
       status = await _location.requestPermission();
     }
-    return {PermissionStatus.granted, PermissionStatus.grantedLimited}
-        .contains(status);
+    return {
+      PermissionStatus.granted,
+      PermissionStatus.grantedLimited,
+    }.contains(status);
   }
 
   Future<LocationData?> get location async =>
@@ -32,18 +34,13 @@ class LocationWrapper {
     if (!await _isAllowed) {
       return;
     }
-    await _location.changeSettings(
-      interval: 15000,
-    );
+    await _location.changeSettings(interval: 15000);
     await subscription?.cancel();
     subscription = _location.onLocationChanged.listen(onData);
   }
 
   void demoOneShot() {
-    Future<void>.delayed(
-      Duration.zero,
-      () => debugPrint(location.toString()),
-    );
+    Future<void>.delayed(Duration.zero, () => debugPrint(location.toString()));
   }
 
   void demoListen() {

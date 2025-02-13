@@ -9,11 +9,7 @@ part 'album.g.dart';
 /// https://jsonplaceholder.typicode.com/albums/1
 @freezed
 class Album with _$Album {
-  const factory Album({
-    int? userId,
-    int? id,
-    String? title,
-  }) = _Album;
+  const factory Album({int? userId, int? id, String? title}) = _Album;
 
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
 }

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      const MaterialApp(
-        home: Scaffold(
-          body: _MyStatefulWidget(),
-        ),
-      ),
-    );
+void main() =>
+    runApp(const MaterialApp(home: Scaffold(body: _MyStatefulWidget())));
 
 class _MyStatefulWidget extends StatefulWidget {
   const _MyStatefulWidget();
@@ -18,8 +13,9 @@ class _MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   @override
   Widget build(BuildContext context) => DraggableScrollableSheet(
-        initialChildSize: 0.7,
-        builder: (context, scrollController) => ColoredBox(
+    initialChildSize: 0.7,
+    builder:
+        (context, scrollController) => ColoredBox(
           color: Colors.cyan,
           child: Column(
             children: <Widget>[
@@ -27,16 +23,17 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
                 child: ListView.builder(
                   controller: scrollController,
                   itemCount: 25,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(
-                      'Item $index',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
+                  itemBuilder:
+                      (context, index) => ListTile(
+                        title: Text(
+                          'Item $index',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
                 ),
               ),
             ],
           ),
         ),
-      );
+  );
 }

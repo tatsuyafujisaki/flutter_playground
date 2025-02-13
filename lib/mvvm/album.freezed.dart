@@ -12,7 +12,8 @@ part of 'album.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Album _$AlbumFromJson(Map<String, dynamic> json) {
   return _Album.fromJson(json);
@@ -60,28 +61,35 @@ class _$AlbumCopyWithImpl<$Res, $Val extends Album>
     Object? id = freezed,
     Object? title = freezed,
   }) {
-    return _then(_value.copyWith(
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            userId:
+                freezed == userId
+                    ? _value.userId
+                    : userId // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            id:
+                freezed == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            title:
+                freezed == title
+                    ? _value.title
+                    : title // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AlbumImplCopyWith<$Res> implements $AlbumCopyWith<$Res> {
   factory _$$AlbumImplCopyWith(
-          _$AlbumImpl value, $Res Function(_$AlbumImpl) then) =
-      __$$AlbumImplCopyWithImpl<$Res>;
+    _$AlbumImpl value,
+    $Res Function(_$AlbumImpl) then,
+  ) = __$$AlbumImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? userId, int? id, String? title});
@@ -92,8 +100,9 @@ class __$$AlbumImplCopyWithImpl<$Res>
     extends _$AlbumCopyWithImpl<$Res, _$AlbumImpl>
     implements _$$AlbumImplCopyWith<$Res> {
   __$$AlbumImplCopyWithImpl(
-      _$AlbumImpl _value, $Res Function(_$AlbumImpl) _then)
-      : super(_value, _then);
+    _$AlbumImpl _value,
+    $Res Function(_$AlbumImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Album
   /// with the given fields replaced by the non-null parameter values.
@@ -104,20 +113,25 @@ class __$$AlbumImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
   }) {
-    return _then(_$AlbumImpl(
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$AlbumImpl(
+        userId:
+            freezed == userId
+                ? _value.userId
+                : userId // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        id:
+            freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        title:
+            freezed == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
@@ -175,15 +189,16 @@ class _$AlbumImpl with DiagnosticableTreeMixin implements _Album {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AlbumImplToJson(
-      this,
-    );
+    return _$$AlbumImplToJson(this);
   }
 }
 
 abstract class _Album implements Album {
-  const factory _Album(
-      {final int? userId, final int? id, final String? title}) = _$AlbumImpl;
+  const factory _Album({
+    final int? userId,
+    final int? id,
+    final String? title,
+  }) = _$AlbumImpl;
 
   factory _Album.fromJson(Map<String, dynamic> json) = _$AlbumImpl.fromJson;
 
