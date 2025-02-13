@@ -13,7 +13,9 @@ void main() {
   final stringKeys = getStringKeys(rootPosix);
   final dartFiles = getDartFiles(rootPosix);
   final unusedStringKeys = findUnusedStringKeys(stringKeys, dartFiles);
+  // ignore: prefer_foreach
   for (final stringKey in unusedStringKeys) {
+    // ignore: avoid_print
     print(stringKey);
   }
 }
