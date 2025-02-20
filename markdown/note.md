@@ -4,6 +4,12 @@
 
 https://docs.flutter.dev/cookbook/navigation/navigation-basics
 
+> Difference between packages and plugins<br>
+> Packages ...<br>
+> Plugins ...
+
+https://docs.flutter.dev/packages-and-plugins/using-packages
+
 # Differences among hot reload, hot restart, and full restart
 &nbsp;|Hot reload|Hot restart|Full restart
 --|--|--|--
