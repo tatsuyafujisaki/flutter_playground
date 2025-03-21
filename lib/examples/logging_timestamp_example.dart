@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_playground/packages/io/directories.dart';
+import '../packages/io/directories.dart';
 
 Future<String> get _pauseTimestampFilePath =>
     joinTemporaryDirectory('pause_timestamp.txt');

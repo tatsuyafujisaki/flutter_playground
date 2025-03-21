@@ -5,8 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_playground/firebase_options.dart';
-import 'package:flutter_playground/packages/fcm/notification.dart';
+import '../../firebase_options.dart';
+import 'notification.dart';
 
 // ignore: unreachable_from_main
 class FirebaseMessageHandler {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/mvvm/album_view_model.dart';
+import 'album_view_model.dart';
 
 void main() {
   runApp(const _MyStatefulWidget());

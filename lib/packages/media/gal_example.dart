@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_playground/packages/io/download_file_example.dart';
 import 'package:gal/gal.dart';
+
+import '../io/download_file_example.dart';
 
 Future<bool> downloadToGallery(String url) async {
   try {

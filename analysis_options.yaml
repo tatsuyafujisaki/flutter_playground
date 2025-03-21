@@ -15,7 +15,6 @@ linter:
     - always_declare_return_types
     - always_put_control_body_on_new_line
     - always_put_required_named_parameters_first
-    - always_use_package_imports
     - annotate_redeclares
     - avoid_annotating_with_dynamic
     - avoid_bool_literals_in_conditional_expressions
@@ -87,6 +86,7 @@ linter:
     - prefer_int_literals
     - prefer_mixin
     - prefer_null_aware_method_calls
+    - prefer_relative_imports # incompatible with always_use_package_imports
     - prefer_single_quotes
     - require_trailing_commas
     - sized_box_shrink_expand

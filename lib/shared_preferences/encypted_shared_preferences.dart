@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_playground/util/encryptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../util/encryptor.dart';
 
 class EncryptedSharedPreferences {
   factory EncryptedSharedPreferences() => _singleton;

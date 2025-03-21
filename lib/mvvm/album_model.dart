@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_playground/mvvm/album.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+
+import 'album.dart';
 
 const _baseUrl = 'jsonplaceholder.typicode.com';
 

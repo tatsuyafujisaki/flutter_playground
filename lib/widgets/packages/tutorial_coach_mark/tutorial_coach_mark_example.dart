@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_playground/extension/extensions.dart';
-import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/coach_mark_target_data.dart';
-import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/tutorial_coach_mark_utils.dart';
+import '../../../extension/extensions.dart';
+import 'coach_mark_target_data.dart';
+import 'tutorial_coach_mark_utils.dart';
 
 void main() => runApp(
   MaterialApp(

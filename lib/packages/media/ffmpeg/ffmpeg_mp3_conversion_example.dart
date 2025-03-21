@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/packages/io/download_and_save_binary_file.dart';
-import 'package:flutter_playground/packages/io/save_file_example.dart';
-import 'package:flutter_playground/packages/media/ffmpeg/ffmpeg.dart';
 import 'package:path/path.dart' as p;
+
+import '../../io/download_and_save_binary_file.dart';
+import '../../io/save_file_example.dart';
+import 'ffmpeg.dart';
 
 void main() => runApp(const _MyStatelessWidget());
 

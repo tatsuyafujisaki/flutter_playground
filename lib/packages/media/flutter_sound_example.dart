@@ -2,12 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/packages/media/ffmpeg/ffmpeg.dart';
-import 'package:flutter_playground/packages/permission_handler_example.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../permission_handler_example.dart';
+import 'ffmpeg/ffmpeg.dart';
 
 void main() => runApp(
   const MaterialApp(

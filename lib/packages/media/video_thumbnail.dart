@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/packages/media/ffmpeg/ffmpeg.dart';
-import 'package:flutter_playground/widgets/future_builder_and_stream_builder/future_builder/create_non_void_future_builder.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+
+import '../../widgets/future_builder_and_stream_builder/future_builder/create_non_void_future_builder.dart';
+import 'ffmpeg/ffmpeg.dart';
 
 void main() => runApp(
   MaterialApp(

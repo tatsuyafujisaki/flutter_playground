@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/packages/permission_handler_example.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_android/image_picker_android.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
+
+import '../packages/permission_handler_example.dart';
 
 void main() => runApp(const MaterialApp(home: _MyStatelessWidget()));
 

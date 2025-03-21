@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/util/color_utils.dart';
+import '../../util/color_utils.dart';
 
 void main() => runApp(const MaterialApp(home: _MyStatelessWidget()));
 

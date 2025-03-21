@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_playground/mvvm/album.dart';
-import 'package:flutter_playground/mvvm/album_model.dart';
+import 'album.dart';
+import 'album_model.dart';
 
 /// https://docs.flutter.dev/get-started/fwe/state-management#defining-the-viewmodel
 /// https://docs.flutter.dev/data-and-backend/state-mgmt/simple

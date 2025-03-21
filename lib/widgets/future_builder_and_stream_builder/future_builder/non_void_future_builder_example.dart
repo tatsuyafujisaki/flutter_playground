@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/widgets/future_builder_and_stream_builder/future_builder/create_non_void_future_builder.dart';
+import 'create_non_void_future_builder.dart';
 
 void main() => runApp(MaterialApp(home: Scaffold(body: _MyStatelessWidget())));
 

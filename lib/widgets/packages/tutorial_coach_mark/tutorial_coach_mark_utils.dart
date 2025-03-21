@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/widgets/packages/tutorial_coach_mark/coach_mark_target_data.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+
+import 'coach_mark_target_data.dart';
 
 Future<void> showTutorialOnFirstVisit(
   BuildContext context,

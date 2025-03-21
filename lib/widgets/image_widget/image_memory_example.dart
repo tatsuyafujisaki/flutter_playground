@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/packages/io/download_file_example.dart';
+import '../../packages/io/download_file_example.dart';
 
 void main() => runApp(_MyStatelessWidget());
 
