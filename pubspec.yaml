@@ -39,6 +39,7 @@ dependencies:
   permission_handler: any
   riverpod_annotation: any
   shared_preferences: any
+  showcaseview: any
   tutorial_coach_mark: any
   url_launcher: any
   video_player: any
