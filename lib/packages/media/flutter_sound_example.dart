@@ -8,7 +8,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../permission_handler_example.dart';
-import 'ffmpeg/ffmpeg.dart';
 
 void main() => runApp(
   const MaterialApp(
@@ -25,7 +24,6 @@ class _MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   late _AudioFile m4aFile;
-  late _AudioFile mp3File;
   final recorder = FlutterSoundRecorder();
   final player = FlutterSoundPlayer();
 
@@ -35,7 +33,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
 
     const basenameWithoutExtension = 'sample';
     m4aFile = _AudioFile(p.setExtension(basenameWithoutExtension, '.m4a'));
-    mp3File = _AudioFile(p.setExtension(basenameWithoutExtension, '.mp3'));
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // You have to add the following to AndroidManifest.xml
@@ -88,9 +85,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   Future<void> toggleRecorder() async {
     if (recorder.isRecording) {
       await recorder.stopRecorder();
-      final inputPath = await m4aFile.filePath;
-      final outputPath = await mp3File.filePath;
-      await ffmpeg('-y -i $inputPath $outputPath');
     } else {
       await recorder.startRecorder(
         codec: Codec.aacMP4,
@@ -105,7 +99,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
       await player.stopPlayer();
     } else {
       await player.startPlayer(
-        fromURI: mp3File.filename,
+        fromURI: m4aFile.filename,
         whenFinished: () => setState(() {}),
       );
     }
