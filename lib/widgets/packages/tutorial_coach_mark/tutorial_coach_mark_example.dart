@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../extension/extensions.dart';
+import '../../../l10n/app_localizations.dart';
 import 'coach_mark_target_data.dart';
 import 'tutorial_coach_mark_utils.dart';
 
@@ -35,14 +36,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => showTutorialOnFirstVisit(context, keyAndTitleAndBodyList),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) => Scaffold(
     body: Center(
       child: Column(
@@ -54,4 +47,12 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
       ),
     ),
   );
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async => showTutorialOnFirstVisit(context, keyAndTitleAndBodyList),
+    );
+  }
 }

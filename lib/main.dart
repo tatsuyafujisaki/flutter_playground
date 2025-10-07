@@ -5,11 +5,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'extension/extensions.dart';
 import 'firebase_options.dart';
+import 'l10n/app_localizations.dart';
 import 'packages/fcm/firebase_message_handler.dart';
 import 'packages/fcm/notification.dart';
 import 'shared_preferences/encypted_shared_preferences.dart';
