@@ -1,11 +1,9 @@
 plugins {
     id "com.android.application"
-    // START: FlutterFire Configuration
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
-    // END: FlutterFire Configuration
-    id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id "org.jetbrains.kotlin.android"
+    id "com.google.gms.google-services"
+    id "com.google.firebase.crashlytics"
 }
 
 def localProperties = new Properties()
@@ -32,10 +30,8 @@ android {
     ndkVersion flutter.ndkVersion
 
     compileOptions {
-        // Avoids the following build error.
-        // > An issue was found when checking AAR metadata:
-        // > 1. Dependency ':flutter_local_notifications' requires core library desugaring to be enabled for :app.
-        // >    See https://developer.android.com/studio/write/java8-support.html for more details.
+        // Required by the flutter_local_notifications package
+        // https://pub.dev/packages/flutter_local_notifications#gradle-setup
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -67,6 +63,13 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+}
+
+dependencies {
+    // Required by the flutter_local_notifications package
+    // https://pub.dev/packages/flutter_local_notifications#gradle-setup
+    // https://maven.google.com/web/index.html?q=com.android.tools#com.android.tools:desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 
 flutter {
