@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC0jf4KDNd3LBeGpwAGYdJgAEP89Ou27cM',
-    appId: '1:462349445956:android:a92f5cfe93ccb3b182c511',
-    messagingSenderId: '462349445956',
-    projectId: 'flutter-playground2',
-    storageBucket: 'flutter-playground2.appspot.com',
+    apiKey: 'AIzaSyB5vqeGwZ0VMVSYPji2EFDIOGTejaX211k',
+    appId: '1:107442897455:android:fc83bc50aad0fdec09bcda',
+    messagingSenderId: '107442897455',
+    projectId: 'flutter-playground4',
+    storageBucket: 'flutter-playground4.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAN8dUU3u4CDZALsxmsUbSoVuFGOv5JjgU',
-    appId: '1:462349445956:ios:7c28a630cc509f2782c511',
-    messagingSenderId: '462349445956',
-    projectId: 'flutter-playground2',
-    storageBucket: 'flutter-playground2.appspot.com',
-    iosBundleId: 'com.tatsuyafujisaki.flutterplayground',
+    apiKey: 'AIzaSyA2fElfOina2305C97FlTt2izlCa86RtNs',
+    appId: '1:107442897455:ios:b15604766fc8cdfa09bcda',
+    messagingSenderId: '107442897455',
+    projectId: 'flutter-playground4',
+    storageBucket: 'flutter-playground4.firebasestorage.app',
+    iosBundleId: 'com.example.flutterPlayground',
   );
 }

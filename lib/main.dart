@@ -31,7 +31,9 @@ void main() async {
   PlatformDispatcher.instance.onError = (error, stackTrace) {
     // Records uncaught platform-level errors as fatal in Firebase Crashlytics.
     // https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/onError.html
-    FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
+    unawaited(
+      FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true),
+    );
     return true;
   };
 

@@ -53,7 +53,7 @@ class FirebaseMessageHandler {
         '''🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.''',
       );
       _printMessage(message);
-      showNotification(message);
+      unawaited(showNotification(message));
     },
   );
 
