@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: any
   showcaseview: any
   tutorial_coach_mark: any
+  upgrader: any
   url_launcher: any
   video_player: any
   webview_flutter: any
