@@ -5,9 +5,11 @@ environment:
   sdk: ^3.7.0
 dependencies:
   archive: any
+  async: any
   audioplayers: any
   # > The version constraint is optional but recommended. If no version constraint is given, any is assumed.
   # https://dart.dev/tools/pub/dependencies#hosted-packages
+  collection: any
   device_info_plus: any
   encrypt: any
   firebase_analytics: any
@@ -37,6 +39,7 @@ dependencies:
   path: any
   path_provider: any
   permission_handler: any
+  riverpod: any
   riverpod_annotation: any
   shared_preferences: any
   showcaseview: any
