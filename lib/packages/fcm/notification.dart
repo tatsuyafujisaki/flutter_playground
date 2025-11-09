@@ -50,6 +50,7 @@ Future<void> enableNotification(BuildContext context) async {
     const InitializationSettings(
       // Specifies the name of a drawable file without the extension in the "android/app/src/main/res/drawable" directory.
       android: AndroidInitializationSettings('android_robot'),
+      iOS: DarwinInitializationSettings(),
     ),
     onDidReceiveNotificationResponse: (details) {
       debugPrint(
@@ -76,8 +77,8 @@ Future<void> showNotification(RemoteMessage message) async {
 
     return NotificationDetails(
       android: AndroidNotificationDetails(
-        _channel.id,
-        _channel.name,
+        'my_default_notification_channel_id',
+        'My Notification Channel',
         largeIcon: await createLargeIcon(imageUrl),
       ),
     );

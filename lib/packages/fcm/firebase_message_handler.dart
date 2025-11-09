@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import '../../firebase_options.dart';
 import 'notification.dart';
 
@@ -87,6 +86,28 @@ class FirebaseMessageHandler {
   }
 
   Future<void> _handleTokenIfExists() async {
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      // On iOS, you must get the APNS token before getting the FCM token.
+      // It might take a moment for the APNS token to be available.
+      // We'll try a few times before giving up.
+      String? apnsToken;
+      for (var i = 0; i < 3; i++) {
+        apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        if (apnsToken != null) {
+          break;
+        }
+        log('APNS token is not available yet. Retrying in 1 second...');
+        await Future<void>.delayed(const Duration(seconds: 1));
+      }
+
+      if (apnsToken == null) {
+        log(
+          'APNS token is still not available after multiple retries. FCM token cannot be retrieved.',
+        );
+        return;
+      }
+    }
+
     // Despite the description below, getToken() does not ask the user for
     // notification permissions.
     //
