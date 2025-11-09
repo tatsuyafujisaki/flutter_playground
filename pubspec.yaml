@@ -47,12 +47,14 @@ dependencies:
   webview_flutter: any
 dev_dependencies:
   build_runner: any
+  custom_lint: any
   flutter_lints: any
   flutter_test:
     sdk: flutter
   freezed: any
   json_serializable: any
   riverpod_generator: any
+  riverpod_lint: any
 flutter:
   generate: true # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
   uses-material-design: true
