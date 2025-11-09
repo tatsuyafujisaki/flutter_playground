@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 abstract interface class Fruit {
   static const apple = '🍎';
   static const orange = '🍊';
 }
 
 void main() {
-  print(Fruit.apple); // 🍎
-  print(Fruit.orange); // 🍊
+  debugPrint(Fruit.apple); // 🍎
+  debugPrint(Fruit.orange); // 🍊
 }

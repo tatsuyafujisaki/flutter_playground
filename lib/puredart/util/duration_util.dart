@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 // ignore: unreachable_from_main
 Duration copyMinutesAndSeconds(Duration duration) => Duration(
   minutes: duration.inMinutes % Duration.minutesPerHour,
@@ -16,6 +18,6 @@ void main() {
     milliseconds: 123,
     microseconds: 456,
   );
-  print(duration); // 12:34:56.123456
-  print(formatInMSs(duration)); // 34:56
+  debugPrint(duration.toString()); // 12:34:56.123456
+  debugPrint(formatInMSs(duration)); // 34:56
 }

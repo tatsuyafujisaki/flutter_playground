@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 void main() {
   final xs = List.generate(5, (x) => x);
   final (evens, odds) = xs.partition((x) => x.isEven);
 
-  print(evens); // [0, 2, 4]
-  print(odds); // [1, 3]
+  debugPrint(evens.toString()); // [0, 2, 4]
+  debugPrint(odds.toString()); // [1, 3]
 }
 
 extension<T> on Iterable<T> {

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 class Debouncer {
   Debouncer(this.duration);
   final Duration duration;
@@ -13,7 +15,7 @@ class Debouncer {
 
 Timer _createAndStartPeriodicTimer([void Function()? callback]) =>
     Timer.periodic(const Duration(seconds: 1) /* inteval */, (timer) {
-      print('Timer.tick: ${timer.tick}');
+      debugPrint('Timer.tick: ${timer.tick}');
       callback?.call();
     });
 
@@ -25,14 +27,14 @@ void main() {
   final timer2 = Timer(
     const Duration(seconds: 2),
     () => debouncer.run(
-      () => print('Debouncer: 2 seconds passed without another call.'),
+      () => debugPrint('Debouncer: 2 seconds passed without another call.'),
     ),
   );
 
   final timer3 = Timer(
     const Duration(seconds: 4),
     () => debouncer.run(
-      () => print('Debouncer: 4 seconds passed without another call.'),
+      () => debugPrint('Debouncer: 4 seconds passed without another call.'),
     ),
   );
 

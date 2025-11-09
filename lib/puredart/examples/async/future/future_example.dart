@@ -1,11 +1,13 @@
+import 'package:flutter/foundation.dart';
+
 void main() async {
   final future1 = Future<String>.value('🍎');
   final future2 = Future<String>.error('☠️');
 
   await _printFuture(future1);
-  print('--');
+  debugPrint('--');
   await _printFuture(future2);
-  print('--');
+  debugPrint('--');
   await _printFuture(future1, deliberatelyThrowErrorInsideThen: true);
 }
 
@@ -19,14 +21,14 @@ Future<void> _printFuture<T>(
           if (deliberatelyThrowErrorInsideThen) {
             throw Exception('This exception originate in `then`.');
           }
-          print('then: $value');
+          debugPrint('then: $value');
         },
         onError: (Object? error) {
-          print('then.onError: $error');
+          debugPrint('then.onError: $error');
         },
       )
       .catchError((Object? error) {
-        print('catchError: $error');
+        debugPrint('catchError: $error');
       })
-      .whenComplete(() => print('whenComplete'));
+      .whenComplete(() => debugPrint('whenComplete'));
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'riverpod_generator_examples.g.dart';
@@ -44,35 +45,35 @@ class MySet extends _$MySet {
 
 void showGeneratedFunctionProviderExamples() {
   final container = ProviderContainer();
-  print(container.read(myGeneratedParameterlessProvider)); // Hello!
-  print(
+  debugPrint(container.read(myGeneratedParameterlessProvider)); // Hello!
+  debugPrint(
     container.read(myGeneratedRequiredParameterProvider('Minnie')),
   ); // Hello, Minnie!
-  print(
+  debugPrint(
     container.read(myGeneratedOptionalParameterProvider()),
   ); // Hello, Anonymous!
-  print(
+  debugPrint(
     container.read(myGeneratedOptionalParameterProvider('Donald')),
   ); // Hello, Donald!
 
-  print(
+  debugPrint(
     container.read(myGeneratedRequiredParametersProvider('Goofy', 18)),
   ); // Hello, Donald!
 }
 
 void showGeneratedBoolNotifirerProviderExamples() {
   final container = ProviderContainer();
-  print(container.read(myBoolProvider)); // false
+  debugPrint(container.read(myBoolProvider).toString()); // false
   container.read(myBoolProvider.notifier).toggle();
-  print(container.read(myBoolProvider)); // true
+  debugPrint(container.read(myBoolProvider).toString()); // true
 }
 
 void showGeneratedSetNotifirerProviderExamples() {
   final container = ProviderContainer();
-  print(container.read(mySetProvider)); // {}
+  debugPrint(container.read(mySetProvider).toString()); // {}
   container.read(mySetProvider.notifier).add('a');
-  print(container.read(mySetProvider)); // {'a'}
+  debugPrint(container.read(mySetProvider).toString()); // {'a'}
   container.read(mySetProvider.notifier).add('b');
   container.read(mySetProvider.notifier).remove('a');
-  print(container.read(mySetProvider)); // {'b'}
+  debugPrint(container.read(mySetProvider).toString()); // {'b'}
 }

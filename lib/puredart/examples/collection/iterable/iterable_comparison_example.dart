@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 
 void main() {
   final iterable1 = <String>['🍎', '🍊'] as Iterable<String>;
@@ -7,7 +8,7 @@ void main() {
 
   const iterableEquality = IterableEquality<String>();
 
-  print(iterable1 == iterable2); // false
-  print(iterableEquality.equals(iterable1, iterable2)); // true
-  print(iterableEquality.equals(iterable1, iterable3)); // false
+  debugPrint((iterable1 == iterable2).toString()); // false
+  debugPrint(iterableEquality.equals(iterable1, iterable2).toString()); // true
+  debugPrint(iterableEquality.equals(iterable1, iterable3).toString()); // false
 }

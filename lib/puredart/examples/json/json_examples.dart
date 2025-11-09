@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 void _printJsonRootType(String json) {
-  print((jsonDecode(json) as Map<String, dynamic>).runtimeType);
+  debugPrint((jsonDecode(json) as Map<String, dynamic>).runtimeType.toString());
 }
 
 void main() {

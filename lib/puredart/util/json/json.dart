@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import '../../examples/freezed/person.dart';
 
 // ignore: unreachable_from_main
@@ -7,8 +9,8 @@ Map<String, dynamic> jsonDecodeToMap(String json) {
   try {
     return jsonDecode(json) as Map<String, dynamic>;
   } on Exception catch (e, s) {
-    print(e);
-    print(s);
+    debugPrint(e.toString());
+    debugPrint(s.toString());
   }
   return <String, dynamic>{};
 }
@@ -30,11 +32,13 @@ List<T> _parseArray<T>(
     ).map(toElement).toList();
 
 void main() {
-  print(_parseObject('{ "name": "John", "age": 42 }', Person.fromJson));
-  print(
+  debugPrint(
+    _parseObject('{ "name": "John", "age": 42 }', Person.fromJson).toString(),
+  );
+  debugPrint(
     _parseArray(
       '[{ "name": "John", "age": 42 }, { "name": "Jane", "age": 18 }]',
       Person.fromJson,
-    ),
+    ).toString(),
   );
 }

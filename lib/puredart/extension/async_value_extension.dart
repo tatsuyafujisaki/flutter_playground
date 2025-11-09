@@ -1,12 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 
 extension on AsyncValue<dynamic> {
   // ignore: unused_element
   void printAll() => when(
-    data: (data) => print('👀data: $data'),
+    data: (data) => debugPrint('👀data: $data'),
     error:
         (error, stackTrace) =>
-            print('👀(error, stackTrace): ($error, $stackTrace)'),
-    loading: () => print('👀loading'),
+            debugPrint('👀(error, stackTrace): ($error, $stackTrace)'),
+    loading: () => debugPrint('👀loading'),
   );
 }

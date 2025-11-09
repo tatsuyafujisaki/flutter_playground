@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class _Person {
   _Person({
     required this.firstName,
@@ -16,7 +18,7 @@ void main() {
     middleName: 'Robin',
     lastName: 'Milne',
   );
-  print(person.firstName);
-  print(person.lastName);
-  print(person.fullName);
+  debugPrint(person.firstName);
+  debugPrint(person.lastName);
+  debugPrint(person.fullName);
 }

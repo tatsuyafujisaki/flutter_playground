@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'person.g.dart';
@@ -17,9 +18,9 @@ class _Person {
 }
 
 void _print(_Person person) {
-  print(person.firstName);
-  print(person.lastName);
-  print(person.toJson());
+  debugPrint(person.firstName.toString());
+  debugPrint(person.lastName);
+  debugPrint(person.toJson().toString());
 }
 
 void main() {

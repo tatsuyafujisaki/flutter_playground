@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
 void main() {
@@ -12,8 +13,8 @@ void main() {
     'foo.PNG',
   ];
 
-  print(_filterJpeg(filenames));
-  print(_filterPng(filenames));
+  debugPrint(_filterJpeg(filenames).toString());
+  debugPrint(_filterPng(filenames).toString());
 }
 
 Iterable<String> _filterJpeg(Iterable<String> filenames) => filenames.where(

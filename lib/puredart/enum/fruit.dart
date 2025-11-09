@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 
 enum Fruit {
   unknown(''),
@@ -18,10 +19,10 @@ void main() {
 
   switch (fruit) {
     case Fruit.unknown:
-      print('Unknown fruit!');
+      debugPrint('Unknown fruit!');
     case Fruit.apple:
-      print('Apple!');
+      debugPrint('Apple!');
     case Fruit.orange:
-      print('Orange!');
+      debugPrint('Orange!');
   }
 }

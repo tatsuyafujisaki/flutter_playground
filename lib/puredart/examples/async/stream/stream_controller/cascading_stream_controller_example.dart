@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 // This example is ...
 //   - impractical and not worth reading for many people.
 //   - for me to get used to some legacy code.
@@ -21,7 +23,7 @@ void main() async {
   final myChildClass = _MyChildClass();
 
   myChildClass.streamController.stream.listen(
-    (event) => print('onData: $event'),
+    (event) => debugPrint('onData: $event'),
   );
 
   myChildClass

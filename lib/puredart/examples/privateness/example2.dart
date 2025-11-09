@@ -1,14 +1,16 @@
+import 'package:flutter/foundation.dart';
+
 import 'example1.dart';
 
 void main() {
   // Top-level private variables are only accessible from within the same file.
-  // print(_myTopPrivateLevelVariable);
-  print(myTopLevelPublicVariable);
+  // debugPrint(_myTopPrivateLevelVariable);
+  debugPrint(myTopLevelPublicVariable);
 
   final myPublic = MyPublic();
   // Private instance variables can only be accessed from the same file.
-  // print(myPublic._myPrivateVariable);
-  print(myPublic.myPublicVariable);
+  // debugPrint(myPublic._myPrivateVariable);
+  debugPrint(myPublic.myPublicVariable);
   // Private instance methods can only be accessed from the same file.
   // myPublic._myPrivateMethod();
   myPublic.myPublicMethod();

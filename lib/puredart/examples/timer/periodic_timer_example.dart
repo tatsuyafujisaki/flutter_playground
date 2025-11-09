@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 class PeriodicRestartableTimer {
   PeriodicRestartableTimer(this.duration, this.callback) {
     _timer = _createTimer();
@@ -23,7 +25,7 @@ class PeriodicRestartableTimer {
 void main() {
   final timer = PeriodicRestartableTimer(
     const Duration(seconds: 1),
-    () => print(DateTime.now()),
+    () => debugPrint(DateTime.now().toString()),
   );
 
   Future<void>.delayed(const Duration(seconds: 3), timer.restart);

@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 
 void main() {
   _sortStringInObject();
@@ -22,10 +23,10 @@ List<_Person> _createPersonList() => <_Person>[
 
 void _sortStringInObject() {
   final list = _createPersonList()..sortBy((person) => person.name);
-  print(list);
+  debugPrint(list.toString());
 }
 
 void _sortStringInObjectDescending() {
   final list = _createPersonList()..sort((a, b) => b.name.compareTo(a.name));
-  print(list);
+  debugPrint(list.toString());
 }

@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:async/async.dart';
+import 'package:flutter/foundation.dart';
 
 void main() async {
   final stream1 = Stream.periodic(
@@ -15,5 +17,5 @@ void main() async {
   StreamGroup.merge<String>([
     stream1,
     stream2,
-  ]).listen((event) => print('onData: $event'));
+  ]).listen((event) => debugPrint('onData: $event'));
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'remove_where_example.freezed.dart';
@@ -14,7 +15,7 @@ void main() {
     const Fruit(emoji: '🍊'),
   ];
 
-  print(fruits);
+  debugPrint(fruits.toString());
   fruits.removeWhere((fruits) => fruits.emoji == '🍏');
-  print(fruits);
+  debugPrint(fruits.toString());
 }

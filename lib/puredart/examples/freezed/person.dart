@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../util/json/date_time_converter.dart';
@@ -24,7 +25,7 @@ void main() {
     age: 42,
   ).copyWith(lastUpdated: DateTime.now());
   final map = person.toJson();
-  print(map);
-  print(Person.fromJson(map));
-  print(jsonEncode(person)); // jsonEncode implicitly calls toJson.
+  debugPrint(map.toString());
+  debugPrint(Person.fromJson(map).toString());
+  debugPrint(jsonEncode(person)); // jsonEncode implicitly calls toJson.
 }

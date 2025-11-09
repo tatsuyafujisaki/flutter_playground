@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 /// https://dart.dev/language/constructors
 class _MyClass {
   // Generative constructor
@@ -29,9 +31,9 @@ class _MyClass {
 }
 
 void main() {
-  print(_MyClass('🍣'));
-  print(_MyClass.myNamedConstructor1('🍣'));
-  print(_MyClass.myNamedConstructor2('🐟', '🍚'));
-  print(_MyClass.myRedirectingConstructor1('🍣'));
-  print(_MyClass.myRedirectingConstructor2('🐟', '🍚'));
+  debugPrint(_MyClass('🍣').toString());
+  debugPrint(_MyClass.myNamedConstructor1('🍣').toString());
+  debugPrint(_MyClass.myNamedConstructor2('🐟', '🍚').toString());
+  debugPrint(_MyClass.myRedirectingConstructor1('🍣').toString());
+  debugPrint(_MyClass.myRedirectingConstructor2('🐟', '🍚').toString());
 }

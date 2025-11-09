@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class _MyClass {
   final _myNonFinalString = '🍎';
   // Trying to replace myNonFinalString itself outside the class will cause a
@@ -31,15 +33,15 @@ void main() {
   final myTemplateClass = _MyClass();
 
   // myTemplateClass.myNonFinalString = '🍏'; // causes a build error.
-  print(myTemplateClass.myFinalString);
+  debugPrint(myTemplateClass.myFinalString);
 
   // myTemplateClass.myList = ['🍏']; // causes a build error.
   myTemplateClass.myList.clear();
   myTemplateClass.myList.addAll(['🍏']);
-  print(myTemplateClass.myList);
+  debugPrint(myTemplateClass.myList.toString());
 
   // myTemplateClass.myUnmodifiableList = ['🍏']; // causes a build error.
   // myTemplateClass.myUnmodifiableList.clear(); // throws a runtime exception.
   // myTemplateClass.myUnmodifiableList.addAll(['🍏']); // throws a runtime exception.
-  print(myTemplateClass.myUnmodifiableList);
+  debugPrint(myTemplateClass.myUnmodifiableList.toString());
 }

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 void main() {
   _sortInt();
   _sortIntDescending();
@@ -5,10 +7,10 @@ void main() {
 
 void _sortInt() {
   final list = <int>[3, 1, 2]..sort();
-  print(list); // [1, 2, 3]
+  debugPrint(list.toString()); // [1, 2, 3]
 }
 
 void _sortIntDescending() {
   final list = <int>[3, 1, 2]..sort((a, b) => b.compareTo(a));
-  print(list); // [3, 2, 1]
+  debugPrint(list.toString()); // [3, 2, 1]
 }

@@ -1,14 +1,16 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 void main() {
   final stopwatch = Stopwatch();
-  print(stopwatch.elapsed); // 0
-  print(stopwatch.isRunning); // false
+  debugPrint(stopwatch.elapsed.toString()); // 0
+  debugPrint(stopwatch.isRunning.toString()); // false
   stopwatch.start();
-  print(stopwatch.isRunning); // true
+  debugPrint(stopwatch.isRunning.toString()); // true
   Future<void>.delayed(const Duration(seconds: 3), () {
     stopwatch.stop();
-    print(stopwatch.elapsed); // 3 seconds
-    print(stopwatch.isRunning); // false
+    debugPrint(stopwatch.elapsed.toString()); // 3 seconds
+    debugPrint(stopwatch.isRunning.toString()); // false
   });
 }

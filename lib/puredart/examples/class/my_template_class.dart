@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class _MyTemplateClass {
   _MyTemplateClass(this._myList, [DateTime? dateTime])
     : myDateTime = dateTime ?? DateTime.now();
@@ -10,6 +12,6 @@ class _MyTemplateClass {
 
 void main() {
   final myTemplateClass = _MyTemplateClass(['🍎', '🍊']);
-  print(myTemplateClass.myList);
-  print(myTemplateClass.myDateTime);
+  debugPrint(myTemplateClass.myList.toString());
+  debugPrint(myTemplateClass.myDateTime.toString());
 }

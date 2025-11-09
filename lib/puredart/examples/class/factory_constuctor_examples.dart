@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class _Person1 {
   _Person1(this.name, this.age);
   factory _Person1.fromJson(Map<String, dynamic> map) =>
@@ -17,7 +19,7 @@ class _Person2 {
 void main() {
   final map = <String, dynamic>{'name': 'Jane', 'age': 18};
   final person1 = _Person1.fromJson(map);
-  print(person1.name);
+  debugPrint(person1.name);
   final person2 = _Person2(map);
-  print(person2.name);
+  debugPrint(person2.name);
 }

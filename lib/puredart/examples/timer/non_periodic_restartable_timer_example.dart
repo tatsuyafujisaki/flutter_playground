@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
+import 'package:flutter/foundation.dart';
 
 RestartableTimer createAndStartNonPeriodicRestartableTimer([
   void Function()? callback,
@@ -9,8 +10,8 @@ RestartableTimer createAndStartNonPeriodicRestartableTimer([
 void main() {
   final nonPeriodicRestartableTimer = createAndStartNonPeriodicRestartableTimer(
     () {
-      print('The given duration has elapsed.');
-      print(DateTime.now());
+      debugPrint('The given duration has elapsed.');
+      debugPrint(DateTime.now().toString());
     },
   );
 
