@@ -47,6 +47,7 @@ dependencies:
   url_launcher: any
   video_player: any
   webview_flutter: any
+  widgetbook: any
 dev_dependencies:
   build_runner: any
   custom_lint: any
