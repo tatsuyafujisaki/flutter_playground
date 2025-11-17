@@ -7,8 +7,6 @@
 .buildlog/
 .history
 
-
-
 # Flutter repo-specific
 /bin/cache/
 /bin/internal/bootstrap.bat
@@ -123,3 +121,6 @@ app.*.symbols
 # https://dart.dev/tools/pub/private-files
 *.freezed.dart
 *.g.dart
+
+# FVM Version Cache
+.fvm/
