@@ -41,7 +41,6 @@ dependencies:
   riverpod: any
   riverpod_annotation: any
   shared_preferences: any
-  tutorial_coach_mark: any
   upgrader: any
   url_launcher: any
   video_player: any
