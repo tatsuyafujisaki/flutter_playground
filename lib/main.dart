@@ -21,7 +21,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // https://pub.dev/documentation/firebase_core/latest/firebase_core/Firebase/initializeApp.html
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
 
   // Records uncaught errors caused by my Dart code as fatal in Firebase
   // Crashlytics.
