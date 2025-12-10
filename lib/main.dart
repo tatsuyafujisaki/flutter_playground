@@ -33,9 +33,13 @@ void main() async {
   };
 
   // https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/onError.html
-  PlatformDispatcher.instance.onError = (exception, stack) {
+  PlatformDispatcher.instance.onError = (exception, stackTrace) {
     unawaited(
-      FirebaseCrashlytics.instance.recordError(exception, stack, fatal: true),
+      FirebaseCrashlytics.instance.recordError(
+        exception,
+        stackTrace,
+        fatal: true,
+      ),
     );
     return true;
   };
