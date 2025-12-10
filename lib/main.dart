@@ -15,7 +15,7 @@ import 'packages/fcm/notification.dart';
 import 'shared_preferences/encypted_shared_preferences.dart';
 
 void main() async {
-  debugPrint('Platform version: ${Platform.version}');
+  debugPrint('Dart version: ${Platform.version}');
 
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
   WidgetsFlutterBinding.ensureInitialized();
