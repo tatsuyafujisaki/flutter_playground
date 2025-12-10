@@ -46,8 +46,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
       await controller.setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (_) => setState(() => loadingPercentage = 0),
-          onProgress:
-              (progress) => setState(() => loadingPercentage = progress),
+          onProgress: (progress) =>
+              setState(() => loadingPercentage = progress),
           onPageFinished: (_) async {
             final title = await controller.getTitle() ?? '';
             setState(() => this.title = title);
@@ -73,11 +73,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Builder(
-          builder:
-              (context) => TextButton(
-                onPressed: widget.onBackPressed,
-                child: const FittedBox(child: Text('Back')),
-              ),
+          builder: (context) => TextButton(
+            onPressed: widget.onBackPressed,
+            child: const FittedBox(child: Text('Back')),
+          ),
         ),
         title: Text(title, style: const TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,

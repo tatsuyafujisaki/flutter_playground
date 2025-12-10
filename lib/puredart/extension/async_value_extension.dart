@@ -5,9 +5,8 @@ extension on AsyncValue<dynamic> {
   // ignore: unused_element
   void printAll() => when(
     data: (data) => debugPrint('👀data: $data'),
-    error:
-        (error, stackTrace) =>
-            debugPrint('👀(error, stackTrace): ($error, $stackTrace)'),
+    error: (error, stackTrace) =>
+        debugPrint('👀(error, stackTrace): ($error, $stackTrace)'),
     loading: () => debugPrint('👀loading'),
   );
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(
-  MaterialApp(home: SafeArea(child: Scaffold(body: _MyStatelessWidget()))),
+  MaterialApp(
+    home: SafeArea(child: Scaffold(body: _MyStatelessWidget())),
+  ),
 );
 
 /// Note of the Text widget:

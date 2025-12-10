@@ -10,11 +10,10 @@ class _MyStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: Center(
       child: IconButton(
-        onPressed:
-            () async => showModalBottomSheet<void>(
-              context: context,
-              builder: (_) => _BottomSheetContent(),
-            ),
+        onPressed: () async => showModalBottomSheet<void>(
+          context: context,
+          builder: (_) => _BottomSheetContent(),
+        ),
         icon: const Icon(Icons.open_in_new),
       ),
     ),

@@ -11,11 +11,10 @@ class _MyStatelessWidget extends StatefulWidget {
 }
 
 class _MyStatelessWidgetState extends State<_MyStatelessWidget> {
-  final _list =
-      List<_MyData>.generate(
-        20,
-        (index) => _MyData(id: index, text: index.toString()),
-      ).toList();
+  final _list = List<_MyData>.generate(
+    20,
+    (index) => _MyData(id: index, text: index.toString()),
+  ).toList();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -24,9 +23,8 @@ class _MyStatelessWidgetState extends State<_MyStatelessWidget> {
       list: _list,
       getKey: (item) => item.id,
       getString: (item) => item.text,
-      onPressed:
-          (item) =>
-              setState(() => _list.removeWhere((element) => element == item)),
+      onPressed: (item) =>
+          setState(() => _list.removeWhere((element) => element == item)),
     ),
   );
 }

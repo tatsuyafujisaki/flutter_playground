@@ -33,9 +33,8 @@ class _MyStatelessWidget extends StatelessWidget {
 
 Future<String?> createZip(String sourceFilePath) async {
   final bytes = File(sourceFilePath).readAsBytesSync();
-  final archive =
-      Archive()
-        ..addFile(ArchiveFile(p.basename(sourceFilePath), bytes.length, bytes));
+  final archive = Archive()
+    ..addFile(ArchiveFile(p.basename(sourceFilePath), bytes.length, bytes));
 
   final zipData = ZipEncoder().encode(archive);
   final zipPath = p.setExtension(sourceFilePath, '.zip');

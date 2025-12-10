@@ -44,16 +44,14 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     body: SafeArea(
       child: FutureBuilder<void>(
         future: _initialized.future,
-        builder:
-            (context, snapshot) => Center(
-              child:
-                  snapshot.connectionState == ConnectionState.done
-                      ? AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(_controller),
-                      )
-                      : const CircularProgressIndicator(),
-            ),
+        builder: (context, snapshot) => Center(
+          child: snapshot.connectionState == ConnectionState.done
+              ? AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: VideoPlayer(_controller),
+                )
+              : const CircularProgressIndicator(),
+        ),
       ),
     ),
     floatingActionButton: FloatingActionButton(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(
-  MaterialApp(home: Scaffold(appBar: AppBar(leading: _MyStatefulWidget()))),
+  MaterialApp(
+    home: Scaffold(appBar: AppBar(leading: _MyStatefulWidget())),
+  ),
 );
 
 class _MyStatefulWidget extends StatefulWidget {
@@ -26,17 +28,16 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
         child: const Text('🍊'),
       ),
     ],
-    builder:
-        (_, controller, child) => TextButton(
-          onPressed: () {
-            if (controller.isOpen) {
-              controller.close();
-            } else {
-              controller.open();
-            }
-          },
-          child: child ?? Icon(isMenuOpen ? Icons.menu_open : Icons.menu),
-        ),
+    builder: (_, controller, child) => TextButton(
+      onPressed: () {
+        if (controller.isOpen) {
+          controller.close();
+        } else {
+          controller.open();
+        }
+      },
+      child: child ?? Icon(isMenuOpen ? Icons.menu_open : Icons.menu),
+    ),
   );
 
   Future<void> _showDialog(String title) async {

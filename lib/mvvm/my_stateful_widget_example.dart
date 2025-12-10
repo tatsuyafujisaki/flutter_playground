@@ -28,14 +28,12 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     home: Scaffold(
       body: ListenableBuilder(
         listenable: albumViewModel,
-        builder:
-            (context, child) => ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
-              itemCount: albumViewModel.albums.length,
-              itemBuilder:
-                  (context, index) =>
-                      Text(albumViewModel.albums[index].title ?? ''),
-            ),
+        builder: (context, child) => ListView.separated(
+          separatorBuilder: (context, index) => const Divider(),
+          itemCount: albumViewModel.albums.length,
+          itemBuilder: (context, index) =>
+              Text(albumViewModel.albums[index].title ?? ''),
+        ),
       ),
     ),
   );

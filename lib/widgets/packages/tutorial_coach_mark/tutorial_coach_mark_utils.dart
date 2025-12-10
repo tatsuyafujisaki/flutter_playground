@@ -37,18 +37,17 @@ TutorialCoachMark _createTutorialCoachMark(
 List<TargetFocus> _createTargetFocusList(
   List<CoachMarkTargetData> coachMarkTargetDataList,
   GestureTapCallback onTap,
-) =>
-    coachMarkTargetDataList
-        .map(
-          (data) => _createTargetFocus(
-            keyTarget: data.key,
-            title: data.title,
-            body: data.body,
-            onTap: onTap,
-            align: data.align,
-          ),
-        )
-        .toList();
+) => coachMarkTargetDataList
+    .map(
+      (data) => _createTargetFocus(
+        keyTarget: data.key,
+        title: data.title,
+        body: data.body,
+        onTap: onTap,
+        align: data.align,
+      ),
+    )
+    .toList();
 
 TargetFocus _createTargetFocus({
   required GlobalKey<State<StatefulWidget>> keyTarget,

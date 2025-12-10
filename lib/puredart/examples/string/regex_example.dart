@@ -1,8 +1,7 @@
 /// https://stackoverflow.com/a/78931094/10867055
-Iterable<String> getUrls(String input) =>
-    RegExp(
-      r'(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])',
-    ).allMatches(input).map((match) => match.group(0)).nonNulls;
+Iterable<String> getUrls(String input) => RegExp(
+  r'(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])',
+).allMatches(input).map((match) => match.group(0)).nonNulls;
 
 void main() {
   getUrls(input).forEach(print);

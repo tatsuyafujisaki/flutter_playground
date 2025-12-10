@@ -9,16 +9,15 @@ class _MyStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: Center(
       child: IconButton(
-        onPressed:
-            () async => showModalBottomSheet<void>(
-              context: context,
-              builder: (_) => const _BottomSheetContent(),
-              // stretches the bottom sheet to full height.
-              isScrollControlled: true,
-              // avoids the bottom sheet of full height
-              // from overlapping the status bar.
-              useSafeArea: true,
-            ),
+        onPressed: () async => showModalBottomSheet<void>(
+          context: context,
+          builder: (_) => const _BottomSheetContent(),
+          // stretches the bottom sheet to full height.
+          isScrollControlled: true,
+          // avoids the bottom sheet of full height
+          // from overlapping the status bar.
+          useSafeArea: true,
+        ),
         icon: const Icon(Icons.flutter_dash),
       ),
     ),
