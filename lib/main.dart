@@ -11,7 +11,6 @@ import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 import 'packages/fcm/firebase_message_handler.dart';
 import 'packages/fcm/notification.dart';
-import 'shared_preferences/encypted_shared_preferences.dart';
 
 void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
@@ -41,7 +40,6 @@ void main() async {
     return true;
   };
 
-  await EncryptedSharedPreferences().initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
 
