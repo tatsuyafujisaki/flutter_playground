@@ -27,16 +27,15 @@ void main() async {
     );
   }
 
-  // Records uncaught errors caused by my Dart code as fatal in Firebase
-  // Crashlytics.
   // https://api.flutter.dev/flutter/foundation/FlutterError/onError.html
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = (details) {
+    unawaited(FirebaseCrashlytics.instance.recordFlutterFatalError(details));
+  };
 
-  PlatformDispatcher.instance.onError = (error, stackTrace) {
-    // Records uncaught platform-level errors as fatal in Firebase Crashlytics.
-    // https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/onError.html
+  // https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/onError.html
+  PlatformDispatcher.instance.onError = (exception, stack) {
     unawaited(
-      FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true),
+      FirebaseCrashlytics.instance.recordError(exception, stack, fatal: true),
     );
     return true;
   };
