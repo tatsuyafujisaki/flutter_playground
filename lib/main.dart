@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -15,8 +14,6 @@ import 'packages/fcm/notification.dart';
 import 'shared_preferences/encypted_shared_preferences.dart';
 
 void main() async {
-  debugPrint('Dart version: ${Platform.version}');
-
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
   WidgetsFlutterBinding.ensureInitialized();
 
