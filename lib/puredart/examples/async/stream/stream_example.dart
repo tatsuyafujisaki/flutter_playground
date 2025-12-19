@@ -11,7 +11,7 @@ void main() async {
               throw Exception('💀');
             }
             if (count == 7) {
-              subscription.cancel();
+              unawaited(subscription.cancel());
             }
             return count;
           })

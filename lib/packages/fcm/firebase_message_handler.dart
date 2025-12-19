@@ -102,7 +102,8 @@ class FirebaseMessageHandler {
 
       if (apnsToken == null) {
         log(
-          'APNS token is still not available after multiple retries. FCM token cannot be retrieved.',
+          'APNS token is still not available after multiple retries. '
+          'FCM token cannot be retrieved.',
         );
         return;
       }

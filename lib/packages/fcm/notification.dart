@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import '../../extension/extensions.dart';
 
 final _notificationPlugin = FlutterLocalNotificationsPlugin();
-late AndroidNotificationChannel _channel;
 
 Future<void> enableNotification(BuildContext context) async {
   // > The app must create a channel with this channel ID before any
@@ -62,7 +61,7 @@ Future<void> enableNotification(BuildContext context) async {
   await deleteMiscellaneousNotificationChannel();
 
   if (context.mounted) {
-    _channel = await createNotificationChannel(context);
+    await createNotificationChannel(context);
   }
 }
 
