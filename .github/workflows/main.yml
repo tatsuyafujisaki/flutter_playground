@@ -18,9 +18,20 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-      - run: |
-          git clone --depth 1 --branch stable https://github.com/flutter/flutter.git $HOME/flutter
-          echo "$HOME/flutter/bin" >> $GITHUB_PATH
+      - id: my-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/flutter
+          key: ${{ runner.os }}-flutter-stable
+      - if: steps.my-cache.outputs.cache-hit != 'true'
+        run: git clone --depth 1 --branch stable https://github.com/flutter/flutter.git $HOME/flutter
+      - run: echo "$HOME/flutter/bin" >> $GITHUB_PATH
+      - uses: actions/cache@v5
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: dart format --output none --set-exit-if-changed .
