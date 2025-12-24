@@ -17,6 +17,7 @@ dependencies:
   firebase_messaging: any
   flutter:
     sdk: flutter
+  flutter_launcher_icons: any
   flutter_local_notifications: any
   flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
     sdk: flutter
