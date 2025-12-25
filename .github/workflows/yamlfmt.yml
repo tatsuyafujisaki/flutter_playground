@@ -1,0 +1,14 @@
+on:
+  push:
+    paths:
+      - '**.yaml'
+      - '**.yml'
+jobs:
+  yaml-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+      - run: go install github.com/google/yamlfmt/cmd/yamlfmt@latest
+      - run: yamlfmt -lint .
