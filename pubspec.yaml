@@ -46,7 +46,6 @@ dependencies:
   url_launcher: any
   video_player: any
   webview_flutter: any
-
 dev_dependencies:
   build_runner: any
   flutter_lints: any
