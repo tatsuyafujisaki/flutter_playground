@@ -10,17 +10,14 @@ android {
     namespace = "com.example.flutter_playground"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+    // https://developer.android.com/build/jdks#toolchain
+    // https://kotlinlang.org/docs/gradle-configure-project.html#gradle-java-toolchains-support
+    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
     compileOptions {
         // Required by the flutter_local_notifications package
         // https://pub.dev/packages/flutter_local_notifications#gradle-setup
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     defaultConfig {
