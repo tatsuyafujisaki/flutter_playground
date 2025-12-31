@@ -1,13 +1,13 @@
 {
   "configurations": [
     {
-      "name": "My Debug",
+      "name": "Debug",
       "type": "dart",
       "request": "launch",
       "flutterMode": "debug"
     },
     {
-      "name": "My Release",
+      "name": "Release",
       "type": "dart",
       "request": "launch",
       "flutterMode": "release"
