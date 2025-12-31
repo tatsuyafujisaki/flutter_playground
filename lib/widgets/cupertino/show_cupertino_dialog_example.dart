@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() =>
-    runApp(const MaterialApp(home: Scaffold(body: _MyStatelessWidget())));
+void main() => runApp(
+  const ProviderScope(
+    child: MaterialApp(home: Scaffold(body: _MyStatelessWidget())),
+  ),
+);
 
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();

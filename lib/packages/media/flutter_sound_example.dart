@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -10,8 +11,10 @@ import 'package:permission_handler/permission_handler.dart';
 import '../permission_handler_example.dart';
 
 void main() => runApp(
-  const MaterialApp(
-    home: Scaffold(body: _MyStatefulWidget(), backgroundColor: Colors.white),
+  const ProviderScope(
+    child: MaterialApp(
+      home: Scaffold(body: _MyStatefulWidget(), backgroundColor: Colors.white),
+    ),
   ),
 );
 

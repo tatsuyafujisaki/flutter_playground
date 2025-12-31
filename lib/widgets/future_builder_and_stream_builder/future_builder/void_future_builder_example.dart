@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'create_void_future_builder.dart';
 
-void main() => runApp(MaterialApp(home: Scaffold(body: _MyStatelessWidget())));
+void main() => runApp(
+  ProviderScope(
+    child: MaterialApp(home: Scaffold(body: _MyStatelessWidget())),
+  ),
+);
 
 class _MyStatelessWidget extends StatelessWidget {
   final _future = Future<void>.delayed(const Duration(seconds: 5), () {});

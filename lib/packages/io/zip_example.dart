@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:archive/archive_io.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
 import 'download_and_save_binary_file.dart';
 import 'save_file_example.dart';
 
-void main() => runApp(const _MyStatelessWidget());
+void main() => runApp(const ProviderScope(child: _MyStatelessWidget()));
 
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();

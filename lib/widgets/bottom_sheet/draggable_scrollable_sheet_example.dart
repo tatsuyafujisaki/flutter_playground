@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() =>
-    runApp(const MaterialApp(home: Scaffold(body: _MyStatefulWidget())));
+void main() => runApp(
+  const ProviderScope(
+    child: MaterialApp(home: Scaffold(body: _MyStatefulWidget())),
+  ),
+);
 
 class _MyStatefulWidget extends StatefulWidget {
   const _MyStatefulWidget();

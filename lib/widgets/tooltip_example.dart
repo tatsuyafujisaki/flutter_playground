@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() => runApp(
-  MaterialApp(
-    home: Scaffold(body: _MyStatelessWidget(), backgroundColor: Colors.lime),
+  ProviderScope(
+    child: MaterialApp(
+      home: Scaffold(body: _MyStatelessWidget(), backgroundColor: Colors.lime),
+    ),
   ),
 );
 

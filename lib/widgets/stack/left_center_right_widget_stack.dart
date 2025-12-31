@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() => runApp(const _MyStatelessWidget());
+void main() => runApp(const ProviderScope(child: _MyStatelessWidget()));
 
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();

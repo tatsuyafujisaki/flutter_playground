@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'album_view_model.dart';
 
 void main() {
-  runApp(const _MyStatefulWidget());
+  runApp(const ProviderScope(child: _MyStatefulWidget()));
 }
 
 class _MyStatefulWidget extends StatefulWidget {

@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
 
-void main() => runApp(MaterialApp(home: _MyStatefulWidget()));
+void main() =>
+    runApp(ProviderScope(child: MaterialApp(home: _MyStatefulWidget())));
 
 class _MyStatefulWidget extends StatefulWidget {
   @override
