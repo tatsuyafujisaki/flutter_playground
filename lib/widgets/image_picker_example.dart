@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_android/image_picker_android.dart';
-import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
-
 import '../packages/permission_handler_example.dart';
 
 void main() =>
@@ -17,13 +14,6 @@ class _MyStatelessWidget extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!await isPhotoGranted) {
         return;
-      }
-      final imagePickerPlatform = ImagePickerPlatform.instance;
-      if (imagePickerPlatform is ImagePickerAndroid) {
-        // > ImagePickerAndroid.useAndroidPhotoPicker must be set to true
-        // > to use the limit functionality.
-        // https://pub.dev/packages/image_picker_android
-        imagePickerPlatform.useAndroidPhotoPicker = true;
       }
       final images = await ImagePicker().pickMultiImage(limit: 3);
       for (final image in images) {

@@ -6,6 +6,7 @@ environment:
 # > The version constraint is optional but recommended. If no version constraint is given, any is assumed.
 # https://dart.dev/tools/pub/dependencies#hosted-packages
 dependencies:
+  archive: any
   async: any
   collection: any
   device_info_plus: any
