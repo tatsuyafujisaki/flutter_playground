@@ -33,4 +33,4 @@ jobs:
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: dart format --output none --set-exit-if-changed .
       - run: flutter analyze
-      - run: flutter test
+      - run: test ! -d test || flutter test
