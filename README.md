@@ -3,9 +3,10 @@
 ```shell
 rm .gitignore
 
-for type in Android Dart Firebase Flutter Gradle Kotlin Swift; do
+for type in Android Dart Firebase Flutter Gradle Kotlin Swift
+do
   echo "#\n# https://github.com/github/gitignore/blob/main/$type.gitignore\n#\n" >> .gitignore
-  curl -sL "https://raw.githubusercontent.com/github/gitignore/main/$type.gitignore" >> .gitignore
+  curl --location "https://raw.githubusercontent.com/github/gitignore/main/$type.gitignore" >> .gitignore
   echo "\n" >> .gitignore
 done
 
