@@ -19,7 +19,7 @@ dependencies:
     sdk: flutter
   flutter_launcher_icons: any
   flutter_local_notifications: any
-  flutter_localizations: # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
+  flutter_localizations:
     sdk: flutter
   flutter_riverpod: any
   flutter_slidable: any
