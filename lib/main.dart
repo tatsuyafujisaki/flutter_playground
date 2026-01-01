@@ -17,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // https://pub.dev/documentation/firebase_core/latest/firebase_core/Firebase/initializeApp.html
+  // https://firebase.google.com/docs/flutter/setup?platform=ios#initialize-firebase
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
