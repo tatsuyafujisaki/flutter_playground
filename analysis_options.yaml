@@ -59,7 +59,6 @@ linter:
     - invalid_case_patterns
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
-    - library_annotations
     - lines_longer_than_80_chars
     - matching_super_parameters
     - missing_whitespace_between_adjacent_strings
@@ -68,7 +67,6 @@ linter:
     - no_literal_bool_comparisons
     - no_runtimeType_toString
     - no_self_assignments
-    - no_wildcard_variable_uses
     - noop_primitive_operations
     - omit_local_variable_types
     - only_throw_errors
@@ -77,6 +75,7 @@ linter:
     - prefer_asserts_with_message
     - prefer_const_constructors
     - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
     - prefer_constructors_over_static_methods
     - prefer_expression_function_bodies
     - prefer_final_in_for_each
@@ -87,7 +86,7 @@ linter:
     - prefer_mixin
     - prefer_null_aware_method_calls
     - prefer_relative_imports # incompatible with always_use_package_imports
-    - prefer_single_quotes
+    - prefer_single_quotes # incompatible with prefer_double_quotes
     - require_trailing_commas
     - sized_box_shrink_expand
     - sort_constructors_first
@@ -107,7 +106,6 @@ linter:
     - unnecessary_parenthesis
     - unnecessary_raw_strings
     - unnecessary_statements
-    - unnecessary_to_list_in_spreads
     - unreachable_from_main
     - use_colored_box
     - use_decorated_box
@@ -119,7 +117,6 @@ linter:
     - use_raw_strings
     - use_setters_to_change_properties
     - use_string_buffers
-    - use_super_parameters
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
     - use_truncating_division

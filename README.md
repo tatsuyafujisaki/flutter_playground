@@ -28,3 +28,11 @@ lib/l10n/untranslated.txt
 .fvm/
 .fvmrc
 ```
+
+# Prompts for AI chatbots
+
+```
+First, read the content of https://dart.dev/tools/linter-rules
+
+Are there any Flutter lint rules that are already in "package:flutter_lints/flutter.yaml" but Iredundantly and explicitly listed in pubspec.yaml?
+```
