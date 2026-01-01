@@ -1,30 +1,16 @@
 # How to create `.gitignore`
 
-```shell
-rm -f .gitignore
+1. Follow the instructions in
+   https://github.com/tatsuyafujisaki/dotfiles/blob/main/git/README.md.
+2. Add the lines below to `.gitignore`.
 
-for type in Android Dart Firebase Flutter Gradle Kotlin Swift
-do
-  {
-    echo "#"
-    echo "# https://github.com/github/gitignore/blob/main/$type.gitignore"
-    echo "#"
-    echo ""
-    curl --location --silent "https://raw.githubusercontent.com/github/gitignore/main/$type.gitignore"
-    echo ""
-  } >> .gitignore
-done
+```gitignore
+#
+# Not from https://github.com/github/gitignore
+#
 
-cat >> .gitignore << 'EOF'
-
-# https://developer.android.com/studio/publish/app-signing
-# keystore.properties
-
-# google-services.json is already included in https://raw.githubusercontent.com/github/gitignore/refs/heads/main/Android.gitignore but GoogleService-Info.plist is not.
-# GoogleService-Info.plist
-
-# Excludes the service credentials file used for Firebase App Distribution.
-# *.json
+ios/Runner/GoogleService-Info.plist
+lib/firebase_options.dart
 
 # > don't include most of the files that your IDE or code editor, the pub tool, and other tools generate.
 # > In many source code repositories, the common practice is not to commit generated files, at all.
@@ -41,13 +27,4 @@ lib/l10n/untranslated.txt
 # https://fvm.app
 .fvm/
 .fvmrc
-
-EOF
 ```
-
-Files that are required for a Flutter project to use Firebase
-
-- android/app/google-services.json
-- ios/Runner/GoogleService-Info.plist
-- lib/firebase_options.dart
-- (optional) firebase.json
