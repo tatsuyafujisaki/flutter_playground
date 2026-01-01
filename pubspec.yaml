@@ -56,5 +56,5 @@ dev_dependencies:
   riverpod_generator: any
   riverpod_lint: any
 flutter:
-  generate: true # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization
+  generate: true # https://docs.flutter.dev/ui/internationalization#adding-your-own-localized-messages
   uses-material-design: true
