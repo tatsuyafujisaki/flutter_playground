@@ -1,13 +1,18 @@
 # How to create `.gitignore`
 
 ```shell
-rm .gitignore
+rm -f .gitignore
 
 for type in Android Dart Firebase Flutter Gradle Kotlin Swift
 do
-  echo "#\n# https://github.com/github/gitignore/blob/main/$type.gitignore\n#\n" >> .gitignore
-  curl --location "https://raw.githubusercontent.com/github/gitignore/main/$type.gitignore" >> .gitignore
-  echo "\n" >> .gitignore
+  {
+    echo "#"
+    echo "# https://github.com/github/gitignore/blob/main/$type.gitignore"
+    echo "#"
+    echo ""
+    curl --location --silent "https://raw.githubusercontent.com/github/gitignore/main/$type.gitignore"
+    echo ""
+  } >> .gitignore
 done
 
 cat >> .gitignore << 'EOF'

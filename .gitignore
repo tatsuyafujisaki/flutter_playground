@@ -37,7 +37,6 @@ google-services.json
 # Android Profiling
 *.hprof
 
-
 #
 # https://github.com/github/gitignore/blob/main/Dart.gitignore
 #
@@ -72,7 +71,6 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 
-
 #
 # https://github.com/github/gitignore/blob/main/Firebase.gitignore
 #
@@ -105,7 +103,6 @@ yarn-error.log*
 
 # Environment files (local configs)
 /.env.*
-
 
 #
 # https://github.com/github/gitignore/blob/main/Flutter.gitignore
@@ -230,7 +227,6 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
-
 #
 # https://github.com/github/gitignore/blob/main/Gradle.gitignore
 #
@@ -256,7 +252,6 @@ gradle-app.setting
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
-
 
 #
 # https://github.com/github/gitignore/blob/main/Kotlin.gitignore
@@ -289,7 +284,6 @@ replay_pid*
 
 # Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
 .kotlin/
-
 #
 # https://github.com/github/gitignore/blob/main/Swift.gitignore
 #
@@ -358,9 +352,8 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 
-
 # https://developer.android.com/studio/publish/app-signing
-keystore.properties
+# keystore.properties
 
 # google-services.json is already included in https://raw.githubusercontent.com/github/gitignore/refs/heads/main/Android.gitignore but GoogleService-Info.plist is not.
 # GoogleService-Info.plist
