@@ -25,6 +25,7 @@ dependencies:
   flutter_sound: any
   flutter_svg: any
   freezed_annotation: any
+  gal: any
   geolocator: any
   glob: any
   http: any

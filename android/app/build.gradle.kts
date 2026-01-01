@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.flutter_playground"
+    namespace = "com.example.flutterplayground"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
     // https://developer.android.com/build/jdks#toolchain
@@ -21,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.flutter_playground"
+        applicationId = "com.example.flutterplayground"
         minSdk = 26
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
