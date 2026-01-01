@@ -32,7 +32,9 @@ lib/l10n/untranslated.txt
 # Prompts for AI chatbots
 
 ```
-First, read the content of https://dart.dev/tools/linter-rules
+According to https://dart.dev/tools/linter-rules, are there any Flutter lint rules that are in `package:flutter_lints/flutter.yaml` but I redundantly and explicitly listed in analysis_options.yaml?
+```
 
-Are there any Flutter lint rules that are already in "package:flutter_lints/flutter.yaml" but Iredundantly and explicitly listed in pubspec.yaml?
+```
+According to https://dart.dev/tools/linter-rules, are there any Flutter lint rules that not in `package:flutter_lints/flutter.yaml` but recommended to add in `analysis_options.yaml`?
 ```
