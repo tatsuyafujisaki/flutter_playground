@@ -35,7 +35,6 @@ dependencies:
   path: any
   path_provider: any
   permission_handler: any
-  riverpod: any
   riverpod_annotation: any
   shared_preferences: any
   upgrader: any
