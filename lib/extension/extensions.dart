@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 
 import '../enum/language.dart';
@@ -9,5 +11,5 @@ extension BuildContextExtension on BuildContext {
 
   double get screenWidth => MediaQuery.of(this).size.width;
   bool isCurrentLocale(Language language) =>
-      Localizations.localeOf(this).languageCode == language.code;
+      PlatformDispatcher.instance.locale.languageCode == language.code;
 }
