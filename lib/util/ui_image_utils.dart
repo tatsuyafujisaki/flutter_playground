@@ -1,8 +1,9 @@
-import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
+
+import 'package:flutter/painting.dart' as painting;
 import 'package:http/http.dart' as http;
 
 Future<Uint8List?> centerCropImageFromPath(String imagePath) =>
@@ -20,7 +21,7 @@ Future<Uint8List> _createImageBytesFromUrl(String imageUrl) async {
 }
 
 Future<Uint8List?> _centerCrop(Uint8List imageBytes) async {
-  final image = await _decodeImage(imageBytes);
+  final image = await painting.decodeImageFromList(imageBytes);
   final cropSize = min(image.width, image.height);
   final pictureRecorder = PictureRecorder();
   Canvas(pictureRecorder).drawImageRect(
@@ -39,10 +40,4 @@ Future<Uint8List?> _centerCrop(Uint8List imageBytes) async {
   );
   final byteData = await croppedImage.toByteData(format: ImageByteFormat.png);
   return byteData?.buffer.asUint8List();
-}
-
-Future<Image> _decodeImage(Uint8List list) async {
-  final completer = Completer<Image>();
-  decodeImageFromList(list, completer.complete);
-  return completer.future;
 }
