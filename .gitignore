@@ -355,6 +355,9 @@ fastlane/test_output
 # Not from https://github.com/github/gitignore
 #
 
+# https://developer.android.com/studio/publish/app-signing
+keystore.properties
+
 ios/Runner/GoogleService-Info.plist
 
 # > don't include most of the files that your IDE or code editor, the pub tool, and other tools generate.
