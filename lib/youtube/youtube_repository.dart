@@ -1,4 +1,4 @@
-import 'dart:developer' as developer;
+import 'dart:ui' as ui;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:googleapis/youtube/v3.dart';
 import 'package:http/http.dart' as http;
@@ -10,21 +10,25 @@ final youtubeRepositoryProvider = Provider<YoutubeRepository>(
 class YoutubeRepository {
   static const _apiKey = String.fromEnvironment('YOUTUBE_API_KEY');
 
+  String _getRegionCode() {
+    final countryCode = ui.PlatformDispatcher.instance.locale.countryCode;
+    return (countryCode != null && countryCode.isNotEmpty) ? countryCode : 'US';
+  }
+
   Future<List<Video>> fetchPopularVideos() async {
     final client = _ApiKeyClient(_apiKey);
     final youtube = YouTubeApi(client);
 
     try {
+      final regionCode = _getRegionCode();
       final response = await youtube.videos.list(
         ['snippet', 'contentDetails', 'statistics'],
         chart: 'mostPopular',
         maxResults: 50,
-        // Optional: regionCode to get popular videos in specific region
-        regionCode: 'JP',
+        regionCode: regionCode,
       );
 
       final videos = response.items ?? [];
-      developer.log('Fetched ${videos.length} videos');
       return videos;
     } finally {
       client.close();
