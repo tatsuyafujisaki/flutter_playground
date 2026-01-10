@@ -27,132 +27,24 @@ class YoutubePage extends ConsumerWidget {
         foregroundColor: Colors.black,
       ),
       body: asyncVideos.when(
-        data: (videos) => GridView.builder(
-          padding: EdgeInsets.zero,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 0,
-            crossAxisSpacing: 0,
-            childAspectRatio: 0.7,
-          ),
-          itemCount: videos.length,
-          itemBuilder: (context, index) {
-            final video = videos[index];
-            final snippet = video.snippet;
-            final stats = video.statistics;
-            final thumbnail =
-                snippet?.thumbnails?.high ??
-                snippet?.thumbnails?.medium ??
-                snippet?.thumbnails?.default_;
-
-            return Card(
-              elevation: 0,
-              margin: EdgeInsets.zero,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                onTap: () {
-                  // TODO(tatsuyafujisaki): Open video
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    if (thumbnail?.url != null)
-                      AspectRatio(
-                        aspectRatio:
-                            (thumbnail!.width != null &&
-                                thumbnail.height != null &&
-                                thumbnail.height! > 0)
-                            ? thumbnail.width! / thumbnail.height!
-                            : 16 / 9,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Image.network(
-                              thumbnail.url!,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Container(
-                                    color: Colors.grey[200],
-                                    child: const Icon(
-                                      Icons.broken_image,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                            ),
-                            if (video.contentDetails?.duration != null)
-                              Positioned(
-                                bottom: 8,
-                                right: 8,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 6,
-                                    vertical: 2,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withValues(alpha: 0.8),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: Text(
-                                    _formatDuration(
-                                      video.contentDetails!.duration!,
-                                    ),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            snippet?.title ?? 'No Title',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              height: 1.3,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            snippet?.channelTitle ?? '',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey[600],
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          if (stats?.viewCount != null) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              '${_formatViewCount(stats!.viewCount!)} views',
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: Colors.grey[500],
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ],
+        data: (videos) => SingleChildScrollView(
+          child: Column(
+            children: [
+              for (var i = 0; i < videos.length; i += 2)
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(child: _buildVideoCard(videos[i])),
+                      if (i + 1 < videos.length)
+                        Expanded(child: _buildVideoCard(videos[i + 1]))
+                      else
+                        const Expanded(child: SizedBox.shrink()),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+            ],
+          ),
         ),
         error: (err, stack) => Center(
           child: Column(
@@ -173,6 +65,112 @@ class YoutubePage extends ConsumerWidget {
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVideoCard(Video video) {
+    final snippet = video.snippet;
+    final stats = video.statistics;
+    final thumbnail =
+        snippet?.thumbnails?.high ??
+        snippet?.thumbnails?.medium ??
+        snippet?.thumbnails?.default_;
+
+    return Card(
+      elevation: 0,
+      margin: EdgeInsets.zero,
+      shape: const RoundedRectangleBorder(),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () {
+          // TODO(tatsuyafujisaki): Open video
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (thumbnail?.url != null)
+              AspectRatio(
+                aspectRatio:
+                    (thumbnail!.width != null &&
+                        thumbnail.height != null &&
+                        thumbnail.height! > 0)
+                    ? thumbnail.width! / thumbnail.height!
+                    : 16 / 9,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(
+                      thumbnail.url!,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[200],
+                        child: const Icon(
+                          Icons.broken_image,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    if (video.contentDetails?.duration != null)
+                      Positioned(
+                        bottom: 8,
+                        right: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.8),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            _formatDuration(video.contentDetails!.duration!),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 8, 10, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    snippet?.title ?? 'No Title',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      height: 1.3,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    snippet?.channelTitle ?? '',
+                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  if (stats?.viewCount != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      '${_formatViewCount(stats!.viewCount!)} views',
+                      style: TextStyle(fontSize: 11, color: Colors.grey[500]),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
