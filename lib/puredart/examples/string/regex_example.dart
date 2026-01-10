@@ -1,12 +1,15 @@
-import 'package:flutter/foundation.dart';
-
 /// https://stackoverflow.com/a/78931094/10867055
-Iterable<String> getUrls(String input) => RegExp(
-  r'(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])',
-).allMatches(input).map((match) => match.group(0)).nonNulls;
+final _urlPattern = RegExp(
+  r'(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+',
+  caseSensitive: false,
+);
 
-void main() {
-  getUrls(input).forEach(debugPrint);
+Iterable<String> getUrls(String input) {
+  if (input.isEmpty) {
+    return [];
+  }
+
+  return _urlPattern.allMatches(input).map((match) => match.group(0)).nonNulls;
 }
 
 // Text from the original poster
