@@ -12,6 +12,7 @@ import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 import 'packages/fcm/firebase_message_handler.dart';
 import 'packages/fcm/notification.dart';
+import 'youtube/youtube_page.dart';
 
 void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
@@ -53,7 +54,7 @@ class MyApp extends ConsumerWidget {
       upgrader: Upgrader(debugDisplayOnce: true),
       showIgnore: false,
       showLater: false,
-      child: const _MyStatefulWidget(title: 'My title'),
+      child: const YoutubePage(),
     ),
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
