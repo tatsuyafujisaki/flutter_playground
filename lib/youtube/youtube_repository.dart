@@ -1,11 +1,13 @@
 import 'dart:ui' as ui;
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:googleapis/youtube/v3.dart';
 import 'package:http/http.dart' as http;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final youtubeRepositoryProvider = Provider<YoutubeRepository>(
-  (ref) => YoutubeRepository(),
-);
+part 'youtube_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+YoutubeRepository youtubeRepository(Ref ref) => YoutubeRepository();
 
 class YoutubeRepository {
   static const _apiKey = String.fromEnvironment('YOUTUBE_API_KEY');

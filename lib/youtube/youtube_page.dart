@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:googleapis/youtube/v3.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'youtube_repository.dart';
 
-final popularVideosProvider = FutureProvider<List<Video>>((ref) async {
+part 'youtube_page.g.dart';
+
+@riverpod
+Future<List<Video>> popularVideos(Ref ref) async {
   final repository = ref.watch(youtubeRepositoryProvider);
   return repository.fetchPopularVideos();
-});
+}
 
 class YoutubePage extends ConsumerWidget {
   const YoutubePage({super.key});
