@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
-
 void _logJsonRootType(String json) {
   developer.log(
     (jsonDecode(json) as Map<String, dynamic>).runtimeType.toString(),
