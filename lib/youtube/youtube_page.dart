@@ -16,7 +16,7 @@ class YoutubePage extends ConsumerWidget {
     final asyncVideos = ref.watch(popularVideosProvider);
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'YouTube Trending',
@@ -28,11 +28,11 @@ class YoutubePage extends ConsumerWidget {
       ),
       body: asyncVideos.when(
         data: (videos) => GridView.builder(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.zero,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 0,
             childAspectRatio: 0.7,
           ),
           itemCount: videos.length,
@@ -46,9 +46,10 @@ class YoutubePage extends ConsumerWidget {
                 snippet?.thumbnails?.default_;
 
             return Card(
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+              elevation: 0,
+              margin: EdgeInsets.zero,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
               ),
               clipBehavior: Clip.antiAlias,
               child: InkWell(
