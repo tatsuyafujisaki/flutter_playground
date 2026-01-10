@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:googleapis/youtube/v3.dart';
 import 'package:http/http.dart' as http;
@@ -23,8 +24,7 @@ class YoutubeRepository {
       );
 
       final videos = response.items ?? [];
-      // ignore: avoid_print
-      print('Fetched ${videos.length} videos');
+      developer.log('Fetched ${videos.length} videos');
       return videos;
     } finally {
       client.close();

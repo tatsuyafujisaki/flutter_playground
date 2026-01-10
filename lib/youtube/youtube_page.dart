@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:googleapis/youtube/v3.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'youtube_repository.dart';
 
 final popularVideosProvider = FutureProvider<List<Video>>((ref) async {
@@ -83,8 +84,15 @@ class YoutubePage extends ConsumerWidget {
       shape: const RoundedRectangleBorder(),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () {
-          // TODO(tatsuyafujisaki): Open video
+        onTap: () async {
+          final videoId = video.id;
+          if (videoId == null) {
+            return;
+          }
+          final url = Uri.parse('https://www.youtube.com/watch?v=$videoId');
+          if (await canLaunchUrl(url)) {
+            await launchUrl(url, mode: LaunchMode.externalApplication);
+          }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
