@@ -5,6 +5,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'extension/extensions.dart';
 import 'firebase_options.dart';
@@ -47,8 +48,13 @@ void main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) => const MaterialApp(
-    home: _MyStatefulWidget(title: 'My title'),
+  Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
+    home: UpgradeAlert(
+      upgrader: Upgrader(debugDisplayOnce: true),
+      showIgnore: false,
+      showLater: false,
+      child: const _MyStatefulWidget(title: 'My title'),
+    ),
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
   );
