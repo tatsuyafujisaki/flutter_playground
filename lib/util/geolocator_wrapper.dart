@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
@@ -67,7 +67,7 @@ class GeolocatorWrapper {
   void demoOneShot() {
     Future<void>.delayed(
       Duration.zero,
-      () => debugPrint(currentPosition.toString()),
+      () => developer.log(currentPosition.toString()),
     );
   }
 
@@ -75,7 +75,7 @@ class GeolocatorWrapper {
     Future<void>.delayed(
       Duration.zero,
       () async => (await GeolocatorWrapper().positionStream)?.listen(
-        (position) => debugPrint(
+        (position) => developer.log(
           '$position, Time: ${DateFormat.Hms().format(DateTime.now())}',
         ),
       ),

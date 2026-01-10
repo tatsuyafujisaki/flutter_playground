@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 void main() {
   _sortString();
@@ -7,10 +7,10 @@ void main() {
 
 void _sortString() {
   final list = <String>['c', 'b', 'a']..sort();
-  debugPrint(list.toString()); // [a, b, c]
+  developer.log(list.toString()); // [a, b, c]
 }
 
 void _sortStringDescending() {
   final list = <String>['c', 'b', 'a']..sort((a, b) => b.compareTo(a));
-  debugPrint(list.toString()); // [c, b, a]
+  developer.log(list.toString()); // [c, b, a]
 }

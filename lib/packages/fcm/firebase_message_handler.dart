@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
+import 'dart:developer' as developer;
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -48,10 +48,10 @@ class FirebaseMessageHandler {
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
     FirebaseMessaging.onMessage,
     (message) {
-      debugPrint(
+      developer.log(
         '''🔥FirebaseMessaging.onMessage received the following message. In other words, the app received a notification while it was in the foreground.''',
       );
-      _printMessage(message);
+      _logMessage(message);
       unawaited(showNotification(message));
     },
   );
@@ -62,10 +62,10 @@ class FirebaseMessageHandler {
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onMessageOpenedApp.html
     FirebaseMessaging.onMessageOpenedApp,
     (message) {
-      debugPrint(
+      developer.log(
         '''🔥FirebaseMessaging.onMessageOpenedApp received the following message. In other words, the user tapped a notification while the app was in the background.''',
       );
-      _printMessage(message);
+      _logMessage(message);
     },
   );
 
@@ -78,9 +78,8 @@ class FirebaseMessageHandler {
     StreamSubscription<T>? subscrption;
     try {
       subscrption = stream.listen(onData, onError: onError, onDone: onDone);
-    } on Exception catch (e, s) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: s);
+    } on Exception catch (error, stackTrace) {
+      developer.log('', error: error, stackTrace: stackTrace);
     }
     return subscrption;
   }
@@ -96,12 +95,14 @@ class FirebaseMessageHandler {
         if (apnsToken != null) {
           break;
         }
-        log('APNS token is not available yet. Retrying in 1 second...');
+        developer.log(
+          'APNS token is not available yet. Retrying in 1 second...',
+        );
         await Future<void>.delayed(const Duration(seconds: 1));
       }
 
       if (apnsToken == null) {
-        log(
+        developer.log(
           'APNS token is still not available after multiple retries. '
           'FCM token cannot be retrieved.',
         );
@@ -134,15 +135,15 @@ class FirebaseMessageHandler {
     // https://firebase.google.com/docs/cloud-messaging/flutter/receive#handling_interaction
     final message = await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
-      debugPrint(
+      developer.log(
         '''🔥FirebaseMessaging.instance.getInitialMessage() received the following message.''',
       );
-      _printMessage(message);
+      _logMessage(message);
     }
   }
 
   void _sendTokenToServer(String token) {
-    debugPrint(
+    developer.log(
       '''🔥Pretend to send a Firebase Cloud Messaging (FCM) registration token to server: $token''',
     );
   }
@@ -151,9 +152,8 @@ class FirebaseMessageHandler {
   Future<void> deleteToken() async {
     try {
       await FirebaseMessaging.instance.deleteToken();
-    } on Exception catch (e, s) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: s);
+    } on Exception catch (error, stackTrace) {
+      developer.log('', error: error, stackTrace: stackTrace);
     }
   }
 
@@ -178,20 +178,20 @@ class FirebaseMessageHandler {
 @pragma('vm:entry-point')
 Future<void> _backgroundMessageHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  debugPrint(
+  developer.log(
     '''🔥FirebaseMessaging.onBackgroundMessage received the following message. In other words, the app received a notification while it was in the background.''',
   );
-  _printMessage(message);
+  _logMessage(message);
 }
 
-void _printMessage(RemoteMessage message) {
-  inspect(message);
+void _logMessage(RemoteMessage message) {
+  developer.inspect(message);
   final notification = message.notification;
   if (notification != null) {
-    debugPrint('🔥RemoteMessage.notification.title: ${notification.title}');
-    debugPrint('🔥RemoteMessage.notification.body: ${notification.body}');
+    developer.log('🔥RemoteMessage.notification.title: ${notification.title}');
+    developer.log('🔥RemoteMessage.notification.body: ${notification.body}');
   }
   for (final entry in message.data.entries) {
-    debugPrint('🔥RemoteMessage.data.entries[${entry.key}]: ${entry.value}');
+    developer.log('🔥RemoteMessage.data.entries[${entry.key}]: ${entry.value}');
   }
 }

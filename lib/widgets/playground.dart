@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,10 +17,10 @@ class _MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      debugPrint('🍎');
+      developer.log('🍎');
     });
     Future<void>.delayed(Duration.zero, () {
-      debugPrint('🍊');
+      developer.log('🍊');
     });
     return const FlutterLogo();
   }

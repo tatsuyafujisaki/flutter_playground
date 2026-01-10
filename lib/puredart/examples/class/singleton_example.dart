@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 /// https://stackoverflow.com/a/12649574/10867055
 class _MySingleton {
   factory _MySingleton() {
     if (!initialized) {
       initialized = true;
-      debugPrint('Perform some initialization.');
+      developer.log('Perform some initialization.');
     }
     return _singleton;
   }
@@ -16,8 +16,8 @@ class _MySingleton {
 }
 
 void main() {
-  debugPrint((_MySingleton() == _MySingleton()).toString()); // true
-  debugPrint(
+  developer.log((_MySingleton() == _MySingleton()).toString()); // true
+  developer.log(
     _MySingleton().initializedAt.toString(),
   ); // prints the same timestamp as above.
 }

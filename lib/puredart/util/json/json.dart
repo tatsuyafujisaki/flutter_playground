@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 import '../../examples/freezed/person.dart';
 
@@ -8,9 +7,12 @@ import '../../examples/freezed/person.dart';
 Map<String, dynamic> jsonDecodeToMap(String json) {
   try {
     return jsonDecode(json) as Map<String, dynamic>;
-  } on Exception catch (e, s) {
-    debugPrint(e.toString());
-    debugPrint(s.toString());
+  } on Exception catch (error, stackTrace) {
+    developer.log(
+      'Failed to decode JSON to map',
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
   return <String, dynamic>{};
 }
@@ -31,10 +33,10 @@ List<T> _parseArray<T>(
 ).map(toElement).toList();
 
 void main() {
-  debugPrint(
+  developer.log(
     _parseObject('{ "name": "John", "age": 42 }', Person.fromJson).toString(),
   );
-  debugPrint(
+  developer.log(
     _parseArray(
       '[{ "name": "John", "age": 42 }, { "name": "Jane", "age": 18 }]',
       Person.fromJson,

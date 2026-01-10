@@ -1,5 +1,6 @@
+import 'dart:developer' as developer;
+
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 
 void main() {
   final list1 = <String>['🍎', '🍊'];
@@ -8,7 +9,7 @@ void main() {
 
   const listEquality = ListEquality<String>();
 
-  debugPrint((list1 == list2).toString()); // false
-  debugPrint(listEquality.equals(list1, list2).toString()); // true
-  debugPrint(listEquality.equals(list1, list3).toString()); // false
+  developer.log((list1 == list2).toString()); // false
+  developer.log(listEquality.equals(list1, list2).toString()); // true
+  developer.log(listEquality.equals(list1, list3).toString()); // false
 }

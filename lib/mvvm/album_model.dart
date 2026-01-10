@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -19,7 +19,7 @@ class AlbumModel {
           .map((map) => Album.fromJson(map as Map<String, dynamic>))
           .toList();
     }
-    _debugPrint(response);
+    _log(response);
     throw Exception('Failed to get albums.');
   }
 
@@ -30,7 +30,7 @@ class AlbumModel {
     if (_isSuccessful(response.statusCode)) {
       return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
-    _debugPrint(response);
+    _log(response);
     throw Exception('Failed to get an album.');
   }
 
@@ -47,7 +47,7 @@ class AlbumModel {
     if (_isSuccessful(response.statusCode)) {
       return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
-    _debugPrint(response);
+    _log(response);
     throw Exception('Failed to post an album.');
   }
 
@@ -67,7 +67,7 @@ class AlbumModel {
     if (_isSuccessful(response.statusCode)) {
       return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
-    _debugPrint(response);
+    _log(response);
     throw Exception('Failed to update an album.');
   }
 
@@ -81,19 +81,19 @@ class AlbumModel {
       },
     );
     if (!_isSuccessful(response.statusCode)) {
-      _debugPrint(response);
+      _log(response);
       throw Exception('Failed to delete an album.');
     }
   }
 
   bool _isSuccessful(int statusCode) => 200 <= statusCode && statusCode <= 299;
 
-  void _debugPrint(Response response) {
-    debugPrint('👀response.request: ${response.request}');
-    debugPrint('👀response.statusCode: ${response.statusCode}');
-    debugPrint('👀response.reasonPhrase: ${response.reasonPhrase}');
-    debugPrint('👀response.headers: ${response.headers}');
-    debugPrint('👀response.body: ${response.body}');
+  void _log(Response response) {
+    developer.log('👀response.request: ${response.request}');
+    developer.log('👀response.statusCode: ${response.statusCode}');
+    developer.log('👀response.reasonPhrase: ${response.reasonPhrase}');
+    developer.log('👀response.headers: ${response.headers}');
+    developer.log('👀response.body: ${response.body}');
   }
 }
 
@@ -110,9 +110,9 @@ void main() async {
     body: <String, dynamic>{'userId': 99, 'title': 'My updated album'},
   );
 
-  debugPrint(albums.toString());
-  debugPrint(album.toString());
-  debugPrint(postedAlbum.toString());
-  debugPrint(updatedAlbum.toString());
+  developer.log(albums.toString());
+  developer.log(album.toString());
+  developer.log(postedAlbum.toString());
+  developer.log(updatedAlbum.toString());
   await albumModel.deleteAlbum(id: 1);
 }

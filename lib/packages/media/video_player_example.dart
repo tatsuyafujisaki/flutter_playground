@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,12 +26,12 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     super.initState();
     _controller.addListener(() {
       final value = _controller.value;
-      debugPrint('📹isBuffering: ${value.isBuffering}');
-      debugPrint('📹isCompleted: ${value.isCompleted}');
-      debugPrint('📹isInitialized: ${value.isInitialized}');
-      debugPrint('📹isLooping: ${value.isLooping}');
-      debugPrint('📹isPlaying: ${value.isPlaying}');
-      debugPrint('📹position: ${value.position}');
+      developer.log('📹isBuffering: ${value.isBuffering}');
+      developer.log('📹isCompleted: ${value.isCompleted}');
+      developer.log('📹isInitialized: ${value.isInitialized}');
+      developer.log('📹isLooping: ${value.isLooping}');
+      developer.log('📹isPlaying: ${value.isPlaying}');
+      developer.log('📹position: ${value.position}');
     });
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _controller.initialize();

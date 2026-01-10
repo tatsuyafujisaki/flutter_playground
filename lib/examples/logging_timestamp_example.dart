@@ -1,6 +1,6 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import '../packages/io/directories.dart';
 
 Future<String> get _pauseTimestampFilePath =>
@@ -29,9 +29,8 @@ DateTime? _readTimestamp(String filePath) {
     return DateTime.fromMillisecondsSinceEpoch(
       int.parse(file.readAsStringSync()),
     );
-  } on Exception catch (e, s) {
-    debugPrint(e.toString());
-    debugPrintStack(stackTrace: s);
+  } on Exception catch (error, stackTrace) {
+    developer.log('', error: error, stackTrace: stackTrace);
   }
   return null;
 }
@@ -41,8 +40,7 @@ void _writeTimestamp(String filePath) {
     File(
       filePath,
     ).writeAsStringSync(DateTime.now().millisecondsSinceEpoch.toString());
-  } on Exception catch (e, s) {
-    debugPrint(e.toString());
-    debugPrintStack(stackTrace: s);
+  } on Exception catch (error, stackTrace) {
+    developer.log('', error: error, stackTrace: stackTrace);
   }
 }

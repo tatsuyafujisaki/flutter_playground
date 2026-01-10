@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
-import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
@@ -40,14 +40,17 @@ class LocationWrapper {
   }
 
   void demoOneShot() {
-    Future<void>.delayed(Duration.zero, () => debugPrint(location.toString()));
+    Future<void>.delayed(
+      Duration.zero,
+      () => developer.log(location.toString()),
+    );
   }
 
   void demoListen() {
     Future<void>.delayed(
       Duration.zero,
       () async => listen(
-        (data) => debugPrint(
+        (data) => developer.log(
           '$data, Time: ${DateFormat.Hms().format(DateTime.now())}',
         ),
       ),

@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,7 +17,7 @@ void main() {
     const Fruit(emoji: '🍊'),
   ];
 
-  debugPrint(fruits.toString());
+  developer.log(fruits.toString());
   fruits.removeWhere((fruits) => fruits.emoji == '🍏');
-  debugPrint(fruits.toString());
+  developer.log(fruits.toString());
 }

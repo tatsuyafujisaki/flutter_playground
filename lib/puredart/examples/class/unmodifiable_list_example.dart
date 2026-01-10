@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 class _MyClass {
   final _myNonFinalString = '🍎';
@@ -33,15 +33,15 @@ void main() {
   final myTemplateClass = _MyClass();
 
   // myTemplateClass.myNonFinalString = '🍏'; // causes a build error.
-  debugPrint(myTemplateClass.myFinalString);
+  developer.log(myTemplateClass.myFinalString);
 
   // myTemplateClass.myList = ['🍏']; // causes a build error.
   myTemplateClass.myList.clear();
   myTemplateClass.myList.addAll(['🍏']);
-  debugPrint(myTemplateClass.myList.toString());
+  developer.log(myTemplateClass.myList.toString());
 
   // myTemplateClass.myUnmodifiableList = ['🍏']; // causes a build error.
   // myTemplateClass.myUnmodifiableList.clear(); // throws a runtime exception.
   // myTemplateClass.myUnmodifiableList.addAll(['🍏']); // throws a runtime exception.
-  debugPrint(myTemplateClass.myUnmodifiableList.toString());
+  developer.log(myTemplateClass.myUnmodifiableList.toString());
 }

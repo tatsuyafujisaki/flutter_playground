@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,7 +46,7 @@ class _MyStatelessWidget extends StatelessWidget {
             ),
           ),
         );
-        debugPrint('👀showCupertinoModalPopup returns $result');
+        developer.log('👀showCupertinoModalPopup returns $result');
       },
       icon: const Icon(Icons.flutter_dash),
     ),

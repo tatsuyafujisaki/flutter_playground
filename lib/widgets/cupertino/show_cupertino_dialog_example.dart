@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +40,7 @@ class _MyStatelessWidget extends StatelessWidget {
             ],
           ),
         );
-        debugPrint(result);
+        developer.log(result.toString());
       },
       icon: const Icon(Icons.flutter_dash),
     ),

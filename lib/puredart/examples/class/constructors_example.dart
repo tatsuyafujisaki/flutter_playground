@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 /// https://dart.dev/language/constructors
 class _MyClass {
@@ -31,9 +31,9 @@ class _MyClass {
 }
 
 void main() {
-  debugPrint(_MyClass('🍣').toString());
-  debugPrint(_MyClass.myNamedConstructor1('🍣').toString());
-  debugPrint(_MyClass.myNamedConstructor2('🐟', '🍚').toString());
-  debugPrint(_MyClass.myRedirectingConstructor1('🍣').toString());
-  debugPrint(_MyClass.myRedirectingConstructor2('🐟', '🍚').toString());
+  developer.log(_MyClass('🍣').toString());
+  developer.log(_MyClass.myNamedConstructor1('🍣').toString());
+  developer.log(_MyClass.myNamedConstructor2('🐟', '🍚').toString());
+  developer.log(_MyClass.myRedirectingConstructor1('🍣').toString());
+  developer.log(_MyClass.myRedirectingConstructor2('🐟', '🍚').toString());
 }

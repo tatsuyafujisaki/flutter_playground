@@ -1,13 +1,15 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 void printLocales() {
-  debugPrint('👀Intl.defaultLocale: ${Intl.defaultLocale}');
-  debugPrint('👀Intl.systemLocale: ${Intl.systemLocale}');
-  debugPrint('👀Intl.getCurrentLocale(): ${Intl.getCurrentLocale()}');
+  developer.log('👀Intl.defaultLocale: ${Intl.defaultLocale}');
+  developer.log('👀Intl.systemLocale: ${Intl.systemLocale}');
+  developer.log('👀Intl.getCurrentLocale(): ${Intl.getCurrentLocale()}');
 
   final locale = PlatformDispatcher.instance.locale;
-  debugPrint('👀Locale: $locale');
-  debugPrint('👀Locale.countryCode: ${locale.countryCode}');
-  debugPrint('👀Locale.languageCode: ${locale.languageCode}');
+  developer.log('👀Locale: $locale');
+  developer.log('👀Locale.countryCode: ${locale.countryCode}');
+  developer.log('👀Locale.languageCode: ${locale.languageCode}');
 }

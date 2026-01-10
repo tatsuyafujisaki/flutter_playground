@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 class _MyAsyncConstructorClass {
   _MyAsyncConstructorClass._(this.data);
@@ -13,5 +13,5 @@ class _MyAsyncConstructorClass {
 
 void main() async {
   final myClass = await _MyAsyncConstructorClass.create('🍎');
-  debugPrint(myClass.data); // 🍎
+  developer.log(myClass.data); // 🍎
 }

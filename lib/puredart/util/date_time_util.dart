@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
+
 import 'package:intl/intl.dart';
 
 // ignore: unreachable_from_main
@@ -15,5 +16,5 @@ DateFormat get mSsDateFormat => DateFormat('m:ss');
 
 void main() {
   final dateTime = DateTime.now();
-  debugPrint(mSsDateFormat.format(dateTime));
+  developer.log(mSsDateFormat.format(dateTime));
 }

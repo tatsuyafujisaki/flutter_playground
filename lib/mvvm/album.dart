@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,7 +18,7 @@ abstract class Album with _$Album {
 void main() {
   const album = Album(userId: 0, id: 0, title: 'Title');
   final map = album.toJson();
-  debugPrint(map.toString());
-  debugPrint(Album.fromJson(map).toString());
-  debugPrint(jsonEncode(album)); // jsonEncode implicitly calls toJson.
+  developer.log(map.toString());
+  developer.log(Album.fromJson(map).toString());
+  developer.log(jsonEncode(album)); // jsonEncode implicitly calls toJson.
 }

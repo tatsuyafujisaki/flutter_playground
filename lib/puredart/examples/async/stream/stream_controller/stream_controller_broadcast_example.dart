@@ -1,11 +1,10 @@
 import 'dart:async';
-
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 void main() async {
   final streamController = StreamController<String>.broadcast()
-    ..stream.listen((event) => debugPrint('Listener 1: $event'))
-    ..stream.listen((event) => debugPrint('Listener 2: $event'))
+    ..stream.listen((event) => developer.log('Listener 1: $event'))
+    ..stream.listen((event) => developer.log('Listener 2: $event'))
     ..add('🍎')
     ..add('🍊');
 

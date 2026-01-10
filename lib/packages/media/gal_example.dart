@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:developer' as developer;
+
 import 'package:gal/gal.dart';
 
 import '../io/download_file_example.dart';
@@ -11,9 +11,8 @@ Future<bool> downloadToGallery(String url) async {
       await Gal.putImageBytes(bytes);
       return true;
     }
-  } on Exception catch (e, s) {
-    debugPrint(e.toString());
-    debugPrintStack(stackTrace: s);
+  } on Exception catch (error, stackTrace) {
+    developer.log('', error: error, stackTrace: stackTrace);
   }
   return false;
 }

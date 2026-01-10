@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 void main() async {
   late StreamSubscription<int> subscription;
@@ -25,12 +25,16 @@ void main() async {
           // > or simply return to make this stream forget the error.
           // https://api.dart.dev/stable/dart-async/Stream/handleError.html
           .handleError((Object error, StackTrace stackTrace) {
-            debugPrint('👀handleError: $error\n$stackTrace');
+            developer.log(
+              '👀handleError',
+              error: error,
+              stackTrace: stackTrace,
+            );
           })
           .listen(
-            (data) => debugPrint('👀data: $data'),
+            (data) => developer.log('👀data: $data'),
             onError: (Object error, StackTrace stackTrace) {
-              debugPrint('👀onError: $error\n$stackTrace');
+              developer.log('👀onError', error: error, stackTrace: stackTrace);
             },
             // onDone will not be called if done by cancel.
             //
@@ -38,7 +42,7 @@ void main() async {
             // > the subscription doesn't receive events
             // > and none of the event handler functions are called.
             // https://api.flutter.dev/flutter/async/LazyStream/listen.html
-            onDone: () => debugPrint('👀onDone'),
+            onDone: () => developer.log('👀onDone'),
             cancelOnError: true,
           );
 }

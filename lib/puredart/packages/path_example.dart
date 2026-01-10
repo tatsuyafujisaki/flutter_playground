@@ -1,6 +1,6 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 // > The path library was designed to be imported with a prefix,
 // > though you don't have to if you don't want to:
 // https://pub.dev/documentation/path/
@@ -16,9 +16,12 @@ void deleteIfExists(String path) {
   if (file.existsSync()) {
     try {
       file.deleteSync(recursive: true);
-    } on FileSystemException catch (e, s) {
-      debugPrint(e.toString());
-      debugPrint(s.toString());
+    } on Exception catch (error, stackTrace) {
+      developer.log(
+        'Failed to delete file',
+        error: error,
+        stackTrace: stackTrace,
+      );
     }
   }
 }

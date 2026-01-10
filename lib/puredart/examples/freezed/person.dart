@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -25,7 +26,7 @@ void main() {
     age: 42,
   ).copyWith(lastUpdated: DateTime.now());
   final map = person.toJson();
-  debugPrint(map.toString());
-  debugPrint(Person.fromJson(map).toString());
-  debugPrint(jsonEncode(person)); // jsonEncode implicitly calls toJson.
+  developer.log(map.toString());
+  developer.log(Person.fromJson(map).toString());
+  developer.log(jsonEncode(person)); // jsonEncode implicitly calls toJson.
 }

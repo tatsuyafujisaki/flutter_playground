@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,8 +24,8 @@ class _MyStatelessWidget extends StatelessWidget {
           return Text(snapshot.data!);
         }
         if (snapshot.hasError) {
-          debugPrint(snapshot.error.toString());
-          debugPrintStack(stackTrace: snapshot.stackTrace);
+          developer.log(snapshot.error.toString());
+          developer.log(snapshot.stackTrace.toString());
           return const Icon(Icons.error);
         }
         return const CircularProgressIndicator();

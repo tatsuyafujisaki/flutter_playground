@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 class _Person {
   _Person(this.name, this.age);
@@ -20,5 +19,5 @@ void main() {
   final map = jsonDecode(json) as Map<String, dynamic>;
   final user = _Person.fromJson(map);
   final encoded = jsonEncode(user);
-  debugPrint(encoded);
+  developer.log(encoded);
 }

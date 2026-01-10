@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,12 +19,12 @@ class _MyStatelessWidget extends StatelessWidget {
       }
       final images = await ImagePicker().pickMultiImage(limit: 3);
       for (final image in images) {
-        debugPrint('👀XFile > path: ${image.path}');
-        debugPrint('👀XFile > name: ${image.name}');
+        developer.log('👀XFile > path: ${image.path}');
+        developer.log('👀XFile > name: ${image.name}');
 
         // Always null, except for the web platform.
         // https://github.com/flutter/flutter/issues/144900#issuecomment-1987332347
-        debugPrint('👀XFile > mimeType: ${image.mimeType}');
+        developer.log('👀XFile > mimeType: ${image.mimeType}');
       }
     });
     return const FlutterLogo();

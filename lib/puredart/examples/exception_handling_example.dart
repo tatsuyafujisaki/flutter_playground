@@ -1,13 +1,9 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 void main() {
   try {
     throw Exception('💀');
-  } on Exception catch (e, s) {
-    debugPrint(e.toString());
-    debugPrint(s.toString());
-    // Uncomment the following in Flutter.
-    // debugPrint(e.toString());
-    // debugPrintStack(stackTrace: s);
+  } on Exception catch (error, stackTrace) {
+    developer.log('An error occurred', error: error, stackTrace: stackTrace);
   }
 }

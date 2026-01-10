@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 
 FutureBuilder<T> createNonVoidFutureBuilder<T>({
@@ -12,8 +14,8 @@ FutureBuilder<T> createNonVoidFutureBuilder<T>({
       return onData(snapshot.data as T);
     }
     if (snapshot.hasError) {
-      debugPrint(snapshot.error.toString());
-      debugPrintStack(stackTrace: snapshot.stackTrace);
+      developer.log(snapshot.error.toString());
+      developer.log(snapshot.stackTrace.toString());
       return onError?.call() ?? const Center(child: Icon(Icons.error));
     }
     return onElse?.call() ?? const Center(child: CircularProgressIndicator());

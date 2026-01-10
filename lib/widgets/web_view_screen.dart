@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -57,9 +57,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
       );
       try {
         await controller.loadRequest(Uri.parse(widget.url));
-      } on FormatException catch (e, s) {
-        stderr.writeln(e);
-        debugPrintStack(stackTrace: s);
+      } on Exception catch (error, stackTrace) {
+        developer.log('', error: error, stackTrace: stackTrace);
       }
     });
   }

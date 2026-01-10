@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 enum _Fruit { apple, orange }
 
 void main() {
-  debugPrint(_Fruit.values.elementAtOrNull(0).toString()); // Apple
-  debugPrint(_Fruit.values.elementAtOrNull(1).toString()); // Orange
-  debugPrint(_Fruit.values.elementAtOrNull(2).toString()); // null
-  // debugPrint(_Fruit.values.elementAtOrNull(null).toString()); // Compilation error
+  developer.log(_Fruit.values.elementAtOrNull(0).toString()); // Apple
+  developer.log(_Fruit.values.elementAtOrNull(1).toString()); // Orange
+  developer.log(_Fruit.values.elementAtOrNull(2).toString()); // null
+  // developer.log(_Fruit.values.elementAtOrNull(null).toString()); // Compilation error
 }

@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'riverpod_examples.g.dart';
@@ -20,37 +21,37 @@ String myGeneratedRequiredParameters(Ref ref, String name, int age) =>
 
 void showGeneratedBoolNotifirerProviderExamples() {
   final container = ProviderContainer();
-  debugPrint(container.read(myBoolProvider).toString()); // false
+  developer.log(container.read(myBoolProvider).toString()); // false
   container.read(myBoolProvider.notifier).toggle();
-  debugPrint(container.read(myBoolProvider).toString()); // true
+  developer.log(container.read(myBoolProvider).toString()); // true
 }
 
 void showGeneratedFunctionProviderExamples() {
   final container = ProviderContainer();
-  debugPrint(container.read(myGeneratedParameterlessProvider)); // Hello!
-  debugPrint(
+  developer.log(container.read(myGeneratedParameterlessProvider)); // Hello!
+  developer.log(
     container.read(myGeneratedRequiredParameterProvider('Minnie')),
   ); // Hello, Minnie!
-  debugPrint(
+  developer.log(
     container.read(myGeneratedOptionalParameterProvider()),
   ); // Hello, Anonymous!
-  debugPrint(
+  developer.log(
     container.read(myGeneratedOptionalParameterProvider('Donald')),
   ); // Hello, Donald!
 
-  debugPrint(
+  developer.log(
     container.read(myGeneratedRequiredParametersProvider('Goofy', 18)),
   ); // Hello, Donald!
 }
 
 void showGeneratedSetNotifirerProviderExamples() {
   final container = ProviderContainer();
-  debugPrint(container.read(mySetProvider).toString()); // {}
+  developer.log(container.read(mySetProvider).toString()); // {}
   container.read(mySetProvider.notifier).add('a');
-  debugPrint(container.read(mySetProvider).toString()); // {'a'}
+  developer.log(container.read(mySetProvider).toString()); // {'a'}
   container.read(mySetProvider.notifier).add('b');
   container.read(mySetProvider.notifier).remove('a');
-  debugPrint(container.read(mySetProvider).toString()); // {'b'}
+  developer.log(container.read(mySetProvider).toString()); // {'b'}
 }
 
 // Generates AutoDisposeNotifierProviderImpl<MyBool, bool>

@@ -1,11 +1,12 @@
+import 'dart:developer' as developer;
+
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter/foundation.dart' hide Key;
 
 void main() {
   const plaintext = 'foo';
   final encrypted = encrypt(plaintext);
-  debugPrint(encrypted);
-  debugPrint(decrypt(encrypted));
+  developer.log(encrypted);
+  developer.log(decrypt(encrypted));
 }
 
 final _encryptor = Encrypter(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
@@ -52,7 +53,7 @@ Future<void> enableNotification(BuildContext context) async {
       iOS: DarwinInitializationSettings(),
     ),
     onDidReceiveNotificationResponse: (details) {
-      debugPrint(
+      developer.log(
         '''🔥onDidReceiveNotificationResponse received the payload: ${details.payload}. In other words, the user tapped a notification while the app was in the foreground.''',
       );
     },

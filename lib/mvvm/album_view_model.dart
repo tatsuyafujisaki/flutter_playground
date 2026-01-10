@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 import 'album.dart';
@@ -18,8 +19,8 @@ class AlbumViewModel extends ChangeNotifier {
   Future<void> fetchAlbums() async {
     try {
       _albums = await _albumModel.getAlbums();
-    } on Exception catch (e) {
-      debugPrint(e.toString());
+    } on Exception catch (error, stackTrace) {
+      developer.log('', error: error, stackTrace: stackTrace);
     }
     notifyListeners();
   }
@@ -27,8 +28,8 @@ class AlbumViewModel extends ChangeNotifier {
   Future<void> fetchAlbum({required int id}) async {
     try {
       _album = await _albumModel.getAlbum(id: id);
-    } on Exception catch (e) {
-      debugPrint(e.toString());
+    } on Exception catch (error, stackTrace) {
+      developer.log('', error: error, stackTrace: stackTrace);
     }
     notifyListeners();
   }
@@ -36,8 +37,8 @@ class AlbumViewModel extends ChangeNotifier {
   Future<void> postAlbum({required Map<String, dynamic> body}) async {
     try {
       _album = await _albumModel.postAlbum(body: body);
-    } on Exception catch (e) {
-      debugPrint(e.toString());
+    } on Exception catch (error, stackTrace) {
+      developer.log('', error: error, stackTrace: stackTrace);
     }
     notifyListeners();
   }
@@ -45,8 +46,8 @@ class AlbumViewModel extends ChangeNotifier {
   Future<void> deleteAlbum({required int id}) async {
     try {
       await _albumModel.deleteAlbum(id: id);
-    } on Exception catch (e) {
-      debugPrint(e.toString());
+    } on Exception catch (error, stackTrace) {
+      developer.log('', error: error, stackTrace: stackTrace);
     }
     notifyListeners();
   }

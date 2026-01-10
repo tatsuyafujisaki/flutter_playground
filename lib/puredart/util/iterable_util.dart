@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 Iterable<T> _flatten<T>(Iterable<Iterable<T>> xs) => xs.expand((x) => x);
 Iterable<T> _filterNotNull<T>(Iterable<T?> xs) => xs.whereType<T>();
@@ -19,9 +19,9 @@ void main() {
     ['d'],
   ];
 
-  debugPrint(_flatten(xs).toList().toString()); // [a, b, c, d]
+  developer.log(_flatten(xs).toList().toString()); // [a, b, c, d]
 
   final ys = <String?>['a', null, 'b'];
 
-  debugPrint(_filterNotNull(ys).toList().toString()); // [a, b]
+  developer.log(_filterNotNull(ys).toList().toString()); // [a, b]
 }

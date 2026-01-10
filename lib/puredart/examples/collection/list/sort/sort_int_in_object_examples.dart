@@ -1,5 +1,6 @@
+import 'dart:developer' as developer;
+
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 
 void main() {
   _sortIntInObject();
@@ -24,15 +25,15 @@ List<_Person> _createPersonList() => <_Person>[
 
 void _sortIntInObject() {
   final list = _createPersonList()..sortBy<num>((person) => person.age);
-  debugPrint(list.toString());
+  developer.log(list.toString());
 }
 
 void _sortIntInObjectDescending1() {
   final list = _createPersonList()..sort((a, b) => b.age.compareTo(a.age));
-  debugPrint(list.toString());
+  developer.log(list.toString());
 }
 
 void _sortIntInObjectDescending2() {
   final list = _createPersonList()..sortBy<num>((x) => x.age * -1);
-  debugPrint(list.toString());
+  developer.log(list.toString());
 }

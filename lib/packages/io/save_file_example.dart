@@ -1,6 +1,6 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'directories.dart';
 
 Future<String?> saveBinaryFileToExternalStorageDirectory(
@@ -28,7 +28,7 @@ Future<String?> saveTextFileToExternalStorageDirectory(
 }
 
 void showHowtoPullSavedFile(String path) =>
-    debugPrint('👉 adb pull $path ~/Desktop');
+    developer.log('👉 adb pull $path ~/Desktop');
 
 String _getDeviceFileExplorerFriendlyExternalStorageDirectory(
   String externalStorageDirectoryPath,

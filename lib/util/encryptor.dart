@@ -1,5 +1,6 @@
+import 'dart:developer' as developer;
+
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter/foundation.dart' show debugPrint;
 
 final _encryptor = Encrypter(
   AES(Key.fromBase64('6ZE61Jel3H8bdRNvGz7BGPK2eJWYfczTZgQZRZt9knM=')),
@@ -17,6 +18,6 @@ String decrypt(String encoded) =>
 void main() {
   const plaintext = 'foo';
   final encrypted = encrypt(plaintext);
-  debugPrint(encrypted);
-  debugPrint(decrypt(encrypted));
+  developer.log(encrypted);
+  developer.log(decrypt(encrypted));
 }

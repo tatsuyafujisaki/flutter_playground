@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/widgets.dart';
 
 class LifecycleExampleWidget extends StatefulWidget {
@@ -42,7 +44,7 @@ class _MyLifecycleWidgetState extends State<LifecycleExampleWidget> {
       onDetach: widget.onDetach,
       onExitRequested: widget.onExitRequested,
       onStateChange: (state) {
-        debugPrint('AppLifecycleState: $state');
+        developer.log('AppLifecycleState: $state');
         // The following is redundant and for explanatory purposes only.
         switch (state) {
           case AppLifecycleState.detached:

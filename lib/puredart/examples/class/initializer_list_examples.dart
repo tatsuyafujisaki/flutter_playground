@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 class _Person {
   _Person({
@@ -18,7 +18,7 @@ void main() {
     middleName: 'Robin',
     lastName: 'Milne',
   );
-  debugPrint(person.firstName);
-  debugPrint(person.lastName);
-  debugPrint(person.fullName);
+  developer.log(person.firstName);
+  developer.log(person.lastName);
+  developer.log(person.fullName);
 }

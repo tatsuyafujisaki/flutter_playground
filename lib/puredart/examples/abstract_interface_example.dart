@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 abstract interface class Fruit {
   static const apple = '🍎';
@@ -6,6 +6,6 @@ abstract interface class Fruit {
 }
 
 void main() {
-  debugPrint(Fruit.apple); // 🍎
-  debugPrint(Fruit.orange); // 🍊
+  developer.log(Fruit.apple); // 🍎
+  developer.log(Fruit.orange); // 🍊
 }

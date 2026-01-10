@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 void _addOrRemove<T>(Set<T> set, T value) {
   if (!set.add(value)) {
@@ -9,7 +9,7 @@ void _addOrRemove<T>(Set<T> set, T value) {
 void main() {
   final fruits = {'🍎', '🍊'};
   _addOrRemove(fruits, '🍏');
-  debugPrint(fruits.toString());
+  developer.log(fruits.toString());
   _addOrRemove(fruits, '🍏');
-  debugPrint(fruits.toString());
+  developer.log(fruits.toString());
 }

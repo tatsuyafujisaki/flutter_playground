@@ -1,6 +1,5 @@
 import 'dart:async';
-
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 extension<T> on Stream<T> {
   // ignore: unused_element
@@ -31,15 +30,15 @@ extension<T> on Stream<T> {
   Stream<T> log() => transform<T>(
     StreamTransformer<T, T>.fromHandlers(
       handleData: (data, sink) {
-        debugPrint('👀handleData: $data');
+        developer.log('👀handleData: $data');
         sink.add(data);
       },
       handleError: (error, stackTrace, sink) {
-        debugPrint('👀handleError: $error\n$stackTrace');
+        developer.log('👀handleError: $error\n$stackTrace');
         sink.addError(error, stackTrace);
       },
       handleDone: (sink) {
-        debugPrint('👀handleDone');
+        developer.log('👀handleDone');
         sink.close();
       },
     ),

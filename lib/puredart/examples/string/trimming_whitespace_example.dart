@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 
 String _trimWhitespace(String s) => s.replaceAll(RegExp(r'\s'), '');
 void main() async {
-  debugPrint(_trimWhitespace('🍎 🍏　🍊\n🍇')); // 🍎🍏🍊🍇
+  developer.log(_trimWhitespace('🍎 🍏　🍊\n🍇')); // 🍎🍏🍊🍇
 }
