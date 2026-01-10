@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:googleapis/youtube/v3.dart';
 import 'youtube_repository.dart';
 
@@ -28,11 +27,14 @@ class YoutubePage extends ConsumerWidget {
         foregroundColor: Colors.black,
       ),
       body: asyncVideos.when(
-        data: (videos) => MasonryGridView.count(
+        data: (videos) => GridView.builder(
           padding: const EdgeInsets.all(12),
-          crossAxisCount: 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.7,
+          ),
           itemCount: videos.length,
           itemBuilder: (context, index) {
             final video = videos[index];
