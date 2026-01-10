@@ -72,7 +72,6 @@ class YoutubePage extends ConsumerWidget {
 
   Widget _buildVideoCard(Video video) {
     final snippet = video.snippet;
-    final stats = video.statistics;
     final thumbnail =
         snippet?.thumbnails?.high ??
         snippet?.thumbnails?.medium ??
@@ -160,13 +159,6 @@ class YoutubePage extends ConsumerWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (stats?.viewCount != null) ...[
-                    const SizedBox(height: 2),
-                    Text(
-                      '${_formatViewCount(stats!.viewCount!)} views',
-                      style: TextStyle(fontSize: 11, color: Colors.grey[500]),
-                    ),
-                  ],
                 ],
               ),
             ),
@@ -193,15 +185,5 @@ class YoutubePage extends ConsumerWidget {
     } else {
       return '$minutes:${seconds.padLeft(2, '0')}';
     }
-  }
-
-  String _formatViewCount(String viewCount) {
-    final count = int.tryParse(viewCount) ?? 0;
-    if (count >= 1000000) {
-      return '${(count / 1000000).toStringAsFixed(1)}M';
-    } else if (count >= 1000) {
-      return '${(count / 1000).toStringAsFixed(1)}K';
-    }
-    return count.toString();
   }
 }
