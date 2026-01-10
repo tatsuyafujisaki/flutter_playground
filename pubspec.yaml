@@ -30,6 +30,7 @@ dependencies:
   geolocator: any
   glob: any
   google_maps_flutter: any
+  googleapis: any
   http: any
   image_picker: any
   intl: any
