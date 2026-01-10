@@ -2,13 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:googleapis/youtube/v3.dart';
 import 'package:http/http.dart' as http;
 
-final youtubeRepositoryProvider = Provider<YoutubeRepository>((ref) {
-  return YoutubeRepository();
-});
+final youtubeRepositoryProvider = Provider<YoutubeRepository>(
+  (ref) => YoutubeRepository(),
+);
 
 class YoutubeRepository {
-  // TODO: Replace with your actual API Key
-  static const _apiKey = 'YOUR_API_KEY_HERE';
+  static const _apiKey = String.fromEnvironment('YOUTUBE_API_KEY');
 
   Future<List<Video>> fetchPopularVideos() async {
     final client = _ApiKeyClient(_apiKey);
@@ -23,7 +22,10 @@ class YoutubeRepository {
         regionCode: 'JP',
       );
 
-      return response.items ?? [];
+      final videos = response.items ?? [];
+      // ignore: avoid_print
+      print('Fetched ${videos.length} videos');
+      return videos;
     } finally {
       client.close();
     }
@@ -31,28 +33,28 @@ class YoutubeRepository {
 }
 
 class _ApiKeyClient extends http.BaseClient {
+  _ApiKeyClient(this._key);
   final String _key;
   final http.Client _inner = http.Client();
 
-  _ApiKeyClient(this._key);
-
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {
-    final url = request.url.replace(
-      queryParameters: <String, String>{
-        ...request.url.queryParameters,
-        'key': _key,
-      },
+    final queryParameters = Map<String, dynamic>.from(
+      request.url.queryParametersAll,
     );
+    queryParameters['key'] = [_key];
+
+    final url = request.url.replace(queryParameters: queryParameters);
 
     final newRequest = http.Request(request.method, url);
     newRequest.headers.addAll(request.headers);
 
     if (request is http.Request) {
-      newRequest.bodyBytes = request.bodyBytes;
-      newRequest.followRedirects = request.followRedirects;
-      newRequest.maxRedirects = request.maxRedirects;
-      newRequest.persistentConnection = request.persistentConnection;
+      newRequest
+        ..bodyBytes = request.bodyBytes
+        ..followRedirects = request.followRedirects
+        ..maxRedirects = request.maxRedirects
+        ..persistentConnection = request.persistentConnection;
     }
 
     return _inner.send(newRequest);

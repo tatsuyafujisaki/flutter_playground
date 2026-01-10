@@ -51,7 +51,6 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
     home: UpgradeAlert(
-      upgrader: Upgrader(debugDisplayOnce: true),
       showIgnore: false,
       showLater: false,
       child: const YoutubePage(),
