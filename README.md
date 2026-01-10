@@ -27,13 +27,3 @@ lib/l10n/untranslated.txt
 .fvm/
 .fvmrc
 ```
-
-# Prompts for AI chatbots
-
-```
-According to https://dart.dev/tools/linter-rules, are there any Flutter lint rules that are in `package:flutter_lints/flutter.yaml` but I redundantly and explicitly listed in analysis_options.yaml?
-```
-
-```
-According to https://dart.dev/tools/linter-rules, are there any Flutter lint rules that not in `package:flutter_lints/flutter.yaml` but recommended to add in `analysis_options.yaml`?
-```
