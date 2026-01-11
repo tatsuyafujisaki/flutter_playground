@@ -97,6 +97,7 @@ linter:
     - unawaited_futures
     - unnecessary_await_in_return
     - unnecessary_breaks
+    - unnecessary_ignore
     - unnecessary_lambdas
     - unnecessary_library_directive
     - unnecessary_null_aware_operator_on_extension_on_nullable
