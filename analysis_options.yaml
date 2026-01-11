@@ -66,6 +66,7 @@ linter:
     - no_self_assignments
     - noop_primitive_operations
     - omit_local_variable_types
+    - omit_obvious_local_variable_types
     - only_throw_errors
     - parameter_assignments
     - prefer_asserts_in_initializer_lists
