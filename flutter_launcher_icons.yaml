@@ -1,0 +1,11 @@
+# flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: "assets/icons/ic_launcher.png"
+  adaptive_icon_foreground: "assets/icons/ic_launcher.png"
+  adaptive_icon_background: "#FFFFFF"
+  android: true
+  # Default is 21
+  # https://pub.dev/documentation/flutter_launcher_icons/latest/constants/androidDefaultAndroidMinSDK-constant.html
+  min_sdk_android: 26
+  ios: true
+  remove_alpha_ios: true

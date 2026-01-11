@@ -8,6 +8,7 @@ environment:
 dependencies:
   archive: any
   async: any
+  cached_network_image: any
   collection: any
   device_info_plus: any
   encrypt: any
@@ -18,6 +19,7 @@ dependencies:
   firebase_ui_firestore: any
   flutter:
     sdk: flutter
+  flutter_launcher_icons: any
   flutter_local_notifications: any
   flutter_localizations:
     sdk: flutter
