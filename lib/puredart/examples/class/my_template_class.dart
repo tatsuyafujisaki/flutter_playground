@@ -2,10 +2,10 @@ import 'dart:developer' as developer;
 
 class _MyTemplateClass {
   _MyTemplateClass(this._myList, [DateTime? dateTime])
-    : myDateTime = dateTime ?? DateTime.now();
+    : myDateTime = dateTime ?? .now();
 
   final List<String> _myList;
-  List<String> get myList => List<String>.unmodifiable(_myList);
+  List<String> get myList => .unmodifiable(_myList);
 
   final DateTime myDateTime;
 }

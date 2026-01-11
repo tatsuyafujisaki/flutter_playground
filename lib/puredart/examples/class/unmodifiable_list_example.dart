@@ -26,7 +26,7 @@ class _MyClass {
   // ... will throw a runtime exception.
   // myTemplateClass.myUnmodifiableList.clear();
   // myTemplateClass.myUnmodifiableList.addAll(['🍏']);
-  List<String> get myUnmodifiableList => List<String>.unmodifiable(_myList);
+  List<String> get myUnmodifiableList => .unmodifiable(_myList);
 }
 
 void main() {
@@ -36,8 +36,9 @@ void main() {
   developer.log(myTemplateClass.myFinalString);
 
   // myTemplateClass.myList = ['🍏']; // causes a build error.
-  myTemplateClass.myList.clear();
-  myTemplateClass.myList.addAll(['🍏']);
+  myTemplateClass.myList
+    ..clear()
+    ..addAll(['🍏']);
   developer.log(myTemplateClass.myList.toString());
 
   // myTemplateClass.myUnmodifiableList = ['🍏']; // causes a build error.

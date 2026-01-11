@@ -16,7 +16,7 @@ class PeriodicRestartableTimer {
 
   void cancel() => _timer?.cancel();
 
-  Timer _createTimer() => Timer.periodic(duration, (_) => callback?.call());
+  Timer _createTimer() => .periodic(duration, (_) => callback?.call());
 
   Timer? _timer;
 }

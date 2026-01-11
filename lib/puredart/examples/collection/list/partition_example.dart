@@ -1,7 +1,7 @@
 import 'dart:developer' as developer;
 
 void main() {
-  final xs = List.generate(5, (x) => x);
+  final xs = List<int>.generate(5, (x) => x);
   final (evens, odds) = xs.partition((x) => x.isEven);
 
   developer.log(evens.toString()); // [0, 2, 4]

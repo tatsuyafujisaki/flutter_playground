@@ -40,15 +40,12 @@ class LocationWrapper {
   }
 
   void demoOneShot() {
-    Future<void>.delayed(
-      Duration.zero,
-      () => developer.log(location.toString()),
-    );
+    Future<void>.delayed(.zero, () => developer.log(location.toString()));
   }
 
   void demoListen() {
     Future<void>.delayed(
-      Duration.zero,
+      .zero,
       () async => listen(
         (data) => developer.log(
           '$data, Time: ${DateFormat.Hms().format(DateTime.now())}',

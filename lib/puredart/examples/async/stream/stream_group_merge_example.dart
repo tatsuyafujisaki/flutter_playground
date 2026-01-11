@@ -4,12 +4,12 @@ import 'dart:developer' as developer;
 import 'package:async/async.dart';
 
 void main() async {
-  final stream1 = Stream.periodic(
+  final stream1 = Stream<String>.periodic(
     const Duration(seconds: 1),
     (count) => ['🍎', '🍊', '🍏'][count],
   ).take(3);
 
-  final stream2 = Stream.periodic(
+  final stream2 = Stream<String>.periodic(
     const Duration(seconds: 1),
     (count) => ['🐶', '🐱', '🦊'][count],
   ).take(3);

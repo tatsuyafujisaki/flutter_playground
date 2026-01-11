@@ -23,7 +23,7 @@ class FirebaseMessageHandler {
     // https://pub.dev/documentation/firebase_messaging/latest/firebase_messaging/FirebaseMessaging/onBackgroundMessage.html
     FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
 
-    Future.delayed(Duration.zero, () async {
+    Future<void>.delayed(.zero, () async {
       await _handleTokenIfExists();
       await _handleInitialMessageIfExists();
 

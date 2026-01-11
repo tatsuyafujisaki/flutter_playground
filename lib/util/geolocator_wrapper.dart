@@ -66,14 +66,14 @@ class GeolocatorWrapper {
 
   void demoOneShot() {
     Future<void>.delayed(
-      Duration.zero,
+      .zero,
       () => developer.log(currentPosition.toString()),
     );
   }
 
   void demoListen() {
     Future<void>.delayed(
-      Duration.zero,
+      .zero,
       () async => (await GeolocatorWrapper().positionStream)?.listen(
         (position) => developer.log(
           '$position, Time: ${DateFormat.Hms().format(DateTime.now())}',

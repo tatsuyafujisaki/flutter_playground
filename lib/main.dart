@@ -70,7 +70,9 @@ class _MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-  final textEditingController = TextEditingController(text: 'My initial text');
+  final TextEditingController textEditingController = TextEditingController(
+    text: 'My initial text',
+  );
   final firebaseMessageHandler = FirebaseMessageHandler();
 
   @override

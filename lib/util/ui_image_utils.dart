@@ -16,7 +16,8 @@ Uint8List _createImageBytesFromPath(String imagePath) =>
     File(imagePath).readAsBytesSync();
 
 Future<Uint8List> _createImageBytesFromUrl(String imageUrl) async {
-  final response = await http.get(Uri.parse(imageUrl));
+  final uri = Uri.parse(imageUrl);
+  final response = await http.get(uri);
   return response.bodyBytes;
 }
 

@@ -13,7 +13,7 @@ class Debouncer {
 }
 
 Timer _createAndStartPeriodicTimer([void Function()? callback]) =>
-    Timer.periodic(const Duration(seconds: 1) /* inteval */, (timer) {
+    .periodic(const Duration(seconds: 1) /* inteval */, (timer) {
       developer.log('Timer.tick: ${timer.tick}');
       callback?.call();
     });

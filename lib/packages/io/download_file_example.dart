@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 Future<Uint8List> downloadBinaryFile(String url) async {
   bool isSuccessful(int statusCode) => 200 <= statusCode && statusCode <= 299;
 
-  final response = await http.get(Uri.parse(url));
+  final uri = Uri.parse(url);
+  final response = await http.get(uri);
   if (isSuccessful(response.statusCode)) {
     return response.bodyBytes;
   }

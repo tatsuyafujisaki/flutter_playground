@@ -119,9 +119,7 @@ class YoutubePage extends ConsumerWidget {
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
                         color: Colors.grey[200],
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                        child: const Center(child: CircularProgressIndicator()),
                       ),
                       errorWidget: (context, url, error) => Container(
                         color: Colors.grey[200],

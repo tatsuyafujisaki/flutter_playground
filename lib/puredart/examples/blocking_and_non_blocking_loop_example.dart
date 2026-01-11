@@ -9,7 +9,7 @@ void main() async {
 }
 
 Stream<int> get _stream =>
-    Stream<int>.periodic(const Duration(seconds: 1), (count) => count).take(3);
+    Stream.periodic(const Duration(seconds: 1), (count) => count).take(3);
 
 Future<void> _showNonBlockingLoopExample1() async {
   Timer.periodic(const Duration(seconds: 1), (timer) {

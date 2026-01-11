@@ -12,7 +12,7 @@ class _MySingleton {
   _MySingleton._();
   static final _singleton = _MySingleton._();
   static bool initialized = false;
-  final initializedAt = DateTime.now();
+  final DateTime initializedAt = .now();
 }
 
 void main() {

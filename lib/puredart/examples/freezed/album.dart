@@ -19,6 +19,7 @@ void main() {
   const album = Album(userId: 0, id: 0, title: 'Title');
   final map = album.toJson();
   developer.log(map.toString());
-  developer.log(Album.fromJson(map).toString());
+  final albumFromJson = Album.fromJson(map);
+  developer.log(albumFromJson.toString());
   developer.log(jsonEncode(album)); // jsonEncode implicitly calls toJson.
 }

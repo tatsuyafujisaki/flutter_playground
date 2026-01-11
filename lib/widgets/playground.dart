@@ -19,7 +19,7 @@ class _MyStatelessWidget extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       developer.log('🍎');
     });
-    Future<void>.delayed(Duration.zero, () {
+    Future<void>.delayed(.zero, () {
       developer.log('🍊');
     });
     return const FlutterLogo();

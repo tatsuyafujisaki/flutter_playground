@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../../extension/extensions.dart';
 
-final _notificationPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin _notificationPlugin = .new();
 
 Future<void> enableNotification(BuildContext context) async {
   // > The app must create a channel with this channel ID before any
@@ -71,7 +71,8 @@ Future<void> showNotification(RemoteMessage message) async {
     String imageUrl,
   ) async {
     Future<ByteArrayAndroidBitmap> createLargeIcon(String url) async {
-      final response = await http.get(Uri.parse(url));
+      final uri = Uri.parse(url);
+      final response = await http.get(uri);
       return ByteArrayAndroidBitmap(response.bodyBytes);
     }
 

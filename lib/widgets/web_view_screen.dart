@@ -21,7 +21,7 @@ class WebViewScreen extends StatefulWidget {
 
 class _WebViewScreenState extends State<WebViewScreen> {
   late final WebViewController controller;
-  final cookieManager = WebViewCookieManager();
+  final WebViewCookieManager cookieManager = .new();
   String title = '';
   int loadingPercentage = 0;
   bool canGoBack = false;
@@ -32,14 +32,14 @@ class _WebViewScreenState extends State<WebViewScreen> {
     super.initState();
     if (widget.cookie != null) {
       Future<void>.delayed(
-        Duration.zero,
+        .zero,
         () async => cookieManager.setCookie(widget.cookie!),
       );
     }
 
-    controller = WebViewController();
+    controller = .new();
 
-    Future<void>.delayed(Duration.zero, () async {
+    Future<void>.delayed(.zero, () async {
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       // Avoid a black screen before the first page loads, even in Dark Mode.
       await controller.setBackgroundColor(Colors.transparent);
@@ -56,7 +56,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
         ),
       );
       try {
-        await controller.loadRequest(Uri.parse(widget.url));
+        await controller.loadRequest(.parse(widget.url));
       } on Exception catch (error, stackTrace) {
         developer.log('', error: error, stackTrace: stackTrace);
       }
@@ -65,7 +65,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Future<void>.delayed(Duration.zero, () async {
+    Future<void>.delayed(.zero, () async {
       canGoBack = await controller.canGoBack();
       canGoForward = await controller.canGoForward();
     });

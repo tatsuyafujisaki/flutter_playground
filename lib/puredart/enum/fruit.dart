@@ -19,11 +19,11 @@ void main() {
   final fruit = Fruit.of('🍎');
 
   switch (fruit) {
-    case Fruit.unknown:
+    case .unknown:
       developer.log('Unknown fruit!');
-    case Fruit.apple:
+    case .apple:
       developer.log('Apple!');
-    case Fruit.orange:
+    case .orange:
       developer.log('Orange!');
   }
 }

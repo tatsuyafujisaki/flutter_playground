@@ -47,15 +47,15 @@ class _MyLifecycleWidgetState extends State<LifecycleExampleWidget> {
         developer.log('AppLifecycleState: $state');
         // The following is redundant and for explanatory purposes only.
         switch (state) {
-          case AppLifecycleState.detached:
+          case .detached:
             widget.onDetach?.call();
-          case AppLifecycleState.resumed:
+          case .resumed:
             widget.onResumed?.call();
-          case AppLifecycleState.inactive:
+          case .inactive:
             widget.onInactive?.call();
-          case AppLifecycleState.hidden:
+          case .hidden:
             widget.onHide?.call();
-          case AppLifecycleState.paused:
+          case .paused:
             widget.onPause?.call();
         }
       },

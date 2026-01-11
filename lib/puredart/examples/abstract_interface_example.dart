@@ -6,6 +6,8 @@ abstract interface class Fruit {
 }
 
 void main() {
-  developer.log(Fruit.apple); // 🍎
-  developer.log(Fruit.orange); // 🍊
+  const apple = Fruit.apple; // 🍎
+  const orange = Fruit.orange; // 🍊
+  developer.log(apple);
+  developer.log(orange);
 }

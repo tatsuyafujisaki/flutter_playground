@@ -8,7 +8,7 @@ extension<T> on Stream<T> {
     void Function(Object, StackTrace)? handleError,
     void Function()? handleDone,
   }) => transform<T>(
-    StreamTransformer<T, T>.fromHandlers(
+    .fromHandlers(
       handleData: (data, sink) {
         handleData?.call(data);
         sink.add(data);
