@@ -10,10 +10,10 @@ import 'package:upgrader/upgrader.dart';
 
 import 'extension/extensions.dart';
 import 'firebase_options.dart';
+import 'google_maps_page.dart';
 import 'l10n/app_localizations.dart';
 import 'packages/analytics/my_analytics_provider.dart';
 import 'packages/analytics/my_analytics_service.dart';
-import 'youtube/youtube_page.dart';
 
 void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
@@ -83,7 +83,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       home: UpgradeAlert(
         showIgnore: false,
         showLater: false,
-        child: const YoutubePage(),
+        child: const GoogleMapsPage(),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
