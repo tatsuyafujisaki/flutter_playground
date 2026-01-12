@@ -13,8 +13,6 @@ import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 import 'packages/analytics/my_analytics_provider.dart';
 import 'packages/analytics/my_analytics_service.dart';
-import 'packages/fcm/firebase_message_handler.dart';
-import 'packages/fcm/notification.dart';
 import 'youtube/youtube_page.dart';
 
 void main() async {
@@ -140,14 +138,9 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   final TextEditingController textEditingController = TextEditingController(
     text: 'My initial text',
   );
-  final firebaseMessageHandler = FirebaseMessageHandler();
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => enableNotification(context),
-    );
-
     showInternationalizationExamples(context);
 
     return Scaffold(
@@ -158,7 +151,6 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
 
   @override
   void dispose() {
-    unawaited(firebaseMessageHandler.dispose());
     textEditingController.dispose();
     super.dispose();
   }
