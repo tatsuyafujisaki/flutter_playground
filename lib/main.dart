@@ -29,19 +29,31 @@ void main() async {
 
   // https://api.flutter.dev/flutter/foundation/FlutterError/onError.html
   FlutterError.onError = (details) {
-    unawaited(FirebaseCrashlytics.instance.recordFlutterFatalError(details));
+    if (kDebugMode) {
+      // In debug mode, show the error in the console/red screen.
+      FlutterError.presentError(details);
+    } else {
+      // In release mode, send to Crashlytics.
+      unawaited(FirebaseCrashlytics.instance.recordFlutterFatalError(details));
+    }
   };
 
   // https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/onError.html
   PlatformDispatcher.instance.onError = (exception, stackTrace) {
-    unawaited(
-      FirebaseCrashlytics.instance.recordError(
-        exception,
-        stackTrace,
-        fatal: true,
-      ),
-    );
-    return true;
+    // In release mode, send to Crashlytics.
+    if (!kDebugMode) {
+      unawaited(
+        FirebaseCrashlytics.instance.recordError(
+          exception,
+          stackTrace,
+          fatal: true,
+        ),
+      );
+    }
+    // In debug mode, return false to let Flutter show the error in the console
+    // and red screen. In release mode, return true to suppress the error
+    // after sending it to Crashlytics.
+    return !kDebugMode;
   };
 
   runApp(const ProviderScope(child: MyApp()));
