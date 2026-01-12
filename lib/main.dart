@@ -11,6 +11,8 @@ import 'package:upgrader/upgrader.dart';
 import 'extension/extensions.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
+import 'packages/analytics/my_analytics_provider.dart';
+import 'packages/analytics/my_analytics_service.dart';
 import 'packages/fcm/firebase_message_handler.dart';
 import 'packages/fcm/notification.dart';
 import 'youtube/youtube_page.dart';
@@ -59,18 +61,71 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
-    home: UpgradeAlert(
-      showIgnore: false,
-      showLater: false,
-      child: const YoutubePage(),
-    ),
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-  );
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => unawaited(ref.read(analyticsServiceProvider).logAppOpen()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final analyticsService = ref.watch(analyticsServiceProvider);
+
+    return MaterialApp(
+      home: UpgradeAlert(
+        showIgnore: false,
+        showLater: false,
+        child: const YoutubePage(),
+      ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      navigatorObservers: [
+        _AnalyticsNavigatorObserver(analyticsService: analyticsService),
+      ],
+    );
+  }
+}
+
+class _AnalyticsNavigatorObserver extends NavigatorObserver {
+  _AnalyticsNavigatorObserver({required this.analyticsService});
+
+  final MyAnalyticsService analyticsService;
+
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    super.didPush(route, previousRoute);
+    _logScreenView(route);
+  }
+
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    if (newRoute != null) {
+      _logScreenView(newRoute);
+    }
+  }
+
+  void _logScreenView(Route<dynamic> route) {
+    final settings = route.settings;
+    if (settings.name != null) {
+      unawaited(
+        analyticsService.logScreenView(
+          screenName: settings.name!,
+          screenClass: settings.name,
+        ),
+      );
+    }
+  }
 }
 
 class _MyStatefulWidget extends StatefulWidget {
