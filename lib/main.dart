@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer' as developer;
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -8,12 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:upgrader/upgrader.dart';
 
-import 'extension/extensions.dart';
 import 'firebase_options.dart';
 import 'google_maps_page.dart';
 import 'l10n/app_localizations.dart';
 import 'packages/analytics/my_analytics_provider.dart';
 import 'packages/analytics/my_analytics_service.dart';
+import 'ui/app_lifecycle_listener.dart';
+import 'ui/app_lifecycle_provider.dart';
 
 void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
@@ -68,22 +68,64 @@ class MyApp extends ConsumerStatefulWidget {
 
 class _MyAppState extends ConsumerState<MyApp> {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => unawaited(ref.read(analyticsServiceProvider).logAppOpen()),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     final analyticsService = ref.watch(analyticsServiceProvider);
+    final lifecycleProvider = ref.watch(appLifecycleProvider);
+
+    // Handle lifecycle state changes
+    ref.listen<AppLifecycleProvider>(appLifecycleProvider, (previous, next) {
+      if (previous?.state != next.state) {
+        switch (next.state) {
+          case AppLifecycleState.resumed:
+            // App came back to foreground - could refresh data,
+            // restart services
+            _handleAppResumed(analyticsService);
+          case AppLifecycleState.paused:
+            // App went to background - could pause expensive operations
+            _handleAppPaused(analyticsService);
+          case AppLifecycleState.inactive:
+            // App is inactive (e.g., during phone call)
+            _handleAppInactive(analyticsService);
+          case AppLifecycleState.detached:
+            // App is about to be terminated
+            _handleAppDetached(analyticsService);
+          case AppLifecycleState.hidden:
+            // App is hidden (new in Flutter 3.13)
+            _handleAppHidden(analyticsService);
+        }
+      }
+    });
 
     return MaterialApp(
-      home: UpgradeAlert(
-        showIgnore: false,
-        showLater: false,
-        child: const GoogleMapsPage(),
+      home: Stack(
+        children: [
+          UpgradeAlert(
+            showIgnore: false,
+            showLater: false,
+            child: const GoogleMapsPage(),
+          ),
+          // App lifecycle indicator
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              color: lifecycleProvider.state == AppLifecycleState.paused
+                  ? Colors.orange
+                  : Colors.green,
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+              child: Text(
+                'App State: ${lifecycleProvider.state.name}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ],
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -91,6 +133,31 @@ class _MyAppState extends ConsumerState<MyApp> {
         _AnalyticsNavigatorObserver(analyticsService: analyticsService),
       ],
     );
+  }
+
+  void _handleAppResumed(MyAnalyticsService analyticsService) {
+    // Log analytics event when app resumes
+    unawaited(analyticsService.logEvent(name: 'app_resumed'));
+  }
+
+  void _handleAppPaused(MyAnalyticsService analyticsService) {
+    // Log analytics event when app pauses
+    unawaited(analyticsService.logEvent(name: 'app_paused'));
+  }
+
+  void _handleAppInactive(MyAnalyticsService analyticsService) {
+    // Log analytics event when app becomes inactive
+    unawaited(analyticsService.logEvent(name: 'app_inactive'));
+  }
+
+  void _handleAppDetached(MyAnalyticsService analyticsService) {
+    // Log analytics event when app is detached
+    unawaited(analyticsService.logEvent(name: 'app_detached'));
+  }
+
+  void _handleAppHidden(MyAnalyticsService analyticsService) {
+    // Log analytics event when app is hidden
+    unawaited(analyticsService.logEvent(name: 'app_hidden'));
   }
 }
 
@@ -123,47 +190,5 @@ class _AnalyticsNavigatorObserver extends NavigatorObserver {
         ),
       );
     }
-  }
-}
-
-class _MyStatefulWidget extends StatefulWidget {
-  const _MyStatefulWidget({required this.title});
-  final String title;
-
-  @override
-  State<_MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-  final TextEditingController textEditingController = TextEditingController(
-    text: 'My initial text',
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    showInternationalizationExamples(context);
-
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: const SizedBox.expand(child: FlutterLogo()),
-    );
-  }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
-
-  void showInternationalizationExamples(BuildContext context) {
-    // This is an example of changing the order of first name and last name
-    // depending on the locale.
-    //
-    // In the English locale, this will log "John Doe".
-    // In the Japanese locale, this will log "Doe John".
-    developer.log('''Full name: ${context.l10n.fullName('John', 'Doe')}''');
-
-    developer.log(context.l10n.piDouble(3.14));
-    developer.log(context.l10n.piNum(3.14));
   }
 }
