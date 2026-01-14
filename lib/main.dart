@@ -13,7 +13,7 @@ import 'l10n/app_localizations.dart';
 import 'packages/analytics/my_analytics_provider.dart';
 import 'packages/analytics/my_analytics_service.dart';
 import 'ui/app_lifecycle_listener.dart';
-import 'ui/app_lifecycle_provider.dart';
+import 'ui/my_app_lifecycle_provider.dart';
 
 void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
@@ -73,7 +73,10 @@ class _MyAppState extends ConsumerState<MyApp> {
     final lifecycleProvider = ref.watch(appLifecycleProvider);
 
     // Handle lifecycle state changes
-    ref.listen<AppLifecycleProvider>(appLifecycleProvider, (previous, next) {
+    ref.listen<MyAppLifecycleChangeNotifier>(appLifecycleProvider, (
+      previous,
+      next,
+    ) {
       if (previous?.state != next.state) {
         switch (next.state) {
           case AppLifecycleState.resumed:

@@ -2,8 +2,8 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/widgets.dart';
 
-class AppLifecycleProvider extends ChangeNotifier {
-  AppLifecycleProvider() {
+class MyAppLifecycleChangeNotifier extends ChangeNotifier {
+  MyAppLifecycleChangeNotifier() {
     _listener = AppLifecycleListener(
       onStateChange: (state) {
         _state = state;
