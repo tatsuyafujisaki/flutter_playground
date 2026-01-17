@@ -25,7 +25,6 @@ dependencies:
   flutter_slidable: any
   flutter_svg: any
   freezed_annotation: any
-  gal: any
   geolocator: any
   glob: any
   google_maps_flutter: any
