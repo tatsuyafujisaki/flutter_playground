@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
@@ -19,9 +20,16 @@ class _MyStatelessWidget extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       developer.log('🍎');
     });
-    Future<void>.delayed(.zero, () {
-      developer.log('🍊');
-    });
+    unawaited(
+      Future.microtask(() {
+        developer.log('🍊');
+      }),
+    );
+    unawaited(
+      Future.delayed(Duration.zero, () {
+        developer.log('🍇');
+      }),
+    );
     return const FlutterLogo();
   }
 }
