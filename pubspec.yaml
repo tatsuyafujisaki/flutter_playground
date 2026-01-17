@@ -11,7 +11,6 @@ dependencies:
   cached_network_image: any
   collection: any
   device_info_plus: any
-  encrypt: any
   firebase_analytics: any
   firebase_core: any
   firebase_crashlytics: any

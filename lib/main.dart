@@ -12,7 +12,6 @@ import 'google_maps_page.dart';
 import 'l10n/app_localizations.dart';
 import 'packages/analytics/my_analytics_provider.dart';
 import 'packages/analytics/my_analytics_service.dart';
-import 'ui/app_lifecycle_listener.dart';
 import 'ui/my_app_lifecycle_provider.dart';
 
 void main() async {
@@ -70,15 +69,12 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final analyticsService = ref.watch(analyticsServiceProvider);
-    final lifecycleProvider = ref.watch(appLifecycleProvider);
+    final lifecycleState = ref.watch(appLifecycleProvider);
 
     // Handle lifecycle state changes
-    ref.listen<MyAppLifecycleChangeNotifier>(appLifecycleProvider, (
-      previous,
-      next,
-    ) {
-      if (previous?.state != next.state) {
-        switch (next.state) {
+    ref.listen<AppLifecycleState>(appLifecycleProvider, (previous, next) {
+      if (previous != next) {
+        switch (next) {
           case AppLifecycleState.resumed:
             // App came back to foreground - could refresh data,
             // restart services
@@ -113,12 +109,12 @@ class _MyAppState extends ConsumerState<MyApp> {
             left: 0,
             right: 0,
             child: Container(
-              color: lifecycleProvider.state == AppLifecycleState.paused
+              color: lifecycleState == AppLifecycleState.paused
                   ? Colors.orange
                   : Colors.green,
               padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
               child: Text(
-                'App State: ${lifecycleProvider.state.name}',
+                'App State: ${lifecycleState.name}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 12,

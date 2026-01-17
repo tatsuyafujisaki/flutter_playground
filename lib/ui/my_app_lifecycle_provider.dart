@@ -1,9 +1,21 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'dart:developer' as developer;
 
-import 'app_lifecycle_listener.dart';
+import 'package:flutter/widgets.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'my_app_lifecycle_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-MyAppLifecycleChangeNotifier appLifecycle(Ref ref) =>
-    MyAppLifecycleChangeNotifier();
+class AppLifecycle extends _$AppLifecycle {
+  @override
+  AppLifecycleState build() {
+    final listener = AppLifecycleListener(
+      onStateChange: (state) {
+        developer.log('🔄$state');
+        this.state = state;
+      },
+    );
+    ref.onDispose(listener.dispose);
+    return WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed;
+  }
+}
