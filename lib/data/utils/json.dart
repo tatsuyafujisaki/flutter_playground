@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
-import '../../examples/freezed/person.dart';
+import '../../puredart/examples/freezed/person.dart';
 
 // ignore: unreachable_from_main
 Map<String, dynamic> jsonDecodeToMap(String json) {

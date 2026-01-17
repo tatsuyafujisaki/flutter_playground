@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../util/color_utils.dart';
 
 void main() =>
     runApp(const ProviderScope(child: MaterialApp(home: _MyStatelessWidget())));
@@ -31,10 +30,7 @@ class _BottomSheetContent extends StatelessWidget {
   Widget build(BuildContext context) => ListView(
     children: [
       for (final i in indices)
-        ListTile(
-          title: Text('Item $i'),
-          tileColor: getMaterialColor(Colors.amber, i),
-        ),
+        ListTile(title: Text('Item $i'), tileColor: Colors.amber),
     ],
   );
 }

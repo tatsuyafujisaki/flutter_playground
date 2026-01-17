@@ -4,7 +4,7 @@ import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../util/json/date_time_converter.dart';
+import '../../../data/utils/date_time_converter.dart';
 
 part 'person.freezed.dart';
 part 'person.g.dart';
@@ -24,7 +24,7 @@ void main() {
   final person = const Person(
     name: 'John',
     age: 42,
-  ).copyWith(lastUpdated: .now());
+  ).copyWith(lastUpdated: DateTime.now());
   final map = person.toJson();
   developer.log(map.toString());
   final personFromJson = Person.fromJson(map);

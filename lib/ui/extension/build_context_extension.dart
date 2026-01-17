@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 
-import '../enum/language.dart';
-import '../l10n/app_localizations.dart';
+import '../../data/enum/language.dart';
+import '../../l10n/app_localizations.dart';
 
 extension BuildContextExtension on BuildContext {
   AppLocalizations get l10n => AppLocalizations.of(this)!;

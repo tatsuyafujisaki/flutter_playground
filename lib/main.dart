@@ -8,11 +8,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:upgrader/upgrader.dart';
 
 import 'firebase_options.dart';
-import 'google_maps_page.dart';
 import 'l10n/app_localizations.dart';
 import 'packages/analytics/my_analytics_provider.dart';
 import 'packages/analytics/my_analytics_service.dart';
-import 'ui/my_app_lifecycle_provider.dart';
+import 'ui/page/google_maps_page.dart';
+import 'ui/provider/my_app_lifecycle_provider.dart';
 
 void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html

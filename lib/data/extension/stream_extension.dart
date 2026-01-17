@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
-extension<T> on Stream<T> {
-  // ignore: unused_element
+extension StreamExtension<T> on Stream<T> {
   Stream<T> handle({
     void Function(T)? handleData,
     void Function(Object, StackTrace)? handleError,
@@ -23,10 +22,7 @@ extension<T> on Stream<T> {
       },
     ),
   );
-}
 
-extension<T> on Stream<T> {
-  // ignore: unused_element
   Stream<T> log() => transform<T>(
     StreamTransformer<T, T>.fromHandlers(
       handleData: (data, sink) {
