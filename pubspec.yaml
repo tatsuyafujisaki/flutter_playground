@@ -6,48 +6,48 @@ environment:
 # > The version constraint is optional but recommended. If no version constraint is given, any is assumed.
 # https://dart.dev/tools/pub/dependencies#hosted-packages
 dependencies:
-  async: any
-  collection: any
-  device_info_plus: any
-  firebase_analytics: any
-  firebase_core: any
-  firebase_crashlytics: any
-  firebase_ui_firestore: any
+  async: any # by dart.dev
+  collection: any # by dart.dev
+  device_info_plus: any # Flutter Favorite
+  firebase_analytics: any # by firebase.google.com
+  firebase_core: any # by firebase.google.com and Flutter Favorite
+  firebase_crashlytics: any # by firebase.google.com and Flutter Favorite
+  firebase_ui_firestore: any # by firebase_ui_firestore and Flutter Favorite
   flutter:
     sdk: flutter
   flutter_launcher_icons: any
-  flutter_local_notifications: any
+  flutter_local_notifications: any # Flutter Favorite
   flutter_localizations:
     sdk: flutter
-  flutter_riverpod: any
-  flutter_slidable: any
-  flutter_svg: any
+  flutter_riverpod: any # Flutter Favorite
+  flutter_slidable: any # Flutter Favorite
+  flutter_svg: any # Flutter Favorite
   freezed_annotation: any
-  geolocator: any
-  glob: any
-  google_maps_flutter: any
-  googleapis: any
-  http: any
-  image_picker: any
-  intl: any
-  json_annotation: any
-  location: any
-  path: any
-  path_provider: any
+  geolocator: any # Flutter Favorite
+  glob: any # by tools.dart.dev
+  google_maps_flutter: any # by flutter.dev
+  googleapis: any # Flutter Favorite and by google.dev
+  http: any # by dart.dev
+  image_picker: any # by flutter.dev
+  intl: any # by dart.dev and Flutter Favorite
+  json_annotation: any # by google.dev
+  location: any # Flutter Favorite
+  path: any # by dart.dev
+  path_provider: any # by path_provider and Flutter Favorite
   permission_handler: any
   riverpod_annotation: any
-  shared_preferences: any
+  shared_preferences: any # by flutter.dev and Flutter Favorite
   upgrader: any
-  url_launcher: any
-  video_player: any
-  webview_flutter: any
+  url_launcher: any # flutter.dev and Fluter Favorite
+  video_player: any # flutter.dev and Flutter Favorite
+  webview_flutter: any # flutter.dev
 dev_dependencies:
-  build_runner: any
-  flutter_lints: any
+  build_runner: any # by tools.dart.dev
+  flutter_lints: any # by flutter.dev
   flutter_test:
     sdk: flutter
-  freezed: any
-  json_serializable: any
+  freezed: any # Flutter Favorite
+  json_serializable: any # Flutter Favorite
   riverpod_generator: any
   riverpod_lint: any
 flutter:
