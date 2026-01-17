@@ -16,31 +16,19 @@ import 'ui/page/google_maps_page.dart';
 import 'ui/provider/my_app_lifecycle_state.dart';
 
 void main() async {
-  // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
   WidgetsFlutterBinding.ensureInitialized();
 
-  // https://pub.dev/documentation/firebase_core/latest/firebase_core/Firebase/initializeApp.html
-  // https://firebase.google.com/docs/flutter/setup?platform=ios#initialize-firebase
-  if (Firebase.apps.isEmpty) {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  }
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // https://api.flutter.dev/flutter/foundation/FlutterError/onError.html
   FlutterError.onError = (details) {
     if (kDebugMode) {
-      // In debug mode, show the error in the console/red screen.
       FlutterError.presentError(details);
     } else {
-      // In release mode, send to Crashlytics.
       unawaited(FirebaseCrashlytics.instance.recordFlutterFatalError(details));
     }
   };
 
-  // https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/onError.html
   PlatformDispatcher.instance.onError = (exception, stackTrace) {
-    // In release mode, send to Crashlytics.
     if (!kDebugMode) {
       unawaited(
         FirebaseCrashlytics.instance.recordError(
