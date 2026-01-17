@@ -69,31 +69,11 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final analyticsService = ref.watch(analyticsServiceProvider);
     final lifecycleState = ref.watch(myAppLifecycleStateProvider);
+    developer.log('🔄${lifecycleState.name}');
 
-    // Handle lifecycle state changes
-    ref.listen<AppLifecycleState>(myAppLifecycleStateProvider, (
-      previous,
-      next,
-    ) {
-      developer.log('🔄${next.name}');
-
-      if (previous != next) {
-        switch (next) {
-          case AppLifecycleState.resumed:
-            _handleAppResumed(analyticsService);
-          case AppLifecycleState.paused:
-            _handleAppPaused(analyticsService);
-          case AppLifecycleState.inactive:
-            _handleAppInactive(analyticsService);
-          case AppLifecycleState.detached:
-            _handleAppDetached(analyticsService);
-          case AppLifecycleState.hidden:
-            _handleAppHidden(analyticsService);
-        }
-      }
-    });
+    final analyticsService = ref.watch(analyticsServiceProvider);
+    unawaited(analyticsService.logEvent(name: lifecycleState.name));
 
     return MaterialApp(
       home: Stack(
@@ -132,31 +112,6 @@ class _MyAppState extends ConsumerState<MyApp> {
         _AnalyticsNavigatorObserver(analyticsService: analyticsService),
       ],
     );
-  }
-
-  void _handleAppResumed(MyAnalyticsService analyticsService) {
-    // Log analytics event when app resumes
-    unawaited(analyticsService.logEvent(name: 'app_resumed'));
-  }
-
-  void _handleAppPaused(MyAnalyticsService analyticsService) {
-    // Log analytics event when app pauses
-    unawaited(analyticsService.logEvent(name: 'app_paused'));
-  }
-
-  void _handleAppInactive(MyAnalyticsService analyticsService) {
-    // Log analytics event when app becomes inactive
-    unawaited(analyticsService.logEvent(name: 'app_inactive'));
-  }
-
-  void _handleAppDetached(MyAnalyticsService analyticsService) {
-    // Log analytics event when app is detached
-    unawaited(analyticsService.logEvent(name: 'app_detached'));
-  }
-
-  void _handleAppHidden(MyAnalyticsService analyticsService) {
-    // Log analytics event when app is hidden
-    unawaited(analyticsService.logEvent(name: 'app_hidden'));
   }
 }
 
