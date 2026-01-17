@@ -3,7 +3,7 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import '../packages/permission_handler_example.dart';
+import '../../packages/permission_handler_example.dart';
 
 void main() =>
     runApp(const ProviderScope(child: MaterialApp(home: _MyStatelessWidget())));
