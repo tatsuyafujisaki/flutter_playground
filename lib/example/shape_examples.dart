@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 
+@Preview()
 Widget ovalOutlinedButtonExample() => OutlinedButton(
   onPressed: () {},
   style: OutlinedButton.styleFrom(
@@ -7,5 +9,5 @@ Widget ovalOutlinedButtonExample() => OutlinedButton(
     side: const BorderSide(color: Colors.red),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
   ),
-  child: const Text('Click me!'),
+  child: const Text('Click me!', style: TextStyle(color: Colors.red)),
 );
