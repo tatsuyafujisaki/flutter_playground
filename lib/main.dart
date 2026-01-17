@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -12,7 +13,7 @@ import 'l10n/app_localizations.dart';
 import 'packages/analytics/my_analytics_provider.dart';
 import 'packages/analytics/my_analytics_service.dart';
 import 'ui/page/google_maps_page.dart';
-import 'ui/provider/my_app_lifecycle_provider.dart';
+import 'ui/provider/my_app_lifecycle_state.dart';
 
 void main() async {
   // https://api.flutter.dev/flutter/widgets/WidgetsFlutterBinding/ensureInitialized.html
@@ -69,27 +70,26 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final analyticsService = ref.watch(analyticsServiceProvider);
-    final lifecycleState = ref.watch(appLifecycleProvider);
+    final lifecycleState = ref.watch(myAppLifecycleStateProvider);
 
     // Handle lifecycle state changes
-    ref.listen<AppLifecycleState>(appLifecycleProvider, (previous, next) {
+    ref.listen<AppLifecycleState>(myAppLifecycleStateProvider, (
+      previous,
+      next,
+    ) {
+      developer.log('🔄${next.name}');
+
       if (previous != next) {
         switch (next) {
           case AppLifecycleState.resumed:
-            // App came back to foreground - could refresh data,
-            // restart services
             _handleAppResumed(analyticsService);
           case AppLifecycleState.paused:
-            // App went to background - could pause expensive operations
             _handleAppPaused(analyticsService);
           case AppLifecycleState.inactive:
-            // App is inactive (e.g., during phone call)
             _handleAppInactive(analyticsService);
           case AppLifecycleState.detached:
-            // App is about to be terminated
             _handleAppDetached(analyticsService);
           case AppLifecycleState.hidden:
-            // App is hidden (new in Flutter 3.13)
             _handleAppHidden(analyticsService);
         }
       }
