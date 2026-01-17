@@ -38,9 +38,6 @@ void main() async {
         ),
       );
     }
-    // In debug mode, return false to let Flutter show the error in the console
-    // and red screen. In release mode, return true to suppress the error
-    // after sending it to Crashlytics.
     return !kDebugMode;
   };
 
