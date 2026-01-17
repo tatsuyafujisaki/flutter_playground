@@ -7,7 +7,6 @@ environment:
 # https://dart.dev/tools/pub/dependencies#hosted-packages
 dependencies:
   async: any
-  cached_network_image: any
   collection: any
   device_info_plus: any
   firebase_analytics: any
