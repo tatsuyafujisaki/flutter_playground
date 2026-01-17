@@ -68,7 +68,6 @@ class _MyAppState extends ConsumerState<MyApp> {
             showLater: false,
             child: const GoogleMapsPage(),
           ),
-          // App lifecycle indicator
           Positioned(
             top: 0,
             left: 0,
