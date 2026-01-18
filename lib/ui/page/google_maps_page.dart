@@ -73,7 +73,8 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Google Maps')),
-    body: Stack(
+    body: SafeArea(
+      child: Stack(
       children: [
         GoogleMap(
           initialCameraPosition: _initialPosition,
@@ -158,6 +159,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
           ),
         ),
       ],
+    ),
     ),
   );
 }
