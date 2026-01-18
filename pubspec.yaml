@@ -31,7 +31,6 @@ dependencies:
   image_picker: any # by flutter.dev
   intl: any # by dart.dev and Flutter Favorite
   json_annotation: any # by google.dev
-  location: any # Flutter Favorite
   path: any # by dart.dev
   path_provider: any # by path_provider and Flutter Favorite
   permission_handler: any
