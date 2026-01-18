@@ -30,6 +30,9 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   void initState() {
     super.initState();
     _currentPosition = _initialPosition;
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async => _getCurrentLocation(),
+    );
   }
 
   String _getLatitudeText() =>
@@ -70,11 +73,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Google Maps')),
-    floatingActionButton: FloatingActionButton(
-      onPressed: _getCurrentLocation,
-      tooltip: 'Get Current Location',
-      child: const Icon(Icons.my_location),
-    ),
     body: Stack(
       children: [
         GoogleMap(
