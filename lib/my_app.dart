@@ -30,26 +30,6 @@ class _MyAppState extends ConsumerState<MyApp> {
             showLater: false,
             child: const GoogleMapsPage(),
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: lifecycleState == AppLifecycleState.paused
-                  ? Colors.orange
-                  : Colors.green,
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-              child: Text(
-                'App State: ${lifecycleState.name}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
         ],
       ),
       navigatorObservers: [
