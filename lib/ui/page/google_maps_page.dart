@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../data/utils/geolocator_utils.dart';
 
 class GoogleMapsPage extends StatefulWidget {
   const GoogleMapsPage({super.key});
@@ -20,6 +24,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   );
 
   CameraPosition? _currentPosition;
+  Position? _userPosition;
 
   @override
   void initState() {
@@ -28,16 +33,49 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   }
 
   String _getLatitudeText() =>
-      _currentPosition?.target.latitude.toStringAsFixed(6) ?? '不明';
+      _currentPosition?.target.latitude.toStringAsFixed(6) ?? 'Unknown';
 
   String _getLongitudeText() =>
-      _currentPosition?.target.longitude.toStringAsFixed(6) ?? '不明';
+      _currentPosition?.target.longitude.toStringAsFixed(6) ?? 'Unknown';
 
-  String _getZoomText() => _currentPosition?.zoom.toStringAsFixed(2) ?? '不明';
+  String _getZoomText() =>
+      _currentPosition?.zoom.toStringAsFixed(2) ?? 'Unknown';
+
+  String _getAccuracyText() => _userPosition != null
+      ? '${_userPosition!.accuracy.toStringAsFixed(2)}m'
+      : 'Unknown';
+
+  String _getUserLatitudeText() =>
+      _userPosition?.latitude.toStringAsFixed(6) ?? 'Unknown';
+
+  String _getUserLongitudeText() =>
+      _userPosition?.longitude.toStringAsFixed(6) ?? 'Unknown';
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      final position = await determinePosition();
+
+      setState(() {
+        _userPosition = position;
+      });
+
+      // Print the location to console
+      developer.log(
+        'Current location: ${position.latitude}, ${position.longitude}',
+      );
+    } on Exception catch (e) {
+      developer.log('Error getting location: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Google Maps')),
+    floatingActionButton: FloatingActionButton(
+      onPressed: _getCurrentLocation,
+      tooltip: 'Get Current Location',
+      child: const Icon(Icons.my_location),
+    ),
     body: Stack(
       children: [
         GoogleMap(
@@ -53,33 +91,73 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
           top: 16,
           left: 16,
           right: 16,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    '現在の位置',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Camera Position',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Latitude: ${_getLatitudeText()}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      Text(
+                        'Longitude: ${_getLongitudeText()}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      Text(
+                        'Zoom: ${_getZoomText()}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '緯度: ${_getLatitudeText()}',
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                  Text(
-                    '経度: ${_getLongitudeText()}',
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                  Text(
-                    'ズーム: ${_getZoomText()}',
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ],
+                ),
               ),
-            ),
+              const SizedBox(height: 8),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'GPS Position',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Latitude: ${_getUserLatitudeText()}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      Text(
+                        'Longitude: ${_getUserLongitudeText()}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      Text(
+                        'Accuracy: ${_getAccuracyText()}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
