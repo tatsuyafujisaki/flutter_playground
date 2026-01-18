@@ -6,11 +6,7 @@ Future<bool> get isOnline async {
     final internetAddresses = await InternetAddress.lookup('example.com');
     return internetAddresses.firstOrNull?.rawAddress.isNotEmpty ?? false;
   } on Exception catch (error, stackTrace) {
-    developer.log(
-      'Failed to check online status',
-      error: error,
-      stackTrace: stackTrace,
-    );
+    developer.log('', error: error, stackTrace: stackTrace);
     return false;
   }
 }
