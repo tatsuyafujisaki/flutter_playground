@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:developer' as developer;
 
 class Debouncer {
   Debouncer(this.duration);
+
   final Duration duration;
   Timer? _timer;
 
@@ -10,36 +10,8 @@ class Debouncer {
     _timer?.cancel();
     _timer = Timer(duration, callback);
   }
-}
 
-Timer _createAndStartPeriodicTimer([void Function()? callback]) =>
-    .periodic(const Duration(seconds: 1) /* inteval */, (timer) {
-      developer.log('Timer.tick: ${timer.tick}');
-      callback?.call();
-    });
-
-void main() {
-  final debouncer = Debouncer(const Duration(seconds: 3));
-
-  final timer1 = _createAndStartPeriodicTimer();
-
-  final timer2 = Timer(
-    const Duration(seconds: 2),
-    () => debouncer.run(
-      () => developer.log('Debouncer: 2 seconds passed without another call.'),
-    ),
-  );
-
-  final timer3 = Timer(
-    const Duration(seconds: 4),
-    () => debouncer.run(
-      () => developer.log('Debouncer: 4 seconds passed without another call.'),
-    ),
-  );
-
-  Future<void>.delayed(const Duration(seconds: 60), () {
-    timer1.cancel();
-    timer2.cancel();
-    timer3.cancel();
-  });
+  void dispose() {
+    _timer?.cancel();
+  }
 }
