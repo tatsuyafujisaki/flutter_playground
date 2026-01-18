@@ -49,7 +49,8 @@
 		<array>
 			<string>https</string>
 		</array>
-		<key>GMSServicesAPIKey</key>
-		<string>$(GOOGLE_MAPS_PLATFORM_API_KEY)</string>
+		<!-- https://pub.dev/packages/geolocator#usage -->
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>This app needs access to location when open.</string>
 	</dict>
 </plist>
