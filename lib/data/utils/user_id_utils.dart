@@ -1,5 +1,6 @@
 import 'dart:developer' as developer;
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -10,12 +11,11 @@ Future<String> getOrCreateUserId() async {
     final prefs = await SharedPreferences.getInstance();
     final existingUserId = prefs.getString(_sharedPreferencesUserIdKey);
 
-    if (existingUserId != null) {
-      return existingUserId;
+    final userId = existingUserId ?? const Uuid().v4();
+    if (existingUserId == null) {
+      await prefs.setString(_sharedPreferencesUserIdKey, userId);
     }
-
-    final userId = const Uuid().v4();
-    await prefs.setString(_sharedPreferencesUserIdKey, userId);
+    await FirebaseAnalytics.instance.setUserId(id: userId);
     return userId;
   } on Exception catch (error, stackTrace) {
     developer.log('', error: error, stackTrace: stackTrace);
