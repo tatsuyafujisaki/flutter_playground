@@ -53,18 +53,17 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
   Future<void> _getCurrentLocation() async {
     try {
-      final position = await determinePosition();
+      final position = await getPosition();
 
       setState(() {
         _userPosition = position;
       });
 
-      // Print the location to console
       developer.log(
         'Current location: ${position.latitude}, ${position.longitude}',
       );
-    } on Exception catch (e) {
-      developer.log('Error getting location: $e');
+    } on Exception catch (error, stackTrace) {
+      developer.log('', error: error, stackTrace: stackTrace);
     }
   }
 
