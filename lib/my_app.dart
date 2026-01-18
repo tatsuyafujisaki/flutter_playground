@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:upgrader/upgrader.dart';
 
 import 'l10n/app_localizations.dart';
-import 'packages/analytics/my_analytics_provider.dart';
 import 'ui/page/google_maps_page.dart';
 import 'ui/provider/my_app_lifecycle_state.dart';
 
@@ -23,9 +21,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final lifecycleState = ref.watch(myAppLifecycleStateProvider);
     developer.log('🔄${lifecycleState.name}');
-
-    final analyticsService = ref.watch(analyticsServiceProvider);
-    unawaited(analyticsService.logEvent(name: lifecycleState.name));
 
     return MaterialApp(
       home: Stack(
