@@ -1,13 +1,13 @@
+# Glossary
+
+https://docs.flutter.dev/resources/glossary
+
 # Terminology
 
 > Terminology<br> In Flutter, screens and pages are called routes. The remainder
 > of this recipe refers to routes.
 
 https://docs.flutter.dev/cookbook/navigation/navigation-basics
-
-> Difference between packages and plugins<br> Packages ...<br> Plugins ...
-
-https://docs.flutter.dev/packages-and-plugins/using-packages
 
 # Differences among hot reload, hot restart, and full restart
 
