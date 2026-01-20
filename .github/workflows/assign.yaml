@@ -1,0 +1,20 @@
+# https://docs.github.com/en/rest/issues/assignees#add-assignees-to-an-issue
+on:
+  pull_request:
+    types: [opened]
+  workflow_dispatch:
+permissions:
+  pull-requests: write
+jobs:
+  assign-author:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              assignees: [context.actor]
+            })
