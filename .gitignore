@@ -376,5 +376,8 @@ lib/l10n/untranslated.txt
 .fvm/
 .fvmrc
 
-# Dart defines (secrets)
+# API keys
 dart_defines.json
+
+# API keys (in case you want to build the app using Xcode, which does not recognize dart_defines.json.)
+ios/Flutter/Secrets.xcconfig

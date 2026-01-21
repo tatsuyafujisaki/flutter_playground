@@ -26,4 +26,24 @@ lib/l10n/untranslated.txt
 # https://fvm.app
 .fvm/
 .fvmrc
+
+# API keys
+dart_defines.json
+
+# API keys (in case you want to build the app using Xcode, which does not recognize dart_defines.json.)
+ios/Flutter/Secrets.xcconfig
 ```
+
+# How to use API keys
+
+1. Create `ios/Flutter/Secrets.xcconfig`, but do not commit it.
+1. Enter API keys in `ios/Flutter/Secrets.xcconfig`.
+   ```
+   API1=KEK1
+   API2=KEY2
+   ```
+1. Add the following to `ios/Flutter/{Debug, Profile, Release}.config`,
+   respectively.
+   ```
+   #include "Secrets.xcconfig"
+   ```
