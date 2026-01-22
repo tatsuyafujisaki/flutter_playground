@@ -80,95 +80,23 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     appBar: AppBar(title: const Text('Google Maps')),
     body: SafeArea(
       child: Stack(
-      children: [
-        GoogleMap(
-          initialCameraPosition: _currentPosition ??
-              const CameraPosition(
-                target: LatLng(35.6812, 139.7671), // 東京駅の座標（デフォルト）
-                zoom: 14.4746,
-              ),
-          onMapCreated: _controller.complete,
-          onCameraMove: (position) {
-            setState(() {
-              _currentPosition = position;
-            });
-          },
-        ),
-        Positioned(
-          top: 16,
-          left: 16,
-          right: 16,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'Camera Position',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Latitude: ${_getLatitudeText()}',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      Text(
-                        'Longitude: ${_getLongitudeText()}',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      Text(
-                        'Zoom: ${_getZoomText()}',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
+        children: [
+          GoogleMap(
+            initialCameraPosition:
+                _currentPosition ??
+                const CameraPosition(
+                  target: LatLng(35.6812, 139.7671), // 東京駅の座標（デフォルト）
+                  zoom: 14.4746,
                 ),
-              ),
-              const SizedBox(height: 8),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'GPS Position',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Latitude: ${_getUserLatitudeText()}',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      Text(
-                        'Longitude: ${_getUserLongitudeText()}',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      Text(
-                        'Accuracy: ${_getAccuracyText()}',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            onMapCreated: _controller.complete,
+            onCameraMove: (position) {
+              setState(() {
+                _currentPosition = position;
+              });
+            },
           ),
-        ),
-      ],
-    ),
+        ],
+      ),
     ),
   );
 }
