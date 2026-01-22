@@ -44,6 +44,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
             markerId: const MarkerId('current_location'),
             position: LatLng(position.latitude, position.longitude),
             infoWindow: const InfoWindow(title: 'Your location'),
+            onTap: () => _showImageDialog(context),
           ),
         );
       });
@@ -59,6 +60,54 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     } on Exception catch (error, stackTrace) {
       developer.log('', error: error, stackTrace: stackTrace);
     }
+  }
+
+  void _showImageDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) => Dialog(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    '画像',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+            ),
+            Flexible(
+              child: Image.network(
+                'https://picsum.photos/400/300',
+                fit: BoxFit.contain,
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) return child;
+                  return const Center(child: CircularProgressIndicator());
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(Icons.error, size: 48),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
