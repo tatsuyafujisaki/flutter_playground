@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../data/utils/geolocator_utils.dart';
@@ -19,7 +18,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
       Completer<GoogleMapController>();
 
   CameraPosition? _currentPosition;
-  Position? _userPosition;
+  final Set<Marker> _markers = {};
 
   @override
   void initState() {
@@ -28,25 +27,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
       (_) async => _getCurrentLocation(),
     );
   }
-
-  String _getLatitudeText() =>
-      _currentPosition?.target.latitude.toStringAsFixed(6) ?? 'Unknown';
-
-  String _getLongitudeText() =>
-      _currentPosition?.target.longitude.toStringAsFixed(6) ?? 'Unknown';
-
-  String _getZoomText() =>
-      _currentPosition?.zoom.toStringAsFixed(2) ?? 'Unknown';
-
-  String _getAccuracyText() => _userPosition != null
-      ? '${_userPosition!.accuracy.toStringAsFixed(2)}m'
-      : 'Unknown';
-
-  String _getUserLatitudeText() =>
-      _userPosition?.latitude.toStringAsFixed(6) ?? 'Unknown';
-
-  String _getUserLongitudeText() =>
-      _userPosition?.longitude.toStringAsFixed(6) ?? 'Unknown';
 
   Future<void> _getCurrentLocation() async {
     try {
@@ -58,8 +38,14 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
       );
 
       setState(() {
-        _userPosition = position;
         _currentPosition = cameraPosition;
+        _markers.add(
+          Marker(
+            markerId: const MarkerId('current_location'),
+            position: LatLng(position.latitude, position.longitude),
+            infoWindow: const InfoWindow(title: 'Your location'),
+          ),
+        );
       });
 
       final controller = await _controller.future;
@@ -94,6 +80,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                 _currentPosition = position;
               });
             },
+            markers: _markers,
           ),
         ],
       ),
