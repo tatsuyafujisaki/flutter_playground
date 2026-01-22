@@ -18,18 +18,12 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-  static const CameraPosition _initialPosition = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
   CameraPosition? _currentPosition;
   Position? _userPosition;
 
   @override
   void initState() {
     super.initState();
-    _currentPosition = _initialPosition;
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async => _getCurrentLocation(),
     );
@@ -58,9 +52,20 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     try {
       final position = await getPosition();
 
+      final cameraPosition = CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: 14.4746,
+      );
+
       setState(() {
         _userPosition = position;
+        _currentPosition = cameraPosition;
       });
+
+      final controller = await _controller.future;
+      await controller.animateCamera(
+        CameraUpdate.newCameraPosition(cameraPosition),
+      );
 
       developer.log(
         'Current location: ${position.latitude}, ${position.longitude}',
@@ -77,7 +82,11 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
       child: Stack(
       children: [
         GoogleMap(
-          initialCameraPosition: _initialPosition,
+          initialCameraPosition: _currentPosition ??
+              const CameraPosition(
+                target: LatLng(35.6812, 139.7671), // 東京駅の座標（デフォルト）
+                zoom: 14.4746,
+              ),
           onMapCreated: _controller.complete,
           onCameraMove: (position) {
             setState(() {
