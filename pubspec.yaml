@@ -36,7 +36,6 @@ dependencies:
   permission_handler: any
   riverpod_annotation: any
   shared_preferences: any # by flutter.dev and Flutter Favorite
-  upgrader: any
   url_launcher: any # flutter.dev and Fluter Favorite
   uuid: any
   video_player: any # flutter.dev and Flutter Favorite

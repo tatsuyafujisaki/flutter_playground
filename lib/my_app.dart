@@ -3,7 +3,6 @@ import 'dart:developer' as developer;
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:upgrader/upgrader.dart';
 
 import 'l10n/app_localizations.dart';
 import 'ui/page/google_maps_page.dart';
@@ -23,15 +22,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     developer.log('🔄${lifecycleState.name}');
 
     return MaterialApp(
-      home: Stack(
-        children: [
-          UpgradeAlert(
-            showIgnore: false,
-            showLater: false,
-            child: const GoogleMapsPage(),
-          ),
-        ],
-      ),
+      home: const GoogleMapsPage(),
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
       ],
