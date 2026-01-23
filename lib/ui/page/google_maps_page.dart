@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 
 import '../../data/utils/geolocator_utils.dart';
 
@@ -37,12 +38,19 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
         zoom: 14.4746,
       );
 
+      final customIcon = await _createCustomMarkerIcon();
+
+      if (!mounted) {
+        return;
+      }
+
       setState(() {
         _currentPosition = cameraPosition;
         _markers.add(
           Marker(
             markerId: const MarkerId('current_location'),
             position: LatLng(position.latitude, position.longitude),
+            icon: customIcon,
             infoWindow: const InfoWindow(title: 'Your location'),
             onTap: () => _showImageDialog(context),
           ),
@@ -62,15 +70,32 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     }
   }
 
-  void _showImageDialog(BuildContext context) {
-    showDialog<void>(
+  Future<BitmapDescriptor> _createCustomMarkerIcon() async {
+    try {
+      final response = await http.get(
+        Uri.parse('https://picsum.photos/100/100'),
+      );
+      final imageData = response.bodyBytes;
+      return BitmapDescriptor.bytes(imageData);
+    } on Exception catch (error, stackTrace) {
+      developer.log(
+        'Failed to load marker image',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return BitmapDescriptor.defaultMarker;
+    }
+  }
+
+  Future<void> _showImageDialog(BuildContext context) async {
+    await showDialog<void>(
       context: context,
-      builder: (BuildContext context) => Dialog(
+      builder: (context) => Dialog(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -93,14 +118,15 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                 'https://picsum.photos/400/300',
                 fit: BoxFit.contain,
                 loadingBuilder: (context, child, progress) {
-                  if (progress == null) return child;
+                  if (progress == null) {
+                    return child;
+                  }
                   return const Center(child: CircularProgressIndicator());
                 },
-                errorBuilder: (context, error, stackTrace) {
-                  return const Center(
-                    child: Icon(Icons.error, size: 48),
-                  );
-                },
+                errorBuilder: (context, error, stackTrace) =>
+                    const Center(
+                  child: Icon(Icons.error, size: 48),
+                ),
               ),
             ),
             const SizedBox(height: 16),
