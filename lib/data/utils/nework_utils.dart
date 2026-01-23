@@ -15,13 +15,24 @@ Future<bool> get isOnline async {
 
 Future<bool> isUrlAccessible(String url) async {
   try {
-    final response = await http
-        .head(Uri.parse(url))
-        .timeout(const Duration(seconds: 10));
+    final uri = Uri.tryParse(url);
+    if (uri == null) {
+      return false;
+    }
 
-    return response.statusCode >= 200 && response.statusCode <= 299;
+    final response = await http.head(uri).timeout(const Duration(seconds: 10));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return true;
+    }
+
+    if (response.statusCode == 405) {
+      final response2 = await http
+          .get(uri)
+          .timeout(const Duration(seconds: 10));
+      return response2.statusCode >= 200 && response2.statusCode < 300;
+    }
   } on Exception catch (error, stackTrace) {
     developer.log('', error: error, stackTrace: stackTrace);
-    return false;
   }
+  return false;
 }
