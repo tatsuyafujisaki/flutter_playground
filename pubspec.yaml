@@ -36,6 +36,7 @@ dependencies:
   path: any # by dart.dev
   path_provider: any # by path_provider and Flutter Favorite
   permission_handler: any
+  pub_semver: any # by tools.dart.dev
   riverpod_annotation: any
   shared_preferences: any # by flutter.dev and Flutter Favorite
   url_launcher: any # flutter.dev and Fluter Favorite
