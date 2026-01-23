@@ -12,6 +12,7 @@ dependencies:
   firebase_analytics: any # by firebase.google.com
   firebase_core: any # by firebase.google.com and Flutter Favorite
   firebase_crashlytics: any # by firebase.google.com and Flutter Favorite
+  firebase_remote_config: any # by firebase.google.com
   firebase_ui_firestore: any # by firebase_ui_firestore and Flutter Favorite
   flutter:
     sdk: flutter
