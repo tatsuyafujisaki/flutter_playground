@@ -21,15 +21,14 @@ Future<bool> isUrlAccessible(String url) async {
     }
 
     final response = await http.head(uri).timeout(const Duration(seconds: 10));
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      return true;
-    }
-
-    if (response.statusCode == 405) {
-      final response2 = await http
-          .get(uri)
-          .timeout(const Duration(seconds: 10));
-      return response2.statusCode >= 200 && response2.statusCode < 300;
+    switch (response.statusCode) {
+      case >= 200 && < 300:
+        return true;
+      case 405:
+        final response2 = await http
+            .get(uri)
+            .timeout(const Duration(seconds: 10));
+        return response2.statusCode >= 200 && response2.statusCode < 300;
     }
   } on Exception catch (error, stackTrace) {
     developer.log('', error: error, stackTrace: stackTrace);
