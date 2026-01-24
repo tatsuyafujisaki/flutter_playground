@@ -6,12 +6,12 @@ import 'package:pub_semver/pub_semver.dart';
 
 Future<bool> _shouldForceUpdate(String requiredVersion) async {
   final packageInfo = await PackageInfo.fromPlatform();
-  final currentVersion = _tryParseVersion(packageInfo.version) ?? Version.none;
-  final requiredVersion1 = _tryParseVersion(requiredVersion) ?? Version.none;
+  final currentVersion = _tryParse(packageInfo.version) ?? Version.none;
+  final requiredVersion1 = _tryParse(requiredVersion) ?? Version.none;
   return currentVersion < requiredVersion1;
 }
 
-Version? _tryParseVersion(String version) {
+Version? _tryParse(String version) {
   try {
     return Version.parse(version);
   } on Exception catch (error, stackTrace) {
