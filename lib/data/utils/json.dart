@@ -3,7 +3,6 @@ import 'dart:developer' as developer;
 
 import '../../puredart/examples/freezed/person.dart';
 
-// ignore: unreachable_from_main
 Map<String, dynamic> jsonDecodeToMap(String json) {
   try {
     return jsonDecode(json) as Map<String, dynamic>;
@@ -17,7 +16,6 @@ Map<String, dynamic> jsonDecodeToMap(String json) {
   return <String, dynamic>{};
 }
 
-// ignore: unreachable_from_main
 String minifyJson(String json) => jsonEncode(jsonDecode(json));
 
 T _parseObject<T>(
@@ -29,10 +27,13 @@ List<T> _parseArray<T>(
   String json,
   T Function(Map<String, dynamic> json) toElement,
 ) => List<Map<String, dynamic>>.from(
-  jsonDecode(json) as Iterable,
+  jsonDecode(json) as Iterable<dynamic>,
 ).map(toElement).toList();
 
 void main() {
+  developer.log(jsonDecodeToMap('{"a": 1}').toString());
+  developer.log(minifyJson('{"a": 1, "b": 2}'));
+
   developer.log(
     _parseObject('{ "name": "John", "age": 42 }', Person.fromJson).toString(),
   );
