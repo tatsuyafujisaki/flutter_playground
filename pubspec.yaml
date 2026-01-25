@@ -27,7 +27,7 @@ dependencies:
   geolocator: any # Flutter Favorite
   glob: any # by tools.dart.dev
   google_maps_flutter: any # by flutter.dev
-  googleapis: any # Flutter Favorite and by google.dev
+  googleapis: any # by google.dev and Flutter Favorite
   http: any # by dart.dev
   image_picker: any # by flutter.dev
   intl: any # by dart.dev and Flutter Favorite
