@@ -3,7 +3,6 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart' as http;
 
 import '../../data/utils/geolocator_utils.dart';
 
@@ -38,21 +37,13 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
         zoom: 14.4746,
       );
 
-      final customIcon = await _createCustomMarkerIcon();
-
-      if (!mounted) {
-        return;
-      }
-
       setState(() {
         _currentPosition = cameraPosition;
         _markers.add(
           Marker(
             markerId: const MarkerId('current_location'),
             position: LatLng(position.latitude, position.longitude),
-            icon: customIcon,
             infoWindow: const InfoWindow(title: 'Your location'),
-            onTap: () => _showImageDialog(context),
           ),
         );
       });
@@ -68,72 +59,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     } on Exception catch (error, stackTrace) {
       developer.log('', error: error, stackTrace: stackTrace);
     }
-  }
-
-  Future<BitmapDescriptor> _createCustomMarkerIcon() async {
-    try {
-      final response = await http.get(
-        Uri.parse('https://picsum.photos/100/100'),
-      );
-      final imageData = response.bodyBytes;
-      return BitmapDescriptor.bytes(imageData);
-    } on Exception catch (error, stackTrace) {
-      developer.log(
-        'Failed to load marker image',
-        error: error,
-        stackTrace: stackTrace,
-      );
-      return BitmapDescriptor.defaultMarker;
-    }
-  }
-
-  Future<void> _showImageDialog(BuildContext context) async {
-    await showDialog<void>(
-      context: context,
-      builder: (context) => Dialog(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '画像',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              child: Image.network(
-                'https://picsum.photos/400/300',
-                fit: BoxFit.contain,
-                loadingBuilder: (context, child, progress) {
-                  if (progress == null) {
-                    return child;
-                  }
-                  return const Center(child: CircularProgressIndicator());
-                },
-                errorBuilder: (context, error, stackTrace) =>
-                    const Center(
-                  child: Icon(Icons.error, size: 48),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
   }
 
   @override
