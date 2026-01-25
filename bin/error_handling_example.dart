@@ -6,7 +6,6 @@ void main() {
     throw Exception('💀');
   } on Exception catch (error, stackTrace) {
     print(error);
-    print(stackTrace);
     print(Trace.from(stackTrace).terse);
   }
 }
