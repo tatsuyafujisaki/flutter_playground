@@ -37,11 +37,12 @@ dependencies:
   path_provider: any # by path_provider and Flutter Favorite
   permission_handler: any
   pub_semver: any # by tools.dart.dev
+  rfw: any # by flutter.dev
   riverpod_annotation: any
   shared_preferences: any # by flutter.dev and Flutter Favorite
-  url_launcher: any # flutter.dev and Fluter Favorite
+  url_launcher: any # by flutter.dev and Fluter Favorite
   uuid: any
-  video_player: any # flutter.dev and Flutter Favorite
+  video_player: any # by flutter.dev and Flutter Favorite
   webview_flutter: any # flutter.dev
   xml: any
 dev_dependencies:
