@@ -5,11 +5,8 @@ void main() {
   try {
     throw Exception('💀');
   } on Exception catch (error, stackTrace) {
-    print('-- Error --');
     print(error);
-    print('-- Stack trace --');
     print(stackTrace);
-    print('-- Stack trace with less noise --');
     print(Trace.from(stackTrace).terse);
   }
 }
