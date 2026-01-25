@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 
-void main() => runApp(
-  ProviderScope(
-    child: MaterialApp(
-      home: SafeArea(child: Scaffold(body: _MyStatelessWidget())),
-    ),
-  ),
-);
+@Preview()
+Widget preview() => _MyStatelessWidget();
 
 /// Note of the Text widget:
 /// - The [Text.softWrap] is true.
