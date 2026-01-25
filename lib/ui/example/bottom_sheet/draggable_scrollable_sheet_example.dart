@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 
 @Preview()
-Widget preview() => const _MyStatefulWidget();
+Widget preview() => const _MyStatelessWidget();
 
-class _MyStatefulWidget extends StatefulWidget {
-  const _MyStatefulWidget();
+class _MyStatelessWidget extends StatelessWidget {
+  const _MyStatelessWidget();
 
-  @override
-  State<_MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   @override
   Widget build(BuildContext context) => DraggableScrollableSheet(
     initialChildSize: 0.7,
