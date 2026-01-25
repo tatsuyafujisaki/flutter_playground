@@ -1,52 +1,38 @@
 // ignore_for_file: avoid_print
+import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 
-void main() {
-  const bookshelfXml = '''
-<?xml version="1.0"?>
-    <bookshelf>
-      <book>
-        <title lang="english">Growing a Business</title>
-        <author>Paul Hawken</author>
-        <price>12.90</price>
-      </book>
-      <book>
-        <title lang="english">The Goal</title>
-        <author>Eliyahu M. Goldratt</author>
-        <price>15.10</price>
-      </book>
-      <book>
-        <title lang="french">La Peste</title>
-        <author>Albert Camus</author>
-        <price>10.00</price>
-      </book>
-    </bookshelf>''';
+void main() async {
+  final url = Uri.parse('https://news.google.com/rss');
 
-  // Parse the XML document.
-  final document = XmlDocument.parse(bookshelfXml);
+  print('Fetching RSS feed from $url...');
 
-  print('--- Bookshelf Contents ---');
-  // Find all 'book' elements.
-  final books = document.findAllElements('book');
-  for (final book in books) {
-    final titleElement = book.findElements('title').first;
-    final title = titleElement.innerText;
-    final author = book.findElements('author').first.innerText;
-    final price = book.findElements('price').first.innerText;
-    final language = titleElement.getAttribute('lang');
+  try {
+    final response = await http.get(url);
 
-    print('Title:  $title');
-    print('Author: $author');
-    print('Price:  $price');
-    print('Lang:   $language');
-    print('-------------------------');
+    if (response.statusCode == 200) {
+      final document = XmlDocument.parse(response.body);
+
+      final title = document.findAllElements('title').first.innerText;
+      print('\nFeed Title: $title');
+      print('--- Recent News ---');
+
+      final items = document.findAllElements('item');
+
+      for (final item in items.take(10)) {
+        final itemTitle = item.findElements('title').first.innerText;
+        final pubDate = item.findElements('pubDate').first.innerText;
+        final link = item.findElements('link').first.innerText;
+
+        print('Title: $itemTitle');
+        print('Date:  $pubDate');
+        print('Link:  $link');
+        print('---');
+      }
+    } else {
+      print('Failed to fetch RSS feed. Status code: ${response.statusCode}');
+    }
+  } on Exception catch (e) {
+    print('Error occurred: $e');
   }
-
-  print('\nQuerying for all book titles:');
-  final titles = document
-      .findAllElements('title')
-      .map((node) => node.innerText);
-  print(titles.join(', '));
-
-  print('\nRoot element name: ${document.rootElement.name.local}');
 }
