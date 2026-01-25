@@ -8,17 +8,17 @@ import 'package:rfw/formats.dart';
 import 'package:rfw/rfw.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MaterialApp(home: RfwExample())));
+  runApp(const ProviderScope(child: MaterialApp(home: _RfwExample())));
 }
 
-class RfwExample extends StatefulWidget {
-  const RfwExample({super.key});
+class _RfwExample extends StatefulWidget {
+  const _RfwExample();
 
   @override
-  State<RfwExample> createState() => _RfwExampleState();
+  State<_RfwExample> createState() => _RfwExampleState();
 }
 
-class _RfwExampleState extends State<RfwExample> {
+class _RfwExampleState extends State<_RfwExample> {
   final _runtime = Runtime();
   final _data = DynamicContent();
   int _count = 0;
