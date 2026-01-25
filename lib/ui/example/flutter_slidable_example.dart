@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-void main() =>
-    runApp(const ProviderScope(child: MaterialApp(home: _MyStatelessWidget())));
+@Preview()
+Widget preview() => const _MyStatelessWidget();
 
 class _MyStatelessWidget extends StatefulWidget {
   const _MyStatelessWidget();

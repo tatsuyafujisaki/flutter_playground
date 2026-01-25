@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 
-void main() => runApp(
-  const ProviderScope(
-    child: MaterialApp(home: Scaffold(body: _MyStatefulWidget())),
-  ),
-);
+@Preview()
+Widget preview() => const _MyStatefulWidget();
 
 class _MyStatefulWidget extends StatefulWidget {
   const _MyStatefulWidget();

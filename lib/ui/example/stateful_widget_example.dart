@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 import '../view_model/album_view_model.dart';
 
-void main() {
-  runApp(const ProviderScope(child: _MyStatefulWidget()));
-}
+@Preview()
+Widget preview() => const _MyStatefulWidget();
 
 class _MyStatefulWidget extends StatefulWidget {
   const _MyStatefulWidget();

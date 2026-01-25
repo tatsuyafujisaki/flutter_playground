@@ -1,12 +1,12 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../packages/permission_handler_example.dart';
 
-void main() =>
-    runApp(const ProviderScope(child: MaterialApp(home: _MyStatelessWidget())));
+@Preview()
+Widget preview() => const _MyStatelessWidget();
 
 class _MyStatelessWidget extends StatelessWidget {
   const _MyStatelessWidget();

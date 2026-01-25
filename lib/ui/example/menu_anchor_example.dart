@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 
-void main() => runApp(
-  ProviderScope(
-    child: MaterialApp(
-      home: Scaffold(appBar: AppBar(leading: _MyStatefulWidget())),
-    ),
-  ),
-);
+@Preview()
+Widget preview() => _MyStatefulWidget();
 
 class _MyStatefulWidget extends StatefulWidget {
   @override

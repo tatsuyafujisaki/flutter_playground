@@ -2,10 +2,11 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 import '../../packages/io/download_file_example.dart';
 
-void main() => runApp(ProviderScope(child: _MyStatelessWidget()));
+@Preview()
+Widget preview() => _MyStatelessWidget();
 
 class _MyStatelessWidget extends StatelessWidget {
   final imageBytes = downloadBinaryFile(

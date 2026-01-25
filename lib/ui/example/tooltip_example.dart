@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 
-void main() => runApp(
-  ProviderScope(
-    child: MaterialApp(
-      home: Scaffold(body: _MyStatelessWidget(), backgroundColor: Colors.lime),
-    ),
-  ),
-);
+@Preview()
+Widget preview() => _MyStatelessWidget();
 
 class _MyStatelessWidget extends StatelessWidget {
   @override
