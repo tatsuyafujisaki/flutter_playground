@@ -1,11 +1,10 @@
 // ignore_for_file: avoid_print
 import 'package:http/http.dart' as http;
+import 'package:stack_trace/stack_trace.dart';
 import 'package:xml/xml.dart';
 
 void main() async {
   final url = Uri.parse('https://news.google.com/rss');
-
-  print('Fetching RSS feed from $url...');
 
   try {
     final response = await http.get(url);
@@ -32,7 +31,8 @@ void main() async {
     } else {
       print('Failed to fetch RSS feed. Status code: ${response.statusCode}');
     }
-  } on Exception catch (e) {
-    print('Error occurred: $e');
+  } on Exception catch (error, stackTrace) {
+    print(error);
+    print(Trace.from(stackTrace).terse);
   }
 }
