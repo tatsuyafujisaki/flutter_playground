@@ -7,8 +7,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const _requiredVersionKey = 'required_version';
-
 /// Checks if a force update is required and shows a dialog if it is.
 Future<void> showForceUpdateDialogIfNeeded(BuildContext context) async {
   try {
@@ -20,41 +18,40 @@ Future<void> showForceUpdateDialogIfNeeded(BuildContext context) async {
     );
     await FirebaseRemoteConfig.instance.fetchAndActivate();
 
-    final requiredVersion = FirebaseRemoteConfig.instance.getString(
-      _requiredVersionKey,
-    );
+    final minVersion = FirebaseRemoteConfig.instance.getString('min_version');
 
-    if (!await _shouldForceUpdate(requiredVersion)) {
+    if (!await _shouldForceUpdate(minVersion)) {
       return;
     }
 
-    final url = await _getStoreUrl();
-
-    if (context.mounted) {
-      await _showUpgradeDialog(context, url);
+    final storeUrl = await _storeUrl;
+    if (storeUrl == null || !context.mounted) {
+      return;
     }
+
+    await _showUpgradeDialog(context, storeUrl);
   } on Exception catch (error, stackTrace) {
     developer.log('', error: error, stackTrace: stackTrace);
   }
 }
 
-Future<bool> _shouldForceUpdate(String requiredVersion) async {
-  Version? tryParse(String version) {
-    try {
-      return Version.parse(version);
-    } on Exception catch (error, stackTrace) {
-      developer.log('', error: error, stackTrace: stackTrace);
-      return null;
-    }
+Version? tryParse(String version) {
+  try {
+    return Version.parse(version);
+  } on Exception catch (error, stackTrace) {
+    developer.log('', error: error, stackTrace: stackTrace);
+    return null;
   }
-
-  final packageInfo = await PackageInfo.fromPlatform();
-  final currentVersion = tryParse(packageInfo.version) ?? Version.none;
-  final requiredVersion1 = tryParse(requiredVersion) ?? Version.none;
-  return currentVersion < requiredVersion1;
 }
 
-Future<String> _getStoreUrl() async {
+Future<bool> _shouldForceUpdate(String minVersionString) async {
+  final packageInfo = await PackageInfo.fromPlatform();
+  final currentVersion = tryParse(packageInfo.version) ?? Version.none;
+  final minVersion = tryParse(minVersionString) ?? Version.none;
+  return currentVersion < minVersion;
+}
+
+Future<String?> get _storeUrl async {
   if (Platform.isIOS) {
     // Replace with your actual App Store ID
     const appStoreId = 'id544007664';
@@ -65,7 +62,7 @@ Future<String> _getStoreUrl() async {
     final packageName = packageInfo.packageName;
     return 'https://play.google.com/store/apps/details?id=$packageName';
   }
-  throw UnimplementedError();
+  return null;
 }
 
 Future<void> _showUpgradeDialog(BuildContext context, String storeUrl) async =>
