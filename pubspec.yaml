@@ -40,9 +40,9 @@ dependencies:
   rfw: any # by flutter.dev
   riverpod_annotation: any
   shared_preferences: any # by flutter.dev and Flutter Favorite
+  stack_trace: any # by tools.dart.dev
   url_launcher: any # by flutter.dev and Fluter Favorite
   uuid: any
-  stack_trace: any # by tools.dart.dev
   video_player: any # by flutter.dev and Flutter Favorite
   webview_flutter: any # flutter.dev
   xml: any
