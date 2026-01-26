@@ -1,15 +1,8 @@
-## [go_router](https://pub.dev/packages/go_router)
+# Architecture
 
-Use the syntactic sugar of
-[GoRouterHelper](https://pub.dev/documentation/go_router/latest/go_router/GoRouterHelper.html)
-instead of `GoRouter.of`.
+> The recommended way to architect a Flutter app.
 
-For example ...
-
-> `context.go('/users/123')` is shorthand for calling calling
-> `GoRouter.of(context).go('/users/123)`.
-
-https://pub.dev/documentation/go_router/latest/topics/Navigation-topic.html
+https://docs.flutter.dev/app-architecture/guide#optional-domain-layer
 
 # Use A rather than B for simplicity or better UIUX
 
