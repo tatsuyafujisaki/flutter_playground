@@ -1,4 +1,4 @@
-# Architecture
+# Recommended architecture
 
 > The recommended way to architect a Flutter app.
 
