@@ -22,9 +22,12 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => showForceUpdateDialogIfNeeded(context),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final navigatorState = navigatorKey.currentState;
+      if (navigatorState != null) {
+        showForceUpdateDialogIfNeeded(navigatorState);
+      }
+    });
   }
 
   @override

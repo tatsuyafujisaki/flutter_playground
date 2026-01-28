@@ -8,7 +8,9 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Checks if a force update is required and shows a dialog if it is.
-Future<void> showForceUpdateDialogIfNeeded(BuildContext context) async {
+Future<void> showForceUpdateDialogIfNeeded(
+  NavigatorState navigatorState,
+) async {
   try {
     await FirebaseRemoteConfig.instance.setConfigSettings(
       RemoteConfigSettings(
@@ -25,11 +27,11 @@ Future<void> showForceUpdateDialogIfNeeded(BuildContext context) async {
     }
 
     final storeUrl = await _storeUrl;
-    if (storeUrl == null || !context.mounted) {
+    if (storeUrl == null) {
       return;
     }
 
-    await _showUpgradeDialog(context, storeUrl);
+    await _showUpgradeDialog(navigatorState, storeUrl);
   } on Exception catch (error, stackTrace) {
     developer.log('', error: error, stackTrace: stackTrace);
   }
@@ -65,29 +67,31 @@ Future<String?> get _storeUrl async {
   return null;
 }
 
-Future<void> _showUpgradeDialog(BuildContext context, String storeUrl) async =>
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => PopScope(
-        canPop: false,
-        child: AlertDialog(
-          title: const Text('Update Required'),
-          content: const Text(
-            'A new version of the app is available. '
-            'Please update to the latest version to continue using the app.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                final uri = Uri.parse(storeUrl);
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
-                }
-              },
-              child: const Text('Update'),
-            ),
-          ],
-        ),
+Future<void> _showUpgradeDialog(
+  NavigatorState navigatorState,
+  String storeUrl,
+) async => showDialog<void>(
+  context: navigatorState.context,
+  barrierDismissible: false,
+  builder: (context) => PopScope(
+    canPop: false,
+    child: AlertDialog(
+      title: const Text('Update Required'),
+      content: const Text(
+        'A new version of the app is available. '
+        'Please update to the latest version to continue using the app.',
       ),
-    );
+      actions: [
+        TextButton(
+          onPressed: () async {
+            final uri = Uri.parse(storeUrl);
+            if (await canLaunchUrl(uri)) {
+              await launchUrl(uri, mode: LaunchMode.externalApplication);
+            }
+          },
+          child: const Text('Update'),
+        ),
+      ],
+    ),
+  ),
+);
