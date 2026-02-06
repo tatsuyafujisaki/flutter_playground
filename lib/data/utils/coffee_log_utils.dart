@@ -31,7 +31,7 @@ Future<void> logNearbyCoffeeChains(ProviderContainer container) async {
       developer.log('Name: $name, Address: $address, Rating: $rating');
     }
     developer.log('----------------------------');
-  } catch (e) {
+  } on Exception catch (e) {
     developer.log('Error logging nearby coffee chains: $e');
   }
 }

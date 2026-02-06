@@ -30,15 +30,30 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.tatsuyafujisaki.flutterplayground"
+        applicationId = "com.tatsuyafujisaki.poc"
         minSdk = 26
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
-        // Read Google Maps API key from environment variable
+        // Read Google Maps API key from environment variable (set via dart-defines)
+        // The value from dart_defines.json is passed as -DGOOGLE_MAPS_PLATFORM_API_KEY during build
         val googleMapsApiKey = System.getenv("GOOGLE_MAPS_PLATFORM_API_KEY") ?: ""
         manifestPlaceholders["GOOGLE_MAPS_PLATFORM_API_KEY"] = googleMapsApiKey
+    }
+
+    flavorDimensions += "app"
+
+    productFlavors {
+        create("dev") {
+            dimension = "app"
+            applicationIdSuffix = ".dev"
+            resValue("string", "app_name", "Flutter Playground Dev")
+        }
+        create("prod") {
+            dimension = "app"
+            resValue("string", "app_name", "Flutter Playground")
+        }
     }
 
     signingConfigs {

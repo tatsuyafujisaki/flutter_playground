@@ -25,7 +25,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final navigatorState = navigatorKey.currentState;
       if (navigatorState != null) {
-        showForceUpdateDialogIfNeeded(navigatorState);
+        await showForceUpdateDialogIfNeeded(navigatorState);
       }
     });
   }

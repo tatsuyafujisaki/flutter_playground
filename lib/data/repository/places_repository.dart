@@ -30,7 +30,7 @@ class PlacesRepository {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+      final data = json.decode(response.body) as Map<String, dynamic>;
       final results = data['results'] as List;
       return results.cast<Map<String, dynamic>>();
     } else {
