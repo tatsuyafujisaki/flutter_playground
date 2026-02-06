@@ -1,15 +1,14 @@
 enum Flavor { dev, prod }
 
 class FlavorConfig {
-  factory FlavorConfig({required Flavor flavor, required String name}) {
-    _instance ??= FlavorConfig._internal(flavor, name);
+  factory FlavorConfig({required Flavor flavor}) {
+    _instance ??= FlavorConfig._internal(flavor);
     return _instance!;
   }
 
-  FlavorConfig._internal(this.flavor, this.name);
+  FlavorConfig._internal(this.flavor);
 
   final Flavor flavor;
-  final String name;
 
   static FlavorConfig? _instance;
 
