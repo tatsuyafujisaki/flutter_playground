@@ -11,6 +11,43 @@ PlacesRepository placesRepository(Ref ref) => PlacesRepository();
 class PlacesRepository {
   static const _apiKey = String.fromEnvironment('GOOGLE_MAPS_PLATFORM_API_KEY');
 
+  // Allowed cafe chain names
+  static const _allowedCafeChains = [
+    'CAFE DI ESPRESSO 珈琲館',
+    'Cafe Miyama',
+    'Cafe Renoir',
+    'Cafeルノアール',
+    'PRONTO',
+    'THE SMOKIST COFFEE',
+    'エクセルシオール',
+    'カフェ・ド・クリエ',
+    'サンマルクカフェ',
+    'スターバックス',
+    'タリーズ',
+    'ドトール',
+    'ブルーボトルコーヒー',
+    'プロント',
+    'ベローチェ',
+    'ホリーズカフェ',
+    'ミスタードーナツ',
+    'メゾン・ド・ヴェール',
+    'レクセル',
+    '上島珈琲店',
+    '猿田彦珈琲',
+    "BECK'S COFFEE SHOP",
+    "NEW YORKER'S Cafe",
+    "Seattle's Best Coffee",
+  ];
+
+  /// Checks if a cafe name matches any of the allowed chains
+  bool _isAllowedCafe(String? displayName) {
+    if (displayName == null || displayName.isEmpty) {
+      return false;
+    }
+
+    return _allowedCafeChains.any((chain) => displayName.contains(chain));
+  }
+
   Future<List<Map<String, dynamic>>> fetchNearbyCoffeeShops(
     double latitude,
     double longitude,
@@ -54,7 +91,20 @@ class PlacesRepository {
       developer.log('Raw response: ${response.body}');
       final data = json.decode(response.body) as Map<String, dynamic>;
       final places = data['places'] as List?;
-      return places?.cast<Map<String, dynamic>>() ?? [];
+      final allPlaces = places?.cast<Map<String, dynamic>>() ?? [];
+
+      // Filter to only include allowed cafe chains
+      final filteredPlaces = allPlaces.where((place) {
+        final displayNameMap = place['displayName'] as Map<String, dynamic>?;
+        final displayName = displayNameMap?['text'] as String?;
+        return _isAllowedCafe(displayName);
+      }).toList();
+
+      developer.log(
+        'Filtered ${filteredPlaces.length} cafes '
+        'from ${allPlaces.length} total places',
+      );
+      return filteredPlaces;
     } else {
       throw Exception('Failed to load places: ${response.body}');
     }

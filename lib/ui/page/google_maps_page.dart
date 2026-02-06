@@ -2,18 +2,21 @@ import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../data/repository/places_repository.dart';
 import '../../data/utils/geolocator_utils.dart';
 
-class GoogleMapsPage extends StatefulWidget {
+class GoogleMapsPage extends ConsumerStatefulWidget {
   const GoogleMapsPage({super.key});
 
   @override
-  State<GoogleMapsPage> createState() => _GoogleMapsPageState();
+  ConsumerState<GoogleMapsPage> createState() => _GoogleMapsPageState();
 }
 
-class _GoogleMapsPageState extends State<GoogleMapsPage> {
+class _GoogleMapsPageState extends ConsumerState<GoogleMapsPage> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
@@ -44,6 +47,9 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
             markerId: const MarkerId('current_location'),
             position: LatLng(position.latitude, position.longitude),
             infoWindow: const InfoWindow(title: 'Your location'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueBlue,
+            ),
           ),
         );
       });
@@ -56,8 +62,79 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
       developer.log(
         'Current location: ${position.latitude}, ${position.longitude}',
       );
+
+      // Fetch nearby cafes
+      await _fetchNearbyCafes(position.latitude, position.longitude);
     } on Exception catch (error, stackTrace) {
       developer.log('', error: error, stackTrace: stackTrace);
+    }
+  }
+
+  Future<void> _fetchNearbyCafes(double latitude, double longitude) async {
+    try {
+      final repository = ref.read(placesRepositoryProvider);
+      final cafes = await repository.fetchNearbyCoffeeShops(
+        latitude,
+        longitude,
+      );
+
+      developer.log('Fetched ${cafes.length} allowed cafes');
+
+      final cafeMarkers = cafes
+          .map((cafe) {
+            final location = cafe['location'] as Map<String, dynamic>?;
+            final lat = location?['latitude'] as double?;
+            final lng = location?['longitude'] as double?;
+            final displayNameMap = cafe['displayName'] as Map<String, dynamic>?;
+            final displayName =
+                displayNameMap?['text'] as String? ?? 'Unknown Cafe';
+            final address = cafe['formattedAddress'] as String? ?? '';
+            final id = cafe['id'] as String? ?? '';
+            final websiteUri = cafe['websiteUri'] as String?;
+
+            if (lat == null || lng == null) {
+              return null;
+            }
+
+            return Marker(
+              markerId: MarkerId(id),
+              position: LatLng(lat, lng),
+              infoWindow: InfoWindow(
+                title: displayName,
+                snippet: address,
+                onTap: websiteUri != null
+                    ? () async {
+                        final uri = Uri.parse(websiteUri);
+                        if (await canLaunchUrl(uri)) {
+                          await launchUrl(
+                            uri,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } else {
+                          developer.log('Could not launch $websiteUri');
+                        }
+                      }
+                    : null,
+              ),
+              icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueRed,
+              ),
+            );
+          })
+          .whereType<Marker>()
+          .toSet();
+
+      setState(() {
+        _markers.addAll(cafeMarkers);
+      });
+
+      developer.log('Added ${cafeMarkers.length} cafe markers to the map');
+    } on Exception catch (error, stackTrace) {
+      developer.log(
+        'Error fetching cafes',
+        error: error,
+        stackTrace: stackTrace,
+      );
     }
   }
 
