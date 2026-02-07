@@ -1,5 +1,6 @@
 import 'dart:developer' as developer;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../repository/places_repository.dart';
 import 'geolocator_utils.dart';
 
@@ -14,8 +15,7 @@ Future<void> logNearbyCoffeeChains(ProviderContainer container) async {
 
     final repository = container.read(placesRepositoryProvider);
     final shops = await repository.fetchNearbyCoffeeShops(
-      position.latitude,
-      position.longitude,
+      LatLng(position.latitude, position.longitude),
     );
 
     if (shops.isEmpty) {

@@ -74,8 +74,7 @@ class _GoogleMapsPageState extends ConsumerState<GoogleMapsPage> {
     try {
       final repository = ref.read(placesRepositoryProvider);
       final cafes = await repository.fetchNearbyCoffeeShops(
-        latitude,
-        longitude,
+        LatLng(latitude, longitude),
       );
 
       developer.log('Fetched ${cafes.length} allowed cafes');
@@ -83,24 +82,23 @@ class _GoogleMapsPageState extends ConsumerState<GoogleMapsPage> {
       final cafeMarkers = cafes
           .map((cafe) {
             final location = cafe['location'] as Map<String, dynamic>?;
-            final lat = location?['latitude'] as double?;
-            final lng = location?['longitude'] as double?;
-            final displayNameMap = cafe['displayName'] as Map<String, dynamic>?;
-            final displayName =
-                displayNameMap?['text'] as String? ?? 'Unknown Cafe';
+            final latitude = location?['latitude'] as double?;
+            final longitude = location?['longitude'] as double?;
+            final displayName = cafe['displayName'] as Map<String, dynamic>?;
+            final text = displayName?['text'] as String? ?? 'Unknown Cafe';
             final address = cafe['formattedAddress'] as String? ?? '';
             final id = cafe['id'] as String? ?? '';
             final websiteUri = cafe['websiteUri'] as String?;
 
-            if (lat == null || lng == null) {
+            if (latitude == null || longitude == null) {
               return null;
             }
 
             return Marker(
               markerId: MarkerId(id),
-              position: LatLng(lat, lng),
+              position: LatLng(latitude, longitude),
               infoWindow: InfoWindow(
-                title: displayName,
+                title: text,
                 snippet: address,
                 onTap: websiteUri != null
                     ? () async {

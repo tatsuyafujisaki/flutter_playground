@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -49,8 +50,7 @@ class PlacesRepository {
   }
 
   Future<List<Map<String, dynamic>>> fetchNearbyCoffeeShops(
-    double latitude,
-    double longitude,
+    LatLng latLng,
   ) async {
     if (_apiKey.isEmpty) {
       throw Exception('GOOGLE_MAPS_PLATFORM_API_KEY is not set.');
@@ -66,7 +66,10 @@ class PlacesRepository {
       'includedTypes': ['cafe'],
       'locationRestriction': {
         'circle': {
-          'center': {'latitude': latitude, 'longitude': longitude},
+          'center': {
+            'latitude': latLng.latitude,
+            'longitude': latLng.longitude,
+          },
           'radius': 1500,
         },
       },
