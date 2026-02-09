@@ -55,3 +55,33 @@ ios/Flutter/Secrets.xcconfig
    ```
    #include "Secrets.xcconfig"
    ```
+
+# How to distribute an iOS app
+
+```shell
+rm -r build/ios # ensures *.ipa matches only the newly built file
+
+fvm flutter build ipa --export-method ad-hoc
+
+# https://firebase.google.com/docs/app-distribution/ios/distribute-cli
+firebase appdistribution:distribute \
+  build/ios/ipa/*.ipa \
+  --app <FIREBASE_APP_ID> \
+  --release-notes-file release-notes.txt \
+  --testers tester1@example.com,tester2@example.com
+```
+
+# How to distribute an Android app
+
+```shell
+rm -r build/app
+
+fvm flutter build apk # --release is the default, so no need to specify it.
+
+# https://firebase.google.com/docs/app-distribution/android/distribute-cli
+firebase appdistribution:distribute \
+  build/app/outputs/flutter-apk/app-release.apk \
+  --app <FIREBASE_APP_ID> \
+  --release-notes-file release-notes.txt \
+  --testers tester1@example.com,tester2@example.com
+```
