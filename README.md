@@ -68,7 +68,7 @@ firebase appdistribution:distribute \
   build/ios/ipa/*.ipa \
   --app <FIREBASE_APP_ID> \
   --release-notes-file release-notes.txt \
-  --testers tester1@example.com,tester2@example.com
+  --groups 'group1,group2'
 ```
 
 # How to distribute an Android app
@@ -83,5 +83,5 @@ firebase appdistribution:distribute \
   build/app/outputs/flutter-apk/app-release.apk \
   --app <FIREBASE_APP_ID> \
   --release-notes-file release-notes.txt \
-  --testers tester1@example.com,tester2@example.com
+  --groups 'group1,group2'
 ```
