@@ -34,9 +34,11 @@ lib/l10n/untranslated.txt
 .fvm/
 .fvmrc
 
-# API keys
-dart_defines.json
+# Firebase
 lib/firebase_options*.dart
+
+# API keys
+secrets.env
 ```
 
 # How to distribute an iOS app
