@@ -37,24 +37,7 @@ lib/l10n/untranslated.txt
 # API keys
 dart_defines.json
 lib/firebase_options*.dart
-
-# API keys (in case you want to build the app using Xcode, which does not recognize dart_defines.json.)
-ios/Flutter/Secrets.xcconfig
 ```
-
-# How to use API keys
-
-1. Create `ios/Flutter/Secrets.xcconfig`, but do not commit it.
-1. Enter API keys in `ios/Flutter/Secrets.xcconfig`.
-   ```
-   API1=KEK1
-   API2=KEY2
-   ```
-1. Add the following to `ios/Flutter/{Debug, Profile, Release}.config`,
-   respectively.
-   ```
-   #include "Secrets.xcconfig"
-   ```
 
 # How to distribute an iOS app
 

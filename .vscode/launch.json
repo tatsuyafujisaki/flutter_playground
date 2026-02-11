@@ -10,7 +10,7 @@
         "--flavor",
         "dev",
         "--dart-define-from-file",
-        "dart_defines.json"
+        "secrets.env"
       ]
     },
     {
@@ -22,7 +22,7 @@
         "--flavor",
         "prod",
         "--dart-define-from-file",
-        "dart_defines.json"
+        "secrets.env"
       ]
     },
     {
@@ -35,7 +35,7 @@
         "--flavor",
         "dev",
         "--dart-define-from-file",
-        "dart_defines.json"
+        "secrets.env"
       ]
     },
     {
@@ -48,7 +48,7 @@
         "--flavor",
         "prod",
         "--dart-define-from-file",
-        "dart_defines.json"
+        "secrets.env"
       ]
     }
   ]
