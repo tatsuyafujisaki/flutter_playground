@@ -5,11 +5,11 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'data/utils/upgrade_utils.dart';
-import 'l10n/app_localizations.dart';
-import 'ui/page/google_maps_page.dart';
-import 'ui/provider/my_app_lifecycle_state.dart';
-import 'ui/view_model/auth_view_model.dart';
+import '../data/utils/upgrade_utils.dart';
+import '../l10n/app_localizations.dart';
+import 'page/google_maps_page.dart';
+import 'provider/my_app_lifecycle_state.dart';
+import 'view_model/auth_view_model.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 

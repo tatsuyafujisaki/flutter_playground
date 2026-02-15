@@ -5,7 +5,7 @@
       "name": "dev (debug)",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_dev.dart",
+      "program": "lib/main.dart",
       "args": [
         "--flavor",
         "dev",
@@ -17,7 +17,7 @@
       "name": "prod (debug)",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_prod.dart",
+      "program": "lib/main.dart",
       "args": [
         "--flavor",
         "prod",
@@ -30,7 +30,7 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
-      "program": "lib/main_dev.dart",
+      "program": "lib/main.dart",
       "args": [
         "--flavor",
         "dev",
@@ -43,7 +43,7 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
-      "program": "lib/main_prod.dart",
+      "program": "lib/main.dart",
       "args": [
         "--flavor",
         "prod",
