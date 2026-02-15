@@ -10,6 +10,7 @@ dependencies:
   collection: any # by dart.dev
   device_info_plus: any # Flutter Favorite
   firebase_analytics: any # by firebase.google.com
+  firebase_auth: any # by firebase.google.com and Flutter Favorite
   firebase_core: any # by firebase.google.com and Flutter Favorite
   firebase_crashlytics: any # by firebase.google.com and Flutter Favorite
   firebase_remote_config: any # by firebase.google.com
@@ -42,7 +43,6 @@ dependencies:
   shared_preferences: any # by flutter.dev and Flutter Favorite
   stack_trace: any # by tools.dart.dev
   url_launcher: any # by flutter.dev and Fluter Favorite
-  uuid: any
   video_player: any # by flutter.dev and Flutter Favorite
   webview_flutter: any # flutter.dev
   xml: any
