@@ -1,16 +1,19 @@
 on:
   push:
     paths:
-      - '**.yaml'
-      - '**.yml'
+      - "*.yaml"
+      - "*.yml"
   workflow_dispatch:
+
 permissions:
   contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
 jobs:
-  yaml-lint:
+  yamlfmt:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
