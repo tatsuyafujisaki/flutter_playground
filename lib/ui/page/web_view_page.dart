@@ -22,10 +22,10 @@ class WebViewScreen extends StatefulWidget {
 class _WebViewScreenState extends State<WebViewScreen> {
   late final WebViewController controller;
   final WebViewCookieManager cookieManager = .new();
-  String title = '';
-  int loadingPercentage = 0;
-  bool canGoBack = false;
-  bool canGoForward = false;
+  var title = '';
+  var loadingPercentage = 0;
+  var canGoBack = false;
+  var canGoForward = false;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
     if (widget.cookie != null) {
       Future<void>.delayed(
         .zero,
-        () async => cookieManager.setCookie(widget.cookie!),
+        () => cookieManager.setCookie(widget.cookie!),
       );
     }
 

@@ -21,7 +21,7 @@ class _RfwExample extends StatefulWidget {
 class _RfwExampleState extends State<_RfwExample> {
   final _runtime = Runtime();
   final _data = DynamicContent();
-  int _count = 0;
+  var _count = 0;
 
   static const _main = LibraryName(['main']);
   static const _coreWidgets = LibraryName(['core', 'widgets']);

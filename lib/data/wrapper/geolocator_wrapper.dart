@@ -10,7 +10,7 @@ class GeolocatorWrapper {
   GeolocatorWrapper._internal() {
     _controller = StreamController();
   }
-  static final GeolocatorWrapper _instance = GeolocatorWrapper._internal();
+  static final _instance = GeolocatorWrapper._internal();
   late final StreamController<Position> _controller;
 
   LocationSettings get _locationSettings {

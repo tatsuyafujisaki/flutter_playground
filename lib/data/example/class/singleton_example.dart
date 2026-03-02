@@ -11,7 +11,7 @@ class _MySingleton {
   }
   _MySingleton._();
   static final _singleton = _MySingleton._();
-  static bool initialized = false;
+  static var initialized = false;
   final DateTime initializedAt = .now();
 }
 

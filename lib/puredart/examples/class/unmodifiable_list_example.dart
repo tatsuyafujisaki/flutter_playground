@@ -7,7 +7,7 @@ class _MyClass {
   // myTemplateClass.myNonFinalString = '🍏'; // causes a build error.
   String get myFinalString => _myNonFinalString;
 
-  final List<String> _myList = ['🍎'];
+  final _myList = <String>['🍎'];
 
   // Tring to replace myList itself outside the class will cause a buid error.
   // myTemplateClass.myList = ['🍏']; // causes a build error.

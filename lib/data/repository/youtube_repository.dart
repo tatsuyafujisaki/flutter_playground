@@ -41,7 +41,7 @@ class YoutubeRepository {
 class _ApiKeyClient extends http.BaseClient {
   _ApiKeyClient(this._key);
   final String _key;
-  final http.Client _inner = http.Client();
+  final _inner = http.Client();
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {

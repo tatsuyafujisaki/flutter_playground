@@ -10,7 +10,7 @@ class _MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-  bool isMenuOpen = false;
+  var isMenuOpen = false;
 
   @override
   Widget build(BuildContext context) => MenuAnchor(
@@ -18,11 +18,11 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
     onClose: () => setState(() => isMenuOpen = false),
     menuChildren: <Widget>[
       MenuItemButton(
-        onPressed: () async => _showDialog('🍎'),
+        onPressed: () => _showDialog('🍎'),
         child: const Text('🍎'),
       ),
       MenuItemButton(
-        onPressed: () async => _showDialog('🍊'),
+        onPressed: () => _showDialog('🍊'),
         child: const Text('🍊'),
       ),
     ],

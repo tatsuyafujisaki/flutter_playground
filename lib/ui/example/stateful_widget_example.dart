@@ -19,7 +19,7 @@ class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => albumViewModel.fetchAlbums(),
+      (_) => albumViewModel.fetchAlbums(),
     );
   }
 

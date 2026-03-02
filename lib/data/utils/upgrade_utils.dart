@@ -70,7 +70,7 @@ Future<String?> get _storeUrl async {
 Future<void> _showUpgradeDialog(
   NavigatorState navigatorState,
   String storeUrl,
-) async => showDialog<void>(
+) => showDialog<void>(
   context: navigatorState.context,
   barrierDismissible: false,
   builder: (context) => PopScope(

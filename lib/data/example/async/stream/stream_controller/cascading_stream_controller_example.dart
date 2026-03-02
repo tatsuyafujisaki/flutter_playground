@@ -18,7 +18,7 @@ class _MyChildClass extends _MyParentClass {
   }
 }
 
-void main() async {
+void main() {
   final myChildClass = _MyChildClass();
 
   myChildClass.streamController.stream.listen(

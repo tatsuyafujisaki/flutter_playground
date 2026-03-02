@@ -2,7 +2,7 @@ import 'dart:async';
 
 class CompositeSubscription {
   final _subscriptions = <StreamSubscription<Object>>{};
-  bool _isDisposed = false;
+  var _isDisposed = false;
   bool get isDisposed => _isDisposed;
 
   void add(StreamSubscription<Object> subscription) {

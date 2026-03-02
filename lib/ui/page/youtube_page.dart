@@ -9,7 +9,7 @@ import '../../data/repository/youtube_repository.dart';
 part 'youtube_page.g.dart';
 
 @riverpod
-Future<List<Video>> popularVideos(Ref ref) async {
+Future<List<Video>> popularVideos(Ref ref) {
   final repository = ref.watch(youtubeRepositoryProvider);
   return repository.fetchPopularVideos();
 }

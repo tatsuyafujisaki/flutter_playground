@@ -14,12 +14,12 @@ class _MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<_MyStatefulWidget> {
-  final VideoPlayerController _controller = VideoPlayerController.networkUrl(
+  final _controller = VideoPlayerController.networkUrl(
     Uri.parse(
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
     ),
   );
-  final Completer<void> _initialized = Completer<void>();
+  final _initialized = Completer<void>();
 
   @override
   void initState() {

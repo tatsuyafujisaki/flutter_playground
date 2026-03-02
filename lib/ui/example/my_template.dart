@@ -17,7 +17,7 @@ class _MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       developer.log('🍎');
     });
     unawaited(

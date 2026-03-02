@@ -17,8 +17,7 @@ class GoogleMapsPage extends ConsumerStatefulWidget {
 }
 
 class _GoogleMapsPageState extends ConsumerState<GoogleMapsPage> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+  final _controller = Completer<GoogleMapController>();
 
   CameraPosition? _currentPosition;
   final Set<Marker> _markers = {};
@@ -26,9 +25,7 @@ class _GoogleMapsPageState extends ConsumerState<GoogleMapsPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _getCurrentLocation(),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getCurrentLocation());
   }
 
   Future<void> _getCurrentLocation() async {

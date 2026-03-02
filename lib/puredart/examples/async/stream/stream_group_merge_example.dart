@@ -3,7 +3,7 @@ import 'dart:developer' as developer;
 
 import 'package:async/async.dart';
 
-void main() async {
+void main() {
   final stream1 = Stream<String>.periodic(
     const Duration(seconds: 1),
     (count) => ['🍎', '🍊', '🍏'][count],

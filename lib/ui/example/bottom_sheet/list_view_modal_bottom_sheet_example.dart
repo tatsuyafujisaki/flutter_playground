@@ -11,7 +11,7 @@ class _MyStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: Center(
       child: IconButton(
-        onPressed: () async => showModalBottomSheet<void>(
+        onPressed: () => showModalBottomSheet<void>(
           context: context,
           builder: (_) => _BottomSheetContent(),
         ),

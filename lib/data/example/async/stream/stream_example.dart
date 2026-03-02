@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'dart:developer' as developer;
 
-void main() async {
+void main() {
   late StreamSubscription<int> subscription;
 
   subscription =
