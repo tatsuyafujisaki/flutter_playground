@@ -59,6 +59,5 @@ flutter:
   default-flavor: dev
   generate: true # https://docs.flutter.dev/ui/internationalization#adding-your-own-localized-messages
   uses-material-design: true
-
   assets:
     - assets/input.rfw

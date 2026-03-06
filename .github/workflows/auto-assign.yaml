@@ -4,10 +4,8 @@ on:
     types:
       - opened
   workflow_dispatch:
-
 permissions:
   pull-requests: write
-
 jobs:
   assign-author:
     runs-on: ubuntu-latest
