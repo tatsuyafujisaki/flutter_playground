@@ -26,6 +26,32 @@
       ]
     },
     {
+      "name": "dev (profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "program": "lib/main.dart",
+      "args": [
+        "--flavor",
+        "dev",
+        "--dart-define-from-file",
+        "secrets.env"
+      ]
+    },
+    {
+      "name": "prod (profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "program": "lib/main.dart",
+      "args": [
+        "--flavor",
+        "prod",
+        "--dart-define-from-file",
+        "secrets.env"
+      ]
+    },
+    {
       "name": "dev (release)",
       "request": "launch",
       "type": "dart",
