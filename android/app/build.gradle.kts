@@ -1,4 +1,5 @@
 import java.util.Properties
+import java.util.Base64
 import java.io.FileInputStream
 
 plugins {
@@ -10,9 +11,17 @@ plugins {
 }
 
 val keystoreProperties = Properties()
-val keystorePropertiesFile = rootProject.file("key.properties")
+val keystorePropertiesFile: File = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
+fun getDartDefine(key: String): String? {
+    val dartDefines = project.findProperty("dart-defines") as? String ?: return null
+    return dartDefines.split(",")
+        .map { Base64.getDecoder().decode(it).decodeToString() }
+        .find { it.startsWith("$key=") }
+        ?.substringAfter("$key=")
 }
 
 android {
@@ -36,10 +45,8 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
-        // Read Google Maps API key from environment variable (set via dart-defines)
-        // The value from dart_defines.json is passed as -DGOOGLE_MAPS_PLATFORM_API_KEY during build
-        val googleMapsApiKey = System.getenv("GOOGLE_MAPS_PLATFORM_API_KEY") ?: ""
-        manifestPlaceholders["GOOGLE_MAPS_PLATFORM_API_KEY"] = googleMapsApiKey
+        manifestPlaceholders["GOOGLE_MAPS_PLATFORM_API_KEY"] = getDartDefine("GOOGLE_MAPS_PLATFORM_API_KEY")
+            ?: throw GradleException("GOOGLE_MAPS_PLATFORM_API_KEY is not set.")
     }
 
     flavorDimensions += "app"

@@ -10,7 +10,7 @@
         "--flavor",
         "dev",
         "--dart-define-from-file",
-        "secrets.env"
+        "dart_defines.json"
       ]
     },
     {
@@ -22,7 +22,7 @@
         "--flavor",
         "prod",
         "--dart-define-from-file",
-        "secrets.env"
+        "dart_defines.json"
       ]
     },
     {
@@ -35,7 +35,7 @@
         "--flavor",
         "dev",
         "--dart-define-from-file",
-        "secrets.env"
+        "dart_defines.json"
       ]
     },
     {
@@ -48,7 +48,7 @@
         "--flavor",
         "prod",
         "--dart-define-from-file",
-        "secrets.env"
+        "dart_defines.json"
       ]
     },
     {
@@ -61,7 +61,7 @@
         "--flavor",
         "dev",
         "--dart-define-from-file",
-        "secrets.env"
+        "dart_defines.json"
       ]
     },
     {
@@ -74,7 +74,7 @@
         "--flavor",
         "prod",
         "--dart-define-from-file",
-        "secrets.env"
+        "dart_defines.json"
       ]
     }
   ]
