@@ -6,15 +6,22 @@
 DEST="${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist"
 
 case $CONFIGURATION in
-  *dev*)
-    cp -f "${PROJECT_DIR}/Runner/Firebase/dev/GoogleService-Info.plist" "$DEST"
-    echo "Copied Dev GoogleService-Info.plist"
+  *dev*|Debug)
+    SRC="${PROJECT_DIR}/Runner/Firebase/dev/GoogleService-Info.plist"
     ;;
-  *prod*)
-    cp -f "${PROJECT_DIR}/Runner/Firebase/prod/GoogleService-Info.plist" "$DEST"
-    echo "Copied Prod GoogleService-Info.plist"
+  *prod*|Release)
+    SRC="${PROJECT_DIR}/Runner/Firebase/prod/GoogleService-Info.plist"
     ;;
   *)
-    echo "No flavor detected in configuration: $CONFIGURATION. Using default if available."
+    echo "error: No flavor detected in configuration: $CONFIGURATION"
+    exit 1
     ;;
 esac
+
+if [ ! -f "$SRC" ]; then
+  echo "error: GoogleService-Info.plist not found at $SRC"
+  exit 1
+fi
+
+cp -f "$SRC" "$DEST"
+echo "Copied $SRC to $DEST"

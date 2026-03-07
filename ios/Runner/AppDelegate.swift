@@ -1,4 +1,3 @@
-import FirebaseCore
 import Flutter
 import GoogleMaps
 import UIKit
@@ -9,27 +8,34 @@ import UIKit
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        printEnvironmentVariables()
+        let apiKey = Bundle.main.object(forInfoDictionaryKey: "GoogleMapsApiKey") as? String
 
-        FirebaseApp.configure()
-        let apiKey = Bundle.main.object(forInfoDictionaryKey: "GOOGLE_MAPS_PLATFORM_API_KEY") as? String
-        if let key = apiKey {
+        if let key = apiKey, !key.isEmpty {
             GMSServices.provideAPIKey(key)
+        } else {
+            print("⚠️ Warning: Google Maps API Key not found in Info.plist")
         }
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
-    private func printEnvironmentVariables() {
-        let environmentKeys = ["GOOGLE_MAPS_PLATFORM_API_KEY", "YOUTUBE_API_KEY"]
+    private func parseDartDefines() -> [String: String] {
+        guard let dartDefinesString = Bundle.main.infoDictionary?["DART_DEFINES"] as? String,
+            let data = Data(base64Encoded: dartDefinesString),
+            let decoded = String(data: data, encoding: .utf8)
+        else {
+            return [:]
+        }
 
-        print("🚀 Environment Variables from Info.plist:")
-        for key in environmentKeys {
-            if let value = Bundle.main.object(forInfoDictionaryKey: key) as? String {
-                print("   \(key): \(value)")
-            } else {
-                print("   \(key): Not found")
+        var results = [String: String]()
+        for part in decoded.components(separatedBy: ",") {
+            let components = part.components(separatedBy: "=")
+            if components.count >= 2 {
+                let key = components[0]
+                let value = components.dropFirst().joined(separator: "=")
+                results[key] = value
             }
         }
+        return results
     }
 }
