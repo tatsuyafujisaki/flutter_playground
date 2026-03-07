@@ -47,6 +47,8 @@ android {
 
         manifestPlaceholders["GOOGLE_MAPS_PLATFORM_API_KEY"] = getDartDefine("GOOGLE_MAPS_PLATFORM_API_KEY")
             ?: throw GradleException("GOOGLE_MAPS_PLATFORM_API_KEY is not set.")
+        manifestPlaceholders["YOUTUBE_API_KEY"] = getDartDefine("YOUTUBE_API_KEY")
+            ?: throw GradleException("YOUTUBE_API_KEY is not set.")
     }
 
     flavorDimensions += "app"

@@ -8,34 +8,18 @@ import UIKit
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let apiKey = Bundle.main.object(forInfoDictionaryKey: "GoogleMapsApiKey") as? String
-
-        if let key = apiKey, !key.isEmpty {
-            GMSServices.provideAPIKey(key)
+        // Get the Google Maps API key from the Info.plist
+        if let apiKey = Bundle.main.object(forInfoDictionaryKey: "GOOGLE_MAPS_PLATFORM_API_KEY") as? String {
+            if !apiKey.isEmpty && apiKey != "$(GOOGLE_MAPS_PLATFORM_API_KEY)" {
+                GMSServices.provideAPIKey(apiKey)
+                print("✅ Successfully provided Google Maps API Key.")
+            } else {
+                print("⚠️ Warning: GOOGLE_MAPS_PLATFORM_API_KEY was found in Info.plist, but its value is either empty or the placeholder '$(GOOGLE_MAPS_PLATFORM_API_KEY)'. Check your Xcode build configuration and dart_defines.json.")
+            }
         } else {
-            print("⚠️ Warning: Google Maps API Key not found in Info.plist")
+            print("🛑 Error: GOOGLE_MAPS_PLATFORM_API_KEY key not found in the app's Info.plist at all. Check that the key exists in ios/Runner/Info.plist.")
         }
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-    }
-
-    private func parseDartDefines() -> [String: String] {
-        guard let dartDefinesString = Bundle.main.infoDictionary?["DART_DEFINES"] as? String,
-            let data = Data(base64Encoded: dartDefinesString),
-            let decoded = String(data: data, encoding: .utf8)
-        else {
-            return [:]
-        }
-
-        var results = [String: String]()
-        for part in decoded.components(separatedBy: ",") {
-            let components = part.components(separatedBy: "=")
-            if components.count >= 2 {
-                let key = components[0]
-                let value = components.dropFirst().joined(separator: "=")
-                results[key] = value
-            }
-        }
-        return results
     }
 }

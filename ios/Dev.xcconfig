@@ -1,2 +1,4 @@
+#include "Generated.xcconfig"
+
 APP_DISPLAY_NAME=Flutter Playground Dev
 PRODUCT_BUNDLE_IDENTIFIER=com.tatsuyafujisaki.poc.dev
