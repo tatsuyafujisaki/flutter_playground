@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
-import '../puredart/examples/freezed/person.dart';
+import 'freezed/person.dart';
 
 Map<String, dynamic> jsonDecodeToMap(String json) {
   try {
