@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
+import 'package:flutter_playground/data/utils/date_time_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../data/utils/date_time_converter.dart';
 
 part 'person.freezed.dart';
 part 'person.g.dart';
