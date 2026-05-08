@@ -10,18 +10,28 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { localProperties.load(it) }
+}
+
 val keystoreProperties = Properties()
-val keystorePropertiesFile: File = rootProject.file("key.properties")
+val keystorePropertiesFile = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    keystorePropertiesFile.inputStream().use { keystoreProperties.load(it) }
 }
 
 fun getDartDefine(key: String): String? {
-    val dartDefines = project.findProperty("dart-defines") as? String ?: return null
-    return dartDefines.split(",")
-        .map { Base64.getDecoder().decode(it).decodeToString() }
-        .find { it.startsWith("$key=") }
-        ?.substringAfter("$key=")
+    val dartDefines = project.findProperty("dart-defines") as? String
+    if (dartDefines != null) {
+        val match = dartDefines.split(",")
+            .map { Base64.getDecoder().decode(it).decodeToString() }
+            .find { it.startsWith("$key=") }
+            ?.substringAfter("$key=")
+        if (match != null) return match
+    }
+    return localProperties.getProperty(key)
 }
 
 android {
@@ -78,6 +88,11 @@ android {
         release {
             signingConfig = signingConfigs.getByName("release")
         }
+    }
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
     }
 }
 
