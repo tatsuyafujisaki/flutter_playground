@@ -88,11 +88,6 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
-
-    lint {
-        abortOnError = false
-        checkReleaseBuilds = false
-    }
 }
 
 flutter {

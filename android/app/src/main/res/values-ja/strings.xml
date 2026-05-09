@@ -2,4 +2,5 @@
 <resources>
     <string name="notification_title">サンプルタイトル</string>
     <string name="notification_message">サンプル本文</string>
+    <string name="app_name">Flutter Playground</string>
 </resources>
