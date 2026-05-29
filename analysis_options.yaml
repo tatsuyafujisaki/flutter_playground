@@ -145,3 +145,4 @@ linter:
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
     - use_truncating_division
+    - var_with_no_type_annotation
