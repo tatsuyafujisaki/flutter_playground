@@ -9,6 +9,7 @@ dependencies:
   async: any # by dart.dev
   collection: any # by dart.dev
   device_info_plus: any # Flutter Favorite
+  firebase_ai: any
   firebase_analytics: any # by firebase.google.com
   firebase_auth: any # by firebase.google.com and Flutter Favorite
   firebase_core: any # by firebase.google.com and Flutter Favorite
