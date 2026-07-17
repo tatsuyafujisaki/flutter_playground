@@ -21,12 +21,12 @@ pluginManagement {
 }
 
 plugins {
-    id("com.android.application") version "8.9.1" apply false
-    id("com.google.firebase.crashlytics") version "3.0.6" apply false
-    id("com.google.gms.google-services") version "4.4.4" apply false
-    id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-    id("org.jetbrains.kotlin.android") version "2.3.10" apply false
+    id("com.android.application") version "8.13.2" apply false
+    id("com.google.firebase.crashlytics") version "+" apply false
+    id("com.google.gms.google-services") version "+" apply false
+    id("dev.flutter.flutter-plugin-loader") version "+"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "+"
+    id("org.jetbrains.kotlin.android") version "+" apply false
 }
 
 include(":app")
