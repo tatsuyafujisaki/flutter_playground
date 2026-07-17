@@ -49,7 +49,7 @@ android {
 
     defaultConfig {
         applicationId = "com.tatsuyafujisaki.poc"
-        minSdk = 26
+        minSdk = 37
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
